@@ -89,9 +89,8 @@ O sistema desenvolvido é uma aplicação web que tem como objetivo auxiliar no 
 ## 9.	Requisitos não-funcionais
 | Código | Nome | Descrição | Categoria | Classificação |
 |:---  |:--- |:--- |:--- |:--- |
-| NF01 | Design responsivo | O site apresentará responsividade, deixando-o mais confortável para o usuário | Usabilidade | obrigatório |
+| NF01 | Design responsivo | O site apresentará responsividade, deixando-o mais confortável para o usuário | Usabilidade | Obrigatório |
 | NF02 | Acesso somente com internet | É necessário um acesso contínuo à Internet para poder acessar os dados do site e suas funcionalidades. | Disponibilidade | Obrigatório |
 | NF03 | Criptografia das informações sensíveis aos usuários | Senhas do usuário devem ser gravadas de forma criptografada no banco de dados | Segurança | Obrigatório |
 | NF04 | Organização do conteúdo de forma objetiva | O site apresentará o conteúdo de forma objetiva, de modo que o usuário encontre o desejado com facilidade. | Usabilidade | Obrigatório |
 | NF05 | Tecnologias utilizadas no desenvolvimento | O site deverá ser feito utilizando HTML, CSS e JS no front-end. No back-end deverá ser utilizado Python com Django e o banco de dados será o MySQL. | Desempenho | Obrigatório |
-|  |  |  |
