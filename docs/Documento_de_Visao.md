@@ -16,7 +16,7 @@
 |:-|:-|
 | **_O problema_** | O lojista que atua no comércio convencional se sente sobrecarregado com o controle manual da loja | 
 | **_afetando_** | A produtividade das vendas da loja |
-| **_cujo impacto é_** | Eficiencia dos funcionários e lucratividade do comércio |
+| **_cujo impacto é_** | a lucratividade do comércio |
 | **_uma boa solução seria_** | Incluir funcionalidades automáticas por meio do sistema |
 | | |
 
@@ -24,37 +24,27 @@
 | Nome | Descrição | Responsabilidades |
 |:- |:- |:- |
 | Gerente | O gerente é o responsável por administrar o sistema. | Cadastrar ingredientes e seus lotes; Cadastrar e manejar funcionários e suas funções; Visualizar relatórios do sistema |
-| Chef | O chef é o responsável por produzir as receitas e o menu do estabelecimento. | Cadastrar ingredientes e seus lotes; Visualizar estoque de ingredientes; Cadastrar receitas com base nos ingredientes disponíveis; Montar o menu do dia; Visualizar os pedidos pendentes |
-| Garçom | O garçom é o responsável por atender os clientes e realizar os pedidos. | Cadastrar o pedido de um cliente; Confirmar o pedido de um cliente; Fechar a conta de um cliente |
-| Recepcionista | O recepcionista é o responsável por gerenciar as reservas e alocar os clientes em suas mesas. | Visualizar reservas; Confirmar reservas para um cliente; Alocar uma cliente para um mesa que não resevou |
 | Cliente | O cliente é o responsável por reservar uma mesa e visualizar o menu do dia. | Visualizar mesas disponíveis; Reservar uma mesa; Ver o menu do dia;  |
 | Visitante | O visitante é o responsável por visualizar as informações do estabelecimento. | Visualisar o menu; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Registrar uma conta |
 
 ## 4. Descrição do ambiente dos usuários 
-O sistema tem cinco tipos de usuários. Quatro deles são funcionários do estabelecimento e um outro que representa o cliente, seja ele anônimo ou já cadastrado.
+O sistema tem três tipos de usuários. Um deles é o responsável por receber os pedidos feitos via aplicação, o outro usuário é o cliente cadastrado e o terceiro é o cliente não cadastrado, chamado de visitante.
 
 O gerente acessará o site a partir do ambiente físico da loja e fará o cadastro dos ingredientes e realizará a gestão dos funcionários e ver relatórios por meio de gráficos.
 
-O chef irá acessar o site a partir do ambiente físico da loja e realizará a gestão dos ingredientes, das receitas e do menu.
-O chef também poderá visualizar os pedidos pendentes por meio de uma tela na cozinha.
+O usuário cliente irá acessar o site utilizando  um computador ou celular e visualizar o cardápio do dia e fazer o pedido.
 
-O garçom irá acessar o site a partir de um dispositivo móvel e realizará a gestão dos pedidos.
-
-O recepcionista irá acessar o site a partir do ambiente físico da loja e realizará a gestão das reservas e das mesas.
-
-O usuário cliente irá acessar o site utilizando  um computador ou celular e visualizar as mesas para reservar ou visualizar o menu do dia.
-
-O usuário visitante irá acessar o site utilizando um computador ou celular e registrar/entrar em uma conta, visualizar o menu do dia, visualisar horários de atendimento e visualizar informações sobre o restaurante.
+O usuário visitante irá acessar o site utilizando um computador ou celular e registrar/entrar em uma conta, visualizar o cardápio do dia,  visualizar informações sobre o restaurante.
 
 ## 5. Principais necessidades dos usuários
 Considerando o ponto de vista do gerente, sua principal necessidade é aumentar a eficiência de sua loja para que possa ter um melhor controle dela por meio de uma gestão inteligente de todas as funções do sistema.
 
-Considerando o ponto de vista do cliente, ele deseja ter acesso a um site com interface amigável que permita obter informações sobre o restaurante, seus pratos, e as mesas disponíveis, caso identifique que estes atendam às suas necessidades, ele possa montar sua relação de agendamento reservando uma mesa.
+Considerando o ponto de vista do cliente, ele deseja ter acesso a um site com interface amigável que permita obter informações sobre o restaurante e sobre os seus pratos, sendo, posteriormente, capaz de realizar o seu pedido.
 
 ## 6. Alternativas concorrentes
-Uma alternativa para a parte de reservas do sistema é o [GetIn](https://restaurante.getinapp.com.br/), que possibilita a reserva de uma mesa no horário e local escolhido pelo cliente.
+Uma alternativa para concorrentes do sistema são o [Crumbl](https://crumblcookies.com/order/carry_out) e o [Brooki Bakehouse](https://www.brookibakehouse.com/).
 
-Uma alternativa para a parte do gerenciamento de ingredientes, receitas e o menu é o [SisChef](https://sischef.com/), que oferece funcionalidades para gerenciar o estoque, os usuários, o menu e o redirecionamento para o pagamento.
+
 
 ## 7.	Visão geral do produto
 O sistema desenvolvido é uma aplicação web que tem como objetivo auxiliar no gerenciamento de um restaurante, permitindo que os funcionários possam gerenciar os ingredientes, receitas e o menu, além de permitir que os clientes possam visualizar as mesas disponíveis e reservar uma, visualizar o menu do dia e visualizar as informações sobre o restaurante.
