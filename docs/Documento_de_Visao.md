@@ -9,23 +9,22 @@
 | 27/04/2025 | **1.01** | Versão Inicial  | Alunos |  
 
 ## 1. Objetivo do Projeto 
-**Projeto**: Sistema para um restaurante, permitindo a gestão de produtos, receitas, pedidos, mesas e reservas.
- 
+**Projeto**: Sistema de comercialização de produtos de um restaurante de comida japonesa.
 ## 2. Descrição do problema 
 | | |
 |:-|:-|
-| **_O problema_** | O lojista que atua no comércio convencional se sente sobrecarregado com o controle manual da loja | 
-| **_afetando_** | A produtividade das vendas da loja |
-| **_cujo impacto é_** | a lucratividade do comércio |
-| **_uma boa solução seria_** | Incluir funcionalidades automáticas por meio do sistema |
+| **_O problema_** | O lojista sente que o comércio que ele atua se torna menos competitivo e visibilizado diante dos concorrentes que oferecem mais praticidade | 
+| **_afetando_** | A capacidade de atrair e manter clientes |
+| **_cujo impacto é_** | A lucratividade e a visibilidade do comércio |
+| **_uma boa solução seria_** | Implementar um sistema próprio de pedidos online para aumentar a competitividade e melhorar a experiência do cliente |
 | | |
 
 ## 3. Descrição dos usuários
 | Nome | Descrição | Responsabilidades |
 |:- |:- |:- |
-| Gerente | O gerente é o responsável por administrar o sistema. | Cadastrar ingredientes e seus lotes; Cadastrar e manejar funcionários e suas funções; Visualizar relatórios do sistema |
+| Gerente | O gerente é o responsável por administrar as vendas. | Ver relatórios das vendas; Montar cardápio; Visualizar os pedidos; Alterar o status dos pedidos |
 | Cliente | O cliente é o responsável por reservar uma mesa e visualizar o menu do dia. | Visualizar mesas disponíveis; Reservar uma mesa; Ver o menu do dia;  |
-| Visitante | O visitante é o responsável por visualizar as informações do estabelecimento. | Visualisar o menu; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Registrar uma conta |
+| Visitante | O visitante é o responsável por visualizar as informações do estabelecimento. | Visualisar o cardápio; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Registrar uma conta |
 
 ## 4. Descrição do ambiente dos usuários 
 O sistema tem três tipos de usuários. Um deles é o responsável por receber os pedidos feitos via aplicação, o outro usuário é o cliente cadastrado e o terceiro é o cliente não cadastrado, chamado de visitante.
