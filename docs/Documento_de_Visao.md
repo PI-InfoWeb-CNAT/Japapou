@@ -5,11 +5,13 @@
 ### Histórico da Revisão 
 |  Data  | Versão | Descrição | Autor |
 |:-------|:-------|:----------|:------|
-| 21/04/2025 | **1.00** | Versão Inicial  | George Azevedo |
-| 27/04/2025 | **1.01** | Versão Inicial  | Alunos |  
+| 21/04/2025 | **1.00** | Versão Inicial | George Azevedo |
+| 27/04/2025 | **1.01** | Versão Inicial | Alunos | 
+| 02/05/2025 | **1.02** | Remoção de funcionalidades | Alunos |
 
 ## 1. Objetivo do Projeto 
 **Projeto**: Sistema de comercialização de produtos de um restaurante de comida japonesa.
+
 ## 2. Descrição do problema 
 | | |
 |:-|:-|
@@ -23,7 +25,7 @@
 | Nome | Descrição | Responsabilidades |
 |:- |:- |:- |
 | Gerente | O gerente é o responsável por administrar as vendas. | Ver relatórios das vendas; Montar cardápio; Visualizar os pedidos; Alterar o status dos pedidos |
-| Cliente | O cliente é o responsável por reservar uma mesa e visualizar o menu do dia. |  Visualizar o cardápio; Fazer pedido; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; |
+| Cliente | O cliente é o responsável por visualizar o menu do dia e fazer pedidos. |  Visualizar o cardápio; Fazer pedido; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; |
 | Visitante | O visitante é o responsável por visualizar as informações do estabelecimento. | Visualizar o cardápio; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Registrar uma conta |
 
 ## 4. Descrição do ambiente dos usuários 
@@ -41,39 +43,26 @@ Considerando o ponto de vista do gerente, sua principal necessidade é aumentar 
 Considerando o ponto de vista do cliente, ele deseja ter acesso a um site com interface amigável que permita obter informações sobre o restaurante e sobre os seus pratos, sendo, posteriormente, capaz de realizar o seu pedido.
 
 ## 6. Alternativas concorrentes
-Uma alternativa para concorrentes do sistema são o [Crumbl](https://crumblcookies.com/order/carry_out) e o [Brooki Bakehouse](https://www.brookibakehouse.com/).
+Uma alternativa para o sistema é o [Crumbl](https://crumblcookies.com/order/carry_out), focando no delivery: oferece escolha de filial, mostra informações sobre o carro de entrega.  
 
-
+Uma outra alternativa é o [Brooki Bakehouse](https://www.brookibakehouse.com/), focando no menu: a organização de como os itens estão dispostos no site e a maneira como o pedido pode ser personalizado.
 
 ## 7.	Visão geral do produto
-O sistema desenvolvido é uma aplicação web que tem como objetivo auxiliar no gerenciamento de um restaurante, permitindo que os funcionários possam gerenciar os ingredientes, receitas e o menu, além de permitir que os clientes possam visualizar as mesas disponíveis e reservar uma, visualizar o menu do dia e visualizar as informações sobre o restaurante.
+O sistema desenvolvido é uma aplicação web que tem como objetivo auxiliar no gerenciamento das vendas de um restaurante, permitindo que o gerente possa gerenciar os pratos, o menu e os pedidos, além de permitir que os clientes possam visualizar o cardápio e fazer pedidos.
 
 ## 8. Requisitos funcionais
-
 | Código | Nome | Descrição |
 |:---  |:--- |:--- |
-| F01 | Cadastrar, visualizar, alterar ou excluir ingredientes | Permite a gestão de ingredientes no sistema, incluindo operações de criação, visualização, atualização e exclusão. |
-| F02 | Cadastrar, visualizar, alterar ou excluir lotes | Facilita o controle de lotes de ingredientes, permitindo operações de cadastro, visualização, modificação e remoção. |
-| F03 | Pesquisar e filtrar o estoque | Oferece funcionalidades para busca e filtragem do estoque, auxiliando na localização rápida de itens. |
-| F04 | Cadastrar funcionário | Possibilita o registro de novos funcionários no sistema, com seus respectivos dados pessoais e profissionais. |
-| F05 | Alterar dados de funcionário | Permite a atualização das informações dos funcionários já cadastrados no sistema. |
-| F06 | Remover funcionário | Disponibiliza a opção de excluir o cadastro de funcionários quando necessário. |
-| F07 | Visualizar relatórios do sistema | Fornece acesso a relatórios detalhados sobre o funcionamento e dados do sistema. |
-| F08 | Cadastrar, visualizar, alterar ou excluir receitas | Gerencia as receitas do restaurante, permitindo operações de criação, visualização, alteração e exclusão. |
-| F09 | Pesquisar e filtrar receitas | Permite buscar e filtrar receitas armazenadas no sistema para fácil acesso. |
-| F10 | Montar menu do dia | Facilita a criação do menu diário com base nas receitas disponíveis. |
-| F11 | Alterar menu do dia | Oferece a possibilidade de modificar o menu do dia conforme necessário. |
-| F12 | Visualizar menu do dia | Permite que usuários visualizem o menu diário disponibilizado pelo restaurante. |
-| F13 | Cadastrar pedido | Habilita o registro de novos pedidos feitos pelos clientes. |
-| F14 | Confirmar pedido | Permite a confirmação dos pedidos registrados pelos clientes. |
-| F15 | Visualizar pedidos pendentes | Exibe uma lista atualizada dos pedidos pendentes de processamento. |
-| F16 | Fechar conta | Facilita o fechamento da conta de um cliente após a conclusão de um pedido. |
-| F17 | Visualizar mesas | Oferece uma visão geral das mesas disponíveis e ocupadas no restaurante. |
-| F18 | Reservar mesa | Permite a reserva de mesas por parte dos clientes e do recepcionista, garantindo a disponibilidade. |
-| F19 | Confirmar reserva | Confirma as reservas feitas, assegurando a alocação de mesas. |
-| F20 | Realizar o cadastro e login no site | Permite que usuários se cadastrem e façam login no sistema para acesso personalizado. |
-| F21 | Visualizar informações do restaurante | Disponibiliza informações gerais sobre o restaurante aos visitantes e clientes. |
-| F22 | Visualizar horários de atendimento | Exibe os horários em que o restaurante está aberto para o público. |
+| F01 | Cadastrar, visualizar, alterar ou excluir pratos | Permite a gestão de pratos no sistema, incluindo operações de criação, visualização, atualização e exclusão. |
+| F02 | Pesquisar e filtrar os pratos | Oferece funcionalidades para busca e filtragem dos pratos, auxiliando na localização rápida de itens. |
+| F03 | Visualizar relatórios do sistema | Fornece acesso a relatórios detalhados sobre o funcionamento e dados do sistema. |
+| F04 | Alterar menu do dia | Oferece a possibilidade de modificar o menu do dia conforme necessário. |
+| F05 | Visualizar menu do dia | Permite que usuários visualizem o menu diário disponibilizado pelo restaurante. |
+| F06 | Fazer pedido | Permite que o cliente faça pedidos de seus pratos. |
+| F07 | Modificar status do pedido | Permite que o gerente altere o status de um pedido. (Pendente, Confirmado, etc) |
+| F08 | Realizar o cadastro e login no site | Permite que usuários se cadastrem e façam login no sistema para acesso personalizado. |
+| F09 | Visualizar informações do restaurante | Disponibiliza informações gerais sobre o restaurante aos visitantes e clientes. |
+| F10 | Visualizar horários de atendimento | Exibe os horários em que o restaurante está aberto para o público. |
 
 ## 9.	Requisitos não-funcionais
 | Código | Nome | Descrição | Categoria | Classificação |
