@@ -23,13 +23,13 @@
 | Nome | Descrição | Responsabilidades |
 |:- |:- |:- |
 | Gerente | O gerente é o responsável por administrar as vendas. | Ver relatórios das vendas; Montar cardápio; Visualizar os pedidos; Alterar o status dos pedidos |
-| Cliente | O cliente é o responsável por reservar uma mesa e visualizar o menu do dia. | Visualizar mesas disponíveis; Reservar uma mesa; Ver o menu do dia;  |
-| Visitante | O visitante é o responsável por visualizar as informações do estabelecimento. | Visualisar o cardápio; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Registrar uma conta |
+| Cliente | O cliente é o responsável por reservar uma mesa e visualizar o menu do dia. |  Visualizar o cardápio; Fazer pedido; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; |
+| Visitante | O visitante é o responsável por visualizar as informações do estabelecimento. | Visualizar o cardápio; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Registrar uma conta |
 
 ## 4. Descrição do ambiente dos usuários 
 O sistema tem três tipos de usuários. Um deles é o responsável por receber os pedidos feitos via aplicação, o outro usuário é o cliente cadastrado e o terceiro é o cliente não cadastrado, chamado de visitante.
 
-O gerente acessará o site a partir do ambiente físico da loja e fará o cadastro dos ingredientes e realizará a gestão dos funcionários e ver relatórios por meio de gráficos.
+O gerente acessará o site a partir do ambiente físico da loja, ver relatórios por meio de gráficos montar/atualizar o cardápio, visualizar os pedidos e alterar seus status.
 
 O usuário cliente irá acessar o site utilizando  um computador ou celular e visualizar o cardápio do dia e fazer o pedido.
 
