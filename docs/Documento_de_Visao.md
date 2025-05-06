@@ -9,6 +9,7 @@
 | 27/04/2025 | **1.01** | Versão Inicial | Alunos | 
 | 02/05/2025 | **1.02** | Remoção de funcionalidades | Alunos |
 | 05/05/2025 | **1.03** | Adição do usuário MotoBoy | Alunos |
+| 06/05/2025 | **1.04** | Modificações rápidas | Alunos |
 
 ## 1. Objetivo do Projeto 
 **Projeto**: Sistema de comercialização de produtos de um restaurante de comida japonesa.
@@ -20,7 +21,6 @@
 | **_afetando_** | A capacidade de atrair e manter clientes |
 | **_cujo impacto é_** | A lucratividade e a visibilidade do comércio |
 | **_uma boa solução seria_** | Implementar um sistema próprio de pedidos online para aumentar a competitividade e melhorar a experiência do cliente |
-| | |
 
 ## 3. Descrição dos usuários
 | Nome | Descrição | Responsabilidades |
@@ -28,7 +28,7 @@
 | Gerente | O gerente é o responsável por administrar as vendas. | Ver relatórios das vendas; Montar cardápio; Visualizar os pedidos; Alterar o status dos pedidos |
 | Cliente | O cliente é o responsável por visualizar o menu do dia e fazer pedidos. |  Visualizar o cardápio; Fazer pedido; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Avaliar clientes |
 | Visitante | O visitante é o responsável por visualizar as informações do estabelecimento. | Visualizar o cardápio; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Registrar uma conta |
-| MotoBoy | O MotoBoy é o responsável por visualisar os pedidos e entregar eles. | Visualisar pedidos; Confirmar entregas; Avaliar clientes |
+| MotoBoy | O MotoBoy é o responsável por visualizar os pedidos e entregar eles. | Visualizar pedidos; Confirmar entregas; Avaliar clientes |
 
 ## 4. Descrição do ambiente dos usuários 
 O sistema tem três tipos de usuários. Um deles é o responsável por receber os pedidos feitos via aplicação, o outro usuário é o cliente cadastrado e o terceiro é o cliente não cadastrado, chamado de visitante.
