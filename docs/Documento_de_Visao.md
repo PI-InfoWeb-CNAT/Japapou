@@ -25,8 +25,8 @@
 ## 3. Descrição dos usuários
 | Nome | Descrição | Responsabilidades |
 |:- |:- |:- |
-| Gerente | O gerente é o responsável por administrar as vendas. | Ver relatórios das vendas; Gerenciar Cardápio; Montar menu do dia; Visualizar os pedidos; Alterar o status dos pedidos; Cadastrar MotoBoys |
-| Cliente | O cliente é o responsável por visualizar o menu do dia e fazer pedidos. |  Visualizar menu do dia; Fazer pedido; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Avaliar motoboys; Avaliar Pratos |
+| Gerente | O gerente é o responsável por administrar as vendas. | Ver relatórios das vendas; Gerenciar Cardápio; Montar menu do dia; Visualizar os pedidos; Alterar o status dos pedidos; Cadastrar MotoBoys; Visualizar histórico de pedidos |
+| Cliente | O cliente é o responsável por visualizar o menu do dia e fazer pedidos. |  Visualizar menu do dia; Confirmar compra; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Avaliar motoboys; Avaliar pratos; Gerenciar carrinho; Visualizar histórico de pedidos; Depositar dinheiro |
 | Visitante | O visitante é o responsável por visualizar as informações do estabelecimento. | Visualizar o menu do dia; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Registrar ou fazer login em uma conta |
 | MotoBoy | O MotoBoy é o responsável por visualizar os pedidos e entregar eles. | Visualizar pedidos; Confirmar entregas |
 
@@ -57,22 +57,25 @@ Uma outra alternativa é o [Brooki Bakehouse](https://www.brookibakehouse.com/),
 O sistema desenvolvido é uma aplicação web que tem como objetivo auxiliar no gerenciamento das vendas de um restaurante, permitindo que o gerente possa gerenciar os pratos, o menu e os pedidos, além de permitir que os clientes possam visualizar o cardápio e fazer pedidos.
 
 ## 8. Requisitos funcionais
-| Código | Nome | Descrição |
-|:---  |:--- |:--- |
-| F01 | Cadastrar, visualizar, alterar ou excluir pratos | Permite a gestão de pratos no sistema, incluindo operações de criação, visualização, atualização e exclusão. |
-| F02 | Cadastrar, visualizar, alterar ou excluir MotoBoys | Permite a gestão dos MotoBoys no sistema, incluindo operações de criação, visualização, atualização e exclusão.
-| F03 | Visualizar relatórios do sistema | Fornece acesso a relatórios detalhados sobre o funcionamento e dados do sistema. |
-| F04 | Alterar menu do dia | Oferece a possibilidade de modificar o menu do dia conforme necessário. |
-| F04 | Visualizar menu do dia | Permite que usuários visualizem o menu diário disponibilizado pelo restaurante. |
-| F05 | Fazer pedido | Permite que o cliente faça pedidos de seus pratos. |
-| F06 | Modificar status do pedido | Permite que o gerente altere o status de um pedido. (Pendente, Confirmado, etc) |
-| F07 | Realizar o cadastro e login no site | Permite que usuários se cadastrem e façam login no sistema para acesso persnalizado. |
-| F08 | Visualizar informações do restaurante | Disponibiliza informações gerais sobre o restaurante aos visitantes e clientes. |
-| F09 | Visualizar horários de atendimento | Exibe os horários em que o restaurante está aberto para o público. |
-| F10 | Avaliar MotoBoy | Permite que um cliente avalie os MotoBoys que entregaram seu pedido. |
-| F11 | Visualizar pedidos atuais | Permite que um MotoBoy visualize os pedidos em andamento. |
-| F11 | Visualizar histórico de pedidos | Permite que um MotoBoy ou Cliente visualize o histórico de pedidos.
-| F12 | Confirmar entregas | Permite que um MotoBoy confirme as entregas. |
+| Código | Nome | Descrição | Categoria |
+|:---  |:--- |:--- | :--- |
+| F01 | Cadastrar, visualizar, alterar ou excluir pratos | Permite a gestão de pratos no sistema, incluindo operações de criação, visualização, atualização e exclusão. | Evidente |
+| F02 | Cadastrar, visualizar, alterar ou excluir MotoBoys | Permite a gestão dos MotoBoys no sistema, incluindo operações de criação, visualização, atualização e exclusão. | Evidente |
+| F03 | Visualizar relatórios do sistema | Fornece acesso a relatórios detalhados sobre o funcionamento e dados do sistema. | Evidente |
+| F04 | Alterar menu do dia | Oferece a possibilidade de modificar o menu do dia conforme necessário. | Evidente |
+| F05 | Visualizar menu do dia | Permite que usuários visualizem o menu diário disponibilizado pelo restaurante. | Evidente |
+| F06 | Fazer pedido | Permite que o cliente faça pedidos de seus pratos. | Evidente |
+| F07 | Realizar o cadastro e login no site | Permite que usuários se cadastrem e façam login no sistema para acesso persnalizado. | Evidente |
+| F08 | Visualizar informações do restaurante | Disponibiliza informações gerais sobre o restaurante aos visitantes e clientes. | Evidente |
+| F09 | Visualizar horários de atendimento | Exibe os horários em que o restaurante está aberto para o público. | Evidente |
+| F10 | Avaliar MotoBoy | Permite que um cliente avalie os MotoBoys que entregaram seu pedido. | Evidente |
+| F11 | Visualizar pedidos atuais | Permite que um MotoBoy visualize os pedidos em andamento. | Evidente |
+| F12 | Visualizar histórico de pedidos | Permite que um MotoBoy, Cliente ou Gerente visualize o histórico de pedidos. | Evidente | 
+| F13 | Confirmar entregas | Permite que um MotoBoy confirme as entregas. | Evidente |
+| F14 | Depositar dinheiro | Permite que um cliente deposite dinheiro em uma conta. | Evidente |
+| F15 | Gerenciar carrinho | Permite que um cliente gerencie o carrinho. | Evidente |
+| F16 | Descontar do saldo | Usuário utiliza o saldo depositado no aplicativo para uma compra. | Oculto |
+
 
 
 ## 9.	Requisitos não-funcionais
@@ -83,3 +86,11 @@ O sistema desenvolvido é uma aplicação web que tem como objetivo auxiliar no 
 | NF03 | Criptografia das informações sensíveis aos usuários | Senhas do usuário devem ser gravadas de forma criptografada no banco de dados | Segurança | Obrigatório |
 | NF04 | Organização do conteúdo de forma objetiva | O site apresentará o conteúdo de forma objetiva, de modo que o usuário encontre o desejado com facilidade. | Usabilidade | Obrigatório |
 | NF05 | Tecnologias utilizadas no desenvolvimento | O site deverá ser feito utilizando HTML, CSS e JS no front-end. No back-end deverá ser utilizado Python com Django e o banco de dados será o MySQL. | Desempenho | Obrigatório |
+
+# TODO
+
+Gerenciar pratos 
+ + nomenclatura
+
+Gerenciar Menu do dia
+ + nomenclatura
