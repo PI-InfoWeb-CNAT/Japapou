@@ -26,9 +26,9 @@
 | Nome | Descrição | Responsabilidades |
 |:- |:- |:- |
 | Gerente | O gerente é o responsável por administrar as vendas. | Ver relatórios das vendas; Montar cardápio; Visualizar os pedidos; Alterar o status dos pedidos |
-| Cliente | O cliente é o responsável por visualizar o menu do dia e fazer pedidos. |  Visualizar o cardápio; Fazer pedido; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Avaliar clientes |
+| Cliente | O cliente é o responsável por visualizar o menu do dia e fazer pedidos. |  Visualizar o cardápio; Fazer pedido; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Avaliar motoboys; Avaliar Pratos |
 | Visitante | O visitante é o responsável por visualizar as informações do estabelecimento. | Visualizar o cardápio; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Registrar uma conta |
-| MotoBoy | O MotoBoy é o responsável por visualizar os pedidos e entregar eles. | Visualizar pedidos; Confirmar entregas; Avaliar clientes |
+| MotoBoy | O MotoBoy é o responsável por visualizar os pedidos e entregar eles. | Visualizar pedidos; Confirmar entregas |
 
 ## 4. Descrição do ambiente dos usuários 
 O sistema tem três tipos de usuários. Um deles é o responsável por receber os pedidos feitos via aplicação, o outro usuário é o cliente cadastrado e o terceiro é o cliente não cadastrado, chamado de visitante.
