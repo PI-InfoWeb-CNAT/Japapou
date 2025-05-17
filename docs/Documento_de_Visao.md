@@ -8,7 +8,7 @@
 | 21/04/2025 | **1.00** | Versão Inicial | George Azevedo |
 | 27/04/2025 | **1.01** | Versão Inicial | Alunos | 
 | 02/05/2025 | **1.02** | Remoção de funcionalidades | Alunos |
-| 05/05/2025 | **1.03** | Adição do usuário MotoBoy | Alunos |
+| 05/05/2025 | **1.03** | Adição do usuário Motoboy | Alunos |
 | 06/05/2025 | **1.04** | Modificações rápidas | Alunos |
 
 ## 1. Objetivo do Projeto 
@@ -25,10 +25,10 @@
 ## 3. Descrição dos usuários
 | Nome | Descrição | Responsabilidades |
 |:- |:- |:- |
-| Gerente | O gerente é o responsável por administrar as vendas. | Ver relatórios das vendas; Gerenciar Cardápio; Montar menu do dia; Visualizar os pedidos; Alterar o status dos pedidos; Cadastrar MotoBoys; Visualizar histórico de pedidos |
+| Gerente | O gerente é o responsável por administrar as vendas. | Ver relatórios das vendas; Gerenciar Cardápio; Montar menu do dia; Visualizar os pedidos; Alterar o status dos pedidos; Cadastrar Motoboys; Visualizar histórico de pedidos |
 | Cliente | O cliente é o responsável por visualizar o menu do dia e fazer pedidos. |  Visualizar menu do dia; Confirmar compra; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Avaliar motoboys; Avaliar pratos; Gerenciar carrinho; Visualizar histórico de pedidos; Depositar dinheiro |
 | Visitante | O visitante é o responsável por visualizar as informações do estabelecimento. | Visualizar o menu do dia; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Registrar ou fazer login em uma conta |
-| MotoBoy | O MotoBoy é o responsável por visualizar os pedidos e entregar eles. | Visualizar pedidos; Confirmar entregas |
+| Motoboy | O Motoboy é o responsável por visualizar os pedidos e entregar eles. | Visualizar pedidos; Confirmar entregas |
 
 ## 4. Descrição do ambiente dos usuários 
 O sistema tem quatro tipos de usuários. Um deles é o responsável por receber os pedidos feitos via aplicação, o outro usuário é o cliente cadastrado e o terceiro é o cliente não cadastrado, chamado de visitante.
@@ -39,14 +39,14 @@ O usuário cliente irá acessar o site utilizando  um computador ou celular e vi
 
 O usuário visitante irá acessar o site utilizando um computador ou celular e registrar/entrar em uma conta, visualizar o cardápio do dia,  visualizar informações sobre o restaurante.
 
-O usuário MotoBoy irá acessar o site utilizando um celular e visualizar os pedidos para ele entregar, confirmar entregas e avaliar clientes.
+O usuário Motoboy irá acessar o site utilizando um celular e visualizar os pedidos para ele entregar, confirmar entregas e avaliar clientes.
 
 ## 5. Principais necessidades dos usuários
 Considerando o ponto de vista do gerente, sua principal necessidade é aumentar a eficiência de sua loja para que possa ter um melhor controle dela por meio de uma gestão inteligente de todas as funções do sistema.
 
 Considerando o ponto de vista do cliente, ele deseja ter acesso a um site com interface amigável que permita obter informações sobre o restaurante e sobre os seus pratos, sendo, posteriormente, capaz de realizar o seu pedido.
 
-Considerando o ponto de vista do MotoBoy, ele deseja ter acesso a um site com interface prática de uso mobile, que permita visualizar os pedidos e confirmar eles.
+Considerando o ponto de vista do Motoboy, ele deseja ter acesso a um site com interface prática de uso mobile, que permita visualizar os pedidos e confirmar eles.
 
 ## 6. Alternativas concorrentes
 Uma alternativa para o sistema é o [Crumbl](https://crumblcookies.com/order/carry_out), focando no delivery: oferece escolha de filial, mostra informações sobre o carro de entrega.  
@@ -60,7 +60,7 @@ O sistema desenvolvido é uma aplicação web que tem como objetivo auxiliar no 
 | Código | Nome | Descrição | Categoria |
 |:---  |:--- |:--- | :--- |
 | F01 | Cadastrar, visualizar, alterar ou excluir pratos | Permite a gestão de pratos no sistema, incluindo operações de criação, visualização, atualização e exclusão. | Evidente |
-| F02 | Cadastrar, visualizar, alterar ou excluir MotoBoys | Permite a gestão dos MotoBoys no sistema, incluindo operações de criação, visualização, atualização e exclusão. | Evidente |
+| F02 | Cadastrar, visualizar, alterar ou excluir Motoboys | Permite a gestão dos Motoboys no sistema, incluindo operações de criação, visualização, atualização e exclusão. | Evidente |
 | F03 | Visualizar relatórios do sistema | Fornece acesso a relatórios detalhados sobre o funcionamento e dados do sistema. | Evidente |
 | F04 | Alterar menu do dia | Oferece a possibilidade de modificar o menu do dia conforme necessário. | Evidente |
 | F05 | Visualizar menu do dia | Permite que usuários visualizem o menu diário disponibilizado pelo restaurante. | Evidente |
@@ -68,14 +68,14 @@ O sistema desenvolvido é uma aplicação web que tem como objetivo auxiliar no 
 | F07 | Realizar o cadastro e login no site | Permite que usuários se cadastrem e façam login no sistema para acesso persnalizado. | Evidente |
 | F08 | Visualizar informações do restaurante | Disponibiliza informações gerais sobre o restaurante aos visitantes e clientes. | Evidente |
 | F09 | Visualizar horários de atendimento | Exibe os horários em que o restaurante está aberto para o público. | Evidente |
-| F10 | Avaliar MotoBoy | Permite que um cliente avalie os MotoBoys que entregaram seu pedido. | Evidente |
-| F11 | Visualizar pedidos atuais | Permite que um MotoBoy visualize os pedidos em andamento. | Evidente |
-| F12 | Visualizar histórico de pedidos | Permite que um MotoBoy, Cliente ou Gerente visualize o histórico de pedidos. | Evidente | 
-| F13 | Confirmar entregas | Permite que um MotoBoy confirme as entregas. | Evidente |
+| F10 | Avaliar Motoboy | Permite que um cliente avalie os Motoboys que entregaram seu pedido. | Evidente |
+| F11 | Visualizar pedidos atuais | Permite que um Motoboy visualize os pedidos em andamento. | Evidente |
+| F12 | Visualizar histórico de pedidos | Permite que um Motoboy, Cliente ou Gerente visualize o histórico de pedidos. | Evidente | 
+| F13 | Confirmar entregas | Permite que um Motoboy confirme as entregas. | Evidente |
 | F14 | Depositar dinheiro | Permite que um cliente deposite dinheiro em uma conta. | Evidente |
 | F15 | Gerenciar carrinho | Permite que um cliente gerencie o carrinho. | Evidente |
 | F16 | Descontar do saldo | Usuário utiliza o saldo depositado no aplicativo para uma compra. | Oculto |
-
+| F17 | Gerenciar carrinho | Permite que um cliente adicione, edite e remova itens do carrinho. | Evidente |
 
 
 ## 9.	Requisitos não-funcionais
@@ -90,7 +90,6 @@ O sistema desenvolvido é uma aplicação web que tem como objetivo auxiliar no 
 # TODO
 
 Gerenciar pratos 
- + nomenclatura
-
 Gerenciar Menu do dia
  + nomenclatura
+ 
