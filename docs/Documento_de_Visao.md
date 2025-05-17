@@ -25,7 +25,7 @@
 ## 3. Descrição dos usuários
 | Nome | Descrição | Responsabilidades |
 |:- |:- |:- |
-| Gerente | O gerente é o responsável por administrar as vendas. | Ver relatórios das vendas; Gerenciar Cardápio; Montar menu do dia; Visualizar os pedidos; Alterar o status dos pedidos; Cadastrar Motoboys; Visualizar histórico de pedidos |
+| Gerente | O gerente é o responsável por administrar as vendas. | Ver relatórios das vendas; Gerenciar Cardápio; Montar menu do dia; Visualizar pedidos pedentes; Confirmar Saída; Cadastrar Motoboys; Visualizar histórico |
 | Cliente | O cliente é o responsável por visualizar o menu do dia e fazer pedidos. |  Visualizar menu do dia; Confirmar compra; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Avaliar motoboys; Avaliar pratos; Gerenciar carrinho; Visualizar histórico de pedidos; Depositar dinheiro |
 | Visitante | O visitante é o responsável por visualizar as informações do estabelecimento. | Visualizar o menu do dia; Visualizar horários de atendimento; Visualizar informações sobre o restaurante; Registrar ou fazer login em uma conta |
 | Motoboy | O Motoboy é o responsável por visualizar os pedidos e entregar eles. | Visualizar pedidos; Confirmar entregas |
