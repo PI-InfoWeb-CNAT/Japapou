@@ -15,3 +15,7 @@
 ## 2. Diagrama de entidades e relacionamentos
 
 ![Entidades e Relacionamentos](imagens/Diagrama_Entidades_e_Relacionamentos.png)
+
+## 3. Mapa do site
+
+![Mapa do Site](imagens/Mapa_do_Site.png)
