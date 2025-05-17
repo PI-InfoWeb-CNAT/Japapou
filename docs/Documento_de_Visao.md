@@ -75,8 +75,6 @@ O sistema desenvolvido é uma aplicação web que tem como objetivo auxiliar no 
 | F14 | Depositar dinheiro | Permite que um cliente deposite dinheiro em uma conta. | Evidente |
 | F15 | Gerenciar carrinho | Permite que um cliente gerencie o carrinho. | Evidente |
 | F16 | Descontar do saldo | Usuário utiliza o saldo depositado no aplicativo para uma compra. | Oculto |
-| F17 | Gerenciar carrinho | Permite que um cliente adicione, edite e remova itens do carrinho. | Evidente |
-
 
 ## 9.	Requisitos não-funcionais
 | Código | Nome | Descrição | Categoria | Classificação |
@@ -86,10 +84,3 @@ O sistema desenvolvido é uma aplicação web que tem como objetivo auxiliar no 
 | NF03 | Criptografia das informações sensíveis aos usuários | Senhas do usuário devem ser gravadas de forma criptografada no banco de dados | Segurança | Obrigatório |
 | NF04 | Organização do conteúdo de forma objetiva | O site apresentará o conteúdo de forma objetiva, de modo que o usuário encontre o desejado com facilidade. | Usabilidade | Obrigatório |
 | NF05 | Tecnologias utilizadas no desenvolvimento | O site deverá ser feito utilizando HTML, CSS e JS no front-end. No back-end deverá ser utilizado Python com Django e o banco de dados será o MySQL. | Desempenho | Obrigatório |
-
-# TODO
-
-Gerenciar pratos 
-Gerenciar Menu do dia
- + nomenclatura
- 
