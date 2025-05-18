@@ -32,7 +32,7 @@ Após a execução deste casos de uso, espera que o sistema:
 ### 5. Fluxos de evento
 
 #### 5.1. Fluxo Principal
-(Pagamento pelo saldo do app)
+(Realizar pedido através do carinho)
 
 | Ator | Sistema |
 |:-------|:------- |
