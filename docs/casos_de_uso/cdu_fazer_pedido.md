@@ -32,12 +32,11 @@ Após a execução deste casos de uso, espera que o sistema:
 ### 5. Fluxos de evento
 
 #### 5.1. Fluxo Principal
-(Realizar pedido através do carinho)
 
 | Ator | Sistema |
 |:-------|:------- |
 | 1. Na página de carinho, o cliente clica em "fazer pedido". | --- |
-| --- | 2. O sistema faz o cálculo apenas dos pratos adicionado no carrinho. |
+| --- | 2. O sistema faz o cálculo apenas dos pratos adicionados no carrinho. |
 | 3. O cliente visualiza a página de dados do pedido e preenche-os. | --- |
 | --- | 4. O sistema calcula o valor total do pedido através dos dados do pedido. |
 | 5. O cliente clica em "confirmar pedido. | --- |
