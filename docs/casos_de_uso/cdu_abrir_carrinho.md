@@ -6,7 +6,7 @@
 |  Data  | Versão | Descrição | Autor |
 |:-------|:-------|:----------|:------|
 | 17/05/2025 | **1.00** | Primeira versão  | Pedro Lucas |
-| 124/05/2025 | **1.01** | Modificação de fluxos de evento  | Pedro Lucas |
+| 124/05/2025 | **1.01** | Modificação do fluxos de evento  | Pedro Lucas |
 
 
 ### 1. Resumo 
