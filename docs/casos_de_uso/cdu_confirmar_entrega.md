@@ -7,10 +7,11 @@
 | Data       | Versão   | Descrição     | Autor           |
 | :--------- | :------- | :------------ | :-------------- |
 | 17/05/25 | **1.00** | Versão modelo | Danilo Dantas |
+| 24/05/25 | **1.01** | Modificação do fluxo de exceção | Pedro Lucas |
 
 ### 1. Resumo
 
-Este casos de uso permite que um motoboy confirme a entrega de um pedido e receba um pagamento caso necessário. 
+Este casos de uso permite que um motoboy confirme a entrega de um pedido com o pagamento sendo automatico com o saldo do cliente no sistema. 
 
 ### 2. Atores
 
@@ -28,35 +29,46 @@ São pré-condições para iniciar este caso de uso:
 
 Após a execução deste casos de uso, espera que o sistema:
 
--   Caso o pagamento seja via pix, o sistema deve gerar um código QR para o pagamento.
--   Caso o pagamento seja pelo saldo do app, deve descontar o saldo do cliente que o pedido foi feito.
+-   O sistema deve descontar o saldo do cliente que o pedido foi feito.
 -   Editar o pedido e definir como entregue.
 
 ### 5. Fluxos de evento
 
 #### 5.1. Fluxo Principal
-(Pagamento pelo saldo do app)
-
 | Ator | Sistema |
 |:-------|:------- |
 | 1. Na página de pedido atual, o motoboy clica em "confirmar entrega". | --- |
-| --- | 2. O sistema desconta o saldo do cliente que o pedido foi feito. |
-| --- | 3. O sistema modifica o pedido com as informações da entrega. |
-| 4. O motoboy visualiza uma confirmação do pagamento. | --- |
-
-#### 5.2. Fluxo alternativo
-(Pagamento via pix)
-
-| Ator | Sistema |
-|:-------|:------- |
-| 1. Na página de pedido atual, o motoboy clica em "confirmar entrega". | --- |
-| --- | 2. O sistema gera um código QR para o pagamento. |
-| 3. O motoboy mostra o código QR para o cliente. | --- |
-| 4. O cliente escanea o código QR e confirma o pagamento. | --- |
+| --- | 2. O sistema verifica o saldo do cliente. |
+| --- | 3. O sistema desconta o saldo do cliente que o pedido foi feito. |
+| --- | 4. O sistema modifica o pedido com as informações da entrega. |
 | 5. O motoboy visualiza uma confirmação do pagamento. | --- |
 
-#### 5.3. Fluxo de excessão 
-Não há excessão.
+#### 5.2.1 Fluxo de excessão 
+| Ator | Sistema |
+|:-------|:------- |
+| 1. Na página de pedido atual, o motoboy clica em "confirmar entrega". | --- |
+| --- | 2. O sistema verifica o saldo do cliente. |
+| --- | 3. (EXCEÇÃO) O sistema detecta que o cliente não possui saldo suficiente. |
+| --- | 4. O sistema exibe uma mensagem de alerta para o motoboy: "Saldo insuficiente. Pagamento automático falhou. Por favor, solicite o pagamento diretamente ao cliente." |
+| 5. O motoboy visualiza o alerta e pede o pagamento ao cliente. | --- |
+| 6. O cliente diz que vai pagar em dinheiro. | --- |
+| 7. O motoboy confirma o pagamento em dinheiro. | --- |
+| --- | 8. O sistema confirma o pedido com as informações da entrega.
+
+#### 5.2.2 Fluxo de excessão 
+| Ator | Sistema |
+|:-------|:------- |
+| 1. Na página de pedido atual, o motoboy clica em "confirmar entrega". | --- |
+| --- | 2. O sistema verifica o saldo do cliente. |
+| --- | 3. (EXCEÇÃO) O sistema detecta que o cliente não possui saldo suficiente. |
+| --- | 4. O sistema exibe uma mensagem de alerta para o motoboy: "Saldo insuficiente. Pagamento |automático falhou. Por favor, solicite o pagamento diretamente ao cliente." |
+| 5. O motoboy visualiza o alerta e pede o pagamento ao cliente. | --- |
+| 6. (EXCEÇÃO) O cliente diz que vai pagar em pix. | --- |
+| 7. O motoboy aperta no botão "pagamento via pix". | --- |
+| --- | 8. O sistema gera um QR code para o pagamento. |
+| 9. O cliente paga. | --- |
+| --- | 10. O sistema confirma o pagamento. |
+| --- | 11. O sistema confirma o pedido como entregue. |
 
 ### 6. Prototipos de Interface
 
