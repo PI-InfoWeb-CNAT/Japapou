@@ -1,7 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin  # type: ignore
+from .models import *
 
-# Register your models here.
-# Register your models here.
-from .models import * #imporata nossos models
-
-admin.site.register(Usuario) #adiciona a interface do adm
+admin.site.register(User)
