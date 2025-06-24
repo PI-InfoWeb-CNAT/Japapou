@@ -8,6 +8,7 @@
 |:-------|:-------|:----------|:------|
 | 01/06/2021 | **1.00** | Versão Inicial  | George Azevedo |
 | 08/06/2025 | **1.10** | Modificação  | Pedro Lucas |
+| 24/06/2025 | **1.20** | Atualização | Juliana Beatriz |
 
 ## 1. Diagrama de casos de uso 
 
