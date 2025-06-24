@@ -15,7 +15,7 @@
 
 ## 2. Diagrama de classes
 
-![Entidades e Relacionamentos](imagens/Class_Diagram0.png)
+![Entidades e Relacionamentos](imagens/ClassDiagram0.png)
 
 ## 3. Diagrama de entidades e relacionamentos
 
