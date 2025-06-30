@@ -21,9 +21,10 @@ from django.conf import settings  # type: ignore
 from django.contrib import admin  # type: ignore
 from django.conf.urls.static import static  # type: ignore
 
+
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("japapou.urls")),
+    path("", include("japapou.urls.visitor_urls")),
     path("client/", include("japapou.urls.client_urls")),
     path("delivery_man/", include("japapou.urls.delivery_man_urls")),
     path("manager/", include("japapou.urls.manager_urls")),
