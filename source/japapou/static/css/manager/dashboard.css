@@ -1,0 +1,19 @@
+.text1 {
+	color: var(--darker-gray);
+}
+
+.text2 {
+	color: var(--dark-gray);
+}
+
+.text3 {
+	color: var(--gray);
+}
+
+.text4 {
+	color: var(--light-gray);
+}
+
+.text5 {
+	color: var(--lighter-gray);
+}

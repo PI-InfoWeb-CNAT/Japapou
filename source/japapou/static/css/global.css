@@ -1,3 +1,11 @@
+:root {
+	--darker-gray: #2a2929;
+	--dark-gray: #565656;
+	--gray: #7f7f7f;
+	--light-gray: #a5a5a5;
+	--lighter-gray: #cdcdcd;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -15,7 +23,3 @@ header {
 	align-items: center;
 	padding: 1rem;
 }
-
-/* header p {   
-	margin: 0;
-} */

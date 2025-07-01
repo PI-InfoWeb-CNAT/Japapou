@@ -11,5 +11,5 @@ urlpatterns = [
     path("menu/", manager_menu_view, name="manager_menu"),
     path("orders/", manager_orders_view, name="manager_orders"),
     path("profile/", manager_profile_view, name="manager_profile"),
-    path("reports/", manager_reports_view, name="manager_reports"),
+    path("dashboard/", manager_dashboard_view, name="manager_dashboard"),
 ]
