@@ -13,20 +13,6 @@
     padding-bottom: 40px; /* Espaço para os botões não cortarem na borda da tela 
 }*/
 
-.carousel-item img {
-  width: 800px;
-  height: 400px;
-  object-fit: cover;
-}
-.carousel-caption {
-  margin: 7.5%;
-}
-.carousel-caption h2 {
-  font-family: "Playfair-Display";
-  font-size: 4em;
-  color: #d9b992;
-}
-
 body {
   background-color: #031627;
 }
@@ -186,6 +172,7 @@ body {
   background-color: #031627;
 }
 
+/* MODALS */
 .data-cardapio p {
   border: 1px solid #f97316;
   color: #f97316;
@@ -198,16 +185,30 @@ body {
   margin: 0;
 }
 #novo-cardapio {
-  width: 400px;
-  height: 300px;
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 20px;
+    margin: 0 auto;
+    width: 30%;
+    padding: 20px;
+    height: 60%;
+    background-color: #024057;
+    border-radius: 5px;
 }
-
+/* MODALS */
 
 
 /* CARROSSEL */
+.carousel-item img {
+  width: 800px;
+  height: 400px;
+  object-fit: cover;
+}
+.carousel-caption {
+  margin: 7.5%;
+}
+.carousel-caption h2 {
+  font-family: "Playfair-Display";
+  font-size: 4em;
+  color: #d9b992;
+}
 .carousel-control-prev-icon {
   filter: invert(54%) sepia(98%) saturate(747%) hue-rotate(355deg)
     brightness(104%) contrast(101%);
