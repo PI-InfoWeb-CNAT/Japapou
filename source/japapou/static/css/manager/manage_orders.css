@@ -1,0 +1,149 @@
+.pedido-box {
+	background-color: #1a1a1a;
+	margin: 0 auto 30px auto;
+	padding: 30px;
+	border-radius: 16px;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+	max-width: 900px;
+	transition: all 0.3s ease;
+}
+
+.pedido-header {
+	background-color: #292929;
+	padding: 12px 20px;
+	border-radius: 8px;
+	text-align: left;
+	font-weight: bold;
+	color: #f0c674;
+	font-size: 18px;
+	margin-bottom: 25px;
+}
+
+.pedido-conteudo {
+	display: flex;
+	gap: 30px;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.pedido-imagens {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+	width: 180px;
+}
+
+.pedido-imagens img {
+	width: 100%;
+	height: auto;
+	border-radius: 10px;
+	object-fit: cover;
+	cursor: pointer;
+	border: 1px solid #444;
+	filter: brightness(0.95);
+	transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.pedido-imagens img:hover {
+	transform: scale(1.05);
+	filter: brightness(1.1);
+}
+
+.pedido-info {
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	flex: 1;
+	min-width: 240px;
+}
+
+.pedido-info p {
+	line-height: 1.6;
+	font-size: 15px;
+	color: #eee;
+}
+
+.btn-toggle {
+	background-color: #f0c674;
+	color: black;
+	border: none;
+	padding: 12px 25px;
+	font-weight: 600;
+	cursor: pointer;
+	border-radius: 10px;
+	margin-top: 30px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 14px;
+	transition: background-color 0.3s ease;
+
+	&:hover {
+		background-color: #ffe191;
+	}
+}
+
+.detalhes {
+	display: none;
+	margin-top: 20px;
+	background-color: #222;
+	padding: 18px;
+	border-radius: 10px;
+	text-align: left;
+	animation: fadeIn 0.3s ease-in-out;
+	color: #ccc;
+	font-size: 14px;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.lightbox-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.9);
+	display: none;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+}
+
+.lightbox-overlay img {
+	max-width: 90%;
+	max-height: 90%;
+	border-radius: 12px;
+	box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.lightbox-overlay.active {
+	display: flex;
+}
+
+@media (max-width: 700px) {
+	.pedido-conteudo {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.pedido-imagens {
+		width: 100%;
+		max-width: 320px;
+	}
+
+	.pedido-info {
+		text-align: center;
+		align-items: center;
+	}
+}

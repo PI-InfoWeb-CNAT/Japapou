@@ -1,39 +1,48 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1, shrink-to-fit=no"
-		/>
-		<link rel="stylesheet" href="{% static 'css/global.css' %}" />
-		<title>{% block title %}{% endblock title %}</title>
-		{% block extra_head %}{% endblock extra_head %}
-	</head>
-	<body>
-		<header>
-			{% comment %} TODO: Atualizar o header e fazer o botão de menu funcionar {% endcomment %}
-			<img
-				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw_HeSzHfBorKS4muw4IIeVvvRgnhyO8Gn8w&s"
-				width="60"
-				height="60"
-				alt="Japapou Logo"
-			/>
-			
-			<p>Japapou</p>
-			<button>
-			<img
-				src="https://t3.ftcdn.net/jpg/02/24/13/60/360_F_224136032_b11na6zJLTpORSjfauRdpKamQDc7Uejv.jpg"
-				width="60"
-				height="60"
-				alt="Japapou Logo"
-			/></button>
-		</header>
-		<nav class="sidenav" style="display: none">
-			{% include "partials/menu_manager.html" %}
-		</nav>
-		<main>{% block content %} {% endblock content %}</main>
-		{% block scripts %} {% endblock scripts %}
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    <title>
+      {% block title %}
+
+      {% endblock %}- JAPAPOU
+    </title>
+    <link href="https://fonts.googleapis.com/css2?family=Gotu&family=Inter:wght@300;400;600&family=Italiana&display=swap" rel="stylesheet" />
+    {% block extra_head %}
+
+    {% endblock %}
+  </head>
+  <body>
+    <header>
+      <div id="foto-perfil">
+        <a href="{% url 'manager_profile' %}"><img src="imagens/user.png" alt="Usuário" width="24px" /></a>
+      </div>
+
+      <a href="{% url 'home' %}"><p>JAPAPOU</p></a>
+
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+    <nav>
+      <ul class="sideMenu" id="sideMenu">
+        {% include 'partials/menu_manager.html' %}
+      </ul>
+    </nav>
+    <main>
+      {% block content %}
+
+      {% endblock %}
+    </main>
+    <script src="{% static 'js/global.js' %}"></script>
+    {% block scripts %}
+
+    {% endblock %}
+  </body>
 </html>

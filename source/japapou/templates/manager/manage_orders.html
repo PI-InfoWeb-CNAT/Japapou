@@ -1,7 +1,202 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Gerenciar Pedidos{% endblock title %}
+{% block title %}
+  Visualizar Pedidos
+{% endblock %}
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/manager/manage_orders.css' %}" />
+  <script src="{% static 'js/manager/manage_orders.js' %}"></script>
+{% endblock %}
 
 {% block content %}
-<h1>Gerenciar Pedidos</h1>
-{% endblock content %}
+  <h1>Pedidos</h1>
+
+  <div class="pedido-box">
+    <div class="pedido-header">Pedido #001 - Express</div>
+
+    <div class="pedido-conteudo">
+      <div class="pedido-imagens">
+        <img src="imagens/manage-orders-img1.png" alt="Sushi 1" />
+        <img src="imagens/manage-orders-img2.png" alt="Sushi 2" />
+        <img src="imagens/manage-orders-img3.png" alt="Sushi 3" />
+        <img src="imagens/manage-orders-img4.png" alt="Sushi 4" />
+      </div>
+
+      <div class="pedido-info">
+        <div>
+          <p>
+            <strong>Nome do Usuário:</strong> João Tanaka
+          </p>
+          <p>
+            <strong>Itens:</strong><br />
+            2x Sushi Especial - R$ 15,00<br />
+            3x Temaki Salmão - R$ 20,00<br />
+            4x Hot Roll - R$ 10,00<br />
+            2x Guaraná - R$ 5,00
+          </p>
+        </div>
+        <div>
+          <p>
+            <strong>Endereço:</strong><br />
+            Bairro Liberdade, Rua das Flores, 210<br />
+            São Paulo, SP
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-toggle" onclick="toggleDetalhes(this)">Mais detalhes</button>
+
+    <div class="detalhes" id="detalhesPedido">
+      <p>
+        <strong>Observações:</strong> Cliente solicitou sem molho teriyaki.<br />
+        <strong>Forma de pagamento:</strong> Cartão de crédito.<br />
+        <strong>Horário do pedido:</strong> 12:34 - 01/07/2025<br />
+        <strong>Status:</strong> Em preparação
+      </p>
+    </div>
+  </div>
+
+  <div class="pedido-box">
+    <div class="pedido-header">Pedido #002 - Express</div>
+
+    <div class="pedido-conteudo">
+      <div class="pedido-imagens">
+        <img src="imagens/manage-orders-img1.png" alt="Sushi 1" />
+        <img src="imagens/manage-orders-img2.png" alt="Sushi 2" />
+        <img src="imagens/manage-orders-img3.png" alt="Sushi 3" />
+        <img src="imagens/manage-orders-img4.png" alt="Sushi 4" />
+      </div>
+
+      <div class="pedido-info">
+        <div>
+          <p>
+            <strong>Nome do Usuário:</strong> João Tanaka
+          </p>
+          <p>
+            <strong>Itens:</strong><br />
+            2x Sushi Especial - R$ 15,00<br />
+            3x Temaki Salmão - R$ 20,00<br />
+            4x Hot Roll - R$ 10,00<br />
+            2x Guaraná - R$ 5,00
+          </p>
+        </div>
+        <div>
+          <p>
+            <strong>Endereço:</strong><br />
+            Bairro Liberdade, Rua das Flores, 210<br />
+            São Paulo, SP
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-toggle" onclick="toggleDetalhes(this)">Mais detalhes</button>
+
+    <div class="detalhes" id="detalhesPedido">
+      <p>
+        <strong>Observações:</strong> Cliente solicitou sem molho teriyaki.<br />
+        <strong>Forma de pagamento:</strong> Cartão de crédito.<br />
+        <strong>Horário do pedido:</strong> 12:34 - 01/07/2025<br />
+        <strong>Status:</strong> Em preparação
+      </p>
+    </div>
+  </div>
+
+  <div class="pedido-box">
+    <div class="pedido-header">Pedido #003 - Express</div>
+
+    <div class="pedido-conteudo">
+      <div class="pedido-imagens">
+        <img src="imagens/manage-orders-img1.png" alt="Sushi 1" />
+        <img src="imagens/manage-orders-img2.png" alt="Sushi 2" />
+        <img src="imagens/manage-orders-img3.png" alt="Sushi 3" />
+        <img src="imagens/manage-orders-img4.png" alt="Sushi 4" />
+      </div>
+
+      <div class="pedido-info">
+        <div>
+          <p>
+            <strong>Nome do Usuário:</strong> João Tanaka
+          </p>
+          <p>
+            <strong>Itens:</strong><br />
+            2x Sushi Especial - R$ 15,00<br />
+            3x Temaki Salmão - R$ 20,00<br />
+            4x Hot Roll - R$ 10,00<br />
+            2x Guaraná - R$ 5,00
+          </p>
+        </div>
+        <div>
+          <p>
+            <strong>Endereço:</strong><br />
+            Bairro Liberdade, Rua das Flores, 210<br />
+            São Paulo, SP
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-toggle" onclick="toggleDetalhes(this)">Mais detalhes</button>
+
+    <div class="detalhes" id="detalhesPedido">
+      <p>
+        <strong>Observações:</strong> Cliente solicitou sem molho teriyaki.<br />
+        <strong>Forma de pagamento:</strong> Cartão de crédito.<br />
+        <strong>Horário do pedido:</strong> 12:34 - 01/07/2025<br />
+        <strong>Status:</strong> Em preparação
+      </p>
+    </div>
+  </div>
+
+  <div class="pedido-box">
+    <div class="pedido-header">Pedido #004 - Express</div>
+
+    <div class="pedido-conteudo">
+      <div class="pedido-imagens">
+        <img src="imagens/manage-orders-img1.png" alt="Sushi 1" />
+        <img src="imagens/manage-orders-img2.png" alt="Sushi 2" />
+        <img src="imagens/manage-orders-img3.png" alt="Sushi 3" />
+        <img src="imagens/manage-orders-img4.png" alt="Sushi 4" />
+      </div>
+
+      <div class="pedido-info">
+        <div>
+          <p>
+            <strong>Nome do Usuário:</strong> João Tanaka
+          </p>
+          <p>
+            <strong>Itens:</strong><br />
+            2x Sushi Especial - R$ 15,00<br />
+            3x Temaki Salmão - R$ 20,00<br />
+            4x Hot Roll - R$ 10,00<br />
+            2x Guaraná - R$ 5,00
+          </p>
+        </div>
+        <div>
+          <p>
+            <strong>Endereço:</strong><br />
+            Bairro Liberdade, Rua das Flores, 210<br />
+            São Paulo, SP
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-toggle" onclick="toggleDetalhes(this)">Mais detalhes</button>
+
+    <div class="detalhes" id="detalhesPedido">
+      <p>
+        <strong>Observações:</strong> Cliente solicitou sem molho teriyaki.<br />
+        <strong>Forma de pagamento:</strong> Cartão de crédito.<br />
+        <strong>Horário do pedido:</strong> 12:34 - 01/07/2025<br />
+        <strong>Status:</strong> Em preparação
+      </p>
+    </div>
+  </div>
+{% endblock %}
+
+{% comment %} <div class="lightbox-overlay" id="lightbox">
+  <img id="lightbox-img" src="" alt="Imagem ampliada" />
+</div> {% endcomment %}
