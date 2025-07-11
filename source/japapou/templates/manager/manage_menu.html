@@ -1,7 +1,45 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Gerenciar Menu{% endblock title %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/manager/manager_menu.css' %}" />{% endblock extra_head %}
 
 {% block content %}
-<h1>Gerenciar Menu</h1>
+    <body>
+
+        <div class="product-card">
+            <button class="action-button delete-button" aria-label="Deletar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <button class="action-button edit-button" aria-label="Editar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+            </button>
+
+            <div class="product-image">
+                <span>Foto do Produto</span>
+            </div>
+
+            <div class="card-body">
+                <div class="product-rating">
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                    <span>&#9733;</span>
+                </div>
+                <h2 class="product-name">Nome do Produto</h2>
+                <p class="product-description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                </p>
+                <button class="remove-button">REMOVER</button>
+            </div>
+
+            <div class="product-price">
+                R$ 40,00
+            </div>
+        </div>
+
+    </body>
 {% endblock content %}
+
+{% block scripts %}<script src="{% static 'js/manager/script.js' %}"></script>{% endblock scripts %}
