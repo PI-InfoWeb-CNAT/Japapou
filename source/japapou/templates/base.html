@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
+<<<<<<< Updated upstream
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -53,4 +54,43 @@
 
     {% endblock %}
   </body>
+=======
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<link rel="stylesheet" href="{% static 'css/global.css' %}" />
+		<title>{% block title %}{% endblock title %}</title>
+		<!-- ✅ Font Awesome -->
+		<script src="https://kit.fontawesome.com/eb5472cd53.js" crossorigin="anonymous"></script>
+		{% block extra_head %}{% endblock extra_head %}
+	</head>
+	<body>
+		<header>
+			{% comment %} TODO: Atualizar o header e fazer o botão de menu funcionar {% endcomment %}
+			<img
+				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw_HeSzHfBorKS4muw4IIeVvvRgnhyO8Gn8w&s"
+				width="60"
+				height="60"
+				alt="Japapou Logo"
+			/>
+			
+			<p>Japapou</p>
+			<button>
+			<img
+				src="https://t3.ftcdn.net/jpg/02/24/13/60/360_F_224136032_b11na6zJLTpORSjfauRdpKamQDc7Uejv.jpg"
+				width="60"
+				height="60"
+				alt="Japapou Logo"
+			/></button>
+		</header>
+		<nav class="sidenav" style="display: none">
+			{% include "partials/menu_manager.html" %}
+		</nav>
+		<main>{% block content %} {% endblock content %}</main>
+		{% block scripts %} {% endblock scripts %}
+	</body>
+>>>>>>> Stashed changes
 </html>

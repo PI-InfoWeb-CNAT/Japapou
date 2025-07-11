@@ -1,7 +1,90 @@
 {% extends "base.html" %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Perfil{% endblock title %}</title>
 
-{% block title %}Perfil{% endblock title %}
+    {% block extra_head %}<link rel="stylesheet" href="{% static 'css/manager/manager_profile.css' %}">{% endblock extra_head %}
+</head>
 
 {% block content %}
-<h1>Perfil</h1>
+<body>
+  <h2 class="section-title">Geral</h2>
+
+<div class="foto-perfil">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="foto-container">
+      <label for="fileInput" class="foto-wrapper">
+        <!-- Você pode deixar esse img comentado se ainda não tiver imagem -->
+        <!-- <img src="{{ user.profile_image.url }}" alt="Foto de perfil" class="foto-img"> -->
+        <div class="icone-camera">
+          <i class="fa-solid fa-camera"></i>
+        </div>
+      </label>
+      <input type="file" name="foto" id="fileInput" accept="image/*" style="display: none" onchange="this.form.submit()" />
+    </div>
+    <div>
+        <p class="foto-label">Altere a sua foto de perfil</p>
+        <button type="submit">Remover</button>
+    </div>
+  </form>
+</div>
+
+
+
+  <ul>
+    <li>
+        <strong>Nome</strong>
+        <div class="value-with-icon">
+            <span>Cláudia Martins Soares</span>
+            <a href="/manager/profile/edit-name/" class="edit-icon" title="Editar">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+        </div>
+    </li>
+    <li>
+      <strong>Aniversário</strong>
+      <div class="value-with-icon">
+            <span>14 de outubro de 1998</span>
+            <a href="/manager/profile/edit-name/" class="edit-icon" title="Editar">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+        </div>
+    </li>
+    <li>
+      <strong>E-mail</strong>
+      <div class="value-with-icon">
+            <span>claudia.martins.gerente@corpflux.com</span>
+            <a href="/manager/profile/edit-name/" class="edit-icon" title="Editar">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+        </div>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2 class="section-title">Conta</h2>
+  <ul>
+    <li>
+      <strong>Username</strong>
+            <div class="value-with-icon">
+            <span>gerente.01.[nome da filial]</span>
+            <a href="/manager/profile/edit-name/" class="edit-icon" title="Editar">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+        </div>
+    </li>
+    <li>
+      <strong>Senha</strong>
+            <div class="value-with-icon">
+            <span>**************</span>
+            <a href="/manager/profile/edit-name/" class="edit-icon" title="Editar">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+        </div>
+    </li>
+  </ul>
+</body>
 {% endblock content %}
