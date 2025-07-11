@@ -37,8 +37,9 @@ header {
 		color: white;
 	}
 
-	#foto-perfil img {
+	#logo img {
 		vertical-align: middle;
+		border-radius: 50%;
 	}
 
 	.hamburger {
