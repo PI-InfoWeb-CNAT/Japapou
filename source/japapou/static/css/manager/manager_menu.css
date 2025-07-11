@@ -1,5 +1,5 @@
 /* Importando uma fonte para um visual mais moderno (Opcional) */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
 /* Estilos gerais para a página */
 /*body {
@@ -13,118 +13,216 @@
     padding-bottom: 40px; /* Espaço para os botões não cortarem na borda da tela 
 }*/
 
+.carousel-item img {
+  width: 800px;
+  height: 400px;
+  object-fit: cover;
+}
+.carousel-caption {
+  margin: 7.5%;
+}
+.carousel-caption h2 {
+  font-family: "Playfair-Display";
+  font-size: 4em;
+  color: #d9b992;
+}
+
+body {
+  background-color: #031627;
+}
+
 /* O contêiner principal do card */
 .product-card {
-    position: relative; /* Essencial para posicionar elementos filhos */
-    width: 300px;
-    background-color: #F97316; /* Laranja principal */
-    border-radius: 25px;
-    padding: 20px;
-    padding-top: 80px; /* Mais espaço no topo para a imagem */
-    text-align: center;
-    color: black;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  position: relative; /* Essencial para posicionar elementos filhos */
+  width: 270px;
+  height: 300px;
+  background-color: #f97316; /* Laranja principal */
+  border-radius: 25px;
+  padding: 20px;
+  padding-top: 80px; /* Mais espaço no topo para a imagem */
+  text-align: center;
+  color: black;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Sombra suave */
 }
 
 /* Círculo da imagem do produto */
 .product-image {
-    position: absolute;
-    top: -60px; /* Puxa a imagem para cima, para fora do card */
-    left: 50%;
-    transform: translateX(-50%); /* Centraliza horizontalmente com perfeição */
-    width: 160px;
-    height: 160px;
-    background-color: #F97316;
-    border: 3px solid black;
-    border-radius: 50%; /* Transforma o div em um círculo */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 700;
+  position: absolute;
+  top: -60px; /* Puxa a imagem para cima, para fora do card */
+  left: 50%;
+  transform: translateX(-50%); /* Centraliza horizontalmente com perfeição */
+  width: 180px;
+  height: 180px;
+  background-color: #f97316;
+  border: 2px solid black;
+  border-radius: 50%; /* Transforma o div em um círculo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+.product-image > img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Estrelas de avaliação */
 .product-rating {
-    margin-top: 20px; /* Espaço entre a área da imagem e as estrelas */
-    font-size: 28px;
-    color: black;
+  /*margin-top: 20px;  Espaço entre a área da imagem e as estrelas */
+  font-size: 28px;
+  color: black;
 }
 
 /* Nome do produto */
 .product-name {
-    font-size: 24px;
-    font-weight: 700;
-    margin-top: 15px;
-    margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 15px;
 }
 
 /* Descrição do produto */
 .product-description {
-    font-size: 14px;
-    line-height: 1.5;
-    margin-bottom: 20px;
+  font-size: 13px;
 }
 
 /* Botão "REMOVER" */
 .remove-button {
-    background-color: #EF4444; /* Vermelho */
-    color: black;
-    border: 2px solid black;
-    border-radius: 15px;
-    padding: 7px 30px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform 0.2s; /* Efeito suave ao clicar */
-    margin-bottom: 30px; /* Espaço para o preço não ficar em cima */
+  background-color: #ef4444; /* Vermelho */
+  color: black;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 5px 30px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: transform 0.2s; /* Efeito suave ao clicar */
 }
 
 .remove-button:hover {
-    transform: scale(1.05); /* Aumenta um pouco ao passar o mouse */
+  transform: scale(1.05); /* Aumenta um pouco ao passar o mouse */
 }
 
 /* Caixa de preço */
 .product-price {
-    position: absolute;
-    bottom: -20px; /* Puxa o preço para baixo, para fora do card */
-    left: 50%;
-    transform: translateX(-50%); /* Centraliza horizontalmente */
-    background-color: #EF4444; /* Vermelho */
-    color: white;
-    border: 2px solid black;
-    border-radius: 15px;
-    padding: 5px 35px;
-    font-size: 20px;
-    font-weight: 700;
+  position: absolute;
+  width: 60%;
+  bottom: -20px; /* Puxa o preço para baixo, para fora do card */
+  left: 50%;
+  transform: translateX(-50%); /* Centraliza horizontalmente */
+  background-color: #ef4444; /* Vermelho */
+  color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 3px 20px;
+  font-size: 20px;
+  font-weight: 700;
+}
+.product-price > p {
+  color: black;
+  margin: 0;
 }
 
 /* Estilo base para os botões de ação (X e lápis) */
 .action-button {
-    position: absolute;
-    bottom: -15px; /* Puxa para baixo */
-    width: 50px;
-    height: 50px;
-    background-color: #EF4444; /* Vermelho */
-    border: 2px solid black;
-    border-radius: 50%; /* Círculo perfeito */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.2s;
+  position: absolute;
+  bottom: -15px; /* Puxa para baixo */
+  width: 50px;
+  height: 50px;
+  background-color: #ef4444; /* Vermelho */
+  border: 1px solid black;
+  border-radius: 50%; /* Círculo perfeito */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
 .action-button:hover {
-    transform: scale(1.1); /* Efeito de zoom no hover */
+  transform: scale(1.1); /* Efeito de zoom no hover */
 }
 
 /* Posição específica do botão de deletar (X) */
 .delete-button {
-    left: -15px; /* Puxa para a esquerda, para fora do card */
+  left: -15px; /* Puxa para a esquerda, para fora do card */
 }
 
 /* Posição específica do botão de editar (lápis) */
 .edit-button {
-    right: -15px; /* Puxa para a direita, para fora do card */
+  right: -15px; /* Puxa para a direita, para fora do card */
 }
+
+.categoria-1 {
+  text-align: left;
+  margin-bottom: 5%;
+}
+.cards {
+  display: flex;
+  /*justify-content: space-around;*/
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 120px;
+}
+.categoria-1 > h2 {
+  margin-bottom: 100px;
+  font-size: 45px;
+  color: #f23e2f;
+}
+.img-estrela {
+  width: 100%;
+  /*height: 100%;*/
+}
+.card-body {
+  margin-top: 25%;
+}
+.product-card-add {
+  background-color: #031627;
+}
+.data-cardapio {
+  display: flex;
+  justify-content: space-around;
+  background-color: #031627;
+}
+
+.data-cardapio p {
+  border: 1px solid #f97316;
+  color: #f97316;
+  border-radius: 30px;
+  padding: 10px 20px 10px 20px;
+}
+.data-cardapio button {
+  border: none;
+  background-color: #031627;
+  margin: 0;
+}
+#novo-cardapio {
+  width: 400px;
+  height: 300px;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+
+
+/* CARROSSEL */
+.carousel-control-prev-icon {
+  filter: invert(54%) sepia(98%) saturate(747%) hue-rotate(355deg)
+    brightness(104%) contrast(101%);
+}
+
+.carousel-control-next-icon {
+  filter: invert(54%) sepia(98%) saturate(747%) hue-rotate(355deg)
+    brightness(104%) contrast(101%);
+}
+
+.carrossel {
+    border-bottom: 2px solid #f97316;
+    margin-bottom: 2%;
+}
+.carousel-indicators [data-bs-target] {
+    background-color: #f97316;
+}
+/* CARROSSEL */

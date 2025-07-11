@@ -7,39 +7,689 @@
 {% block content %}
     <body>
 
-        <div class="product-card">
-            <button class="action-button delete-button" aria-label="Deletar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-            <button class="action-button edit-button" aria-label="Editar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-            </button>
-
-            <div class="product-image">
-                <span>Foto do Produto</span>
-            </div>
-
-            <div class="card-body">
-                <div class="product-rating">
-                    <span>&#9733;</span>
-                    <span>&#9733;</span>
-                    <span>&#9733;</span>
-                    <span>&#9733;</span>
-                    <span>&#9733;</span>
+        <section class="carrossel">
+                <div id="carouselExampleIndicators" class="carousel slide">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://images.virgula.me/2012/10/04/370005.jpg" class="d-block w-100" alt="imagem de um brownie de chocolate">
+                            <div class="carousel-caption">
+                               
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://conteudo.imguol.com.br/2012/10/04/neymar-veste-uma-fantasia-de-super-heroi-para-um-comercial-da-marca-de-sorvetes-kibon-1349359868566_615x300.jpg" class="d-block w-100" alt="imagem de doces diversos">
+                            <div class="carousel-caption">
+                                
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://lncimg.lance.com.br/uploads/2017/02/24/58b00bf94de20.jpeg" class="d-block w-100" alt="imagem de um cheesecake de chocolate">
+                            <div class="carousel-caption">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon seta-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Próximo</span>
+                    </button>
                 </div>
-                <h2 class="product-name">Nome do Produto</h2>
-                <p class="product-description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
-                </p>
-                <button class="remove-button">REMOVER</button>
-            </div>
+                
+            </section>
 
-            <div class="product-price">
-                R$ 40,00
-            </div>
+
+        <div class="data-cardapio">
+            <p>01/06/2025 ~ 07/06/2025</p>
+            <button onclick="document.getElementById('novo-cardapio').showModal()"><p>+ novo cardapio</p></button>
         </div>
+        
+        <section class="categoria-1">
+            <h2>Categoria 1</h2>
+            <div class="cards">
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
 
-    </body>
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+            </div> <!-- div cards-->
+        </body>
+    </section>
+
+    <section class="categoria-1">
+            <h2>Categoria 2</h2>
+            <div class="cards">
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <button class="action-button delete-button" aria-label="Deletar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                    <button class="action-button edit-button" aria-label="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                    </button>
+                    <div class="img-estrela">
+                        <div class="product-image">
+                            <img src="https://s2.glbimg.com/5D3cttbosROUhkdyhNU7Ank3FmM=/0x0:1999x1260/690x435/s.glbimg.com/es/ge/f/original/2014/05/08/baggio-1994-ap.jpg" alt="imagem do baggio">
+                        </div>
+                        <div class="estrela-1"></div>
+                        <div class="estrela-2"></div>
+                        <div class="estrela-3"></div>
+                        <div class="estrela-4"></div>
+                        <div class="estrela-5"></div>
+                        <div class="estrela-6"></div>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="product-name">Nome do Produto</h2>
+                        <p class="product-description">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+                        </p>
+                        <button class="remove-button">REMOVER</button>
+                    </div>
+                    <div class="product-price">
+                        <p>R$ 40,00</p>
+                    </div>
+                </div>
+
+            </div> <!-- div cards-->
+        </body>
+    </section>
+
+    <!-- MODALS -->
+
+    <dialog id="novo-cardapio">
+        <h2>Novo Cardápio</h2>
+        <form>
+            <label for="data-inicio">Inicio: </label>
+            <label for="data-fim">Fim: </label><br>
+            <input type="datetime" id="data-inicio" name="data-inicio">
+
+            <input type="datetime" id="data-fim" name="data-fim">
+        </form>
+    </dialog>
+
+    <!-- MODALS -->
+
 {% endblock content %}
 
 {% block scripts %}<script src="{% static 'js/manager/script.js' %}"></script>{% endblock scripts %}
