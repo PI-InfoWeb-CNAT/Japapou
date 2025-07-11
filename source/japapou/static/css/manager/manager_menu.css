@@ -2,16 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
 /* Estilos gerais para a página */
-body {
+/*body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background-color: #f0f0f0;
     font-family: 'Poppins', sans-serif;
-    padding-top: 60px; /* Espaço para a imagem não cortar na borda da tela */
-    padding-bottom: 40px; /* Espaço para os botões não cortarem na borda da tela */
-}
+    padding-top: 60px; /* Espaço para a imagem não cortar na borda da tela 
+    padding-bottom: 40px; /* Espaço para os botões não cortarem na borda da tela 
+}*/
 
 /* O contêiner principal do card */
 .product-card {
