@@ -1,0 +1,130 @@
+/* Importando uma fonte para um visual mais moderno (Opcional) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+/* Estilos gerais para a página */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    font-family: 'Poppins', sans-serif;
+    padding-top: 60px; /* Espaço para a imagem não cortar na borda da tela */
+    padding-bottom: 40px; /* Espaço para os botões não cortarem na borda da tela */
+}
+
+/* O contêiner principal do card */
+.product-card {
+    position: relative; /* Essencial para posicionar elementos filhos */
+    width: 300px;
+    background-color: #F97316; /* Laranja principal */
+    border-radius: 25px;
+    padding: 20px;
+    padding-top: 80px; /* Mais espaço no topo para a imagem */
+    text-align: center;
+    color: black;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+/* Círculo da imagem do produto */
+.product-image {
+    position: absolute;
+    top: -60px; /* Puxa a imagem para cima, para fora do card */
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza horizontalmente com perfeição */
+    width: 160px;
+    height: 160px;
+    background-color: #F97316;
+    border: 3px solid black;
+    border-radius: 50%; /* Transforma o div em um círculo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Estrelas de avaliação */
+.product-rating {
+    margin-top: 20px; /* Espaço entre a área da imagem e as estrelas */
+    font-size: 28px;
+    color: black;
+}
+
+/* Nome do produto */
+.product-name {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+/* Descrição do produto */
+.product-description {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Botão "REMOVER" */
+.remove-button {
+    background-color: #EF4444; /* Vermelho */
+    color: black;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 7px 30px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s; /* Efeito suave ao clicar */
+    margin-bottom: 30px; /* Espaço para o preço não ficar em cima */
+}
+
+.remove-button:hover {
+    transform: scale(1.05); /* Aumenta um pouco ao passar o mouse */
+}
+
+/* Caixa de preço */
+.product-price {
+    position: absolute;
+    bottom: -20px; /* Puxa o preço para baixo, para fora do card */
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza horizontalmente */
+    background-color: #EF4444; /* Vermelho */
+    color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 5px 35px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Estilo base para os botões de ação (X e lápis) */
+.action-button {
+    position: absolute;
+    bottom: -15px; /* Puxa para baixo */
+    width: 50px;
+    height: 50px;
+    background-color: #EF4444; /* Vermelho */
+    border: 2px solid black;
+    border-radius: 50%; /* Círculo perfeito */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.action-button:hover {
+    transform: scale(1.1); /* Efeito de zoom no hover */
+}
+
+/* Posição específica do botão de deletar (X) */
+.delete-button {
+    left: -15px; /* Puxa para a esquerda, para fora do card */
+}
+
+/* Posição específica do botão de editar (lápis) */
+.edit-button {
+    right: -15px; /* Puxa para a direita, para fora do card */
+}
