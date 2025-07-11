@@ -1,0 +1,83 @@
+main {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: 32px;
+	padding: 32px;
+}
+
+.card {
+	background: #000;
+	border: 1px solid var(--darker-gray);
+	display: flex;
+	flex-direction: column;
+
+	h2 {
+		font-size: 16px;
+		font-weight: 600;
+		text-align: center;
+		margin: 12px 0 8px;
+	}
+}
+
+.rating {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	margin-bottom: 20px;
+
+	i {
+		font-size: 24px;
+		color: var(--gray);
+	}
+}
+
+.photo {
+	height: 260px;
+	background: linear-gradient(#b6b6b6, #5b5b5b); /* TODO: add variable */
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	color: black;
+	font-size: 14px;
+
+	span {
+		padding-bottom: 8px;
+	}
+}
+
+.actions {
+	margin: 0 16px 24px;
+	display: flex;
+	gap: 4px;
+
+	button {
+		flex: 1;
+		border: none;
+		font-weight: 600;
+		padding: 6px 0;
+		cursor: pointer;
+		background: white;
+		color: black;
+		transition: background 0.2s;
+
+		&:hover {
+			background: var(--lighter-gray);
+		}
+	}
+}
+
+.add-card {
+	background: var(--lighter-gray);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 48px;
+	color: black;
+	height: 360px;
+	cursor: pointer;
+	transition: background 0.2s;
+
+	&:hover {
+		background: var(--light-gray);
+	}
+}

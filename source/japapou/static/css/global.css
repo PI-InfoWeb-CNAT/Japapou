@@ -1,9 +1,12 @@
 :root {
-	--darker-gray: #2a2929;
+	--darker-gray: #292929;
 	--dark-gray: #565656;
 	--gray: #7f7f7f;
 	--light-gray: #a5a5a5;
 	--lighter-gray: #cdcdcd;
+	--lightest-gray: #eeeeee;
+
+	--light-yellow: #f0c674;
 }
 
 * {
@@ -15,7 +18,8 @@
 body {
 	background-color: black;
 	color: white;
-	font-family: "Inter", sans-serif;
+	font-family: "Poppins", sans-serif;
+	min-height: 100vh;
 }
 
 /* HEADER */
@@ -28,7 +32,6 @@ header {
 	position: relative;
 
 	p {
-		font-family: Georgia, "Times New Roman", Times, serif;
 		font-size: 24px;
 		font-weight: 100;
 		color: white;
