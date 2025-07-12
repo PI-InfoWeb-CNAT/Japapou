@@ -174,6 +174,26 @@ body {
 }
 
 /* MODALS */
+/* TODOS */
+dialog {
+    z-index: 100;
+}
+dialog h2 {
+    color: #f97316;
+}
+dialog::backdrop{
+  background-color: rgba(0, 0, 0, 0.6);
+}
+dialog button{
+    background-color: #f23e2f;
+    border: 2px solid #031627;
+    border-radius: 15px;
+    width: 40%;
+    height: 7%;
+    margin-top: 5%;
+}
+/* TODOS */
+
 /* MODAL NOVO CARDAPIO */
 .data-cardapio p {
   border: 1px solid #f97316;
@@ -209,7 +229,7 @@ body {
 
 form {
     width: 100%;
-    height: 90%;
+    height: 80%;
 }
 form button{
     background-color: #f23e2f;
@@ -288,12 +308,23 @@ label {
   border-radius: 0;
   margin-bottom: 12%;
 }
+#div-novo-prato div button {
+  padding: 0px;
+  width: 200px;
+  height: 200px;
+  background-color: #f97316;
+  border: 2px solid #031627;
+  border-radius: 0;
+  margin-bottom: 12%;
+}
 #div-novo-prato div h2 {
   font-size: 25px;
   font-weight: bold;
+  color: #031627;
 }
 #div-novo-prato div p {
   font-size: 13px;
+  color: #031627;
 }
 
 #div-novo-prato div {
@@ -304,10 +335,146 @@ label {
   padding: 20px 25px 0px 25px;
   place-items: center; /* Centraliza vertical e horizontalmente */
 }
-#novo-prato::backdrop{
-  background-color: rgba(0, 0, 0, 0.6);
-}
 /* MODAL ADD PRATO */
+/* MODAL PRATOS REGISTRADOS NO SISTEMA */
+#pratos-registrados {
+  margin: 0 auto;
+  position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	margin: 0;
+  width: 30%;
+  height: 75%;
+  padding: 15px 20px 20px 20px;
+  background-color: #024057;
+  border: 1px solid white;
+  border-radius: 20px;
+  place-items: center; /* Centraliza vertical e horizontalmente */
+}
+#pratos-registrados h2{
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+#pratos-registrados button{
+  width: 40%;
+    height: 6%;
+  margin-top: 5%;
+}
+#pratos-registrados form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5%;
+  background-color: #f97316;
+  padding: 25px 0px 45px 0px;
+  width: 95%;
+  height: 70%;
+  border: 2px solid #031627;
+  border-radius: 8px;
+}
+#pratos-registrados form div {
+  display: flex;
+  align-items: center;
+  gap: 1%;
+  height: 5%;
+  
+}
+#pratos-registrados form label {
+  font-size: 15px;
+  color: #031627;
+  width: 100px;
+  margin: 0;
+}
+#pratos-registrados form input {
+  width: 15px;
+}
+#pratos-registrados form input[type="checkbox"] {
+  all: unset;
+  border: 1px solid black;
+  border-radius: 1px;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+}
+#pratos-registrados form input[type="checkbox"]:checked {
+  background-color: green;
+}
+/* MODAL PRATOS REGISTRADOS NO SISTEMA */
+
+/* MODAL NOVO PRATO */
+#criar-prato {
+  margin: 0 auto;
+  position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	margin: 0;
+  width: 30%;
+  height: 75%;
+  padding: 15px 40px 20px 40px;
+  background-color: #024057;
+  border: 1px solid white;
+  border-radius: 20px;
+  place-items: center; /* Centraliza vertical e horizontalmente */
+}
+#criar-prato form {
+  place-items: center;
+}
+#criar-prato form #image-file{
+  background-color: #f97316;
+  width: 35%;
+  height: 30%;
+}
+#criar-prato form div {
+  text-align: left;
+  width: 100%;
+}
+#criar-prato form div textarea {
+  background-color: #f97316;
+  width: 100%;
+}
+#criar-prato form div label {
+  margin: 0;
+  font-size: 17px;
+}
+#criar-prato form div input {
+  margin-bottom: 15px;
+}
+#criar-prato form label {
+  margin: 0;
+}
+#criar-prato form #image-file label{
+  color: #031627;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  padding: 0px 0px 0px 0px;
+  width: 100%;
+  height: 100%;
+}
+#criar-prato form label p{
+  margin: 0;
+}
+#criar-prato form label .material-symbols-outlined{
+  font-size: 60px;
+  margin: 25px 0px 0px 0px;
+}
+#criar-prato form input[type="file"]{
+  display: none;
+}
+#criar-prato button {
+    background-color: #f23e2f;
+    border: 2px solid #031627;
+    border-radius: 12px;
+    width: 40%;
+    height: 6%;
+    margin-top: 5%;
+}
+/* MODAL NOVO PRATO */
 /* MODALS */
 
 

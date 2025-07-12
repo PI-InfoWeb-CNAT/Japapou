@@ -35,3 +35,20 @@
 //     });
 
 // });
+
+const addPratoExisten = document.getElementById('addpratoexistentbtn');
+const addNovoPrato = document.getElementById('addnovopratobtn');
+
+const modalNovoPrato = document.getElementById('novo-prato');
+const modalAddNovoPrato = document.getElementById('criar-prato');
+const modalPratosRegistrados = document.getElementById('pratos-registrados');
+
+addPratoExisten.addEventListener('click', () => {
+    modalNovoPrato.close();
+    modalPratosRegistrados.showModal();
+});
+
+addNovoPrato.addEventListener('click', () => {
+    modalNovoPrato.close();
+    modalAddNovoPrato.showModal();
+});
