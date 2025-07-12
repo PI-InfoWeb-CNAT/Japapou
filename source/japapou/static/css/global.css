@@ -121,7 +121,7 @@ main {
 	h1 {
 		font-family: "Italiana", serif;
 		font-size: 36px;
-		color: white;
+		/*color: white;*/
 		margin-bottom: 40px;
 		letter-spacing: 1px;
 	}
