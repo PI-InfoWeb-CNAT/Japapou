@@ -340,18 +340,18 @@ label {
   width: 200px;
   height: 200px;
   background-color: #f97316;
-  border: 2px solid #031627;
+  border: 2px solid black;
   border-radius: 0;
   margin-bottom: 12%;
 }
 #div-novo-prato div h2 {
   font-size: 25px;
   font-weight: bold;
-  color: #031627;
+  color: black;
 }
 #div-novo-prato div p {
   font-size: 13px;
-  color: #031627;
+  color: black;
 }
 
 #div-novo-prato div {
@@ -482,6 +482,7 @@ label {
   padding: 0px 0px 0px 0px;
   width: 100%;
   height: 100%;
+  cursor: pointer;
 }
 #criar-prato form label p{
   margin: 0;
@@ -535,6 +536,18 @@ label {
 }
 .carousel-indicators [data-bs-target] {
     background-color: #f97316;
+}
+.carrossel .carousel-item img {
+  filter: brightness(40%);
+}
+.carousel-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left, rgba(23, 23, 23, 1.7), rgba(255, 255, 254, 0));
 }
 /* CARROSSEL */
 
