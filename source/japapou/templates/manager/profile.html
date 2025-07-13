@@ -17,16 +17,17 @@
     <div class="foto-container">
       <label for="fileInput" class="foto-wrapper">
         <!-- Você pode deixar esse img comentado se ainda não tiver imagem -->
-        <!-- <img src="{{ user.profile_image.url }}" alt="Foto de perfil" class="foto-img"> -->
+         <img id="previewImage" src="{% static 'imgs/manage/gerente_FotoPerfil.png' %}" alt="Foto de perfil" class="foto-img">
         <div class="icone-camera">
           <i class="fa-solid fa-camera"></i>
         </div>
       </label>
-      <input type="file" name="foto" id="fileInput" accept="image/*" style="display: none" onchange="this.form.submit()" />
+      <input type="file" name="foto" id="fileInput" accept="image/*" style="display: none" />
     </div>
     <div>
-        <p class="foto-label">Altere a sua foto de perfil</p>
-        <button type="submit">Remover</button>
+      <p class="foto-label">Altere a sua foto de perfil</p>
+      <!-- Remover imagem temporariamente -->
+      <button type="button" id="removeImageBtn">Remover</button>
     </div>
   </form>
 </div>
@@ -38,7 +39,7 @@
         <strong>Nome</strong>
         <div class="value-with-icon">
             <span>Cláudia Martins Soares</span>
-            <a href="/manager/profile/edit-name/" class="edit-icon" title="Editar">
+            <a href="#" class="edit-icon" title="Editar">
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
         </div>
@@ -47,7 +48,7 @@
       <strong>Aniversário</strong>
       <div class="value-with-icon">
             <span>14 de outubro de 1998</span>
-            <a href="/manager/profile/edit-name/" class="edit-icon" title="Editar">
+            <a href="#" class="edit-icon" title="Editar">
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
         </div>
@@ -56,7 +57,7 @@
       <strong>E-mail</strong>
       <div class="value-with-icon">
             <span>claudia.martins.gerente@corpflux.com</span>
-            <a href="/manager/profile/edit-name/" class="edit-icon" title="Editar">
+            <a href="#" class="edit-icon" title="Editar">
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
         </div>
@@ -71,7 +72,7 @@
       <strong>Username</strong>
             <div class="value-with-icon">
             <span>gerente.01.[nome da filial]</span>
-            <a href="/manager/profile/edit-name/" class="edit-icon" title="Editar">
+            <a href="#" class="edit-icon" title="Editar">
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
         </div>
@@ -80,11 +81,19 @@
       <strong>Senha</strong>
             <div class="value-with-icon">
             <span>**************</span>
-            <a href="/manager/profile/edit-name/" class="edit-icon" title="Editar">
+            <a href="#" class="edit-icon" title="Editar">
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
         </div>
     </li>
   </ul>
+<!-- Define a variável JS com o caminho da imagem padrão -->
+<script>
+  const defaultImagePath = "{% static 'imgs/default_profile.png' %}";
+</script>
+
+<!-- Carrega seu arquivo JS -->
+<script src="{% static 'js/manager/manage_profile.js' %}"></script>
+
 </body>
 {% endblock content %}

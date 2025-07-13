@@ -11,7 +11,6 @@ body {
   font-family: 'Arial', sans-serif;
   color: var(--laranja-mais-claro);
   padding: 2rem;
-  max-width: 700px;
   margin: 0 auto 4rem auto;
 }
 
@@ -83,7 +82,7 @@ h2,
   padding: 6px;
   color: var(--laranja-mais-escuro);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 24px;
 }
 
 /* Botões e ações */
@@ -112,14 +111,15 @@ h2,
   margin-bottom: 0.7em;
 }
 
-.remover-btn {
-  background-color: var(--laranja-mais-escuro);
-  border: none;
-  padding: 0.6rem 1.2rem;
-  color: var(--laranja-mais-claro);
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
+#removeImageBtn:hover {
+  background-color: var(--vermelho);
+  color: var(--laranja-mais-escuro);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.icone-camera i:hover {
+  color: var(--azul-mais-claro);
+  transition: color 0.3s ease;
 }
 
 /* Lista */
@@ -166,3 +166,11 @@ ul li strong {
 .edit-icon:hover {
   color: #ffa94d;
 }
+
+.temp-edit-input {
+  font-size: 1em;
+  padding: 3px 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
