@@ -8,10 +8,10 @@
 
 body {
   background-color: var(--azul-mais-escuro);
-  font-family: 'Arial', sans-serif;
+  /*font-family: 'Arial', sans-serif;
   color: var(--laranja-mais-claro);
   padding: 2rem;
-  margin: 0 auto 4rem auto;
+  margin: 0 auto 4rem auto;*/
 }
 
 /* Títulos */
@@ -123,7 +123,7 @@ h2,
 }
 
 /* Lista */
-ul {
+.informações {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -150,6 +150,7 @@ ul li strong {
   gap: 8px;
   justify-content: flex-end;
   color: var(--laranja-mais-claro);
+  padding-right: 20px;
 }
 
 .value-with-icon span {

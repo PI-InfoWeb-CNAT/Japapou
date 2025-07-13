@@ -5,7 +5,7 @@
 	--light-gray: #a5a5a5;
 	--lighter-gray: #cdcdcd;
 	--lightest-gray: #eeeeee;
-
+	--laranja-mais-claro: #F8761E;
 	--light-yellow: #f0c674;
 }
 
@@ -111,6 +111,14 @@ header {
 			color: var(--light-gray);
 		}
 	}
+}
+ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--laranja-mais-claro);
+    padding: 1rem 0;
+    font-size: 1rem;
 }
 
 /* DEFAULTS */
