@@ -34,13 +34,13 @@ body {
 /* Círculo da imagem do produto */
 .product-image {
   position: absolute;
-  top: -60px; /* Puxa a imagem para cima, para fora do card */
+  top: -135px; /* Puxa a imagem para cima, para fora do card */
   left: 50%;
   transform: translateX(-50%); /* Centraliza horizontalmente com perfeição */
   width: 180px;
   height: 180px;
   background-color: #f97316;
-  border: 2px solid black;
+  border: 1px solid black;
   border-radius: 50%; /* Transforma o div em um círculo */
   display: flex;
   justify-content: center;
@@ -66,12 +66,14 @@ body {
 .product-name {
   font-size: 20px;
   font-weight: 700;
-  margin-top: 15px;
+  margin-top: 45px;
+  margin-bottom: 1px;
 }
 
 /* Descrição do produto */
 .product-description {
-  font-size: 13px;
+  font-size: 12px;
+  margin-bottom: 5px;
 }
 
 /* Botão "REMOVER" */
@@ -158,11 +160,12 @@ body {
   margin-left: 1%;
 }
 .img-estrela {
+  position: relative;
   width: 100%;
-  /*height: 100%;*/
+  height: 60%;
 }
 .card-body {
-  margin-top: 25%;
+  margin-top: -35%;
 }
 .product-card-add {
   background-color: #031627;
@@ -549,7 +552,9 @@ label {
   color: black;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Sombra suave */
 }
-
+.product-card-branco .img-estrela {
+  height: 0;
+}
 /* Círculo da imagem do produto */
 .product-card-branco.product-image {
   position: absolute;
@@ -587,3 +592,45 @@ label {
   margin-top: 20%;
 }
 /* CARD EM BRANCO */
+
+
+/* ESTRELAS */
+.curved-stars-container {
+    position: relative;
+    width: 300px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.estrelas {
+  position: absolute;
+  top: -50%;
+  left: -15%;
+}
+/* O estilo agora é aplicado diretamente na tag <i> do ícone */
+.star {
+    position: absolute;
+    font-size: 30px; /* Controla o tamanho do ícone */
+    color: #031627;    /* Controla a cor do ícone */
+}
+
+/* PASSO 3: REMOVEMOS a regra ".star::before" pois não é mais necessária */
+
+/* Posicionamento (sem alterações) */
+.star:nth-child(1) {
+    transform: translate(-58px, 6px) rotate(0deg);
+}
+.star:nth-child(2) {
+    transform: translate(-30px, 20px) rotate(0deg);
+}
+.star:nth-child(3) {
+    transform: translate(0px, 27px);
+}
+.star:nth-child(4) {
+    transform: translate(30px, 20px) rotate(0deg);
+}
+.star:nth-child(5) {
+    transform: translate(58px, 6px) rotate(0deg);
+}
+/* ESTRELAS */
