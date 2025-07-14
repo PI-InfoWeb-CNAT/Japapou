@@ -4,7 +4,8 @@
 	padding: 30px;
 	border-radius: 16px;
 	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
-	max-width: 900px;
+	min-width: 60%;
+	max-width: 80%;
 	transition: all 0.3s ease;
 }
 

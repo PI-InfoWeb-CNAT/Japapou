@@ -6,7 +6,6 @@
 {% endblock %}
 {% block extra_head %}
   <link rel="stylesheet" href="{% static 'css/manager/manage_orders.css' %}" />
-  <script src="{% static 'js/manager/manage_orders.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -195,8 +194,12 @@
       </p>
     </div>
   </div>
+
+  <div class="lightbox-overlay" id="lightbox">
+    <img id="lightbox-img" src="" alt="Imagem ampliada" />
+  </div>
 {% endblock %}
 
-{% comment %} <div class="lightbox-overlay" id="lightbox">
-  <img id="lightbox-img" src="" alt="Imagem ampliada" />
-</div> {% endcomment %}
+{% block scripts %}
+  <script src="{% static 'js/manager/manage_orders.js' %}"></script>
+{% endblock %}

@@ -12,4 +12,7 @@ urlpatterns = [
     path("orders/", manager_orders_view, name="manager_orders"),
     path("profile/", manager_profile_view, name="manager_profile"),
     path("dashboard/", manager_dashboard_view, name="manager_dashboard"),
+    path(
+        "assign_delivery/", manager_assign_delivery_view, name="manager_assign_delivery"
+    ),
 ]

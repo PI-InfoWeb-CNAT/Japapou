@@ -1,0 +1,152 @@
+body {
+	color: var(--laranja-mais-claro);
+}
+
+section {
+	width: 100%;
+}
+
+h2,
+.section-title {
+	color: var(--laranja-mais-claro);
+	font-weight: bold;
+	font-size: 2.3rem;
+	margin: 2rem 0 0.5rem 0;
+}
+
+.foto-perfil {
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+	margin-bottom: 2rem;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	> form {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		align-items: center;
+		text-align: left;
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.foto-container {
+		position: relative;
+		width: 120px;
+		height: 120px;
+	}
+
+	label {
+		position: relative;
+		width: 120px;
+		height: 120px;
+		border-radius: 50%;
+		background-color: var(--azul-mais-claro);
+		border: 3px solid var(--laranja-mais-claro);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+	}
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 50%;
+		border: 3px solid var(--laranja-mais-claro);
+	}
+
+	.icone-camera {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		background-color: none;
+		border-radius: 50%;
+		padding: 6px;
+		color: var(--laranja-mais-escuro);
+		cursor: pointer;
+		font-size: 24px;
+
+		i:hover {
+			color: var(--azul-mais-claro);
+			transition: color 0.3s ease;
+		}
+	}
+
+	button {
+		background-color: var(--laranja-mais-escuro);
+		border: none;
+		padding: 0.6rem 2.4rem;
+		color: az;
+		border-radius: 8px;
+		font-weight: bold;
+		cursor: pointer;
+
+		&:hover {
+			background-color: var(--vermelho);
+			color: var(--laranja-mais-escuro);
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+	}
+
+	.foto-label {
+		color: var(--laranja-mais-escuro);
+		font-weight: bold;
+		margin: 0;
+		margin-bottom: 0.7em;
+	}
+}
+
+.informacoes {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	border-top: 1px solid var(--laranja-mais-claro);
+
+	li {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid var(--laranja-mais-claro);
+		padding: 1rem 0;
+		font-size: 1rem;
+
+		strong {
+			color: var(--laranja-mais-claro);
+			min-width: 120px;
+		}
+
+		.value-with-icon {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			justify-content: flex-end;
+			color: var(--laranja-mais-claro);
+
+			span {
+				text-align: right;
+			}
+		}
+	}
+}
+
+.edit-icon {
+	text-decoration: none;
+	color: var(--laranja-mais-claro);
+	font-size: 0.85rem;
+
+	&:hover {
+		color: #ffa94d;
+	}
+}
+
+.temp-edit-input {
+	font-size: 1em;
+	padding: 3px 6px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}

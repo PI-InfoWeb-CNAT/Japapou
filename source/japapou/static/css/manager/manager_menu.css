@@ -1,649 +1,642 @@
-/* Importando uma fonte para um visual mais moderno (Opcional) */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
-
-/* Estilos gerais para a página */
-/*body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f0f0;
-    font-family: 'Poppins', sans-serif;
-    padding-top: 60px; /* Espaço para a imagem não cortar na borda da tela 
-    padding-bottom: 40px; /* Espaço para os botões não cortarem na borda da tela 
-}*/
-
-body {
-  background-color: #031627;
+main {
+	padding: 0;
 }
 
-/* O contêiner principal do card */
-.product-card {
-  position: relative; /* Essencial para posicionar elementos filhos */
-  width: 270px;
-  height: 300px;
-  background-color: #f97316; /* Laranja principal */
-  border-radius: 25px;
-  padding: 20px;
-  padding-top: 80px; /* Mais espaço no topo para a imagem */
-  text-align: center;
-  color: black;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Sombra suave */
+.carousel {
+	border-bottom: 2px solid #f97316;
+	/* margin-bottom: 2%; */
+	width: 100%;
+
+	.carousel-indicators {
+		[data-bs-target] {
+			background-color: #f97316;
+		}
+	}
+
+	.carousel-inner {
+		.carousel-item {
+			img {
+				width: 800px;
+				height: 400px;
+				object-fit: cover;
+				/* filter: brightness(40%); */
+			}
+
+			.carousel-caption {
+				margin: 7.5%;
+
+				h2 {
+					font-family: "Playfair-Display";
+					font-size: 4em;
+					color: #d9b992;
+				}
+			}
+
+			/* &::after {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(
+					to left,
+					rgba(23, 23, 23, 1.7),
+					rgba(255, 255, 254, 0)
+				);
+			} */
+		}
+	}
+
+	.carousel-control-prev-icon {
+		filter: invert(54%) sepia(98%) saturate(747%) hue-rotate(355deg)
+			brightness(104%) contrast(101%);
+	}
+
+	.carousel-control-next-icon {
+		filter: invert(54%) sepia(98%) saturate(747%) hue-rotate(355deg)
+			brightness(104%) contrast(101%);
+	}
 }
 
-/* Círculo da imagem do produto */
+.categoria {
+	text-align: left;
+	margin-bottom: 5%;
+	padding: 0 2rem;
+
+	h2 {
+		margin-bottom: 100px;
+		font-size: 45px;
+		color: #f23e2f;
+		margin-left: 1%;
+	}
+
+	.cards {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 120px 80px;
+	}
+}
+
 .product-image {
-  position: absolute;
-  top: -135px; /* Puxa a imagem para cima, para fora do card */
-  left: 50%;
-  transform: translateX(-50%); /* Centraliza horizontalmente com perfeição */
-  width: 180px;
-  height: 180px;
-  background-color: #f97316;
-  border: 1px solid black;
-  border-radius: 50%; /* Transforma o div em um círculo */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-.product-image > img {
-  border-radius: 50%;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+	position: absolute;
+	top: -135px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 180px;
+	height: 180px;
+	background-color: #f97316;
+	border: 1px solid black;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 700;
+
+	img {
+		border-radius: 50%;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
 }
 
-/* Estrelas de avaliação */
-.product-rating {
-  /*margin-top: 20px;  Espaço entre a área da imagem e as estrelas */
-  font-size: 28px;
-  color: black;
+.product-card {
+	position: relative;
+	width: 270px;
+	height: 300px;
+	background-color: #f97316;
+	border-radius: 25px;
+	padding: 20px;
+	padding-top: 80px;
+	text-align: center;
+	color: black;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+
+	.action-button {
+		position: absolute;
+		bottom: -15px;
+		width: 50px;
+		height: 50px;
+		background-color: #ef4444;
+		border: 1px solid black;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		transition: transform 0.2s;
+
+		&:hover {
+			transform: scale(1.1);
+		}
+	}
+
+	.delete-button {
+		left: -15px;
+	}
+
+	.edit-button {
+		right: -15px;
+	}
+
+	.img-estrela {
+		position: relative;
+		width: 100%;
+		height: 60%;
+
+		.estrelas {
+			position: absolute;
+			top: -50%;
+			left: -15%;
+
+			.curved-stars-container {
+				position: relative;
+				width: 300px;
+				height: 150px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				.star {
+					position: absolute;
+					font-size: 30px;
+					color: black;
+
+					&:nth-child(1) {
+						transform: translate(-58px, 6px) rotate(0deg);
+					}
+					&:nth-child(2) {
+						transform: translate(-30px, 20px) rotate(0deg);
+					}
+					&:nth-child(3) {
+						transform: translate(0px, 27px);
+					}
+					&:nth-child(4) {
+						transform: translate(30px, 20px) rotate(0deg);
+					}
+					&:nth-child(5) {
+						transform: translate(58px, 6px) rotate(0deg);
+					}
+				}
+			}
+		}
+	}
+
+	.card-body {
+		margin-top: -35%;
+
+		.product-name {
+			font-size: 20px;
+			font-weight: 700;
+			margin-top: 45px;
+			margin-bottom: 1px;
+		}
+
+		.product-description {
+			font-size: 12px;
+			margin-bottom: 5px;
+		}
+
+		.remove-button {
+			background-color: #ef4444;
+			color: black;
+			border: 1px solid black;
+			border-radius: 15px;
+			padding: 5px 30px;
+			font-size: 10px;
+			cursor: pointer;
+			transition: transform 0.2s;
+
+			&:hover {
+				transform: scale(1.05);
+			}
+		}
+	}
+
+	.product-price {
+		position: absolute;
+		width: 60%;
+		bottom: -20px;
+		left: 50%;
+		transform: translateX(-50%);
+		background-color: #ef4444;
+		color: white;
+		border: 1px solid black;
+		border-radius: 10px;
+		padding: 3px 20px;
+		font-size: 20px;
+		font-weight: 700;
+
+		p {
+			color: black;
+			margin: 0;
+		}
+	}
 }
 
-/* Nome do produto */
-.product-name {
-  font-size: 20px;
-  font-weight: 700;
-  margin-top: 45px;
-  margin-bottom: 1px;
-}
-
-/* Descrição do produto */
-.product-description {
-  font-size: 12px;
-  margin-bottom: 5px;
-}
-
-/* Botão "REMOVER" */
-.remove-button {
-  background-color: #ef4444; /* Vermelho */
-  color: black;
-  border: 1px solid black;
-  border-radius: 15px;
-  padding: 5px 30px;
-  font-size: 10px;
-  cursor: pointer;
-  transition: transform 0.2s; /* Efeito suave ao clicar */
-}
-
-.remove-button:hover {
-  transform: scale(1.05); /* Aumenta um pouco ao passar o mouse */
-}
-
-/* Caixa de preço */
-.product-price {
-  position: absolute;
-  width: 60%;
-  bottom: -20px; /* Puxa o preço para baixo, para fora do card */
-  left: 50%;
-  transform: translateX(-50%); /* Centraliza horizontalmente */
-  background-color: #ef4444; /* Vermelho */
-  color: white;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 3px 20px;
-  font-size: 20px;
-  font-weight: 700;
-}
-.product-price > p {
-  color: black;
-  margin: 0;
-}
-
-/* Estilo base para os botões de ação (X e lápis) */
-.action-button {
-  position: absolute;
-  bottom: -15px; /* Puxa para baixo */
-  width: 50px;
-  height: 50px;
-  background-color: #ef4444; /* Vermelho */
-  border: 1px solid black;
-  border-radius: 50%; /* Círculo perfeito */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.action-button:hover {
-  transform: scale(1.1); /* Efeito de zoom no hover */
-}
-
-/* Posição específica do botão de deletar (X) */
-.delete-button {
-  left: -15px; /* Puxa para a esquerda, para fora do card */
-}
-
-/* Posição específica do botão de editar (lápis) */
-.edit-button {
-  right: -15px; /* Puxa para a direita, para fora do card */
-}
-
-.categoria-1 {
-  text-align: left;
-  margin-bottom: 5%;
-}
-.cards {
-  display: flex;
-  /*justify-content: space-around;*/
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 120px;
-}
-.categoria-1 > h2 {
-  margin-bottom: 100px;
-  font-size: 45px;
-  color: #f23e2f;
-  margin-left: 1%;
-}
-.img-estrela {
-  position: relative;
-  width: 100%;
-  height: 60%;
-}
-.card-body {
-  margin-top: -35%;
-}
-.product-card-add {
-  background-color: #031627;
-}
 .data-cardapio {
-  display: flex;
-  justify-content: space-around;
-  background-color: #031627;
+	display: flex;
+	justify-content: space-around;
+	background-color: black;
+	width: 100%;
+	padding: 1em 0;
+	margin-bottom: 1em;
+
+	p {
+		border: 1px solid #f97316;
+		color: #f97316;
+		border-radius: 30px;
+		padding: 10px 20px 10px 20px;
+	}
+
+	button {
+		border: none;
+		background-color: black;
+		margin: 0;
+	}
 }
 
-/* MODALS */
-/* TODOS */
 dialog {
-    z-index: 100;
-}
-dialog h2 {
-    color: #f97316;
-}
-dialog::backdrop{
-  background-color: rgba(0, 0, 0, 0.6);
-}
-dialog button{
-    background-color: #f23e2f;
-    border: 2px solid #031627;
-    border-radius: 15px;
-    width: 40%;
-    height: 7%;
-    margin-top: 5%;
-}
-/* TODOS */
+	z-index: 100;
 
-/* MODAL NOVO CARDAPIO */
-.data-cardapio p {
-  border: 1px solid #f97316;
-  color: #f97316;
-  border-radius: 30px;
-  padding: 10px 20px 10px 20px;
-}
-.data-cardapio button {
-  border: none;
-  background-color: #031627;
-  margin: 0;
-}
-#novo-cardapio {
-    position: fixed;
-	  top: 50%;
-	  left: 50%;
-	  transform: translate(-50%, -50%);
-	  z-index: 1;
-	  margin: 0;
-    width: 35%;
-    padding: 15px 30px 0px 30px;
-    height: 72%;
-    background-color: #024057;
-    border: 1px solid white;
-    border-radius: 20px;
-}
-#novo-cardapio::backdrop{
-  background-color: rgba(0, 0, 0, 0.6);
-}
-#novo-cardapio h2 {
-    color: #f97316;
+	h2 {
+		color: #f97316;
+	}
+
+	&::backdrop {
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+	button {
+		background-color: #f23e2f;
+		border: 2px solid black;
+		border-radius: 15px;
+		width: 40%;
+		height: 7%;
+		margin-top: 5%;
+	}
 }
 
 form {
-    width: 100%;
-    height: 80%;
-}
-form button{
-    background-color: #f23e2f;
-    border: 2px solid #031627;
-    border-radius: 15px;
-    width: 40%;
-    height: 7%;
-    margin-top: 5%;
-}
-#inputs-datas {
-    width: 100%;
-    height: 20%;
-    display: flex;
-    justify-content: space-between;
-    
-}
-#inputs-datas div {
-    text-align: left;
-    width: 40%;
-    height: 100%;
-    padding: 0;
+	width: 100%;
+	height: 80%;
+
+	button {
+		background-color: #f23e2f;
+		border: 2px solid black;
+		border-radius: 15px;
+		width: 40%;
+		height: 7%;
+		margin-top: 5%;
+	}
+
+	#inputs-datas {
+		width: 100%;
+		height: 20%;
+		display: flex;
+		justify-content: space-between;
+
+		div {
+			text-align: left;
+			width: 40%;
+			height: 100%;
+			padding: 0;
+		}
+	}
+
+	input {
+		background-color: #f97316;
+		border: none;
+		border-radius: 6px;
+		height: 25%;
+		width: 100%;
+		padding: 5px 0px 5px 10px;
+	}
+
+	label {
+		font-size: 24px;
+		color: #f97316;
+		margin-bottom: 10px;
+	}
 }
 
-input {
-    background-color: #f97316;
-    border: none;
-    border-radius: 6px;
-    height: 25%;
-    width: 100%;
-    padding: 5px 0px 5px 10px;
-}
-label {
-    font-size: 24px;
-    color: #f97316;
-    margin-bottom: 10px;
-}
-
-#div-pratos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 4%;
-  background-color: #f97316;
-  padding: 20px 20px 20px 20px;
-  width: 100%;
-  height: 70%;
-  border: 2px solid #031627;
-  border-radius: 8px;
-}
-#div-pratos div {
-  display: flex;
-  align-items: center;
-  gap: 1%;
-  height: 5%;
-}
-#div-pratos div label {
-  font-size: 15px;
-  color: #031627;
-  width: 100px;
-  margin: 0;
-}
-#div-pratos div input[type="checkbox"] {
-  all: unset;
-  border: 1px solid black;
-  border-radius: 1px;
-  background-color: transparent;
-  width: 20px;
-  height: 20px;
-}
-#div-pratos div input[type="checkbox"]:checked {
-  background-color: green;
-}
-/* MODAL NOVO CARDAPIO */
-
-/* MODAL ADD PRATO */
-#novo-prato {
-  position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-  margin: 0;
-  width: 50%;
-  height: 45%;
-  border: none;
-  background-color: transparent;
-}
-#novo-prato #div-novo-prato {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
-}
-#div-novo-prato div > div {
-  padding: 0px;
-  width: 200px;
-  height: 200px;
-  background-color: #f97316;
-  border: 2px solid #031627;
-  border-radius: 0;
-  margin-bottom: 12%;
-}
-#div-novo-prato div button {
-  padding: 0px;
-  width: 200px;
-  height: 200px;
-  background-color: #f97316;
-  border: 2px solid black;
-  border-radius: 0;
-  margin-bottom: 12%;
-}
-#div-novo-prato div h2 {
-  font-size: 25px;
-  font-weight: bold;
-  color: black;
-}
-#div-novo-prato div p {
-  font-size: 13px;
-  color: black;
-}
-
-#div-novo-prato div {
-  background-color: #f97316;
-  width: 40%;
-  height: 100%;
-  border-radius: 15px;
-  padding: 20px 25px 0px 25px;
-  place-items: center; /* Centraliza vertical e horizontalmente */
-}
-/* MODAL ADD PRATO */
-/* MODAL PRATOS REGISTRADOS NO SISTEMA */
-#pratos-registrados {
-  margin: 0 auto;
-  position: fixed;
+#novo-cardapio {
+	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 1;
 	margin: 0;
-  width: 30%;
-  height: 75%;
-  padding: 15px 20px 20px 20px;
-  background-color: #024057;
-  border: 1px solid white;
-  border-radius: 20px;
-  place-items: center; /* Centraliza vertical e horizontalmente */
-}
-#pratos-registrados h2{
-  font-size: 36px;
-  margin-bottom: 15px;
-}
-#pratos-registrados button{
-  width: 40%;
-    height: 6%;
-  margin-top: 5%;
-}
-#pratos-registrados form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 5%;
-  background-color: #f97316;
-  padding: 25px 0px 45px 0px;
-  width: 95%;
-  height: 70%;
-  border: 2px solid #031627;
-  border-radius: 8px;
-}
-#pratos-registrados form div {
-  display: flex;
-  align-items: center;
-  gap: 1%;
-  height: 5%;
-  
-}
-#pratos-registrados form label {
-  font-size: 15px;
-  color: #031627;
-  width: 100px;
-  margin: 0;
-}
-#pratos-registrados form input {
-  width: 15px;
-}
-#pratos-registrados form input[type="checkbox"] {
-  all: unset;
-  border: 1px solid black;
-  border-radius: 1px;
-  background-color: transparent;
-  width: 20px;
-  height: 20px;
-}
-#pratos-registrados form input[type="checkbox"]:checked {
-  background-color: green;
-}
-/* MODAL PRATOS REGISTRADOS NO SISTEMA */
+	width: 35%;
+	padding: 15px 30px 0px 30px;
+	height: 72%;
+	background-color: #024057;
+	border: 1px solid white;
+	border-radius: 20px;
 
-/* MODAL NOVO PRATO */
+	&::backdrop {
+		background-color: rgba(0, 0, 0, 0.6);
+	}
+
+	h2 {
+		color: #f97316;
+	}
+}
+
+#novo-cardapio #div-pratos {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 4%;
+	background-color: #f97316;
+	padding: 20px 20px 20px 20px;
+	width: 100%;
+	height: 70%;
+	border: 2px solid black;
+	border-radius: 8px;
+
+	div {
+		display: flex;
+		align-items: center;
+		gap: 1%;
+		height: 5%;
+
+		label {
+			font-size: 15px;
+			color: black;
+			width: 100px;
+			margin: 0;
+		}
+
+		input[type="checkbox"] {
+			all: unset;
+			border: 1px solid black;
+			border-radius: 1px;
+			background-color: transparent;
+			width: 20px;
+			height: 20px;
+		}
+
+		input[type="checkbox"]:checked {
+			background-color: green;
+		}
+	}
+}
+
+#novo-prato {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0;
+	width: 50%;
+	height: 45%;
+	border: none;
+	background-color: transparent;
+
+	#div-novo-prato {
+		display: flex;
+		justify-content: space-around;
+		width: 100%;
+		height: 100%;
+		background-color: transparent;
+		cursor: pointer;
+
+		div {
+			background-color: #f97316;
+			width: 40%;
+			height: 100%;
+			border-radius: 15px;
+			padding: 20px 25px 0px 25px;
+			place-items: center;
+
+			> div {
+				padding: 0px;
+				width: 200px;
+				height: 200px;
+				background-color: #f97316;
+				border: 2px solid black;
+				border-radius: 0;
+				margin-bottom: 12%;
+			}
+
+			button {
+				padding: 0px;
+				width: 200px;
+				height: 200px;
+				background-color: #f97316;
+				border: 2px solid black;
+				border-radius: 0;
+				margin-bottom: 12%;
+			}
+			h2 {
+				font-size: 25px;
+				font-weight: bold;
+				color: black;
+			}
+			p {
+				font-size: 13px;
+				color: black;
+			}
+		}
+	}
+}
+
+#pratos-registrados {
+	margin: 0 auto;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	margin: 0;
+	width: 30%;
+	height: 75%;
+	padding: 15px 20px 20px 20px;
+	background-color: #024057;
+	border: 1px solid white;
+	border-radius: 20px;
+	place-items: center;
+
+	h2 {
+		font-size: 36px;
+		margin-bottom: 15px;
+	}
+
+	button {
+		width: 40%;
+		height: 6%;
+		margin-top: 5%;
+	}
+
+	form {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 5%;
+		background-color: #f97316;
+		padding: 25px 0px 45px 0px;
+		width: 95%;
+		height: 70%;
+		border: 2px solid black;
+		border-radius: 8px;
+
+		div {
+			display: flex;
+			align-items: center;
+			gap: 1%;
+			height: 5%;
+		}
+
+		label {
+			font-size: 15px;
+			color: black;
+			width: 100px;
+			margin: 0;
+		}
+
+		input {
+			width: 15px;
+		}
+
+		input[type="checkbox"] {
+			all: unset;
+			border: 1px solid black;
+			border-radius: 1px;
+			background-color: transparent;
+			width: 20px;
+			height: 20px;
+
+			&:checked {
+				background-color: green;
+			}
+		}
+	}
+}
+
 #criar-prato {
-  margin: 0 auto;
-  position: fixed;
+	margin: 0 auto;
+	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 2;
 	margin: 0;
-  width: 30%;
-  height: 75%;
-  padding: 15px 40px 20px 40px;
-  background-color: #024057;
-  border: 1px solid white;
-  border-radius: 20px;
-  place-items: center; /* Centraliza vertical e horizontalmente */
-}
-#criar-prato form {
-  place-items: center;
-}
-#criar-prato form #image-file{
-  background-color: #f97316;
-  width: 35%;
-  height: 30%;
-}
-#criar-prato form div {
-  text-align: left;
-  width: 100%;
-}
-#criar-prato form div textarea {
-  background-color: #f97316;
-  width: 100%;
-}
-#criar-prato form div label {
-  margin: 0;
-  font-size: 17px;
-}
-#criar-prato form div input {
-  margin-bottom: 15px;
-}
-#criar-prato form label {
-  margin: 0;
-}
-#criar-prato form #image-file label{
-  color: #031627;
-  font-size: 13px;
-  font-weight: bold;
-  text-align: center;
-  margin: 0;
-  padding: 0px 0px 0px 0px;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-}
-#criar-prato form label p{
-  margin: 0;
-}
-#criar-prato form label .material-symbols-outlined{
-  font-size: 60px;
-  margin: 25px 0px 0px 0px;
-}
-#criar-prato form input[type="file"]{
-  display: none;
-}
-#criar-prato button {
-    background-color: #f23e2f;
-    border: 2px solid #031627;
-    border-radius: 12px;
-    width: 40%;
-    height: 6%;
-    margin-top: 5%;
-}
-/* MODAL NOVO PRATO */
-/* MODALS */
+	width: 30%;
+	height: 75%;
+	padding: 15px 40px 20px 40px;
+	background-color: #024057;
+	border: 1px solid white;
+	border-radius: 20px;
+	place-items: center;
 
+	form {
+		place-items: center;
+	}
 
-/* CARROSSEL */
-.carousel-item img {
-  width: 800px;
-  height: 400px;
-  object-fit: cover;
-}
-.carousel-caption {
-  margin: 7.5%;
-}
-.carousel-caption h2 {
-  font-family: "Playfair-Display";
-  font-size: 4em;
-  color: #d9b992;
-}
-.carousel-control-prev-icon {
-  filter: invert(54%) sepia(98%) saturate(747%) hue-rotate(355deg)
-    brightness(104%) contrast(101%);
+	form #image-file {
+		background-color: #f97316;
+		width: 35%;
+		height: 30%;
+	}
+
+	form div {
+		text-align: left;
+		width: 100%;
+	}
+
+	form div textarea {
+		background-color: #f97316;
+		width: 100%;
+	}
+
+	form div label {
+		margin: 0;
+		font-size: 17px;
+	}
+
+	form div input {
+		margin-bottom: 15px;
+	}
+
+	form label {
+		margin: 0;
+	}
+
+	form #image-file label {
+		color: black;
+		font-size: 13px;
+		font-weight: bold;
+		text-align: center;
+		margin: 0;
+		padding: 0px 0px 0px 0px;
+		width: 100%;
+		height: 100%;
+	}
+
+	form label p {
+		margin: 0;
+	}
+
+	form label .material-symbols-outlined {
+		font-size: 60px;
+		margin: 25px 0px 0px 0px;
+	}
+
+	form input[type="file"] {
+		display: none;
+	}
+
+	button {
+		background-color: #f23e2f;
+		border: 2px solid black;
+		border-radius: 12px;
+		width: 40%;
+		height: 6%;
+		margin-top: 5%;
+	}
 }
 
-.carousel-control-next-icon {
-  filter: invert(54%) sepia(98%) saturate(747%) hue-rotate(355deg)
-    brightness(104%) contrast(101%);
-}
-
-.carrossel {
-    border-bottom: 2px solid #f97316;
-    margin-bottom: 2%;
-}
-.carousel-indicators [data-bs-target] {
-    background-color: #f97316;
-}
-.carrossel .carousel-item img {
-  filter: brightness(40%);
-}
-.carousel-item::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to left, rgba(23, 23, 23, 1.7), rgba(255, 255, 254, 0));
-}
-/* CARROSSEL */
-
-
-/* CARD EM BRANCO */
 .product-card-branco {
-  position: relative; /* Essencial para posicionar elementos filhos */
-  width: 270px;
-  height: 300px;
-  background-color: #024057; /* Laranja principal */
-  border-radius: 25px;
-  padding: 20px;
-  padding-top: 80px; /* Mais espaço no topo para a imagem */
-  text-align: center;
-  color: black;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Sombra suave */
-}
-.product-card-branco .img-estrela {
-  height: 0;
-}
-/* Círculo da imagem do produto */
-.product-card-branco.product-image {
-  position: absolute;
-  top: -60px; /* Puxa a imagem para cima, para fora do card */
-  left: 50%;
-  transform: translateX(-50%); /* Centraliza horizontalmente com perfeição */
-  width: 180px;
-  height: 180px;
-  background-color: #024057;
-  border: 2px solid #024057;
-  border-radius: 50%; /* Transforma o div em um círculo */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  font-weight: 700;
-}
-.product-card-branco .product-image {
-  border-radius: 50%;
-  background-color: #024057;
-  border: none;
-}
-.product-card-branco button {
-  background-color: transparent;
-  border: none;
-}
-.product-card-branco .product-image > img {
-  border-radius: 50%;
-  width: 100%;
-  height: 100%;
-  background-color: #024057;
-}
-.product-card-branco .material-symbols-outlined {
-  font-size: 100px;
-  margin-top: 20%;
-}
-/* CARD EM BRANCO */
+	position: relative;
+	width: 270px;
+	height: 300px;
+	background-color: #024057;
+	border-radius: 25px;
+	padding: 20px;
+	padding-top: 80px;
+	text-align: center;
+	color: black;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 
+	.img-estrela {
+		height: 0;
 
-/* ESTRELAS */
-.curved-stars-container {
-    position: relative;
-    width: 300px;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.estrelas {
-  position: absolute;
-  top: -50%;
-  left: -15%;
-}
-/* O estilo agora é aplicado diretamente na tag <i> do ícone */
-.star {
-    position: absolute;
-    font-size: 30px; /* Controla o tamanho do ícone */
-    color: #031627;    /* Controla a cor do ícone */
-}
+		.product-image {
+			border-radius: 50%;
+			background-color: #024057;
+			border: none;
+			top: -55px;
 
-/* PASSO 3: REMOVEMOS a regra ".star::before" pois não é mais necessária */
+			> img {
+				border-radius: 50%;
+				width: 100%;
+				height: 100%;
+				background-color: #024057;
+			}
+		}
+	}
 
-/* Posicionamento (sem alterações) */
-.star:nth-child(1) {
-    transform: translate(-58px, 6px) rotate(0deg);
+	button {
+		background-color: transparent;
+		border: none;
+	}
+
+	.material-symbols-outlined {
+		font-size: 100px;
+		margin-top: 20%;
+	}
 }
-.star:nth-child(2) {
-    transform: translate(-30px, 20px) rotate(0deg);
-}
-.star:nth-child(3) {
-    transform: translate(0px, 27px);
-}
-.star:nth-child(4) {
-    transform: translate(30px, 20px) rotate(0deg);
-}
-.star:nth-child(5) {
-    transform: translate(58px, 6px) rotate(0deg);
-}
-/* ESTRELAS */

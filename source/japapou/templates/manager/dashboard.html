@@ -1,17 +1,42 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Relatórios{% endblock title %}
+{% block title %}
+  Relatórios
+{% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="{% static 'css/manager/dashboard.css' %}" />
-{% endblock extra_head %}
+  <link rel="stylesheet" href="{% static 'css/manager/dashboard.css' %}" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
 
 {% block content %}
-<h1>Relatórios</h1>
-<p class="text1">Texto de exemplo.</p>
-<p class="text2">Texto de exemplo.</p>
-<p class="text3">Texto de exemplo.</p>
-<p class="text4">Texto de exemplo.</p>
-<p class="text5">Texto de exemplo.</p>
-{% endblock content %}
+  <h1>Dashboard</h1>
+  <!--     
+    <canvas id="meuGrafico" width="400" height="200"></canvas>
+
+    <script>
+        const ctx = document.getElementById('meuGrafico').getContext('2d');
+        const meuGrafico = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ labels|safe }},
+                datasets: [{
+                    label: 'Vendas',
+                    data: {{ sales|safe }},
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>   
+      -->
+{% endblock %}

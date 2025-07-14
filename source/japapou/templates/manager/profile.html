@@ -1,99 +1,87 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Perfil{% endblock title %}</title>
+{% block title %}
+  Perfil
+{% endblock %}
 
-    {% block extra_head %}<link rel="stylesheet" href="{% static 'css/manager/manager_profile.css' %}">{% endblock extra_head %}
-</head>
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/manager/profile.css' %}" />
+{% endblock %}
 
 {% block content %}
-<body>
   <h2 class="section-title">Geral</h2>
 
-<div class="foto-perfil">
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="foto-container">
-      <label for="fileInput" class="foto-wrapper">
-        <!-- Você pode deixar esse img comentado se ainda não tiver imagem -->
-         <img id="previewImage" src="{% static 'imgs/manage/gerente_FotoPerfil.png' %}" alt="Foto de perfil" class="foto-img">
-        <div class="icone-camera">
-          <i class="fa-solid fa-camera"></i>
+  <section>
+    <div class="foto-perfil">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="foto-container">
+          <label for="fileInput">
+            <img id="previewImage" src="{% static 'imgs/manager/profile.png' %}" alt="Foto de perfil" />
+            <div class="icone-camera">
+              <i class="fa-solid fa-camera"></i>
+            </div>
+          </label>
+          <input type="file" name="foto" id="fileInput" accept="image/*" style="display: none" />
         </div>
-      </label>
-      <input type="file" name="foto" id="fileInput" accept="image/*" style="display: none" />
+        <div>
+          <p class="foto-label">Altere a sua foto de perfil</p>
+          <button type="button" id="removeImageBtn">Remover</button>
+        </div>
+      </form>
     </div>
-    <div>
-      <p class="foto-label">Altere a sua foto de perfil</p>
-      <!-- Remover imagem temporariamente -->
-      <button type="button" id="removeImageBtn">Remover</button>
-    </div>
-  </form>
-</div>
+  </section>
 
-
-
-  <ul class="informações">
-    <li>
+  <section>
+    <ul class="informacoes">
+      <li>
         <strong>Nome</strong>
         <div class="value-with-icon">
-            <span>Cláudia Martins Soares</span>
-            <a href="#" class="edit-icon" title="Editar">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
+          <span>Cláudia Martins Soares</span>
+          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
         </div>
-    </li>
-    <li>
-      <strong>Aniversário</strong>
-      <div class="value-with-icon">
-            <span>14 de outubro de 1998</span>
-            <a href="#" class="edit-icon" title="Editar">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
+      </li>
+      <li>
+        <strong>Aniversário</strong>
+        <div class="value-with-icon">
+          <span>14 de outubro de 1998</span>
+          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
         </div>
-    </li>
-    <li>
-      <strong>E-mail</strong>
-      <div class="value-with-icon">
-            <span>claudia.martins.gerente@corpflux.com</span>
-            <a href="#" class="edit-icon" title="Editar">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
+      </li>
+      <li>
+        <strong>E-mail</strong>
+        <div class="value-with-icon">
+          <span>claudia.martins.gerente@corpflux.com</span>
+          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
         </div>
-    </li>
-  </ul>
-</section>
+      </li>
+    </ul>
+  </section>
 
-<section>
-  <h2 class="section-title">Conta</h2>
-  <ul class="informações">
-    <li>
-      <strong>Username</strong>
-            <div class="value-with-icon">
-            <span>gerente.01.[nome da filial]</span>
-            <a href="#" class="edit-icon" title="Editar">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
+  <section>
+    <h2 class="section-title">Conta</h2>
+    <ul class="informacoes">
+      <li>
+        <strong>Username</strong>
+        <div class="value-with-icon">
+          <span>gerente.01.[nome da filial]</span>
+          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
         </div>
-    </li>
-    <li>
-      <strong>Senha</strong>
-            <div class="value-with-icon">
-            <span>**************</span>
-            <a href="#" class="edit-icon" title="Editar">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
+      </li>
+      <li>
+        <strong>Senha</strong>
+        <div class="value-with-icon">
+          <span>**************</span>
+          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
         </div>
-    </li>
-  </ul>
-<!-- Define a variável JS com o caminho da imagem padrão -->
-<script>
-  const defaultImagePath = "{% static 'imgs/default_profile.png' %}";
-</script>
+      </li>
+    </ul>
+  </section>
+{% endblock %}
 
-<!-- Carrega seu arquivo JS -->
-<script src="{% static 'js/manager/manage_profile.js' %}"></script>
-
-</body>
-{% endblock content %}
+{% block scripts %}
+  <script>
+    const defaultImagePath = "{% static 'imgs/default_profile.png' %}"
+  </script>
+  <script src="{% static 'js/manager/manage_profile.js' %}"></script>
+{% endblock %}
