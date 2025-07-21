@@ -7,6 +7,7 @@
 
 {% block extra_head %}
   <link rel="stylesheet" href="{% static 'css/manager/manager_menu.css' %}" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=keyboard_arrow_down" />
 {% endblock %}
 
 {% block content %}
@@ -45,8 +46,11 @@
   </section>
 
   <div class="data-cardapio">
+    <div>
     <p>01/06/2025 ~ 07/06/2025</p>
-    <button onclick="document.getElementById('novo-cardapio').showModal()"><p>+ novo cardapio</p></button>
+    <span class="material-symbols-outlined">keyboard_arrow_down</span>
+    </div>
+    <button class="novo-cardapio" onclick="document.getElementById('novo-cardapio').showModal()"><p>+ novo cardapio</p></button>
   </div>
 
   <section class="categoria">
@@ -67,7 +71,7 @@
           </button>
           <div class="img-estrela">
             <div class="product-image">
-              <img src="/media/{{pratos.image}}" alt="Imagem de sushi de salmão" />
+              <img src="/media/{{ prato.foto }}" alt="Imagem de sushi de salmão" />
             </div>
             <div class="estrelas">
               <div class="curved-stars-container">
@@ -90,12 +94,6 @@
           </div>
         </div>
       {% endfor %}
-    </div>
-  </section>
-
-  <section class="categoria">
-    <h2>Categoria 2</h2>
-    <div class="cards">
       <!-- CARDS EM BRANCO -->
       <div class="product-card-branco">
         <div class="img-estrela">
@@ -103,6 +101,14 @@
         </div>
         <button onclick="document.getElementById('novo-prato').showModal()"><span class="material-symbols-outlined">+</span></button>
       </div>
+      <!-- CARDS EM BRANCO -->
+    </div>
+  </section>
+
+  <section class="categoria">
+    <h2>Categoria 2</h2>
+    <div class="cards">
+      <!-- CARDS EM BRANCO -->
       <!-- CARDS EM BRANCO -->
     </div>
   </section>

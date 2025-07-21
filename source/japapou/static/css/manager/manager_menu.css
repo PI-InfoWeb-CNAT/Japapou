@@ -63,12 +63,13 @@ main {
 	text-align: left;
 	margin-bottom: 5%;
 	padding: 0 2rem;
+	width: 100%;
 
 	h2 {
 		margin-bottom: 100px;
 		font-size: 45px;
 		color: #f23e2f;
-		margin-left: 1%;
+		
 	}
 
 	.cards {
@@ -245,7 +246,16 @@ main {
 	padding: 1em 0;
 	margin-bottom: 1em;
 
-	p {
+	div {
+		border: 1px solid #f97316;
+		color: #f97316;
+		border-radius: 30px;
+		padding: 10px 20px 10px 20px;
+		display: flex;
+		align-items: center;
+	}
+	
+	.novo-cardapio {
 		border: 1px solid #f97316;
 		color: #f97316;
 		border-radius: 30px;
@@ -255,7 +265,13 @@ main {
 	button {
 		border: none;
 		background-color: black;
-		margin: 0;
+		margin-bottom: 0px;
+		padding: 0;
+	}
+	.material-symbols-outlined {
+		color: #f97316;
+		font-size: 30px;
+		cursor: pointer;
 	}
 }
 
