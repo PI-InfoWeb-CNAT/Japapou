@@ -9,5 +9,10 @@ class Prato(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     altered_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = 'Prato'
+        verbose_name_plural = 'Pratos'
+        ordering = ['name']
+
     def __str__(self):
         return f"nome: {self.name}"
