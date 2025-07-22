@@ -1,5 +1,6 @@
 from django.db import models  # type: ignore
 
+
 class User(models.Model):
     name = models.CharField(null=False, max_length=100)
     cpf = models.CharField(null=False, max_length=15)
@@ -7,4 +8,4 @@ class User(models.Model):
     altered_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{}'.format(self.name)
+        return f"{self.name}"

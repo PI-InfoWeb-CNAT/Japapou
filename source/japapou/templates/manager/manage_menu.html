@@ -47,8 +47,11 @@
 
   <div class="data-cardapio">
     <div>
-    <p>01/06/2025 ~ 07/06/2025</p>
-    <span class="material-symbols-outlined">keyboard_arrow_down</span>
+      <div>
+        <p>01/06/2025 ~ 07/06/2025</p>
+        <span class="material-symbols-outlined">keyboard_arrow_down</span>
+      </div>
+      <form method="get">{{ select_menu }}</form>
     </div>
     <button class="novo-cardapio" onclick="document.getElementById('novo-cardapio').showModal()"><p>+ novo cardapio</p></button>
   </div>
@@ -56,7 +59,7 @@
   <section class="categoria">
     <h2>Categoria 1</h2>
     <div class="cards">
-      {% for prato in pratos %}
+      {% for plate in plates %}
         <div class="product-card">
           <button class="action-button delete-button" aria-label="Deletar">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -71,7 +74,7 @@
           </button>
           <div class="img-estrela">
             <div class="product-image">
-              <img src="/media/{{ prato.foto }}" alt="Imagem de sushi de salmão" />
+              <img src="/media/{{ plate.photo }}" alt="Imagem de sushi de salmão" />
             </div>
             <div class="estrelas">
               <div class="curved-stars-container">
@@ -84,13 +87,13 @@
             </div>
           </div>
           <div class="card-body">
-            <h3 class="product-name">{{ prato.name }}</h3>
-            <p class="product-description">{{ prato.descricao }}</p>
+            <h3 class="product-name">{{ plate.name }}</h3>
+            <p class="product-description">{{ plate.description }}</p>
             <button class="remove-button">REMOVER</button>
             <!-- TODO: DEPOIS MUDAR O BUTTON PRA FICAR FORA DA DIV E ADICIONAR UM POSION ABSOLUTE NELE -->
           </div>
           <div class="product-price">
-            <p>{{ prato.preco }}</p>
+            <p>R$ {{ plate.price }}</p>
           </div>
         </div>
       {% endfor %}
