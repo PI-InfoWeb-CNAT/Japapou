@@ -7,7 +7,7 @@
 
 {% block extra_head %}
   <link rel="stylesheet" href="{% static 'css/manager/manager_menu.css' %}" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=keyboard_arrow_down" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=image_arrow_up,keyboard_arrow_down" />
 {% endblock %}
 
 {% block content %}
@@ -396,26 +396,34 @@
   </dialog>
   <dialog id="criar-prato">
     <h2>Criar Novo Prato</h2>
-    <form>
+    <form method="post", enctype="multipart/form-data">
       {% csrf_token %}
+      
       <div id="image-file">
-        <input type="file" id="upload-arquivo" accept="image/png, image/jpeg" />
-        <label for="upload-arquivo">
+        <!--<input type="file" id="upload-arquivo" accept="image/png, image/jpeg" />-->
+        {{ form.photo }}
+        <label for="{{ form.photo.id_for_label }}">
           <p class="material-symbols-outlined">image_arrow_up</p>
           <p>Faça o upload da foto do produto com fundo transparente</p>
         </label>
       </div>
       <div>
-        <label for="nome">Nome</label><br />
-        <input type="text" id="nome" name="nome" placeholder="Peixe Cru Bêbado" />
+        <!--<label for="nome">Nome</label><br />-->
+        {{ form.name.label_tag }}
+        <!--<input type="text" id="nome" name="nome" placeholder="Peixe Cru Bêbado" />-->
+        {{ form.name }}
       </div>
       <div>
-        <label for="preco">Preço</label><br />
-        <input type="number" id="preco" name="preco" placeholder="R$ 00,00" />
+        <!--<label for="preco">Preço</label>-->
+        {{ form.price.label_tag }}<br/>
+        <!--<input type="number" id="preco" name="preco" placeholder="R$ 00,00"/>-->
+        {{ form.price }}
       </div>
       <div>
-        <label for="descricao">Descrição</label><br />
-        <textarea name="descicao" id="descricao" rows="8"></textarea>
+        <!--<label for="descricao">Descrição</label><br/>-->
+        {{ form.description.label_tag }}<br>
+        <!--<textarea name="descicao" id="descricao" rows="8"></textarea>-->
+        {{ form.description }}
       </div>
     </form>
     <button onclick="document.getElementById('criar-prato').close()">+ Adicionar ao Menu</button>

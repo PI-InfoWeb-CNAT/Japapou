@@ -1,7 +1,7 @@
-from django.shortcuts import render  # type: ignore
+from django.shortcuts import render, redirect  # type: ignore
 from japapou.models import Menu, Plate
 from django import forms  # type: ignore
-
+from japapou.forms import PlatesForms
 
 class Search(forms.Form):
     field = forms.ChoiceField(
@@ -12,6 +12,7 @@ class Search(forms.Form):
 
 
 def manager_menu_view(request):
+    #form = PlatesForms()    
     menus = Menu.objects.all()
     choices = [(menu.name, menu.name) for menu in menus]
 
@@ -27,11 +28,22 @@ def manager_menu_view(request):
 
     plates = Plate.objects.filter(menu=selected_menu)
 
+    if request.method == 'POST':
+        form = PlatesForms(request.POST, request.FILES)
+        
+        if form.is_valid():
+            form.save()
+            return redirect('manager_menu')
+    
+    else:
+        form = PlatesForms() 
+
     context = {
         "select_menu": search,
         "selected": selected_menu,
         "menus": menus,
         "plates": plates,
+        "form": form
     }
 
     return render(
