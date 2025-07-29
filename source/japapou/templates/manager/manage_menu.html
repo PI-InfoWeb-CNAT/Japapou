@@ -11,6 +11,11 @@
 {% endblock %}
 
 {% block content %}
+
+{% for message in messages %}
+  <p>{{ message }}</p>
+{% endfor %}
+
   <section id="carouselExampleIndicators" class="carousel slide">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -396,7 +401,7 @@
   </dialog>
   <dialog id="criar-prato">
     <h2>Criar Novo Prato</h2>
-    <form method="post", enctype="multipart/form-data">
+    <form action="{% url "manager_menu" %}" method="post", enctype="multipart/form-data">
       {% csrf_token %}
       
       <div id="image-file">
@@ -425,8 +430,20 @@
         <!--<textarea name="descicao" id="descricao" rows="8"></textarea>-->
         {{ form.description }}
       </div>
+      <div>
+        {{ form.menus.label_tag }}
+        {{ form.menus }}
+
+        {% if form.menus.errors %}
+          <ul class="errorlist">
+              {% for error in form.menus.errors %}
+                  <li>{{ error }}</li>
+              {% endfor %}
+          </ul>
+      {% endif %}
+      </div>
+      <button type="submit" onclick="document.getElementById('criar-prato').close()">+ Adicionar ao Menu</button>
     </form>
-    <button onclick="document.getElementById('criar-prato').close()">+ Adicionar ao Menu</button>
   </dialog>
 
   <!-- MODALS -->
