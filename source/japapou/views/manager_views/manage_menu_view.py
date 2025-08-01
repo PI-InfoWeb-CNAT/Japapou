@@ -1,7 +1,9 @@
-from django.shortcuts import render  # type: ignore
+from django.shortcuts import render, redirect  # type: ignore
 from japapou.models import Menu, Plate
 from django import forms  # type: ignore
-
+from django.urls import reverse
+from japapou.forms import PlatesForms
+from django.contrib import messages
 
 class Search(forms.Form):
     field = forms.ChoiceField(
@@ -27,11 +29,32 @@ def manager_menu_view(request):
 
     plates = Plate.objects.filter(menu=selected_menu)
 
+    if request.method == 'POST':
+        form = PlatesForms(request.POST, request.FILES)
+        
+        if form.is_valid():
+            plate_instance = form.save(commit=False)
+            plate_instance.save()
+            selected_menus = form.cleaned_data.get('menus')
+
+            if selected_menus:
+                for menu_obj in selected_menus:
+                    menu_obj.plates.add(plate_instance)
+
+            messages.success(request, "Prato adicionado com sucesso.")
+            redirect_url = reverse('manager_menu')
+            if selected_menu:
+                redirect_url += f'?field={selected_menu.name}'
+            return redirect(redirect_url)
+    else:
+        form = PlatesForms() 
+
     context = {
         "select_menu": search,
         "selected": selected_menu,
         "menus": menus,
         "plates": plates,
+        "form": form
     }
 
     return render(
