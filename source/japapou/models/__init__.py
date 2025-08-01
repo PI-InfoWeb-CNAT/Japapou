@@ -4,6 +4,9 @@ from django.db.models.signals import post_save  # type: ignore
 from django.dispatch import receiver  # type: ignore
 
 from .menu import Menu
+from .order_item import OrderItem
+from .order import Order
 from .period import Period
+from .plate_option import PlateOption
 from .plate import Plate
 from .user import User

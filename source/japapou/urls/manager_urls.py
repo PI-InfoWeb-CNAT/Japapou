@@ -9,6 +9,7 @@ urlpatterns = [
         name="manage_delivery_man",
     ),
     path("menu/", manager_menu_view, name="manager_menu"),
+    path("plates/", manager_plates_view, name="manager_plates"),
     path("orders/", manager_orders_view, name="manager_orders"),
     path("profile/", manager_profile_view, name="manager_profile"),
     path("dashboard/", manager_dashboard_view, name="manager_dashboard"),

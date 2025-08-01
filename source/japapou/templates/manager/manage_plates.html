@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-  Menu
+  Plates
 {% endblock %}
 
 {% block extra_head %}
@@ -46,18 +46,11 @@
   </section>
 
   <div class="data-cardapio">
-    <div>
-      <div>
-        <p>01/06/2025 ~ 07/06/2025</p>
-        <span class="material-symbols-outlined">keyboard_arrow_down</span>
-      </div>
-      <form method="get">{{ select_menu }}</form>
-    </div>
-    <button class="novo-cardapio" onclick="document.getElementById('novo-cardapio').showModal()"><p>+ Novo Menu</p></button>
+    <button class="novo-cardapio" onclick="document.getElementById('novo-cardapio').showModal()"><p>+ Novo Prato</p></button>
   </div>
 
   <section class="categoria">
-    <h2>Menu:</h2>
+    <h2>Pratos:</h2>
     <div class="cards">
       {% for plate in plates %}
         <div class="product-card">
