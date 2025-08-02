@@ -11,10 +11,9 @@
 {% endblock %}
 
 {% block content %}
-
-{% for message in messages %}
-  <p>{{ message }}</p>
-{% endfor %}
+  {% for message in messages %}
+    <p>{{ message }}</p>
+  {% endfor %}
 
   <section id="carouselExampleIndicators" class="carousel slide">
     <div class="carousel-indicators">
@@ -64,7 +63,7 @@
   <section class="categoria">
     <h2>Menu:</h2>
     <div class="cards">
-      {% for plate in plates %}
+      {% for plate in menu_plates %}
         <div class="product-card">
           <button class="action-button delete-button" aria-label="Deletar">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -94,22 +93,66 @@
           <div class="card-body">
             <h3 class="product-name">{{ plate.name }}</h3>
             <p class="product-description">{{ plate.description }}</p>
-            <button class="remove-button">REMOVER</button>
-            <!-- TODO: DEPOIS MUDAR O BUTTON PRA FICAR FORA DA DIV E ADICIONAR UM POSION ABSOLUTE NELE -->
           </div>
           <div class="product-price">
             <p>R$ {{ plate.price }}</p>
           </div>
         </div>
       {% endfor %}
-      <!-- CARDS EM BRANCO -->
       <div class="product-card-branco">
         <div class="img-estrela">
           <div class="product-image"></div>
         </div>
-        <button onclick="document.getElementById('novo-prato').showModal()"><span class="material-symbols-outlined">+</span></button>
+        <button onclick="document.getElementById('criar-prato').showModal()"><span class="material-symbols-outlined">+</span></button>
       </div>
-      <!-- CARDS EM BRANCO -->
+    </div>
+  </section>
+
+  <section class="categoria">
+    <h2>Available:</h2>
+    <div class="cards">
+      {% for plate in other_plates %}
+        <div class="product-card">
+          <button class="action-button delete-button" aria-label="Deletar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          <button class="action-button edit-button" aria-label="Editar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+            </svg>
+          </button>
+          <div class="img-estrela">
+            <div class="product-image">
+              <img src="/media/{{ plate.photo }}" alt="Imagem de sushi de salmão" />
+            </div>
+            <div class="estrelas">
+              <div class="curved-stars-container">
+                <i class="star fa-solid fa-star"></i>
+                <i class="star fa-solid fa-star"></i>
+                <i class="star fa-solid fa-star"></i>
+                <i class="star fa-solid fa-star"></i>
+                <i class="star fa-solid fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3 class="product-name">{{ plate.name }}</h3>
+            <p class="product-description">{{ plate.description }}</p>
+          </div>
+          <div class="product-price">
+            <p>R$ {{ plate.price }}</p>
+          </div>
+        </div>
+      {% endfor %}
+      <div class="product-card-branco">
+        <div class="img-estrela">
+          <div class="product-image"></div>
+        </div>
+        <button onclick="document.getElementById('criar-prato').showModal()"><span class="material-symbols-outlined">+</span></button>
+      </div>
     </div>
   </section>
 
@@ -179,225 +222,33 @@
           <input type="checkbox" id="prato-14" name="prato-14" />
           <label for="prato-14">Lorem Ipsum</label>
         </div>
-        <div>
-          <input type="checkbox" id="prato-15" name="prato-15" />
-          <label for="prato-15">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-16" name="prato-16" />
-          <label for="prato-16">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-17" name="prato-17" />
-          <label for="prato-17">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-18" name="prato-18" />
-          <label for="prato-18">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-19" name="prato-19" />
-          <label for="prato-19">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-20" name="prato-20" />
-          <label for="prato-20">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-21" name="prato-21" />
-          <label for="prato-21">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-22" name="prato-22" />
-          <label for="prato-22">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-23" name="prato-23" />
-          <label for="prato-23">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-24" name="prato-24" />
-          <label for="prato-24">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-25" name="prato-25" />
-          <label for="prato-25">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-26" name="prato-26" />
-          <label for="prato-26">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-27" name="prato-27" />
-          <label for="prato-27">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-28" name="prato-28" />
-          <label for="prato-28">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-29" name="prato-29" />
-          <label for="prato-29">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-30" name="prato-30" />
-          <label for="prato-30">Lorem Ipsum</label>
-        </div>
       </div>
       <button onclick="document.getElementById('novo-cardapio').close()">+ Adicionar o Menu</button>
     </form>
   </dialog>
 
-  <dialog id="novo-prato">
+  {% comment %} <dialog id="novo-prato">
     <div id="div-novo-prato">
       <div>
-        <button id="addpratoexistentbtn"><img src="{% static 'imgs/manager/icons/addpratoexistente.png' %}" alt="Ícone de adicionar um prato existente" width="128" /></button>
-        <h2>Adicionar um Já Existente</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus.</p>
+        <a href="{% url 'home' %}">
+          <button id="addpratoexistentbtn"><img src="{% static 'imgs/manager/icons/addpratoexistente.png' %}" alt="Ícone de adicionar um prato existente" width="128" /></button>
+          <h2>Adicionar um Já Existente</h2>
+        </a>
       </div>
       <div>
         <button id="addnovopratobtn"><img src="{% static 'imgs/manager/icons/addnovoprato.png' %}" alt="Ícone de adicionar um novo prato" width="128" /></button>
         <h2>Adicionar um Novo Prato</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus.</p>
       </div>
     </div>
-    <!-- <button onclick="document.getElementById('novo-prato').close()">fechar modal</button> -->
-  </dialog>
+  </dialog> {% endcomment %}
 
-  <dialog id="pratos-registrados">
-    <h2>Pratos já Registrados no Sistema</h2>
-    <form>
-      {% csrf_token %}
-      <div>
-        <input type="checkbox" id="prato-a" name="prato-a" />
-        <label for="prato-a">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-b" name="prato-b" />
-        <label for="prato-b">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-c" name="prato-c" />
-        <label for="prato-c">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-d" name="prato-d" />
-        <label for="prato-d">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-e" name="prato-e" />
-        <label for="prato-e">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-f" name="prato-f" />
-        <label for="prato-f">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-g" name="prato-g" />
-        <label for="prato-g">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-h" name="prato-h" />
-        <label for="prato-h">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-i" name="prato-i" />
-        <label for="prato-i">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-j" name="prato-j" />
-        <label for="prato-j">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-k" name="prato-k" />
-        <label for="prato-k">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-l" name="prato-l" />
-        <label for="prato-l">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-m" name="prato-m" />
-        <label for="prato-m">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-n" name="prato-n" />
-        <label for="prato-n">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-o" name="prato-o" />
-        <label for="prato-o">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-p" name="prato-p" />
-        <label for="prato-p">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-q" name="prato-q" />
-        <label for="prato-q">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-r" name="prato-r" />
-        <label for="prato-r">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-s" name="prato-s" />
-        <label for="prato-s">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-t" name="prato-t" />
-        <label for="prato-t">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-u" name="prato-u" />
-        <label for="prato-u">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-v" name="prato-v" />
-        <label for="prato-v">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-w" name="prato-w" />
-        <label for="prato-w">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-x" name="prato-x" />
-        <label for="prato-x">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-y" name="prato-y" />
-        <label for="prato-y">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-z" name="prato-z" />
-        <label for="prato-z">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-aa" name="prato-aa" />
-        <label for="prato-aa">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-ab" name="prato-ab" />
-        <label for="prato-ab">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-ac" name="prato-ac" />
-        <label for="prato-ac">Lorem Ipsum</label>
-      </div>
-      <div>
-        <input type="checkbox" id="prato-ad" name="prato-ad" />
-        <label for="prato-ad">Lorem Ipsum</label>
-      </div>
-    </form>
-    <button onclick="document.getElementById('pratos-registrados').close()">+ Adicionar ao Menu</button>
-  </dialog>
   <dialog id="criar-prato">
     <h2>Criar Novo Prato</h2>
-    <form action="{% url "manager_menu" %}" method="post", enctype="multipart/form-data">
+    <form action="{% url 'manager_menu' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      
+
       <div id="image-file">
-        <!--<input type="file" id="upload-arquivo" accept="image/png, image/jpeg" />-->
+        <!-- <input type="file" id="upload-arquivo" accept="image/png, image/jpeg" /> -->
         {{ form.photo }}
         <label for="{{ form.photo.id_for_label }}">
           <p class="material-symbols-outlined">image_arrow_up</p>
@@ -405,21 +256,21 @@
         </label>
       </div>
       <div>
-        <!--<label for="nome">Nome</label><br />-->
+        <!-- <label for="nome">Nome</label><br /> -->
         {{ form.name.label_tag }}
-        <!--<input type="text" id="nome" name="nome" placeholder="Peixe Cru Bêbado" />-->
+        <!-- <input type="text" id="nome" name="nome" placeholder="Peixe Cru Bêbado" /> -->
         {{ form.name }}
       </div>
       <div>
-        <!--<label for="preco">Preço</label>-->
-        {{ form.price.label_tag }}<br/>
-        <!--<input type="number" id="preco" name="preco" placeholder="R$ 00,00"/>-->
+        <!-- <label for="preco">Preço</label> -->
+        {{ form.price.label_tag }}<br />
+        <!-- <input type="number" id="preco" name="preco" placeholder="R$ 00,00"/> -->
         {{ form.price }}
       </div>
       <div>
-        <!--<label for="descricao">Descrição</label><br/>-->
-        {{ form.description.label_tag }}<br>
-        <!--<textarea name="descicao" id="descricao" rows="8"></textarea>-->
+        <!-- <label for="descricao">Descrição</label><br/> -->
+        {{ form.description.label_tag }}<br />
+        <!-- <textarea name="descicao" id="descricao" rows="8"></textarea> -->
         {{ form.description }}
       </div>
       <div>
@@ -428,11 +279,11 @@
 
         {% if form.menus.errors %}
           <ul class="errorlist">
-              {% for error in form.menus.errors %}
-                  <li>{{ error }}</li>
-              {% endfor %}
+            {% for error in form.menus.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
           </ul>
-      {% endif %}
+        {% endif %}
       </div>
       <button type="submit" onclick="document.getElementById('criar-prato').close()">+ Adicionar ao Menu</button>
     </form>

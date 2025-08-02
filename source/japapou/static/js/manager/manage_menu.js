@@ -4,7 +4,6 @@ const modalNovoCardapio = document.getElementById("novo-cardapio");
 
 const modalNovoPrato = document.getElementById("novo-prato");
 const modalAddNovoPrato = document.getElementById("criar-prato");
-const modalPratosRegistrados = document.getElementById("pratos-registrados");
 
 modalNovoPrato.addEventListener("click", function (event) {
 	if (event.target === modalNovoPrato) {
@@ -20,7 +19,6 @@ modalNovoCardapio.addEventListener("click", function (event) {
 
 addPratoExisten.addEventListener("click", () => {
 	modalNovoPrato.close();
-	modalPratosRegistrados.showModal();
 });
 
 addNovoPrato.addEventListener("click", () => {
