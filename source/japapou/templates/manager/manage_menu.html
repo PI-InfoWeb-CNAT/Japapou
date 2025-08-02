@@ -61,7 +61,7 @@
   </div>
 
   <section class="categoria">
-    <h2>Menu:</h2>
+    <h2>{{ selected.name }}:</h2>
     <div class="cards">
       {% for plate in menu_plates %}
         <div class="product-card">
@@ -159,10 +159,10 @@
   <!-- MODALS -->
 
   <dialog id="novo-cardapio">
-    <h2>Novo Cardápio</h2>
-    <form>
+    <h2>Novo Menu</h2>
+    <form action="{% url 'manager_menu' %}" method="post">
       {% csrf_token %}
-      <div id="inputs-datas">
+      {% comment %} <div id="inputs-datas">
         <div>
           <label for="data-inicio">Inicio</label><br />
           <input type="datetime" id="data-inicio" name="data-inicio" placeholder="dd/mm/aaaa" />
@@ -171,59 +171,26 @@
           <label for="data-fim">Fim</label><br />
           <input type="datetime" id="data-fim" name="data-fim" placeholder="dd/mm/aaaa" />
         </div>
+      </div> {% endcomment %}
+      <div>
+        {{ form_menu.name.label_tag }}
+        {{ form_menu.name }}
       </div>
       <label>Pratos</label>
       <div id="div-pratos">
-        <div>
+        {% comment %} <div>
           <input type="checkbox" id="prato-1" name="prato-1" />
           <label for="prato-1">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-2" name="prato-2" />
-          <label for="prato-2">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-5" name="prato-5" />
-          <label for="prato-5">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-6" name="prato-6" />
-          <label for="prato-6">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-7" name="prato-7" />
-          <label for="prato-7">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-8" name="prato-8" />
-          <label for="prato-8">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-9" name="prato-9" />
-          <label for="prato-9">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-10" name="prato-10" />
-          <label for="prato-10">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-11" name="prato-11" />
-          <label for="prato-11">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-12" name="prato-12" />
-          <label for="prato-12">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-13" name="prato-13" />
-          <label for="prato-13">Lorem Ipsum</label>
-        </div>
-        <div>
-          <input type="checkbox" id="prato-14" name="prato-14" />
-          <label for="prato-14">Lorem Ipsum</label>
-        </div>
-      </div>
-      <button onclick="document.getElementById('novo-cardapio').close()">+ Adicionar o Menu</button>
+        </div> {% endcomment %}
+        {% for checkbox in form_menu.plates %}
+          <div>
+            {{ checkbox.tag }}
+            <label for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+          </div>
+        {% endfor %}
+
+      </div> 
+      <button name="btn-create-menu" type="submit" onclick="document.getElementById('novo-cardapio').close()">+ Adicionar o Menu</button>
     </form>
   </dialog>
 
@@ -285,7 +252,7 @@
           </ul>
         {% endif %}
       </div>
-      <button type="submit" onclick="document.getElementById('criar-prato').close()">+ Adicionar ao Menu</button>
+      <button name="btn-create-plate" type="submit" onclick="document.getElementById('criar-prato').close()">+ Adicionar ao Menu</button>
     </form>
   </dialog>
 
