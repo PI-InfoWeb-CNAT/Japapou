@@ -38,6 +38,11 @@ class PlatesForms(forms.ModelForm):
             "description": "Descrição",
             # O label para 'menus' já foi definido no campo explícito acima
         }
+        def __init__(self, *args, **kwargs):
+            super(PlatesForms, self).__init__(*args, **kwargs)
+            self.fields['photo'].required = False
+            if self.instance and self.instance.pk:
+                self.fields['menus'].initial = self.instance.menu_set.all()
 
 class PlateChoiceField(forms.ModelMultipleChoiceField):
     """

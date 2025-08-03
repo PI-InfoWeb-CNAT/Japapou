@@ -10,6 +10,8 @@ urlpatterns = [
     ),
     path("menu/", manager_menu_view, name="manager_menu"),
     path("plates/", manager_plates_view, name="manager_plates"),
+    path("plates/<int:id>/edit/", plate_get_json, name="manager_plates_edit"),
+    path("plates/<int:id>/update/", plate_update_view, name="manager_plates_update"),
     path("orders/", manager_orders_view, name="manager_orders"),
     path("profile/", manager_profile_view, name="manager_profile"),
     path("dashboard/", manager_dashboard_view, name="manager_dashboard"),

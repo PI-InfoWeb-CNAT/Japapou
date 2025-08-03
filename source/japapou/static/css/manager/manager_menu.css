@@ -623,6 +623,95 @@ form {
 	}
 }
 
+#editar-prato {
+	margin: 0 auto;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	margin: 0;
+	width: 30%;
+	height: 75%;
+	padding: 15px 40px 20px 40px;
+	background-color: #024057;
+	border: 1px solid white;
+	border-radius: 20px;
+	place-items: center;
+
+	form {
+		place-items: center;
+	}
+
+	form #image-file-edit {
+		background-color: #f97316;
+		width: 35%;
+		height: 30%;
+	}
+
+	form div {
+		text-align: left;
+		width: 100%;
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	form div textarea {
+		background-color: #f97316;
+		width: 100%;
+	}
+
+	form div label {
+		margin: 0;
+		font-size: 17px;
+	}
+
+	form div input {
+		margin-bottom: 15px;
+	}
+
+	form label {
+		margin: 0;
+	}
+
+	form #image-file-edit label {
+		color: black;
+		font-size: 13px;
+		font-weight: bold;
+		text-align: center;
+		margin: 0;
+		padding: 0px 0px 0px 0px;
+		width: 100%;
+		height: 100%;
+	}
+
+	form label p {
+		margin: 0;
+	}
+
+	form label .material-symbols-outlined {
+		font-size: 60px;
+		margin: 25px 0px 0px 0px;
+	}
+
+	form input[type="file"] {
+		display: none;
+	}
+
+	button {
+		background-color: #f23e2f;
+		border: 2px solid black;
+		border-radius: 12px;
+		width: 40%;
+		height: 6%;
+		margin-top: 5%;
+	}
+}
+
+
 .product-card-branco {
 	position: relative;
 	width: 270px;
