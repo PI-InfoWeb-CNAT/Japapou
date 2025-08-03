@@ -50,15 +50,15 @@
   </section>
 
   <div class="data-cardapio">
-    <div>
-      <div>
-        <p>01/06/2025 ~ 07/06/2025</p>
-        <span class="material-symbols-outlined">keyboard_arrow_down</span>
-      </div>
+    
+      {% comment %} <div>
+        <p>01/06/2025 ~ 07/06/2025 <span class="material-symbols-outlined">keyboard_arrow_down</span> </p>
+      </div> {% endcomment %}
       <form method="get">{{ select_menu }}</form>
+    
+      <button class="novo-cardapio" onclick="document.getElementById('novo-cardapio').showModal()"><p>+ Novo Menu</p></button>
     </div>
-    <button class="novo-cardapio" onclick="document.getElementById('novo-cardapio').showModal()"><p>+ Novo Menu</p></button>
-  </div>
+  
 
   <section class="categoria">
     <h2>{{ selected.name }}:</h2>
@@ -71,7 +71,7 @@
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           </button>
-          <button class="action-button edit-button" aria-label="Editar">
+          <button class="action-button edit-button" plate-id="{{ plate.id }}" data-url="{% url 'manager_plates_edit' plate.id %}" data-next-page="manager_menu" aria-label="Editar">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
             </svg>
@@ -119,7 +119,7 @@
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           </button>
-          <button class="action-button edit-button" aria-label="Editar">
+          <button class="action-button edit-button" plate-id="{{ plate.id }}" data-url="{% url 'manager_plates_edit' plate.id %}" data-next-page="manager_menu" aria-label="Editar">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
             </svg>
@@ -160,7 +160,7 @@
 
   <dialog id="novo-cardapio">
     <h2>Novo Menu</h2>
-    <form action="{% url 'manager_menu' %}" method="post">
+    <form action="{% url 'create_menu' %}" method="post">
       {% csrf_token %}
       {% comment %} <div id="inputs-datas">
         <div>
@@ -211,33 +211,36 @@
 
   <dialog id="criar-prato">
     <h2>Criar Novo Prato</h2>
-    <form action="{% url 'manager_menu' %}" method="post" enctype="multipart/form-data">
+    <form id="form-criar-prato" action="{% url 'create_plates_view' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
 
       <div id="image-file">
-        <!-- <input type="file" id="upload-arquivo" accept="image/png, image/jpeg" /> -->
+        
         {{ form.photo }}
         <label for="{{ form.photo.id_for_label }}">
           <p class="material-symbols-outlined">image_arrow_up</p>
           <p>Faça o upload da foto do produto com fundo transparente</p>
         </label>
       </div>
+
       <div>
-        <!-- <label for="nome">Nome</label><br /> -->
+        
         {{ form.name.label_tag }}
-        <!-- <input type="text" id="nome" name="nome" placeholder="Peixe Cru Bêbado" /> -->
+        
         {{ form.name }}
       </div>
+
       <div>
-        <!-- <label for="preco">Preço</label> -->
+        
         {{ form.price.label_tag }}<br />
-        <!-- <input type="number" id="preco" name="preco" placeholder="R$ 00,00"/> -->
+        
         {{ form.price }}
       </div>
+
       <div>
-        <!-- <label for="descricao">Descrição</label><br/> -->
+        
         {{ form.description.label_tag }}<br />
-        <!-- <textarea name="descicao" id="descricao" rows="8"></textarea> -->
+        
         {{ form.description }}
       </div>
       <div>
@@ -253,6 +256,57 @@
         {% endif %}
       </div>
       <button name="btn-create-plate" type="submit" onclick="document.getElementById('criar-prato').close()">+ Adicionar ao Menu</button>
+    </form>
+  </dialog>
+
+  <dialog id="editar-prato">
+    <h2>Editar Prato</h2>
+    <form id="form-editar-prato" method="post" enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+
+       <input type="hidden" id="redirect-after-update" name="next_redirect_url_name" value="">
+
+      <div id="image-file-edit">
+        <img id="edit-photo-preview" src="" alt="Pré-visualização da imagem">
+      </div>
+
+      <input type="file" name="photo" id="edit-photo-input" accept="image/*">
+      <label for="edit-photo-input">
+          <p class="material-symbols-outlined">image_arrow_up</p>
+      </label>
+
+      <div>
+        <label for="edit-name">Nome</label><br />
+        <input type="text" id="edit-name" name="name" class="form-control" />
+      </div>
+
+      <div>
+        <label for="edit-price">Preço</label><br />
+        <input type="number" step="0.01" id="edit-price" name="price" class="form-control" />
+      </div>
+
+      <div>
+        <label for="edit-description">Descrição</label><br />
+        <textarea name="description" id="edit-description" rows="8" class="form-control"></textarea>
+      </div>
+
+      <div>
+          {{ form.menus.label_tag }}
+          {{ form.menus }}
+      </div>
+      <button name="btn-update-plate" type="submit">Salvar Alterações</button>
+    </form>
+  </dialog>
+
+  <dialog id="excluir-prato">
+    <h2>Confirmar Exclusão</h2>
+    <p>Você tem certeza de que deseja excluir este prato? Esta ação não pode ser desfeita.</p>
+    <form id="form-excluir-prato" method="post">
+      {% csrf_token %}
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" onclick="document.getElementById('excluir-prato').close()">Cancelar</button>
+        <button type="submit" class="btn-confirm-delete">Sim, Excluir</button>
+      </div>
     </form>
   </dialog>
 

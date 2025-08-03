@@ -14,6 +14,16 @@ document.addEventListener('DOMContentLoaded', function() {
       //const url = `/plates/${plateId}/edit/`;
       const url = this.getAttribute('data-url');
 
+      const nextPage = this.getAttribute('data-next-page');
+
+
+      console.log('JS DEBUG: Botão clicado - data-next-page:', nextPage); // DEVE MOSTRAR manager_plates
+      if (!nextPage) {
+          console.error('JS ERROR: data-next-page está vazio ou nulo no botão!');
+          alert('Erro de configuração: o botão de edição não sabe para onde redirecionar.');
+          return; // Interrompe a execução se nextPage for inválido
+      }
+
       // 3. Faz a requisição (fetch) para o backend
       fetch(url)
         .then(response => {
@@ -50,6 +60,11 @@ document.addEventListener('DOMContentLoaded', function() {
             option.selected = data.menus.includes(parseInt(option.value));
           });
           
+          const redirectInput = form.querySelector('#redirect-after-update');
+          if (redirectInput) { // Verifica se o campo existe antes de tentar preencher
+              redirectInput.value = nextPage;
+          }
+
           // 5. Abre o modal
           editDialog.showModal();
         })
