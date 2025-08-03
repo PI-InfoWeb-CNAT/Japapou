@@ -54,7 +54,7 @@
     <div class="cards">
       {% for plate in plates %}
         <div class="product-card">
-          <button class="action-button delete-button" aria-label="Deletar">
+          <button class="action-button delete-button" plate-id="{{ plate.id }}" aria-label="Deletar">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -169,7 +169,18 @@
           {{ form.menus }}
       </div>
       <button name="btn-update-plate" type="submit">Salvar Alterações</button>
-      <button type="button" onclick="document.getElementById('editar-prato').close()">Cancelar</button>
+    </form>
+  </dialog>
+
+  <dialog id="excluir-prato">
+    <h2>Confirmar Exclusão</h2>
+    <p>Você tem certeza de que deseja excluir este prato? Esta ação não pode ser desfeita.</p>
+    <form id="form-excluir-prato" method="post">
+      {% csrf_token %}
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" onclick="document.getElementById('excluir-prato').close()">Cancelar</button>
+        <button type="submit" class="btn-confirm-delete">Sim, Excluir</button>
+      </div>
     </form>
   </dialog>
 

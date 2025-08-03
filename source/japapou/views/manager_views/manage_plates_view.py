@@ -21,7 +21,7 @@ def manager_plates_view(request):
                         menu_obj.plates.add(plate_instance)
 
                 messages.success(request, "Prato adicionado com sucesso.")
-                return reverse("manager_menu")
+                return reverse("manager_plates")
     
     else:
         form = PlatesForms(request.POST, request.FILES)
@@ -81,4 +81,18 @@ def plate_update_view(request, id):
                     messages.error(request, f"Erro no campo '{error_field}': {message}")
 
     # Redireciona o usuário de volta para a página de gerenciamento de pratos
+    return redirect("manager_plates")
+
+def plate_delete_view(request, id):
+
+    if request.method == "POST":
+        plate = get_object_or_404(Plate, pk=id)
+        plate_name = plate.name
+
+        if plate.photo:
+            plate.photo.delete(save=False)
+
+        plate.delete()
+        messages.success(request, f"Prato '{plate_name}' foi excluído com sucesso.")
+    
     return redirect("manager_plates")

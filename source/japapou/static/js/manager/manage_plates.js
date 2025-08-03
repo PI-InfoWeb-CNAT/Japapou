@@ -59,4 +59,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
   });
+  const deleteDialog = document.getElementById('excluir-prato');
+  const deleteForm = document.getElementById('form-excluir-prato');
+
+  document.querySelectorAll('.delete-button').forEach(button => {
+    button.addEventListener('click', function() {
+      // 1. Pega o ID do prato do botão clicado
+      const plateId = this.getAttribute('plate-id');
+
+      // 2. Monta a URL de action para o formulário de exclusão
+      deleteForm.action = `/manager/plates/${plateId}/delete/`;
+
+      // 3. Abre o modal de confirmação
+      deleteDialog.showModal();
+    });
+  });
 });

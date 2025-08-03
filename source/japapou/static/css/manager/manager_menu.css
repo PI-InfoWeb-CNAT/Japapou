@@ -711,6 +711,45 @@ form {
 	}
 }
 
+#excluir-prato {
+	margin: 0 auto;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	margin: 0;
+	width: 30%;
+	height: 21%;
+	padding: 15px 40px 20px 40px;
+	background-color: #024057;
+	border: 1px solid white;
+	border-radius: 20px;
+	place-items: center;
+	
+	form {
+		place-items: center;
+		height: 0%;
+	}
+	p {
+		color: white;
+	}
+
+	form div {
+		text-align: center;
+		width: 100%;
+		
+	}
+
+	button {
+		background-color: #f23e2f;
+		border: 2px solid black;
+		border-radius: 12px;
+		width: 40%;
+		height: 6%;
+		margin-top: 5%;
+	}
+}
 
 .product-card-branco {
 	position: relative;
