@@ -39,6 +39,8 @@ def manager_plates_view(request):
     )
 
 def create_plates_view(request):
+    redirect_to_url_name = request.POST.get('next_redirect_url_name', 'manager_plates')
+
     if request.method == "POST":
         form = PlatesForms(request.POST, request.FILES)
         if 'btn-create-plate' in request.POST:
@@ -51,15 +53,20 @@ def create_plates_view(request):
                     for menu_obj in selected_menus:
                         menu_obj.plates.add(plate_instance)
 
-                if request.resolver_match.url_name == 'manager_menu':
-                    messages.success(request, "Prato adicionado com sucesso.")
-                    return reverse("manager_menu")
-                else:
-                    messages.success(request, "Prato adicionado com sucesso.")
-                    return reverse("manager_plates")
+                messages.success(request, "Prato adicionado com sucesso.")
+                # CORREÇÃO: Usa a variável obtida do POST para redirecionar
+                return redirect(reverse(redirect_to_url_name))
+            else:
+                for error_field, error_messages in form.errors.items():
+                    for message in error_messages:
+                        messages.error(request, f"Erro no campo '{error_field}': {message}")
+                
+                # CORREÇÃO: Redireciona de volta para a página de origem, mesmo com erros
+                return redirect(reverse(redirect_to_url_name))
     
-    else:
-        form = PlatesForms(request.POST, request.FILES)
+    # Se a requisição não for POST ou não houver 'btn-create-plate' no POST
+    # ou se for um acesso GET direto, redireciona para a página principal de pratos.
+    return redirect(reverse("manager_plates"))
 
 def plate_get_json(request, id):
     

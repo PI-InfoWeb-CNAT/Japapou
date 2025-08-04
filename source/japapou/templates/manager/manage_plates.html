@@ -102,6 +102,8 @@
     <form id="form-criar-prato" action="{% url 'create_plates_view' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
 
+      <input type="hidden" id="redirect-after-update" name="next_redirect_url_name" value="manager_plates">
+
       <div id="image-file">
         <!-- <input type="file" id="upload-arquivo" accept="image/png, image/jpeg" /> -->
         {{ form.photo }}
