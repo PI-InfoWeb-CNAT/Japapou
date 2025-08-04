@@ -128,7 +128,7 @@
         <!-- <textarea name="descicao" id="descricao" rows="8"></textarea> -->
         {{ form.description }}
       </div>
-      <div>
+      <div class="criar-prato-menus">
         {{ form.menus.label_tag }}
         {{ form.menus }}
 
@@ -156,7 +156,7 @@
       </div>
       <input type="file" name="photo" id="edit-photo-input" accept="image/*">
   
-      <label for="edit-photo-input">
+      <label for="edit-photo-input" id="label-image">
           <p class="material-symbols-outlined">image_arrow_up</p>
       </label>
       <div>
@@ -171,7 +171,7 @@
         <label for="edit-description">Descrição</label><br />
         <textarea name="description" id="edit-description" rows="8" class="form-control"></textarea>
       </div>
-      <div>
+      <div class="criar-prato-menus">
           {{ form.menus.label_tag }}
           {{ form.menus }}
       </div>

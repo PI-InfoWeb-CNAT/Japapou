@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect  # type: ignore
-from japapou.models import Menu, Plate
+from japapou.models import Menu, Plate, Period
 from django import forms  # type: ignore
 from django.urls import reverse
 from japapou.forms import PlatesForms, MenuForms
 from django.contrib import messages
+from japapou.views.manager_views import manage_period_view
+
 
 
 class Search(forms.Form):
@@ -16,6 +18,7 @@ class Search(forms.Form):
 
 
 def manager_menu_view(request):
+
     menus = Menu.objects.all()
     choices = [(menu.name, menu.name) for menu in menus]
 
@@ -29,6 +32,27 @@ def manager_menu_view(request):
         if menus.filter(name=selected_menu_name).exists():
             selected_menu = menus.get(name=selected_menu_name)
 
+    period_choices = []
+    if selected_menu:
+        periods_for_menu = Period.objects.filter(menu=selected_menu)
+        period_choices = [(str(period.id), f"{period.start_date.strftime('%d/%m/%Y')} - {period.end_date.strftime('%d/%m/%Y')}") for period in periods_for_menu]
+        
+
+    period_choices.insert(0, ('', 'Todos os Períodos'))
+
+    get_data = request.GET.copy()
+
+    selected_period_id = get_data.get('period_field')
+
+    valid_period_ids = [value for value, label in period_choices]
+
+    if selected_period_id and selected_period_id not in valid_period_ids:
+        # Se o valor não é válido para o novo menu, remova-o de get_data
+        get_data['period_field'] = '' # Defina como vazio para selecionar "Todos os Períodos"
+
+    search_period_form = manage_period_view.SearchPeriods(get_data)
+    search_period_form.fields["period_field"].choices = period_choices
+
     menu_plates = Plate.objects.filter(menu=selected_menu)
     other_plates = Plate.objects.exclude(menu=selected_menu)
 
@@ -40,6 +64,7 @@ def manager_menu_view(request):
         "other_plates": other_plates,
         "form": PlatesForms(),
         "form_menu": MenuForms(),
+        "search_period": search_period_form,
         
     }
     
