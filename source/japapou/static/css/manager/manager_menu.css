@@ -68,7 +68,7 @@ main {
 	h2 {
 		margin-bottom: 100px;
 		font-size: 45px;
-		color: #f23e2f;
+		color: white;
 	}
 
 	.cards {
@@ -86,8 +86,8 @@ main {
 	transform: translateX(-50%);
 	width: 180px;
 	height: 180px;
-	background-color: #f97316;
-	border: 1px solid black;
+	background-color: none;
+	/*border: 1px solid black;*/
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
@@ -107,12 +107,12 @@ main {
 	position: relative;
 	width: 270px;
 	height: 300px;
-	background-color: #f97316;
+	background-color: var(--azul-mais-claro);
 	border-radius: 25px;
 	padding: 20px;
 	padding-top: 80px;
 	text-align: center;
-	color: black;
+	color: white;
 	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 
 	.action-button {
@@ -120,7 +120,7 @@ main {
 		bottom: -15px;
 		width: 50px;
 		height: 50px;
-		background-color: #ef4444;
+		background-color: var(--laranja-mais-claro);
 		border: 1px solid black;
 		border-radius: 50%;
 		display: flex;
@@ -163,7 +163,7 @@ main {
 				.star {
 					position: absolute;
 					font-size: 30px;
-					color: black;
+					color:var(--lighter-gray);
 
 					&:nth-child(1) {
 						transform: translate(-58px, 6px) rotate(0deg);
@@ -201,7 +201,7 @@ main {
 		}
 
 		.remove-button {
-			background-color: #ef4444;
+			background-color: var(--light-yellow);
 			color: black;
 			border: 1px solid black;
 			border-radius: 15px;
@@ -222,7 +222,7 @@ main {
 		bottom: -20px;
 		left: 50%;
 		transform: translateX(-50%);
-		background-color: #ef4444;
+		background-color: var(--laranja-mais-claro);
 		color: white;
 		border: 1px solid black;
 		border-radius: 10px;
@@ -261,8 +261,8 @@ main {
 	}
 
 	.novo-cardapio {
-		border: 1px solid #f97316;
-		color: #f97316;
+		border: 1px solid white;
+		color: white;
 		border-radius: 30px;
 		
 	}
@@ -291,7 +291,7 @@ main {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			border: 1px solid #f97316;
+			border: 1px solid white;
 			color: #f97316;
 			border-radius: 30px;
 			width: 100%;
@@ -304,7 +304,7 @@ main {
 		}
 	}
 	form select {
-		background-color: #f97316;
+		background-color: none;
 		border: none;
 		font-size: 15px;
 	}
@@ -314,7 +314,7 @@ dialog {
 	z-index: 100;
 
 	h2 {
-		color: #f97316;
+		color: white;
 	}
 
 	&::backdrop {
@@ -336,7 +336,7 @@ form {
 	height: 80%;
 
 	button {
-		background-color: #f23e2f;
+		background-color: var(--laranja-mais-claro);
 		border: 2px solid black;
 		border-radius: 15px;
 		width: 40%;
@@ -359,8 +359,8 @@ form {
 	}
 
 	input {
-		background-color: #f97316;
-		border: none;
+		background-color: var(--azul-mais-claro);
+		border: 1px solid white;
 		border-radius: 6px;
 		height: 25%;
 		width: 100%;
@@ -369,7 +369,7 @@ form {
 
 	label {
 		font-size: 24px;
-		color: #f97316;
+		color: white;
 		margin-bottom: 10px;
 	}
 }
@@ -393,7 +393,7 @@ form {
 	}
 
 	h2 {
-		color: #f97316;
+		color: white;
 	}
 	form #name-menu{
 		display: flex;
@@ -402,7 +402,8 @@ form {
 	}
 	form #id_name {
 		width: 60%;
-		border: 2px solid black;
+		border: 2px solid white;
+		color: white;
     	border-radius: 8px;
 	}
 }
@@ -412,11 +413,11 @@ form {
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 4%;
-	background-color: #f97316;
+	background-color: var(--azul-mais-escuro);
 	padding: 20px 0px 20px 0px;
 	width: 100%;
 	height: 70%;
-	border: 2px solid black;
+	border: 2px solid white;
 	border-radius: 8px;
 
 	div {
@@ -428,14 +429,14 @@ form {
 
 		label {
 			font-size: 14px;
-			color: black;
+			color: white;
 			width: 100px;
 			margin: 0; 
 		}
 
 		input[type="checkbox"] {
 			all: unset;
-			border: 1px solid black;
+			border: 1px solid white;
 			border-radius: 1px;
 			background-color: transparent;
 			width: 20px;
@@ -515,7 +516,7 @@ form {
 	}
 }
 
-#pratos-registrados {
+/* #pratos-registrados {
 	margin: 0 auto;
 	position: fixed;
 	top: 50%;
@@ -547,7 +548,7 @@ form {
 		flex-wrap: wrap;
 		justify-content: center;
 		gap: 5%;
-		background-color: #f97316;
+		background-color: var();
 		padding: 25px 0px 45px 0px;
 		width: 95%;
 		height: 70%;
@@ -585,7 +586,7 @@ form {
 			}
 		}
 	}
-}
+} */
 
 #criar-prato {
 	margin: 0 auto;
@@ -598,7 +599,7 @@ form {
 	width: 30%;
 	height: 90%;
 	padding: 15px 40px 20px 40px;
-	background-color: #024057;
+	background-color: var(--azul-mais-escuro);
 	border: 1px solid white;
 	border-radius: 20px;
 	place-items: center;
@@ -608,7 +609,7 @@ form {
 	}
 
 	form #image-file {
-		background-color: #f97316;
+		background-color: var(--laranja-mais-claro);
 		width: 35%;
 		height: 25%;
 	}
@@ -623,7 +624,7 @@ form {
 	}
 
 	form div textarea {
-		background-color: #f97316;
+		background-color: var(--azul-mais-claro);
 		width: 100%;
 	}
 
@@ -641,7 +642,7 @@ form {
 	}
 
 	form #image-file label {
-		color: black;
+		color: white;
 		font-size: 13px;
 		font-weight: bold;
 		text-align: center;
@@ -665,7 +666,7 @@ form {
 	}
 
 	button {
-		background-color: #f23e2f;
+		background-color: var(--laranja-mais-claro);
 		border: 2px solid black;
 		border-radius: 12px;
 		width: 110%;
@@ -685,7 +686,7 @@ form {
 	width: 30%;
 	height: 90%;
 	padding: 15px 40px 20px 40px;
-	background-color: #024057;
+	background-color: var(--azul-mais-escuro);
 	border: 1px solid white;
 	border-radius: 20px;
 	place-items: center;
@@ -696,7 +697,7 @@ form {
 	}
 
 	form #image-file-edit {
-		background-color: #f97316;
+		background-color: var(--azul-mais-claro);
 		width: 35%;
 		height: 25%;
 	}
@@ -717,8 +718,9 @@ form {
 	}
 
 	form div textarea {
-		background-color: #f97316;
+		background-color: var(--azul-mais-claro);
 		width: 100%;
+		color: white;
 	}
 
 	form div label {
@@ -728,7 +730,8 @@ form {
 
 	form div input {
 		margin-bottom: 15px;
-		background-color: #f97316;
+		color: white;
+		background-color: var(--azul-mais-claro);
 	}
 
 	form label {
@@ -766,7 +769,7 @@ form {
 	}
 
 	button {
-		background-color: #f23e2f;
+		background-color: var(--laranja-mais-claro);
 		border: 2px solid black;
 		border-radius: 12px;
 		width: 110%;
@@ -786,7 +789,7 @@ form {
 	width: 30%;
 	height: 21%;
 	padding: 15px 40px 20px 40px;
-	background-color: #024057;
+	background-color: var(--azul-mais-escuro);
 	border: 1px solid white;
 	border-radius: 20px;
 	place-items: center;
@@ -806,7 +809,7 @@ form {
 	}
 
 	button {
-		background-color: #f23e2f;
+		background-color: var(--laranja-mais-claro);
 		border: 2px solid black;
 		border-radius: 12px;
 		width: 40%;
@@ -819,7 +822,7 @@ form {
 	position: relative;
 	width: 270px;
 	height: 300px;
-	background-color: #024057;
+	background-color: var(--azul-mais-claro);
 	border-radius: 25px;
 	padding: 20px;
 	padding-top: 80px;
@@ -832,7 +835,7 @@ form {
 
 		.product-image {
 			border-radius: 50%;
-			background-color: #024057;
+			background-color: var(--azul-mais-claro);
 			border: none;
 			top: -55px;
 
@@ -840,7 +843,7 @@ form {
 				border-radius: 50%;
 				width: 100%;
 				height: 100%;
-				background-color: #024057;
+				background-color: var(--azul-mais-claro);
 			}
 		}
 	}

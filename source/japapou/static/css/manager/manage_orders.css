@@ -1,5 +1,5 @@
 .pedido-box {
-	background-color: #1a1a1a;
+	background-color: var(--azul-mais-claro);
 	margin: 0 auto 30px auto;
 	padding: 30px;
 	border-radius: 16px;
@@ -10,12 +10,12 @@
 }
 
 .pedido-header {
-	background-color: var(--darker-gray);
+	background-color: var(--azul-mais-escuro);
 	padding: 12px 20px;
 	border-radius: 8px;
 	text-align: left;
 	font-weight: bold;
-	color: var(--light-yellow);
+	color: white;
 	font-size: 18px;
 	margin-bottom: 25px;
 }
@@ -67,8 +67,8 @@
 }
 
 .btn-toggle {
-	background-color: var(--light-yellow);
-	color: black;
+	background-color: var(--azul-mais-escuro);
+	color: white;
 	border: none;
 	padding: 12px 25px;
 	font-weight: 600;
@@ -78,17 +78,19 @@
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	font-size: 14px;
-	transition: background-color 0.3s ease;
+	transition: background-color 1s ease;
+	transition: color 0.7s ease;
 
 	&:hover {
-		background-color: #ffe191;
+		background-color: white;
+		color: black;
 	}
 }
 
 .detalhes {
 	display: none;
 	margin-top: 20px;
-	background-color: var(--darker-gray);
+	background-color: var(--azul-mais-escuro);
 	padding: 18px;
 	border-radius: 10px;
 	text-align: left;
