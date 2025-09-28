@@ -1,5 +1,5 @@
 body {
-	color: var(--laranja-mais-claro);
+	color: var(--lightest-gray);
 }
 
 section {
@@ -8,7 +8,7 @@ section {
 
 h2,
 .section-title {
-	color: var(--laranja-mais-claro);
+	color: var(--lightest-gray); 
 	font-weight: bold;
 	font-size: 2.3rem;
 	margin: 2rem 0 0.5rem 0;
@@ -43,8 +43,8 @@ h2,
 		width: 120px;
 		height: 120px;
 		border-radius: 50%;
-		background-color: var(--azul-mais-claro);
-		border: 3px solid var(--laranja-mais-claro);
+		background-color: var(--azul-mais-claro); 
+		border: 3px solid var(--laranja-mais-claro); 
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -67,7 +67,7 @@ h2,
 		background-color: none;
 		border-radius: 50%;
 		padding: 6px;
-		color: var(--laranja-mais-escuro);
+		color: var(--laranja-mais-claro);
 		cursor: pointer;
 		font-size: 24px;
 
@@ -78,23 +78,23 @@ h2,
 	}
 
 	button {
-		background-color: var(--laranja-mais-escuro);
+		background-color: var(--laranja-mais-escuro); 
 		border: none;
 		padding: 0.6rem 2.4rem;
-		color: az;
+		color: var(--lightest-gray); 
 		border-radius: 8px;
 		font-weight: bold;
 		cursor: pointer;
 
 		&:hover {
-			background-color: var(--vermelho);
-			color: var(--laranja-mais-escuro);
+			background-color: var(--vermelho); 
+			color: var(--laranja-mais-claro);
 			transition: background-color 0.3s ease, color 0.3s ease;
 		}
 	}
 
 	.foto-label {
-		color: var(--laranja-mais-escuro);
+		color: var(--lightest-gray);
 		font-weight: bold;
 		margin: 0;
 		margin-bottom: 0.7em;
@@ -116,7 +116,7 @@ h2,
 		font-size: 1rem;
 
 		strong {
-			color: var(--laranja-mais-claro);
+			color: var(--lightest-gray);
 			min-width: 120px;
 		}
 
@@ -125,7 +125,7 @@ h2,
 			align-items: center;
 			gap: 8px;
 			justify-content: flex-end;
-			color: var(--laranja-mais-claro);
+			color: var(--lightest-gray);
 
 			span {
 				text-align: right;
@@ -140,13 +140,13 @@ h2,
 	font-size: 0.85rem;
 
 	&:hover {
-		color: #ffa94d;
+		color: #ffa94d; 
 	}
 }
 
 .temp-edit-input {
 	font-size: 1em;
 	padding: 3px 6px;
-	border: 1px solid #ccc;
+	border: 1px solid var(--lighter-gray);
 	border-radius: 4px;
 }
