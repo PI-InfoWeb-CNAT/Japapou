@@ -7,9 +7,9 @@
 {% block content %}
 <h1>Home</h1>
 
-{% if user.is_authenticate %}
+{% if user.is_authenticated %}
     <p>Bem-vindo, {{ user.username }}!</p>
 {% else %}
-    <p>Bem-vindo, visitante! Por favor, <a href="{% url 'login' %}">faça login</a> ou <a href="{% url 'register' %}">registre-se</a>.</p>
+    <p>Bem-vindo, visitante! Por favor, <a href="{% url 'visitor_login' %}">faça login</a> ou <a href="{% url 'visitor_login' %}">registre-se</a>.</p>
 {% endif %}
 {% endblock content %}

@@ -14,31 +14,11 @@
                     <h2>Fazer Login</h2>
                     <form method="post">
                         {% csrf_token %}
-                        {{ form.email }}
-                        {{ form.password }}
-                        <a href="">Esqueci minha senha</a>
-                        <button type="submit">Entrar</button>
+                        {{ login_form.as_p}}
+                        <!-- <a href="">Esqueci minha senha</a> -->
+                        <button name="login_submit" type="submit">Entrar</button>
                     </form>
-                    <div class="midias-sociais">
-                        <ul>
-                            <li  class="item-social-media">
-                                <a href="">
-                                    <i class="fa-brands fa-facebook-f"></i>
-                                </a>
-                            </li>
-                            <li  class="item-social-media">
-                                <a href="">
-                                    <i class="fa-brands fa-google"></i>
-                                </a>
-                            </li>
-
-                            <li class="item-social-media">
-                                <a href="">
-                                    <i class="fa-brands fa-instagram"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    
                 </div>
                 <div class="facaLogin">
                     <h1><a href=""><img src="{% static 'imgs/visitor/japapou-logo.png' %}" width="200" alt="Logo"></a></h1>
@@ -52,61 +32,27 @@
                     <h2>Cadastro</h2>
                     <form method="post">
                         {% csrf_token %}
-                        <div>
-                            <label for="id_username"></label>
-                            {{ form.username }}
-                        </div>
-                        <div>
-                            <label for="id_nome"></label>
-                            {{ form.nome }}
-                        </div>
-                        <div>
-                            <label for="id_email"></label>
-                            {{ form.email }}
-                        </div>
-                        <div>
-                            <label for="id_telefone"></label>
-                            {{ form.telefone }}
-                        </div>
-                        <div>
-                            <label for="id_cpf"></label>
-                            {{ form.cpf }}
-                        </div>
-                        <div>
-                            <label for="id_data_nascimento"></label>
-                            {{ form.data_nascimento }}
-                        </div>
-                        <div>
-                            <label for="id_password"></label>
-                            {{ form.password }}
-                        </div>
-                        <div>
-                            <label for="id_password2"></label>
-                            {{ form.password2 }}
-                        </div>
-                        <a href="">Esqueci minha senha</a>
-                        <button type="submit">Cadastrar</button>
-                    </form>
-                    <div class="midias-sociais">
-                        <ul>
-                            <li  class="item-social-media">
-                                <a href="">
-                                    <i class="fa-brands fa-facebook-f"></i>
-                                </a>
-                            </li>
-                            <li  class="item-social-media">
-                                <a href="">
-                                    <i class="fa-brands fa-google"></i>
-                                </a>
-                            </li>
+                        <label for="id_username">Username:</label>
+                        {{ register_form.username }}
 
-                            <li class="item-social-media">
-                                <a href="">
-                                    <i class="fa-brands fa-instagram"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                        <label for="id_email">Email:</label>
+                        {{ register_form.email }}
+
+                        <label for="id_password">Password:</label>
+                        {{ register_form.password }}
+
+                        <label for="id_cpf">CPF:</label>
+                        {{ register_form.cpf }}
+
+                        <label for="id_data_nascimento">Data de Nascimento:</label>
+                        {{ register_form.data_nascimento}}
+                        
+                        <label for="id_nome">Nome Completo:</label>
+                        {{ register_form.nome }}
+                        <!-- <a href="">Esqueci minha senha</a> -->
+                        <button name="register_submit" type="submit">Cadastrar</button>
+                    </form>
+                    
                 </div>
                 <div class="facaCadastro">
                     <h1><a href=""><img src="{% static 'imgs/visitor/japapou-logo.png' %}" width="200" alt="Logo"></a></h1>

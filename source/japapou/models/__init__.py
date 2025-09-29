@@ -9,4 +9,4 @@ from .order import Order
 from .period import Period
 from .plate_option import PlateOption
 from .plate import Plate
-from .user import User
+from .user import CustomUser
