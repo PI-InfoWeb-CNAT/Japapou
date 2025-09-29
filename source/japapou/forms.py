@@ -1,5 +1,6 @@
-from django import forms
+from django import forms # type: ignore
 from japapou.models import Menu, Plate
+from japapou.models.user import CustomUser
 
 
 class PlatesForms(forms.ModelForm):
@@ -74,3 +75,19 @@ class MenuForms(forms.ModelForm):
         model = Menu
 
         fields = ["name", "plates"]
+
+class VisitorRegisterForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'password', 'email', 'telefone', 'endereco', 'cpf', 'data_nascimento','nome']
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data['password'])
+        user.tipo = 'client'  # Define o tipo como 'client' ao salvar
+        if commit:
+            user.save()
+        return user
