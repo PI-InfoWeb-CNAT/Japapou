@@ -16,7 +16,7 @@ Todo material está publicado sob licença [GPL-3.0](https://www.gnu.org/license
     2. [Visualizar produtos](./docs/casos_de_uso/cdu_visualizar_produtos.md)
     3. continua...
 -   [Diagrama de casos de uso](./docs/imagens/Japapou_CDU.png) (_TODO_)
--   [Diagrama de classes de domínio](./docs/imagens/japapou_diagrama-classes.png) (_TODO_)
+-   [Diagrama de classes de domínio](./docs/imagens/japapou_diagrama_classes.png) (_TODO_)
 -   Documentação da arquitetura (_TODO_)
 
 ## Equipe
