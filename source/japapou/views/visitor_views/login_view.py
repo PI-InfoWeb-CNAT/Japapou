@@ -1,5 +1,5 @@
 
-from django.contrib.auth import authenticate, login # type: ignore
+from django.contrib.auth import authenticate, login, logout # type: ignore
 from django.shortcuts import render, redirect # type: ignore
 from django.contrib.auth.forms import AuthenticationForm # type: ignore
 from japapou.forms import VisitorRegisterForm  # type: ignore
