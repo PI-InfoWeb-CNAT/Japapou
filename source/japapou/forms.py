@@ -90,7 +90,8 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser
 
-        fields = ('tipo_usuario', 'username', 'email', 'first_name', 'last_name', 'is_staff', 'telefone', 'endereco', 'cpf', 'data_nascimento', 'foto_perfil', 'cnh', 'modelo_moto')
+        fields = ('tipo_usuario', 'username', 'email', 'first_name', 'last_name', 'is_staff', 'telefone', 'endereco', 'cpf', 'data_nascimento', 
+                  'foto_perfil', 'cnh', 'modelo_moto', 'modelo_moto', 'cor_moto', 'Placa_moto')
 
 
     def clean(self):
@@ -107,6 +108,8 @@ class CustomUserCreationForm(UserCreationForm):
         endereco = cleaned_data.get('endereco')
         foto_perfil = cleaned_data.get('foto_perfil')
         data_nascimento = cleaned_data.get('data_nascimento')
+        cor_moto = cleaned_data.get('cor_moto')
+        Placa_moto = cleaned_data.get('Placa_moto')
 
         if tipo_usuario == CustomUser.TipoUsuario.DELIVERY:
             if not cnh:
@@ -129,6 +132,10 @@ class CustomUserCreationForm(UserCreationForm):
                 self.add_error('foto_perfil', 'Foto de perfil é obrigatória para entregadores.')
             if not data_nascimento:
                 self.add_error('data_nascimento', 'Data de nascimento é obrigatória para entregadores.')
+            if not cor_moto:
+                self.add_error('cor_moto', 'Cor da moto é obrigatória para entregadores.')
+            if not Placa_moto:
+                self.add_error('Placa_moto', 'Placa da moto é obrigatória para entregadores.')
             
 
         if tipo_usuario == CustomUser.TipoUsuario.MANAGER:
