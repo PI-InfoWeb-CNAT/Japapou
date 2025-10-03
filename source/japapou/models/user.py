@@ -1,11 +1,30 @@
+from django.contrib.auth.models import AbstractUser  # type: ignore
 from django.db import models  # type: ignore
 
 
-class User(models.Model):
-    name = models.CharField(null=False, max_length=100)
-    cpf = models.CharField(null=False, max_length=15)
-    created_at = models.DateTimeField(auto_now_add=True)
-    altered_at = models.DateTimeField(auto_now=True)
+class CustomUser(AbstractUser):
 
-    def __str__(self):
-        return f"{self.name}"
+    class TipoUsuario(models.TextChoices):
+        # herdar de models.textchoices para criar uma lista de opções
+        CLIENT = 'CLIENT', 'Client'
+        DELIVERY_MAN = 'DELIVERY_MAN', 'Delivery_man'
+        MANAGER = 'MANAGER', 'Manager'
+
+    # Campo para definir a identidade principal do usuário
+    tipo_usuario = models.CharField(
+        max_length=20,
+        choices=TipoUsuario.choices, # gera uma lista de tuplas que é o formato que o django espera para o menu dropdown
+        default=TipoUsuario.DELIVERY_MAN,
+    )
+
+
+    # AbstractUser já tem username, email, password, first_name, last_name, etc.
+    telefone = models.CharField(max_length=20, blank=True)
+    endereco = models.CharField(max_length=255, blank=True)
+    cpf = models.CharField(max_length=14, blank=True)
+    data_nascimento = models.DateField(null=True, blank=True)
+    foto_perfil = models.ImageField(upload_to='perfil/', blank=True, null=True)
+    cnh = models.CharField(max_length=10, blank=True)
+    modelo_moto = models.CharField(max_length=20, blank=True)
+    cor_moto = models.CharField(max_length=10, blank=True)
+    Placa_moto = models.CharField(max_length=10, blank=True)

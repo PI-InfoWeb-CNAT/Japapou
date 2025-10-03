@@ -1,1 +1,88 @@
-<h1>Perfil Cliente</h1>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  Perfil
+{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/manager/profile.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <h2 class="section-title">Geral</h2>
+
+  <section>
+    <div class="foto-perfil">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="foto-container">
+          <label for="fileInput">
+            <img id="previewImage" src="{{ user.foto_perfil.url }}" alt="Foto de perfil" />
+            {% comment %} <img id="previewImage" src="{% static 'imgs/manager/profile.png' %}" alt="Foto de perfil" /> {% endcomment %}
+            <div class="icone-camera">
+              <i class="fa-solid fa-camera"></i>
+            </div>
+          </label>
+          <input type="file" name="foto" id="fileInput" accept="image/*" style="display: none" />
+        </div>
+        <div>
+          <p class="foto-label">Altere a sua foto de perfil</p>
+          <button type="button" id="removeImageBtn">Remover</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section>
+    <ul class="informacoes">
+      <li>
+        <strong>Nome</strong>
+        <div class="value-with-icon">
+          <span>{{ user.nome }}</span>
+          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+      </li>
+      <li>
+        <strong>Aniversário</strong>
+        <div class="value-with-icon">
+          <span>user.data_nascimento</span>
+          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+      </li>
+      <li>
+        <strong>E-mail</strong>
+        <div class="value-with-icon">
+          <span>{{ user.email }}</span>
+          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="section-title">Conta</h2>
+    <ul class="informacoes">
+      <li>
+        <strong>Username</strong>
+        <div class="value-with-icon">
+          <span>{{ user.username }}</span>
+          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+      </li>
+      <li>
+        <strong>Senha</strong>
+        <div class="value-with-icon">
+          <span>**************</span>
+          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>
+      </li>
+    </ul>
+  </section>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    const defaultImagePath = "{% static 'imgs/default_profile.png' %}"
+  </script>
+  <script src="{% static 'js/manager/manage_profile.js' %}"></script>
+{% endblock %}

@@ -28,6 +28,7 @@ urlpatterns = [
     path("client/", include("japapou.urls.client_urls")),
     path("delivery_man/", include("japapou.urls.delivery_man_urls")),
     path("manager/", include("japapou.urls.manager_urls")),
+    path("auth/", include("japapou.urls.auth_urls")),
 ]
 
 urlpatterns.extend(static(settings.STATIC_URL, document_root=settings.STATIC_ROOT))

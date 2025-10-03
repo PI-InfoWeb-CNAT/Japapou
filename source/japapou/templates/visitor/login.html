@@ -1,7 +1,71 @@
-{% extends "base.html" %}
+{% load static %}
 
-{% block title %}Login{% endblock title %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/global.css' %}" />
+<link rel="stylesheet" href="{% static 'css/visitor/login.css' %}" />
+{% endblock %}
 
 {% block content %}
-<h1>Login</h1>
+<body>
+    <div class="container">
+        <div class="card LoginActive">
+            <div class="esquerda">
+                <div class="FormLogin">
+                    <h2>Fazer Login</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ login_form.as_p}}
+                        <!-- <a href="">Esqueci minha senha</a> -->
+                        <button name="login_submit" type="submit">Entrar</button>
+                    </form>
+                    
+                </div>
+                <div class="facaLogin">
+                    <h1><a href=""><img src="{% static 'imgs/visitor/japapou-logo.png' %}" width="200" alt="Logo"></a></h1>
+                    <h2>Já tem uma conta?</h2>
+                    <p>Faça login e tenha acesso a pedidos exclusivos e personalizados, perfeitos para tornar suas celebrações ainda mais doces e inesquecíveis!</p>
+                    <button type="submit" class="loginButao">Fazer Login</button>
+                </div>
+            </div>
+            <div class="direita">
+                <div class="formCadastro">
+                    <h2>Cadastro</h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        <label for="id_username">Username:</label>
+                        {{ register_form.username }}
+
+                        <label for="id_email">Email:</label>
+                        {{ register_form.email }}
+
+                        <label for="id_password">Password:</label>
+                        {{ register_form.password }}
+
+                        <label for="id_cpf">CPF:</label>
+                        {{ register_form.cpf }}
+
+                        <label for="id_data_nascimento">Data de Nascimento:</label>
+                        {{ register_form.data_nascimento}}
+                        
+                        <label for="id_nome">Nome Completo:</label>
+                        {{ register_form.nome }}
+                        <!-- <a href="">Esqueci minha senha</a> -->
+                        <button name="register_submit" type="submit">Cadastrar</button>
+                    </form>
+                    
+                </div>
+                <div class="facaCadastro">
+                    <h1><a href=""><img src="{% static 'imgs/visitor/japapou-logo.png' %}" width="200" alt="Logo"></a></h1>
+                    <h2>Não tem uma conta?</h2>
+                    <p>Cadastre-se agora e desbloqueie pedidos exclusivos e personalizados para deixar suas datas comemorativas com um toque de sabor único de caramelo com cereja!</p>
+                    <button type="submit" class="CadastroButao">Cadastre-se</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 {% endblock content %}
+
+{% block scripts %}
+  <script src="{% static 'js/visitor/login.js' %}"></script>
+{% endblock %}

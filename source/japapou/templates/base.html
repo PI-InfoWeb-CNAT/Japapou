@@ -47,7 +47,11 @@
     </header>
     <nav>
       <ul class="sideMenu" id="sideMenu">
-        {% include 'partials/menu_manager.html' %}
+        {% if user.is_authenticated %}
+          {% include 'partials/menu_manager.html' %}
+        {% else %}
+          {% include 'partials/menu_visitor.html' %}
+        {% endif %}
       </ul>
     </nav>
     <main>
@@ -92,9 +96,11 @@
         <div class="footer-column">
           <h4><a href="{% url 'manager_history' %}"><i class="fa-solid fa-gear"></i> Histórico</a></h4>
         </div>
-        <div class="footer-column">
-          <h4><a href="{% url 'home' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></h4>
-        </div>
+        {% if user.is_authenticated %}
+          <div class="footer-column">
+            <h4><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></h4>
+          </div>
+        {% endif %}
       </div>
     </footer>
     <script src="{% static 'js/global.js' %}"></script>

@@ -1,8 +1,12 @@
-<nav>
-    <ul>
-        <li><a href="{% url "home" %}">Home</a></li>
-        <li><a href="{% url "visitor_login" %}">Login</a></li> 
-        <li><a href="{% url "visitor_menu" %}">Menu</a></li> 
-        <li><a href="{% url "contact" %}">Contato</a></li> 
-    </ul>
-</nav>
+<li>
+    <a href="{% url "home" %}">Home</a>
+</li>
+<li>
+    <a href="{% url "login_register" %}">Login | Registrar</a>
+</li> 
+<li>
+    <a href="{% url "visitor_menu" %}">Menu</a>
+</li> 
+<li>
+    <a href="{% url "contact" %}">Contato</a>
+</li>
