@@ -1,10 +1,12 @@
-
-from django.contrib.auth import authenticate, login, logout # type: ignore
-from django.shortcuts import render, redirect # type: ignore
+from django.contrib.auth import logout, login
+from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm # type: ignore
 from japapou.forms import VisitorRegisterForm  # type: ignore
 
-def visitor_login_register_view(request):
+
+
+
+def login_register_view(request):
     login_form = AuthenticationForm()
     register_form = VisitorRegisterForm()
     login_error = None
@@ -34,3 +36,9 @@ def visitor_login_register_view(request):
         "login_error": login_error,
         "register_error": register_error,
     })
+
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("home")
