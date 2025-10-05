@@ -1,6 +1,7 @@
 from django.urls import path  # type: ignore
 from japapou.views import *  # type: ignore
 
+
 urlpatterns = [
     path("history/", manager_history_view, name="manager_history"),
     path(
@@ -19,4 +20,5 @@ urlpatterns = [
     path("profile/", manager_profile_view, name="manager_profile"),
     path("dashboard/", manager_dashboard_view, name="manager_dashboard"),
     path("assign_delivery/", manager_assign_delivery_view, name="manager_assign_delivery"),
+    path("register_delivery_man/", delivery_man_register_view, name="register_delivery_man"),
 ]
