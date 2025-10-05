@@ -1,10 +1,28 @@
 from django.contrib.auth import logout, login
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm # type: ignore
-from japapou.forms import VisitorRegisterForm  # type: ignore
+from japapou.forms import VisitorRegisterForm, DeliveyrRegisterForm  # type: ignore
 
 
+def delivery_man_register_view(request):
+    form = DeliveyrRegisterForm()
 
+    if request.method == "POST":
+        print(request.POST)
+        
+        form = DeliveyrRegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False) # Salva o usuário, mas não faz commit no banco ainda
+            user.tipo_usuario = 'DELIVERY_MAN'  # Define o tipo de usuário como ENTREGADOR
+            user.set_password(form.cleaned_data['password'])  # Hash da senha
+            user.save()  # Agora faz o commit no banco
+            login(request, user)
+            return redirect("home")
+        else:
+            print(form.errors)
+            form = DeliveyrRegisterForm()
+
+    return render(request, "manager/register_delivery_man.html", context={'form': form})
 
 def login_register_view(request):
     login_form = AuthenticationForm()
@@ -22,12 +40,19 @@ def login_register_view(request):
             else:
                 login_error = "Usuário ou senha inválidos."
         elif 'register_submit' in request.POST:
+            print(request.POST)
             register_form = VisitorRegisterForm(request.POST)
             if register_form.is_valid():
-                user = register_form.save()
+
+                user = register_form.save(commit=False) # Salva o usuário, mas não faz commit no banco ainda
+                user.tipo_usuario = 'CLIENT'  # Define o tipo de usuário como CLIENTE
+                user.set_password(register_form.cleaned_data['password'])  # Hash da senha
+                user.save()  # Agora faz o commit no banco
+
                 login(request, user)
                 return redirect("home")
             else:
+                print(register_form.errors)
                 register_error = "Erro ao cadastrar. Verifique os dados."
 
     return render(request, "visitor/login.html", {

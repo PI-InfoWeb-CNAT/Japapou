@@ -9,6 +9,7 @@ form{
     display: flex;
     flex-direction: column;
     gap: 16px;
+    width: 40em;
 }
 
 form button{
@@ -24,6 +25,7 @@ input{
     width: 400px;
     background-color: var(--azul-mais-escuro);
     color: white;
+    width: 100%;
 }
 
 input::placeholder{

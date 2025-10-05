@@ -77,100 +77,50 @@ class MenuForms(forms.ModelForm):
         fields = ["name", "plates"]
 
 class VisitorRegisterForm(forms.ModelForm):
+    '''
+        Formulário personalizado para registro de visitantes para que um novo cliente possa se cadastrar
+    '''
+    password = forms.CharField(required=True, widget=forms.PasswordInput)
+    email = forms.EmailField(required=True, max_length=254)
+    cpf = forms.CharField(required=True, max_length=14)
+    data_nascimento = forms.DateField(required=True, widget=forms.DateInput(attrs={'type': 'date'}))
+
     class Meta:
         model = CustomUser
         fields = ['username', 'password', 'email', 'telefone', 'endereco', 'cpf', 'data_nascimento', 'first_name', 'last_name']
-        widgets = {
-            'password': forms.PasswordInput(),
-        }
+        
 
+class DeliveyrRegisterForm(forms.ModelForm):
+    '''
+        Formulário personalizado para que um gerente possa cadastrar um novo entregador
+    '''
+
+    first_name = forms.CharField(required=True, max_length=50)
+    last_name = forms.CharField(required=True, max_length=100)
+    email = forms.EmailField(required=True, max_length=254)
+    password = forms.CharField(required=True, widget=forms.PasswordInput)
+    telefone = forms.CharField(required=True, max_length=20)
+    cpf = forms.CharField(required=True, max_length=14)
+    data_nascimento = forms.DateField(required=True, widget=forms.DateInput(attrs={'type': 'date'}))
+    cnh = forms.CharField(required=True, max_length=10)
+    modelo_moto = forms.CharField(required=True, max_length=20)
+    cor_moto = forms.CharField(required=True, max_length=10)
+    Placa_moto = forms.CharField(required=True, max_length=10)
+
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'password', 'email', 'telefone', 'endereco', 'cpf', 'data_nascimento', 'first_name', 'last_name',
+                  'cnh', 'modelo_moto', 'cor_moto', 'Placa_moto']
 
 
 class CustomUserCreationForm(UserCreationForm):
+    '''
+        Formulário personalizado para criação de usuários no painel de admin
+    '''
     class Meta(UserCreationForm.Meta):
         model = CustomUser
 
         fields = ('tipo_usuario', 'username', 'email', 'first_name', 'last_name', 'is_staff', 'telefone', 'endereco', 'cpf', 'data_nascimento', 
-                  'foto_perfil', 'cnh', 'modelo_moto', 'modelo_moto', 'cor_moto', 'Placa_moto')
+                  'foto_perfil', 'cnh', 'modelo_moto', 'cor_moto', 'Placa_moto')
 
-
-    def clean(self):
-        cleaned_data = super().clean()
-
-        tipo_usuario = cleaned_data.get('tipo_usuario')
-        cnh = cleaned_data.get('cnh')
-        modelo_moto = cleaned_data.get('modelo_moto')
-        email = cleaned_data.get('email')
-        first_name = cleaned_data.get('first_name')
-        last_name = cleaned_data.get('last_name')
-        cpf = cleaned_data.get('cpf')
-        telefone = cleaned_data.get('telefone')
-        endereco = cleaned_data.get('endereco')
-        foto_perfil = cleaned_data.get('foto_perfil')
-        data_nascimento = cleaned_data.get('data_nascimento')
-        cor_moto = cleaned_data.get('cor_moto')
-        Placa_moto = cleaned_data.get('Placa_moto')
-
-        if tipo_usuario == CustomUser.TipoUsuario.DELIVERY:
-            if not cnh:
-                self.add_error('cnh', 'CNH é obrigatório para entregadores.')
-            if not modelo_moto:
-                self.add_error('modelo_moto', 'Modelo da moto é obrigatório para entregadores.')
-            if not email:
-                self.add_error('email', 'Email é obrigatório para entregadores.')
-            if not first_name:
-                self.add_error('first_name', 'Primeiro nome é obrigatório para entregadores.')
-            if not last_name:
-                self.add_error('last_name', 'Sobrenome é obrigatório para entregadores.')
-            if not cpf:
-                self.add_error('cpf', 'CPF é obrigatório para entregadores.')
-            if not telefone:
-                self.add_error('telefone', 'Telefone é obrigatório para entregadores.')
-            if not endereco:
-                self.add_error('endereco', 'Endereço é obrigatório para entregadores.')
-            if not foto_perfil:
-                self.add_error('foto_perfil', 'Foto de perfil é obrigatória para entregadores.')
-            if not data_nascimento:
-                self.add_error('data_nascimento', 'Data de nascimento é obrigatória para entregadores.')
-            if not cor_moto:
-                self.add_error('cor_moto', 'Cor da moto é obrigatória para entregadores.')
-            if not Placa_moto:
-                self.add_error('Placa_moto', 'Placa da moto é obrigatória para entregadores.')
-            
-
-        if tipo_usuario == CustomUser.TipoUsuario.MANAGER:
-            if not email:
-                self.add_error('email', 'Email é obrigatório para gerentes.')
-            if not first_name:
-                self.add_error('first_name', 'Primeiro nome é obrigatório para gerentes.')
-            if not last_name:
-                self.add_error('last_name', 'Sobrenome é obrigatório para gerentes.')
-            if not cpf:
-                self.add_error('cpf', 'CPF é obrigatório para gerentes.')
-            if not telefone:
-                self.add_error('telefone', 'Telefone é obrigatório para gerentes.')
-            if not endereco:
-                self.add_error('endereco', 'Endereço é obrigatório para gerentes.')
-            if not foto_perfil:
-                self.add_error('foto_perfil', 'Foto de perfil é obrigatória para gerentes.')
-            if not data_nascimento:
-                self.add_error('data_nascimento', 'Data de nascimento é obrigatória para gerentes.')
-        
-        
-        if tipo_usuario == CustomUser.TipoUsuario.CLIENT:
-            if not email:
-                self.add_error('email', 'Email é obrigatório para clientes.')
-            if not first_name:
-                self.add_error('first_name', 'Primeiro nome é obrigatório para clientes.')
-            if not last_name:
-                self.add_error('last_name', 'Sobrenome é obrigatório para clientes.')
-            if not cpf:
-                self.add_error('cpf', 'CPF é obrigatório para clientes.')
-            if not telefone:
-                self.add_error('telefone', 'Telefone é obrigatório para clientes.')
-            if not endereco:
-                self.add_error('endereco', 'Endereço é obrigatório para clientes.')
-            if not foto_perfil:
-                self.add_error('foto_perfil', 'Foto de perfil é obrigatória para clientes.')
-            if not data_nascimento:
-                self.add_error('data_nascimento', 'Data de nascimento é obrigatória para clientes.')
+         
