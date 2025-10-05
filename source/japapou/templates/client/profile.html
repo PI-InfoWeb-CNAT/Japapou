@@ -17,7 +17,7 @@
         {% csrf_token %}
         <div class="foto-container">
           <label for="fileInput">
-            <img id="previewImage" src="{{ user.foto_perfil.url }}" alt="Foto de perfil" />
+            {% comment %} <img id="previewImage" src="{{ user.foto_perfil.url }}" alt="Foto de perfil" /> {% endcomment %}
             {% comment %} <img id="previewImage" src="{% static 'imgs/manager/profile.png' %}" alt="Foto de perfil" /> {% endcomment %}
             <div class="icone-camera">
               <i class="fa-solid fa-camera"></i>
@@ -45,7 +45,7 @@
       <li>
         <strong>Aniversário</strong>
         <div class="value-with-icon">
-          <span>user.data_nascimento</span>
+          <span>{{ user.data_nascimento }}</span>
           <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
         </div>
       </li>

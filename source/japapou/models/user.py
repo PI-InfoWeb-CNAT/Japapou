@@ -14,7 +14,9 @@ class CustomUser(AbstractUser):
     tipo_usuario = models.CharField(
         max_length=20,
         choices=TipoUsuario.choices, # gera uma lista de tuplas que é o formato que o django espera para o menu dropdown
-        default=TipoUsuario.MANAGER,
+        default=TipoUsuario.MANAGER, 
+        null=True,
+        blank=True
     )
 
 

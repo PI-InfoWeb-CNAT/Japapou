@@ -4,7 +4,10 @@ from django.urls import reverse
 from japapou.forms import PlatesForms
 from django.contrib import messages
 from django.http import JsonResponse
+from django.contrib.auth.decorators import permission_required
 
+
+@permission_required('japapou.view_plate', login_url='home')
 def manager_plates_view(request):
     plates = Plate.objects.all()
 
@@ -38,6 +41,7 @@ def manager_plates_view(request):
         context=context,
     )
 
+@permission_required('japapou.add_plate', login_url='home')
 def create_plates_view(request):
     redirect_to_url_name = request.POST.get('next_redirect_url_name', 'manager_plates')
 
@@ -68,6 +72,7 @@ def create_plates_view(request):
     # ou se for um acesso GET direto, redireciona para a página principal de pratos.
     return redirect(reverse("manager_plates"))
 
+@permission_required('japapou.view_plate', login_url='home')
 def plate_get_json(request, id):
     
     try:
@@ -89,6 +94,7 @@ def plate_get_json(request, id):
         return JsonResponse(request, {'erro': 'Produto não encontrado'}, status=404)
     
 
+permission_required('japapou.change_plate', login_url='home')
 def plate_update_view(request, id):
     redirect_to_url_name = request.POST.get('next_redirect_url_name', 'manager_plates')
 
@@ -112,6 +118,7 @@ def plate_update_view(request, id):
     return render(request, "manager_plates.html")
 
 
+permission_required('japapou.delete_plate', login_url='home')
 def plate_delete_view(request, id):
 
     if request.method == "POST":

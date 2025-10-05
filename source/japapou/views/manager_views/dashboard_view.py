@@ -1,6 +1,7 @@
 from django.shortcuts import render  # type: ignore
 from django.http import HttpRequest, HttpResponse  # type: ignore
 from datetime import datetime, timedelta
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 class Sale:
@@ -10,6 +11,8 @@ class Sale:
         self.total: int = sum([plate["subtotal"] for plate in plates])
 
 
+@login_required
+@permission_required('japapou.change_plate', login_url='home')
 def manager_dashboard_view(request: HttpRequest) -> HttpResponse:
     sales_data: list[dict] = [
         {

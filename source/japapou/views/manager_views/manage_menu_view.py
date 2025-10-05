@@ -5,6 +5,7 @@ from django.urls import reverse
 from japapou.forms import PlatesForms, MenuForms
 from django.contrib import messages
 from japapou.views.manager_views import manage_period_view
+from django.contrib.auth.decorators import permission_required, login_required
 
 
 
@@ -17,7 +18,12 @@ class Search(forms.Form):
     )
 
 
+@login_required
+@permission_required('japapou.view_menu', login_url='home')
 def manager_menu_view(request):
+    if request.user.tipo_usuario != 'GERENTE':
+        return redirect('home')
+
 
     menus = Menu.objects.all()
     choices = [(menu.name, menu.name) for menu in menus]
@@ -75,6 +81,8 @@ def manager_menu_view(request):
         context=context,
     )
 
+@login_required
+@permission_required('japapou.add_menu', login_url='home')
 def create_menu_view(request):
     if request.method == "POST":
         
