@@ -11,7 +11,7 @@ def delivery_man_register_view(request):
     form = DeliveyrRegisterForm()
 
     if request.method == "POST":
-        print(request.POST)
+        #print(request.POST)
         
         form = DeliveyrRegisterForm(request.POST)
         if form.is_valid():

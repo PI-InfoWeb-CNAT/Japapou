@@ -79,27 +79,87 @@
       <hr class="footer-divider" />
 
       <div class="footer-links">
-        <div class="footer-column">
-          <h4><a href="{% url 'manager_profile' %}"><i class="fa-solid fa-gear"></i> Minha Conta</a></h4>
-        </div>
+        {% if user.is_authenticated and user.tipo_usuario == 'GERENTE' %}
+          <div class="footer-column">
+            <h4><a href="{% url 'manager_profile' %}"><i class="fa-solid fa-gear"></i>Minha Conta</a></h4>
+          </div>
+        {% elif user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
+          <div class="footer-column">
+            <h4><a href="{% url 'client_profile' %}"><i class="fa-solid fa-gear"></i>Minha Conta</a></h4>
+          </div>
+        {% elif user.is_authenticated and user.tipo_usuario == 'DELIVERY_MAN' %}
+          <div class="footer-column">
+            <h4><a href="{% url 'delivery_man_profile' %}"><i class="fa-solid fa-gear"></i>Minha Conta</a></h4>
+          </div>
+        {% else %}
+          <div class="footer-column">
+            <h4><a href="{% url 'login_register' %}"><i class="fa-solid fa-gear"></i>Minha Conta</a></h4>
+          </div>
+        {% endif %}
+
+
+        {% if request.user.is_authenticated and request.user.tipo_usuario == 'GERENTE' %}
         <div class="footer-column">
           <h4><a href="{% url 'manager_plates' %}"><i class="fa-solid fa-book-open"></i> Pratos</a></h4>
         </div>
-        <div class="footer-column">
-          <h4><a href="{% url 'manager_menu' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
-        </div>
-        <div class="footer-column">
-          <h4><a href="{% url 'manage_delivery_man' %}"><i class="fa-solid fa-gear"></i> Entregadores</a></h4>
-        </div>
-        <div class="footer-column">
-          <h4><a href="{% url 'manager_orders' %}"><i class="fa-solid fa-gear"></i> Pedidos</a></h4>
-        </div>
+        {% endif %}
+
+
+        {% if user.is_authenticated and user.tipo_usuario == 'GERENTE' %}
+          <div class="footer-column">
+            <h4><a href="{% url 'manager_menu' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
+          </div>
+        {% elif user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
+          <div class="footer-column">
+            <h4><a href="{% url 'client_menu' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
+          </div>
+        {% elif user.is_authenticated and user.tipo_usuario == 'DELIVERY_MAN' %}
+          <div class="footer-column">
+            <h4><a href="{% url 'home' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
+          </div>
+        {% else %}
+          <div class="footer-column">
+            <h4><a href="{% url 'visitor_menu' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
+          </div>
+        {% endif %}
+          
+
+        {% if user.is_authenticated and user.tipo_usuario == 'GERENTE' %}
+          <div class="footer-column">
+            <h4><a href="{% url 'manage_delivery_man' %}"><i class="fa-solid fa-gear"></i> Entregadores</a></h4>
+          </div>
+        {% endif %}
+
+        {% if user.is_authenticated and user.tipo_usuario == 'GERENTE' %}
+          <div class="footer-column">
+            <h4><a href="{% url 'manager_orders' %}"><i class="fa-solid fa-gear"></i> Pedidos</a></h4>
+          </div>
+        {% elif user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
+          <div class="footer-column">
+            <h4><a href="{% url 'client_order' %}"><i class="fa-solid fa-gear"></i>Meus Pedidos</a></h4>
+          </div>
+        {% elif user.is_authenticated %}
+          <div class="footer-column">
+            <h4><a href="{% url 'login_register' %}"><i class="fa-solid fa-gear"></i>Meus Pedidos</a></h4>
+          </div>
+        {% endif %}
+          
+        {% if user.is_authenticated and user.tipo_usuario == 'GERENTE' %}
         <div class="footer-column">
           <h4><a href="{% url 'manager_dashboard' %}"><i class="fa-solid fa-gear"></i> Relatórios</a></h4>
         </div>
-        <div class="footer-column">
-          <h4><a href="{% url 'manager_history' %}"><i class="fa-solid fa-gear"></i> Histórico</a></h4>
-        </div>
+        {% endif %}
+
+        {% if user.is_authenticated and user.tipo_usuario == 'GERENTE' %}
+          <div class="footer-column">
+            <h4><a href="{% url 'manager_history' %}"><i class="fa-solid fa-gear"></i> Histórico</a></h4>
+          </div>
+        {% elif user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
+          <div class="footer-column">
+            <h4><a href="{% url 'client_history' %}"><i class="fa-solid fa-gear"></i> Histórico</a></h4>
+          </div>    
+        {% endif %}
+          
         {% if user.is_authenticated %}
           <div class="footer-column">
             <h4><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></h4>
@@ -107,6 +167,8 @@
         {% endif %}
       </div>
     </footer>
+
+
     <script src="{% static 'js/global.js' %}"></script>
     {% block scripts %}
 
