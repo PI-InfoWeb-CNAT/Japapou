@@ -8,7 +8,8 @@ from japapou.views.manager_views import manage_period_view
 from django.contrib.auth.decorators import permission_required, login_required
 
 
-
+@login_required
+@permission_required('japapou.view_menu', login_url='home')
 class Search(forms.Form):
     field = forms.ChoiceField(
         choices=[],
@@ -21,8 +22,8 @@ class Search(forms.Form):
 @login_required
 @permission_required('japapou.view_menu', login_url='home')
 def manager_menu_view(request):
-    if request.user.tipo_usuario != 'GERENTE':
-        return redirect('home')
+    # if request.user.tipo_usuario != 'MANAGER':
+    #     return redirect('home')
 
 
     menus = Menu.objects.all()

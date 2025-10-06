@@ -190,7 +190,8 @@ footer {
 	}
 
 	.footer-links {
-		display: grid;
+		display: flex;
+		justify-content: space-around;
 		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
 		gap: 32px;
 
