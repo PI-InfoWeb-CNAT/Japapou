@@ -5,6 +5,9 @@ from japapou.forms import VisitorRegisterForm, DeliveyrRegisterForm  # type: ign
 
 
 def delivery_man_register_view(request):
+    '''
+        View para registro de entregadores (Gerente que registra entregadores).
+    '''
     form = DeliveyrRegisterForm()
 
     if request.method == "POST":
@@ -25,6 +28,9 @@ def delivery_man_register_view(request):
     return render(request, "manager/register_delivery_man.html", context={'form': form})
 
 def login_register_view(request):
+    '''
+        View para login e registro de visitantes (clientes).
+    '''
     login_form = AuthenticationForm()
     register_form = VisitorRegisterForm()
     login_error = None
@@ -40,7 +46,7 @@ def login_register_view(request):
             else:
                 login_error = "Usuário ou senha inválidos."
         elif 'register_submit' in request.POST:
-            print(request.POST)
+            #print(request.POST)
             register_form = VisitorRegisterForm(request.POST)
             if register_form.is_valid():
 
