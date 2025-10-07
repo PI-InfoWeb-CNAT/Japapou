@@ -1,81 +1,117 @@
 document.addEventListener("DOMContentLoaded", function () {
 	const editIcons = document.querySelectorAll(".edit-icon");
-
+  
 	editIcons.forEach((icon) => {
-		icon.addEventListener("click", function (event) {
-			event.preventDefault(); // Impede comportamento padrão do link ou botão
-
-			const container = this.closest(".value-with-icon");
-			const span = container.querySelector("span");
-
-			if (!span) return;
-
-			const currentValue = span.textContent.trim();
-
-			// Evita criar múltiplos inputs se já estiver editando
-			if (container.querySelector("input")) return;
-
-			// Cria o campo de input
-			const input = document.createElement("input");
-			input.type = "text";
-			input.value = currentValue;
-			input.className = "temp-edit-input";
-
-			// Substitui o span pelo input
-			container.replaceChild(input, span);
-			input.focus();
-
-			// Função para restaurar o span com novo texto
-			function restoreSpan() {
-				const newSpan = document.createElement("span");
-				newSpan.textContent = input.value || currentValue;
-				container.replaceChild(newSpan, input);
-			}
-
-			// Quando o campo perde o foco
-			input.addEventListener("blur", restoreSpan);
-
-			// Quando o usuário pressiona Enter
-			input.addEventListener("keydown", function (e) {
-				if (e.key === "Enter") {
-					input.blur(); // Dispara blur para restaurar o texto
-				}
+	  icon.addEventListener("click", function (event) {
+		event.preventDefault();
+  
+		const container = this.closest(".value-with-icon");
+		const span = container.querySelector("span");
+  
+		if (!span || container.querySelector("input")) return;
+  
+		const field = span.dataset.field;
+		const userId = span.dataset.id;
+		const currentValue = span.textContent.trim();
+  
+		const input = document.createElement("input");
+		input.type = "text";
+		input.value = currentValue;
+		input.className = "temp-edit-input";
+  
+		container.replaceChild(input, span);
+		input.focus();
+  
+		async function saveEdit() {
+		  const newValue = input.value.trim();
+  
+		  // Cria o novo <span>
+		  const newSpan = document.createElement("span");
+		  newSpan.textContent = newValue;
+		  newSpan.dataset.field = field;
+		  newSpan.dataset.id = userId;
+		  newSpan.className = "editable-span";
+		  container.replaceChild(newSpan, input);
+  
+		  // Envia o dado via fetch (AJAX)
+		  try {
+			const response = await fetch("/profile/update_user/", {
+			  method: "POST",
+			  headers: {
+				"Content-Type": "application/json",
+				"X-CSRFToken": getCSRFToken(),
+			  },
+			  body: JSON.stringify({
+				id: userId,
+				field: field,
+				value: newValue,
+			  }),
 			});
-		});
-	});
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-	const previewImage = document.getElementById("previewImage");
-	const removeImageBtn = document.getElementById("removeImageBtn");
-	const fileInput = document.getElementById("fileInput");
-
-	// Define alt vazio só se for a imagem padrão
-	function updateAlt() {
-		if (previewImage.src.includes(defaultImagePath)) {
-			previewImage.alt = ""; // limpa alt pra não mostrar texto "por trás"
-		} else {
-			previewImage.alt = "Foto de perfil"; // alt normal pra imagem customizada
+  
+			const result = await response.json();
+			if (!response.ok || result.status !== "ok") {
+			  alert("Erro ao salvar!");
+			  console.log(result);
+			}
+		  } catch (err) {
+			console.error("Erro:", err);
+		  }
 		}
-	}
-
-	updateAlt();
-
-	fileInput.addEventListener("change", (event) => {
+  
+		input.addEventListener("blur", saveEdit);
+		input.addEventListener("keydown", function (e) {
+		  if (e.key === "Enter") input.blur();
+		});
+	  });
+	});
+  
+	const fileInput = document.getElementById("fileInput");
+	const previewImage = document.getElementById("previewImage");
+  
+	if (fileInput && previewImage) {
+	  fileInput.addEventListener("change", (event) => {
 		const file = event.target.files[0];
 		if (file) {
-			const reader = new FileReader();
-			reader.onload = (e) => {
-				previewImage.src = e.target.result;
-				updateAlt();
-			};
-			reader.readAsDataURL(file);
+		  const formData = new FormData();
+		  formData.append("foto", file);
+  
+		  // Você pode enviar o ID do usuário se necessário
+		  formData.append("id", "{{ user.id }}");
+  
+		  fetch("/profile/update_photo/", {
+			method: "POST",
+			headers: {
+			  "X-CSRFToken": getCSRFToken(),
+			},
+			body: formData,
+		  })
+			.then((response) => response.json())
+			.then((data) => {
+			  if (data.status === "ok") {
+				previewImage.src = data.nova_foto_url;
+				// Se quiser, chame updateAlt() aqui, mas defina ela antes
+			  } else {
+				alert("Erro ao enviar imagem");
+			  }
+			})
+			.catch((error) => {
+			  console.error("Erro:", error);
+			});
+  
+		  // Se quiser mostrar preview local ANTES do upload, descomente:
+		  /*
+		  const reader = new FileReader();
+		  reader.onload = (e) => {
+			previewImage.src = e.target.result;
+		  };
+		  reader.readAsDataURL(file);
+		  */
 		}
-	});
-
-	removeImageBtn.addEventListener("click", () => {
-		previewImage.src = defaultImagePath;
-		updateAlt();
-		fileInput.value = "";
-	});
-});
+	  });
+	}
+  
+	function getCSRFToken() {
+	  return document.querySelector('[name=csrfmiddlewaretoken]').value;
+	}
+  });
+  
