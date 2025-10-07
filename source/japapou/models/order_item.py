@@ -1,7 +1,8 @@
 from django.db import models  # type: ignore
-
+from japapou.models.plate import Plate
 
 class OrderItem(models.Model):
+    prato = models.ForeignKey(Plate, on_delete=models.CASCADE, default=1, related_name='items')
     amount = models.IntegerField()
     comment = models.TextField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
