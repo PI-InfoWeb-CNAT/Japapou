@@ -8,8 +8,6 @@ from japapou.views.manager_views import manage_period_view
 from django.contrib.auth.decorators import permission_required, login_required
 
 
-@login_required
-@permission_required('japapou.view_menu', login_url='home')
 class Search(forms.Form):
     field = forms.ChoiceField(
         choices=[],
@@ -22,8 +20,9 @@ class Search(forms.Form):
 @login_required
 @permission_required('japapou.view_menu', login_url='home')
 def manager_menu_view(request):
-    # if request.user.tipo_usuario != 'MANAGER':
-    #     return redirect('home')
+    if request.user.tipo_usuario != 'MANAGER':
+        messages.error(request, "Você não tem permissão para acessar essa página.")
+        return redirect('home')
 
 
     menus = Menu.objects.all()
@@ -70,7 +69,7 @@ def manager_menu_view(request):
         "menu_plates": menu_plates,
         "other_plates": other_plates,
         "form": PlatesForms(),
-        "form_menu": MenuForms(),
+        "form_menu": MenuForms(request=request),
         "search_period": search_period_form,
         
     }
@@ -87,7 +86,7 @@ def manager_menu_view(request):
 def create_menu_view(request):
     if request.method == "POST":
         
-        form_menu = MenuForms(request.POST)
+        form_menu = MenuForms(request.POST, request=request)
 
         
         if 'btn-create-menu' in request.POST:
@@ -100,8 +99,9 @@ def create_menu_view(request):
                 return redirect(f"{redirect_url}?field={new_menu.name}")
             else:
                 messages.error(request, "Erro ao criar o menu.")
-                redirect_url = reverse("manager_menu")
+                return redirect("manager_menu")
         
-    
+        return redirect("manager_menu")
+
     else:
-        form_menu = MenuForms()
+        form_menu = MenuForms(request=request)

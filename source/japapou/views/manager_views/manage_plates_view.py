@@ -9,6 +9,10 @@ from django.contrib.auth.decorators import permission_required
 
 @permission_required('japapou.view_plate', login_url='home')
 def manager_plates_view(request):
+    if request.user.tipo_usuario != 'MANAGER':
+        messages.error(request, "Você não tem permissão para acessar essa página.")
+        return redirect('home')
+
     plates = Plate.objects.all()
 
     if request.method == "POST":
@@ -43,6 +47,10 @@ def manager_plates_view(request):
 
 @permission_required('japapou.add_plate', login_url='home')
 def create_plates_view(request):
+    if request.user.tipo_usuario != 'MANAGER':
+        messages.error(request, "Você não tem permissão para acessar essa página.")
+        return redirect('home')
+    
     redirect_to_url_name = request.POST.get('next_redirect_url_name', 'manager_plates')
 
     if request.method == "POST":
@@ -96,6 +104,10 @@ def plate_get_json(request, id):
 
 permission_required('japapou.change_plate', login_url='home')
 def plate_update_view(request, id):
+    if request.user.tipo_usuario != 'MANAGER':
+        messages.error(request, "Você não tem permissão para acessar essa página.")
+        return redirect('home')
+
     redirect_to_url_name = request.POST.get('next_redirect_url_name', 'manager_plates')
 
     if request.method in 'POST':

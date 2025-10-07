@@ -5,6 +5,11 @@
 {% block extra_head%}  {% endblock extra_head %}
 
 {% block content %}
+
+{% for message in messages %}
+    <p>{{ message }}</p>
+{% endfor %}
+
 <h1>Home</h1>
 
 <p>{{ user.tipo_usuario }}</p>

@@ -39,11 +39,12 @@ class PlatesForms(forms.ModelForm):
             "description": "Descrição",
             # O label para 'menus' já foi definido no campo explícito acima
         }
-        def __init__(self, *args, **kwargs):
-            super(PlatesForms, self).__init__(*args, **kwargs)
-            self.fields['photo'].required = False
-            if self.instance and self.instance.pk:
-                self.fields['menus'].initial = self.instance.menu_set.all()
+
+    def __init__(self, *args, **kwargs):
+        super(PlatesForms, self).__init__(*args, **kwargs)
+        self.fields['photo'].required = False
+        if self.instance and self.instance.pk:
+            self.fields['menus'].initial = self.instance.menu_set.all()
 
 class PlateChoiceField(forms.ModelMultipleChoiceField):
     """
@@ -57,13 +58,6 @@ class PlateChoiceField(forms.ModelMultipleChoiceField):
 
 class MenuForms(forms.ModelForm):
 
-    # plates = forms.ModelMultipleChoiceField(
-    #     queryset=Plate.objects.all(),
-    #     widget=forms.CheckboxSelectMultiple, # para transformar em checkboxes
-    #     required=False,
-    #     label_from_instance=lambda plate: plate.name,
-    # )
-
     plates = PlateChoiceField(
         queryset=Plate.objects.all(),
         widget=forms.CheckboxSelectMultiple,
@@ -75,6 +69,31 @@ class MenuForms(forms.ModelForm):
         model = Menu
 
         fields = ["name", "plates"]
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+
+        super(MenuForms, self).__init__(*args, **kwargs)
+
+        self.fields['plates'].queryset = Plate.objects.all()
+    
+    def save(self, commit=True):
+        # 1. Pega a instância do modelo, mas ainda não a guarda na base de dados.
+        instance = super().save(commit=False)
+
+        # 2. Verifica se o campo 'created_by' (ou similar) existe no seu modelo Menu.
+        #    (Ajuste 'created_by' para o nome do campo correto no seu modelo)
+        if hasattr(instance, 'created_by') and self.request:
+            # 3. Associa o utilizador logado à instância.
+            instance.created_by = self.request.user
+
+        # 4. Se commit for True, guarda a instância na base de dados.
+        if commit:
+            instance.save()
+            # O save_m2m() é necessário para guardar as relações ManyToMany (os 'plates')
+            self.save_m2m() 
+            
+        return instance
 
 class VisitorRegisterForm(forms.ModelForm):
     '''

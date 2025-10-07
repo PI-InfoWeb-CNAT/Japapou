@@ -34,8 +34,14 @@
   <body>
     <header id="header">
       <div id="logo">
-        {% if user.is_authenticated %}
+        {% if user.is_authenticated and user.tipo_usuario == "MANAGER" %}
+          <a href="{% url 'manager_profile' %}"><img src="{% static 'imgs/logo.png' %}" alt="Perfil" width="32px" /></a>
+        {% elif user.is_authenticated and user.tipo_usuario == "CLIENT" %}
           <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/logo.png' %}" alt="Perfil" width="32px" /></a>
+        {% elif user.is_authenticated and user.tipo_usuario == "DELIVERY_MAN" %}
+          <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/logo.png' %}" alt="Perfil" width="32px" /></a>
+        {% else %}
+          <a href="{% url 'login_register' %}"><img src="{% static 'imgs/logo.png' %}" alt="Perfil" width="32px" /></a>
         {% endif %}
       </div>
 
