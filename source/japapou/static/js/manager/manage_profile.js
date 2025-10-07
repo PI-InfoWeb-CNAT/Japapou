@@ -1,117 +1,112 @@
-document.addEventListener("DOMContentLoaded", function () {
-	const editIcons = document.querySelectorAll(".edit-icon");
-  
-	editIcons.forEach((icon) => {
-	  icon.addEventListener("click", function (event) {
-		event.preventDefault();
-  
-		const container = this.closest(".value-with-icon");
-		const span = container.querySelector("span");
-  
-		if (!span || container.querySelector("input")) return;
-  
-		const field = span.dataset.field;
-		const userId = span.dataset.id;
-		const currentValue = span.textContent.trim();
-  
-		const input = document.createElement("input");
-		input.type = "text";
-		input.value = currentValue;
-		input.className = "temp-edit-input";
-  
-		container.replaceChild(input, span);
-		input.focus();
-  
-		async function saveEdit() {
-		  const newValue = input.value.trim();
-  
-		  // Cria o novo <span>
-		  const newSpan = document.createElement("span");
-		  newSpan.textContent = newValue;
-		  newSpan.dataset.field = field;
-		  newSpan.dataset.id = userId;
-		  newSpan.className = "editable-span";
-		  container.replaceChild(newSpan, input);
-  
-		  // Envia o dado via fetch (AJAX)
-		  try {
-			const response = await fetch("/profile/update_user/", {
-			  method: "POST",
-			  headers: {
-				"Content-Type": "application/json",
-				"X-CSRFToken": getCSRFToken(),
-			  },
-			  body: JSON.stringify({
-				id: userId,
-				field: field,
-				value: newValue,
-			  }),
-			});
-  
-			const result = await response.json();
-			if (!response.ok || result.status !== "ok") {
-			  alert("Erro ao salvar!");
-			  console.log(result);
+document.addEventListener("DOMContentLoaded", () => {
+	console.log("manage_profile.js carregado ✅");
+
+	function getCSRFToken() {
+		const token = document.querySelector('[name=csrfmiddlewaretoken]');
+		return token ? token.value : "";
+	}
+
+	// 🔹 EDIÇÃO INLINE VIA BOTÃO
+	const editButtons = document.querySelectorAll(".edit-icon");
+
+	editButtons.forEach((btn) => {
+		btn.addEventListener("click", (e) => {
+			e.preventDefault();
+			const targetId = btn.dataset.edit;
+			const editable = document.getElementById(targetId);
+			if (!editable) return;
+
+			const currentValue = editable.textContent.trim();
+
+			// Cria input temporário
+			const input = document.createElement("input");
+			input.type = "text";
+			input.value = currentValue;
+			input.className = "temp-edit-input";
+
+			editable.replaceWith(input);
+			input.focus();
+
+			async function saveEdit() {
+				let newValue = input.value.trim();
+
+				// 🔹 Converte data_nascimento para formato ISO
+				if (editable.dataset.field === "data_nascimento") {
+					const parts = newValue.split("/");
+					if (parts.length === 3) {
+						// dd/mm/yyyy -> yyyy-mm-dd
+						newValue = `${parts[2]}-${parts[1].padStart(2, "0")}-${parts[0].padStart(2, "0")}`;
+					}
+				}
+
+				// Restaura o span
+				input.replaceWith(editable);
+				editable.textContent = newValue;
+
+				// Envia via AJAX
+				try {
+					const response = await fetch("/manager/profile/update_user/", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+							"X-CSRFToken": getCSRFToken(),
+						},
+						body: JSON.stringify({
+							id: editable.dataset.id,
+							field: editable.dataset.field,
+							value: newValue,
+						}),
+					});
+
+					const result = await response.json();
+					if (!response.ok || result.status !== "ok") {
+						alert("Erro ao salvar! " + (result.mensagem || ""));
+						console.log(result);
+					}
+				} catch (err) {
+					console.error("Erro:", err);
+				}
 			}
-		  } catch (err) {
-			console.error("Erro:", err);
-		  }
-		}
-  
-		input.addEventListener("blur", saveEdit);
-		input.addEventListener("keydown", function (e) {
-		  if (e.key === "Enter") input.blur();
+
+			input.addEventListener("blur", saveEdit);
+			input.addEventListener("keydown", (e) => {
+				if (e.key === "Enter") input.blur();
+			});
 		});
-	  });
 	});
-  
+
+	// 🔹 UPLOAD DE FOTO
 	const fileInput = document.getElementById("fileInput");
 	const previewImage = document.getElementById("previewImage");
-  
+
 	if (fileInput && previewImage) {
-	  fileInput.addEventListener("change", (event) => {
-		const file = event.target.files[0];
-		if (file) {
-		  const formData = new FormData();
-		  formData.append("foto", file);
-  
-		  // Você pode enviar o ID do usuário se necessário
-		  formData.append("id", "{{ user.id }}");
-  
-		  fetch("/profile/update_photo/", {
-			method: "POST",
-			headers: {
-			  "X-CSRFToken": getCSRFToken(),
-			},
-			body: formData,
-		  })
-			.then((response) => response.json())
-			.then((data) => {
-			  if (data.status === "ok") {
-				previewImage.src = data.nova_foto_url;
-				// Se quiser, chame updateAlt() aqui, mas defina ela antes
-			  } else {
-				alert("Erro ao enviar imagem");
-			  }
-			})
-			.catch((error) => {
-			  console.error("Erro:", error);
-			});
-  
-		  // Se quiser mostrar preview local ANTES do upload, descomente:
-		  /*
-		  const reader = new FileReader();
-		  reader.onload = (e) => {
-			previewImage.src = e.target.result;
-		  };
-		  reader.readAsDataURL(file);
-		  */
-		}
-	  });
+		fileInput.addEventListener("change", async (event) => {
+			const file = event.target.files[0];
+			if (!file) return;
+
+			const formData = new FormData();
+			formData.append("foto", file);
+			formData.append("id", "{{ user.id }}"); // Django template
+
+			try {
+				const response = await fetch("/manager/profile/update_photo/", {
+					method: "POST",
+					headers: {
+						"X-CSRFToken": getCSRFToken(),
+					},
+					body: formData,
+				});
+
+				const data = await response.json();
+				if (data.status === "ok") {
+					// Atualiza o preview da imagem
+					previewImage.src = data.nova_foto_url + "?t=" + new Date().getTime(); // força cache buster
+				} else {
+					alert("Erro ao enviar imagem: " + (data.mensagem || ""));
+				}
+			} catch (error) {
+				console.error("Erro ao enviar imagem:", error);
+			}
+		});
 	}
-  
-	function getCSRFToken() {
-	  return document.querySelector('[name=csrfmiddlewaretoken]').value;
-	}
-  });
-  
+});
