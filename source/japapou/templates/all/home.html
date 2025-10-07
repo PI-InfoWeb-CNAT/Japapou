@@ -2,14 +2,66 @@
 {% load static %}
 
 {% block title %}Home{% endblock title %}
-{% block extra_head%}  {% endblock extra_head %}
+{% block extra_head%} {% endblock extra_head %}
+{% block styles%}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock styles %}
 
 {% block content %}
+
 <h1>Home</h1>
 
 {% if user.is_authenticated %}
-    <p>Bem-vindo, {{ user.username }}!</p>
+<p>Bem-vindo, {{ user.username }}!</p>
 {% else %}
-    <p>Bem-vindo, visitante! Por favor, <a href="{% url 'login_register' %}">faça login</a> ou <a href="{% url 'login_register' %}">registre-se</a>.</p>
+<p>Bem-vindo, visitante! Por favor, <a href="{% url 'login_register' %}">faça login</a> ou <a
+        href="{% url 'login_register' %}">registre-se</a>.</p>
 {% endif %}
+
+
+<div class="container">
+    <div class="coverflow-container">
+        <div class="coverflow">
+
+            {% for prato in ranking %}
+            <div class="slide">
+                <img src="{{ prato.photo.url }}" alt="{{ prato.name }}" width="100">
+                <h4>{{ prato.name }}</h4>
+                <h6>{{ prato.description }}</h6>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <button id="prev"><img src="{% static 'imgs/seta.png' %}" alt="seta_esquerda"></button>
+    <button id="next"><img src="{% static 'imgs/seta.png' %}" alt="seta_direita"></button>
+</div>
+
 {% endblock content %}
+
+
+
+{% block scripts %}
+<script>
+    const coverflow = document.querySelector('.coverflow');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+
+    const scrollStep = 220; 
+
+    next.addEventListener('click', () => {
+        coverflow.scrollBy({
+            left: scrollStep,
+            behavior: 'smooth'
+        });
+    });
+
+    prev.addEventListener('click', () => {
+        coverflow.scrollBy({
+            left: -scrollStep,
+            behavior: 'smooth'
+        });
+    });
+</script>
+{% endblock %}

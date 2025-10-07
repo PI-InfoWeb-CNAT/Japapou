@@ -1,0 +1,64 @@
+.coverflow-container {
+  position: relative;
+  width: 80%;
+  overflow: hidden;
+  width: 660px;
+}
+
+.coverflow {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.slide {
+  flex: 0 0 200px; 
+  height: 150px;
+  background: #f3f3f3;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  padding: 8px 12px;
+  border-radius: 50%;
+}
+
+#prev {
+  left: 5px;
+  transform: scaleX(-1);
+}
+
+#next {
+  right: 5px;
+}
+
+.container{
+    width: 600px;
+    display: flex;
+}
+
+.coverflow::-webkit-scrollbar {
+  display: none;
+}
+
+.slide{
+    display: block;
+}
+
+div .container{
+    width: 800px;
+}
