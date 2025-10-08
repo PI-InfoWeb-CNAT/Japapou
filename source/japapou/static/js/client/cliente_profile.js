@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-	console.log("manage_profile.js carregado ✅");
+	console.log("client_profile.js carregado ✅");
 
 	// 🔹 Função utilitária para pegar o token CSRF
 	function getCSRFToken() {
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 				// Envia via AJAX
 				try {
-					const response = await fetch("/manager/profile/update_user/", {
+					const response = await fetch("/client/profile/update_user/", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			formData.append("id", userId);
 
 			try {
-				const response = await fetch("/manager/profile/update_photo/", {
+				const response = await fetch("/client/profile/update_photo/", {
 					method: "POST",
 					headers: {
 						"X-CSRFToken": getCSRFToken(),
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			formData.append("id", userId);
 
 			try {
-				const response = await fetch("/manager/profile/update_photo/", {
+				const response = await fetch("/client/profile/update_photo/", {
 					method: "POST",
 					headers: {
 						"X-CSRFToken": getCSRFToken(),

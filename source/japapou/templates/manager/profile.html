@@ -13,19 +13,20 @@
   <div class="foto-perfil">
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      <div class="foto-container">
-        <label for="fileInput">
-          {% if user.foto_perfil %}
-            <img id="previewImage" src="{{ user.foto_perfil.url }}" alt="Foto de perfil" />
-          {% else %}
-            <img id="previewImage" src="{% static 'imgs/manager/profile.png' %}" alt="Foto de perfil" />
-          {% endif %}
-          <div class="icone-camera">
-            <i class="fa-solid fa-camera"></i>
-          </div>
-        </label>
-        <input type="file" name="foto" id="fileInput" accept="image/*" style="display: none" />
-      </div>
+      <!-- Adicione o data-user-id ao input ou à div da foto -->
+        <div class="foto-container" data-user-id="{{ user.id }}">
+          <label for="fileInput">
+            {% if user.foto_perfil %}
+              <img id="previewImage" src="{{ user.foto_perfil.url }}" alt="Foto de perfil" />
+            {% else %}
+              <img id="previewImage" src="{% static 'imgs/manager/profile.png' %}" alt="Foto de perfil" />
+            {% endif %}
+            <div class="icone-camera">
+              <i class="fa-solid fa-camera"></i>
+            </div>
+          </label>
+          <input type="file" name="foto" id="fileInput" accept="image/*" style="display: none" />
+        </div>
       <div>
         <p class="foto-label">Altere a sua foto de perfil</p>
         <button type="button" id="removeImageBtn">Remover</button>
