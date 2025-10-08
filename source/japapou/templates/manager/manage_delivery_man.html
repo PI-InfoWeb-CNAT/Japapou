@@ -2,136 +2,50 @@
 {% load static %}
 
 {% block title %}
-  Gerenciar Entregadores
+Gerenciar Entregadores
 {% endblock %}
 
 {% block extra_head %}
-  <link rel="stylesheet" href="{% static 'css/manager/manage_delivery_man.css' %}" />
+<link rel="stylesheet" href="{% static 'css/manager/manage_delivery_man.css' %}" />
 {% endblock %}
 
 {% block content %}
-  <h1>Entregadores</h1>
+<h1>Entregadores</h1>
 
-  <div class="entregadores">
+<div class="entregadores">
+    {% for entregador in entregadores %}
     <article class="card">
-      <div class="photo">
-        <img src="{% static 'imgs/delivery_man/person_1.jpeg' %}" alt="Entregador" />
-      </div>
-      <h2>Bill Wilkins</h2>
-      <div class="rating">
-        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-      </div>
-      <div class="actions">
-        <button>Excluir</button><button>Editar</button>
-      </div>
-    </article>
+        <div class="photo">
+            {% if entregador.foto_perfil %}
+                <img src="{{ entregador.foto_perfil.url }}" alt="{{ entregador.first_name }}">
+            {% else %}
+                <img src="{% static 'imgs/delivery_man/default.jpg' %}" alt="Entregador">
+            {% endif %}
+        </div>
 
-    <article class="card">
-      <div class="photo">
-        <img src="{% static 'imgs/delivery_man/person_2.jpeg' %}" alt="Entregador" />
-      </div>
-      <h2>Laura Moody</h2>
-      <div class="rating">
-        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-      </div>
-      <div class="actions">
-        <button>Excluir</button><button>Editar</button>
-      </div>
-    </article>
+        <h2>{{ entregador.first_name }} {{ entregador.last_name }}</h2>
 
-    <article class="card">
-      <div class="photo">
-        <img src="{% static 'imgs/delivery_man/person_3.jpeg' %}" alt="Entregador" />
-      </div>
-      <h2>Amy Lee</h2>
-      <div class="rating">
-        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-      </div>
-      <div class="actions">
-        <button>Excluir</button><button>Editar</button>
-      </div>
-    </article>
+        <div class="rating">
+            {% for i in "12345" %}
+                <i class="fa-solid fa-star"></i>
+            {% endfor %}
+        </div>
 
-    <article class="card">
-      <div class="photo">
-        <img src="{% static 'imgs/delivery_man/person_4.jpeg' %}" alt="Entregador" />
-      </div>
-      <h2>Leah Hunt</h2>
-      <div class="rating">
-        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-      </div>
-      <div class="actions">
-        <button>Excluir</button><button>Editar</button>
-      </div>
-    </article>
+        <div class="actions">
+            <a href="{% url 'edit_delivery_man' entregador.id %}" class="btn-edit">
+                <button>Editar</button>
+            </a>
 
-    <article class="card">
-      <div class="photo">
-        <img src="{% static 'imgs/delivery_man/person_5.jpeg' %}" alt="Entregador" />
-      </div>
-      <h2>Donald Vasquez</h2>
-      <div class="rating">
-        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-      </div>
-      <div class="actions">
-        <button>Excluir</button><button>Editar</button>
-      </div>
+            <form method="POST" action="{% url 'delete_delivery_man' entregador.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Excluir</button>
+            </form>
+        </div>
     </article>
-
-    <article class="card">
-      <div class="photo">
-        <img src="{% static 'imgs/delivery_man/person_6.jpeg' %}" alt="Entregador" />
-      </div>
-      <h2>Kathryn Lyons</h2>
-      <div class="rating">
-        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-      </div>
-      <div class="actions">
-        <button>Excluir</button><button>Editar</button>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="photo">
-        <img src="{% static 'imgs/delivery_man/person_7.jpeg' %}" alt="Entregador" />
-      </div>
-      <h2>Georgie Weber</h2>
-      <div class="rating">
-        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-      </div>
-      <div class="actions">
-        <button>Excluir</button><button>Editar</button>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="photo">
-        <img src="{% static 'imgs/delivery_man/person_8.jpeg' %}" alt="Entregador" />
-      </div>
-      <h2>Cynthia Craig</h2>
-      <div class="rating">
-        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-      </div>
-      <div class="actions">
-        <button>Excluir</button><button>Editar</button>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="photo">
-        <img src="{% static 'imgs/delivery_man/person_9.jpeg' %}" alt="Entregador" />
-      </div>
-      <h2>Millie Hernandez</h2>
-      <div class="rating">
-        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-      </div>
-      <div class="actions">
-        <button>Excluir</button><button>Editar</button>
-      </div>
-    </article>
+    {% endfor %}
 
     <div class="add-card">
-      <a href="{% url 'register_delivery_man' %}"><i class="fa-solid fa-plus"></i></a>
+        <a href="{% url 'register_delivery_man' %}"><i class="fa-solid fa-plus"></i></a>
     </div>
-  </div>
+</div>
 {% endblock %}

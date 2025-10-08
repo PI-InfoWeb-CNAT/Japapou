@@ -1,18 +1,31 @@
-from django.urls import path  # type: ignore
-from japapou.views import *  # type: ignore
-
+from django.urls import path
+from japapou.views import (
+    manager_history_view,
+    manager_manage_delivery_man_view,
+    manager_menu_view,
+    create_menu_view,
+    manager_plates_view,
+    create_plates_view,
+    plate_get_json,
+    plate_update_view,
+    plate_delete_view,
+    manager_orders_view,
+    manager_profile_view,
+    manager_dashboard_view,
+    manager_assign_delivery_view,
+    delivery_man_register_view,
+    delivery_man_update_view,
+    delivery_man_delete_view,
+    delivery_man_get_json,
+)
 
 urlpatterns = [
     path("history/", manager_history_view, name="manager_history"),
-    path(
-        "manage_delivery_man/",
-        manager_manage_delivery_man_view,
-        name="manage_delivery_man",
-    ),
+    path("manage_delivery_man/", manager_manage_delivery_man_view, name="manage_delivery_man"),
     path("menu/", manager_menu_view, name="manager_menu"),
     path("menu/create/", create_menu_view, name="create_menu"),
     path("plates/", manager_plates_view, name="manager_plates"),
-    path("plates/create", create_plates_view, name="create_plates_view"),
+    path("plates/create/", create_plates_view, name="create_plates"),
     path("plates/<int:id>/edit/", plate_get_json, name="manager_plates_edit"),
     path("plates/<int:id>/update/", plate_update_view, name="manager_plates_update"),
     path("plates/<int:id>/delete/", plate_delete_view, name="manager_plate_delete"),
@@ -21,4 +34,7 @@ urlpatterns = [
     path("dashboard/", manager_dashboard_view, name="manager_dashboard"),
     path("assign_delivery/", manager_assign_delivery_view, name="manager_assign_delivery"),
     path("register_delivery_man/", delivery_man_register_view, name="register_delivery_man"),
+    path("delivery_man/<int:id>/edit/", delivery_man_update_view, name="edit_delivery_man"),
+    path("delivery_man/<int:id>/delete/", delivery_man_delete_view, name="delete_delivery_man"),
+    path("delivery_man/<int:id>/json/", delivery_man_get_json, name="get_delivery_man_json"),
 ]
