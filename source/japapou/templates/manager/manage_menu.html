@@ -209,7 +209,7 @@
 
   <dialog id="criar-prato">
     <h2>Criar Novo Prato</h2>
-    <form id="form-criar-prato" action="{% url 'create_plates_view' %}" method="post" enctype="multipart/form-data">
+    <form id="form-criar-prato" action="{% url 'create_plates' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
 
       
