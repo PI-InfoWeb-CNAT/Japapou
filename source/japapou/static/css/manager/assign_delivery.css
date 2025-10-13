@@ -2,7 +2,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background-color: #031627;
+	background-color: var(--azul-mais-escuro);
 	row-gap: 5em;
 	width: 100%;
 	height: 100%;
@@ -68,7 +68,7 @@ button {
 }
 
 .destaque {
-	background-color: chocolate;
+	background-color: var(--azul-mais-escuro);
 	border-radius: 11px;
 	height: 85px;
 	width: 1079px;
@@ -80,7 +80,7 @@ button {
 
 	p,
 	h2 {
-		color: #031627;
+		color: white;
 		margin: 0;
 	}
 
@@ -100,7 +100,7 @@ button {
 }
 
 .secundario {
-	color: chocolate;
+	color: white;
 	display: flex;
 	justify-content: space-between;
 	font-size: 24px;
@@ -108,7 +108,7 @@ button {
 }
 
 .principal {
-	color: #f23e2f;
+	color: white;
 	font-weight: bold;
 	display: flex;
 	justify-content: space-between;
@@ -118,7 +118,7 @@ button {
 }
 
 section {
-	background-color: #024057;
+	background-color:var(--azul-mais-claro);
 	width: 1170px;
 	height: 788px;
 	border-radius: 11px;
@@ -133,7 +133,7 @@ section {
 	padding-bottom: 1em;
 	gap: 4em;
 	border-bottom-style: solid;
-	border-color: chocolate;
+	border-color: var(--azul-mais-escuro);;
 	justify-content: center;
 }
 
@@ -141,7 +141,7 @@ section {
 	width: 450px;
 	height: 250px;
 	border-right-style: solid;
-	border-color: chocolate;
+	border-color: var(--azul-mais-escuro);;
 	font-weight: bold;
 	padding-right: 4em;
 	display: flex;
@@ -153,13 +153,13 @@ section {
 #detalhes-p2 {
 	width: 450px;
 	height: 250px;
-	color: chocolate;
+	color: white;
 	font-size: 24px;
 	font-weight: bold;
 }
 
 #button-1 {
-	background-color: #f23e2f;
+	background-color: var(--azul-mais-escuro);
 	width: 220px;
 	text-align: center;
 	height: 49px;
@@ -173,12 +173,16 @@ section {
 	h4 {
 		font-size: 24px;
 		margin: 0;
-		color: #031627;
+		color: white;
 	}
 }
 
+#button-1:hover {
+	background-color: var(--vermelho);
+}
+
 #button-2 {
-	background-color: #f23e2f;
+	background-color: var(--azul-mais-escuro);
 	width: 327px;
 	text-align: center;
 	height: 49px;
@@ -192,12 +196,16 @@ section {
 	h4 {
 		font-size: 24px;
 		margin: 0;
-		color: #031627;
+		color: white;
 	}
 }
 
+#button-2:hover {
+	background-color: var(--vermelho);
+}
+
 #button-3 {
-	background-color: chocolate;
+	background-color: white;
 	width: 443px;
 	text-align: center;
 	height: 49px;
@@ -211,7 +219,15 @@ section {
 	h4 {
 		font-size: 24px;
 		margin: 0;
-		color: #031627;
+		color: black;
+	}
+}
+
+#button-3:hover {
+	background-color: var(--vermelho);
+
+	h4 {
+		color: white;
 	}
 }
 
@@ -224,20 +240,22 @@ section {
 #detalhes-entregador {
 	margin-left: 1.9em;
 	margin-right: 1.9em;
+	margin-top: 1.5em;
 	p:nth-child(odd) {
 		font-weight: bold;
 	}
 }
 
 .div-principal {
-	background-color: #024057;
-	width: 390px;
-	height: 489px;
+	background-color: var(--azul-mais-claro);
+	width: 23vw;
+	height: 52vh;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 	border-radius: 17px;
+	padding: 1em;
 
 	h3 {
 		text-align: center;
@@ -253,10 +271,11 @@ section {
 
 	.prato > p {
 		font-size: 15px;
+		margin-bottom: 2em;
 	}
 
 	.prato {
-		color: #f23e2f;
+		color: white;
 	}
 }
 
@@ -274,6 +293,10 @@ div .img-secundaria {
 	position: absolute;
 	top: -23px;
 	left: 341px;
+	font-size: 7em
+}
+div .img-secundaria:hover {
+	color: var(--vermelho);
 }
 
 .detalhes {
@@ -287,16 +310,17 @@ div .img-secundaria {
 	justify-content: center;
 	align-items: center;
 	border-radius: 100%;
-	background-color: #f23e2f;
+	background-color: white;
 	width: 56px;
 	height: 56px;
 	text-align: center;
+	margin-right: 1em;
 }
 
 .circ-1 > p {
 	font-size: 32px;
 	font-weight: bold;
-	color: #031627;
+	color: white;
 	margin: 0;
 	font-family: serif;
 }
@@ -306,18 +330,19 @@ div .img-secundaria {
 	justify-content: center;
 	align-items: center;
 	border-radius: 100%;
-	background-color: #031627;
+	background-color: white;
 	width: 34px;
 	height: 34px;
 	text-align: center;
 	position: absolute;
 	top: -1em;
+	margin-right: 1em;
 }
 
 .circ-2 > p {
 	font-size: 24px;
 	font-weight: bold;
-	color: #f23e2f;
+	color: var(--vermelho);
 	margin: 0;
 }
 
@@ -329,13 +354,13 @@ div .img-secundaria {
 }
 
 .especificacao {
-	background-color: #f23e2f;
-	color: #031627;
+	background-color: white;
+	color: white;
 	width: 14em;
 	border-radius: 11px;
 	margin-bottom: 1em;
-	width: 297px;
-	height: 96px;
+	width: 21vw;
+	height: 11vh;
 	padding: 0.3em;
 
 	h5,
@@ -356,4 +381,11 @@ div .img-secundaria {
 	flex-direction: column;
 	justify-content: space-evenly;
 	height: 22em;
+}
+
+.fa-arrow-left:hover {
+	color: var(--vermelho);
+}
+.fa-arrow-right:hover{
+	color: var(--vermelho);
 }

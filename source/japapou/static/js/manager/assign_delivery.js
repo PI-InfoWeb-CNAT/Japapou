@@ -18,10 +18,10 @@
       slide.style.transform = 'scale(0.5) translateX(0)';
       slide.style.zIndex = 0;
 
-      if (prato) prato.style.color = '#F23E2F';
-      if(especificacao) especificacao.style.backgroundColor = '#F23E2F';
-      if(circ_2) circ_2.style.color = '#F23E2F';
-      if(circ_1) circ_1.style.backgroundColor = '#F23E2F';
+      if (prato) prato.style.color = 'var(--azul-mais-escuro)';
+      if(especificacao) especificacao.style.backgroundColor = 'white';
+      if(circ_2) circ_2.style.color = 'var(--vermelho)';
+      if(circ_1) circ_1.style.backgroundColor = 'var(--vermelho)';
 
       return;
     }
@@ -32,20 +32,20 @@
 
     if (offset === 0) {
       slide.style.transform = 'translateX(0) scale(1)';
-      if (prato) prato.style.color = '#F8761E';
-      if(especificacao) especificacao.style.backgroundColor = '#F8761E';
-      if(circ_2) circ_2.style.color = '#F8761E';
-      if(circ_1) circ_1.style.backgroundColor = '#F8761E';
+      if (prato) prato.style.color = 'white';
+      if(especificacao) especificacao.style.backgroundColor = 'var(--azul-mais-escuro)';
+      if(circ_2) circ_2.style.color = 'var(--azul-mais-escuro)';
+      if(circ_1) circ_1.style.backgroundColor = 'var(--azul-mais-escuro)';
     } else {
       slide.style.transform = `
         translateX(${offset * 400}px)
         rotateY(0deg)
         scale(0.7)
       `;
-      if (prato) prato.style.color = '#F23E2F';
-      if(especificacao) especificacao.style.backgroundColor = '#F23E2F';
-      if(circ_1) circ_1.style.color = '#F23E2F';
-      if(circ_1) circ_1.style.backgroundColor = '#F23E2F';
+      if (prato) prato.style.color = 'white';
+      if(especificacao) especificacao.style.backgroundColor = 'var(--vermelho)';
+      if(circ_1) circ_1.style.color = 'var(--vermelho)';
+      if(circ_1) circ_1.style.backgroundColor = 'var(--vermelho)';
     }
   });
 }

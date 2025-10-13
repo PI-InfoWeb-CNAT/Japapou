@@ -17,7 +17,8 @@
             <div class="conteudo">
               <div class="images">
                 <img class="img-principal" src="{% static 'imgs/manager/orders/img_jap1.png' %}" alt="" />
-                <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" />
+                <!-- <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" /> -->
+                <i class="fa-regular fa-heart img-secundaria"></i>
               </div>
               <div class="prato">
                 <h3>1x Lamen com Gyoza</h3>
@@ -46,7 +47,8 @@
             <div class="test">
               <div class="images">
                 <img class="img-principal" src="{% static 'imgs/manager/orders/img_jap2.png' %}" alt="" />
-                <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" />
+                <!-- <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" /> -->
+                <i class="fa-regular fa-heart img-secundaria"></i>
               </div>
               <div class="prato">
                 <h3>Comida</h3>
@@ -75,7 +77,8 @@
             <div class="test">
               <div class="images">
                 <img class="img-principal" src="{% static 'imgs/manager/orders/img_jap3.png' %}" alt="" />
-                <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" />
+                <!-- <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" /> -->
+                <i class="fa-regular fa-heart img-secundaria"></i>
               </div>
               <div class="prato">
                 <h3>1x Lamen com Gyoza</h3>
@@ -104,7 +107,8 @@
             <div class="test">
               <div class="images">
                 <img class="img-principal" src="{% static 'imgs/manager/orders/img_jap4.png' %}" alt="" />
-                <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" />
+                <!-- <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" /> -->
+                <i class="fa-regular fa-heart img-secundaria"></i>
               </div>
               <div class="prato">
                 <h3>1x Lamen com Gyoza</h3>
@@ -133,7 +137,8 @@
             <div class="test">
               <div class="images">
                 <img class="img-principal" src="{% static 'imgs/manager/orders/img_jap5.png' %}" alt="" />
-                <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" />
+                <!-- <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" /> -->
+                <i class="fa-regular fa-heart img-secundaria"></i>
               </div>
               <div class="prato">
                 <h3>1x Lamen com Gyoza</h3>
@@ -158,15 +163,15 @@
           </div>
         </div>
       </div>
-      <button id="prev"><img src="{% static 'imgs/manager/orders/Seta.png' %}" alt="" /></button>
-      <button id="next"><img src="{% static 'imgs/manager/orders/Seta.png' %}" alt="" /></button>
+      <button id="prev"><i class="fa-solid fa-arrow-left"></i></button>
+      <button id="next"><i class="fa-solid fa-arrow-right"></i></button>
     </div>
   </div>
 
   <section>
     <div class="destaque">
       <p>Seu pedido em</p>
-      <h2>japapou [Rua]</h2>
+      <h2>japapou</h2>
     </div>
     <div id="detalhes">
       <div id="detalhes-p1">
@@ -195,8 +200,7 @@
       </div>
 
       <div id="detalhes-p2">
-        <p>Ponto de referencia: descrição</p>
-        <p>Complemento: [complemento], [Bairro], [Rua], [Número], [Cidade], [Estado]</p>
+        <p>{{ user.endereco }}</p>
       </div>
     </div>
 
