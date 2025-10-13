@@ -10,6 +10,8 @@ import json
 @login_required(login_url='/login/')  # ou o caminho real do seu login
 @permission_required(['japapou.view_customuser', 'japapou.change_customuser'], raise_exception=True)
 def manager_profile_view(request):
+	if request.user.tipo_usuario != 'MANAGER':
+		return HttpResponseForbidden("Acesso negado. 403 Forbidden.")
 	return render(request, "manager/profile.html", {"user": request.user})
 
 @login_required
