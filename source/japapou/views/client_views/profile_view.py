@@ -11,7 +11,7 @@ import json
 def client_profile_view(request):
     return render(request, "client/profile.html", {"user": request.user})
 
-@login_required
+@login_required(login_url='/login/')
 def update_user(request):
 	if request.method == "POST":
 		try:
