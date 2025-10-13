@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 				// Envia via AJAX
 				try {
-					const response = await fetch("/manager/profile/update_user/", {
+					const response = await fetch("/delivery_man/profile/update_user/", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			formData.append("id", userId);
 
 			try {
-				const response = await fetch("/manager/profile/update_photo/", {
+				const response = await fetch("/delivery_man/profile/update_photo/", {
 					method: "POST",
 					headers: {
 						"X-CSRFToken": getCSRFToken(),
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			formData.append("id", userId);
 
 			try {
-				const response = await fetch("/manager/profile/update_photo/", {
+				const response = await fetch("/delivery_man/profile/update_photo/", {
 					method: "POST",
 					headers: {
 						"X-CSRFToken": getCSRFToken(),
