@@ -2,6 +2,7 @@ from django.db import models  # type: ignore
 from japapou.models.plate import Plate
 
 class OrderItem(models.Model):
+    order = models.ForeignKey('japapou.Order', on_delete=models.CASCADE, related_name='items')
     prato = models.ForeignKey(Plate, on_delete=models.CASCADE, default=1, related_name='items')
     amount = models.IntegerField()
     comment = models.TextField(null=True)

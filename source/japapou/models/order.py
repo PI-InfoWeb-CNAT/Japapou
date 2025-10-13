@@ -27,10 +27,20 @@ class Order_Pickup(Order):
         return f"Retirado em {self.pickup_date.strftime('%d/%m/%Y %H:%M')}"
     
 
+from django.conf import settings
+
 class Order_Delivery(Order):
-    delivery_fee  = models.DecimalField(max_digits=10, decimal_places=2, null=False)
-    dispatch_date = models.DateTimeField()
-    delivery_date = models.DateTimeField()
+    delivery_fee = models.DecimalField(max_digits=10, decimal_places=2, null=False)
+    dispatch_date = models.DateTimeField(null=True, blank=True)
+    delivery_date = models.DateTimeField(null=True, blank=True)
+    delivery_man = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        limit_choices_to={'tipo_usuario': 'DELIVERY_MAN'},
+        related_name='pedidos_entregues'
+    )
 
     class Meta:
         verbose_name = "Pedido Delivery"
