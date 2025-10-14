@@ -389,6 +389,19 @@ div .img-secundaria:hover {
 .fa-arrow-right:hover{
 	color: var(--vermelho);
 }
+#button-3.confirmed {
+  background-color: #3bb33b;
+  cursor: default;
+  pointer-events: none; /* impede qualquer clique */
+  padding: 2.6em;
+  padding-inline: 0;
+  transition: all 0.3s ease;
+}
+
+#button-3.confirmed h4 {
+  color: white;
+}
+
 
 
 .modal {

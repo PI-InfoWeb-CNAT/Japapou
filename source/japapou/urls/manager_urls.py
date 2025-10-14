@@ -22,5 +22,6 @@ urlpatterns = [
     path("profile/update_photo/", update_photo, name="update_photo"),
     path("dashboard/", manager_dashboard_view, name="manager_dashboard"),
     path("assign_delivery/<int:order_id>/", manager_assign_delivery_view, name='assign_delivery'),
+    path('confirm_dispatch/<int:order_id>/', confirm_dispatch_view, name='confirm_dispatch'),
     path("register_delivery_man/", delivery_man_register_view, name="register_delivery_man"),
 ]

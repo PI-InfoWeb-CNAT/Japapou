@@ -94,9 +94,18 @@
       <div class="button">
         <div class="assign-delivery-btn"><h4>Atribuir entregador</h4></div>
       </div>
-      <div class="button">
-        <div id="button-3"><h4>Confirmar saída para entrega</h4></div>
-      </div>
+      {% if order.dispatch_date %}
+        <div class="button">
+          <div id="button-3" class="confirmed">
+            <h4>Já saiu para entrega ({{ order.dispatch_date|date:"d/m/Y H:i" }})</h4>
+          </div>
+        </div>
+      {% else %}
+        <div class="button">
+          <div id="button-3"><h4>Confirmar saída para entrega</h4></div>
+        </div>
+      {% endif %}
+
     </div>
   {% else %}
     <div id="detalhes-entregador" data-order-id="{{ order.id }}" data-csrf="{{ csrf_token }}">

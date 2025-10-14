@@ -106,3 +106,39 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const confirmBtn = document.getElementById('button-3');
+  if (!confirmBtn) return;
+
+  confirmBtn.addEventListener('click', async () => {
+    const container = document.getElementById('detalhes-entregador');
+    const orderId = container.dataset.orderId;
+    const csrf = container.dataset.csrf;
+
+    try {
+      const response = await fetch(`/manager/confirm_dispatch/${orderId}/`, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': csrf,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const data = await response.json();
+
+      if (data.status === 'ok') {
+        confirmBtn.innerHTML = `<h4>Já saiu para entrega (${data.dispatch_date})</h4>`;
+        confirmBtn.style.backgroundColor = '#3bb33b';
+      } else {
+        alert('Erro ao confirmar saída.');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Erro de conexão.');
+    }
+  });
+});
+
+confirmBtn.classList.add('confirmed');
+confirmBtn.disabled = true;
