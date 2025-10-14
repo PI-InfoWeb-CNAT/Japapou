@@ -1,5 +1,6 @@
 from django.urls import path  # type: ignore
 from japapou.views import *  # type: ignore
+from japapou.views.manager_views.assign_pickup_view import manager_assign_pickup_view, confirm_pickup_view
 
 
 urlpatterns = [
@@ -22,6 +23,8 @@ urlpatterns = [
     path("profile/update_photo/", update_photo, name="update_photo"),
     path("dashboard/", manager_dashboard_view, name="manager_dashboard"),
     path("assign_delivery/<int:order_id>/", manager_assign_delivery_view, name='assign_delivery'),
+    path("assign_pickup/<int:order_id>/", manager_assign_pickup_view, name='assign_pickup'),
     path('confirm_dispatch/<int:order_id>/', confirm_dispatch_view, name='confirm_dispatch'),
+    path('confirm_pickup/<int:order_id>/', confirm_pickup_view, name='confirm_pickup'),
     path("register_delivery_man/", delivery_man_register_view, name="register_delivery_man"),
 ]

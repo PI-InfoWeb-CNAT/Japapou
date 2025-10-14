@@ -17,14 +17,16 @@ class Order(models.Model):
         return f"{self.date.strftime('%d/%m/%Y')} - R$ {self.total}"
 
 class Order_Pickup(Order):
-    pickup_date = models.DateField()
+    pickup_date = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         verbose_name = "Pedido Retirada"
         verbose_name_plural = "Pedidos Retirados"
 
     def __str__(self):
-        return f"Retirado em {self.pickup_date.strftime('%d/%m/%Y %H:%M')}"
+        if self.pickup_date:
+            return f"Retirado em {self.pickup_date.strftime('%d/%m/%Y %H:%M')}"
+        return f"Pedido retirada (sem data definida)"
     
 
 from django.conf import settings

@@ -1,3 +1,6 @@
+from django.contrib import admin
+from .models.order_item import OrderItem
+from .models.order import Order, Order_Pickup,Order_Delivery
 from django.contrib import admin  # type: ignore
 from japapou.models import *
 from .models.user import CustomUser
@@ -32,3 +35,23 @@ class CustomUserAdmin(UserAdmin):
     )
 
 admin.site.register(CustomUser, CustomUserAdmin)
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'date', 'total', 'created_at')
+    ordering = ('-date',)
+    readonly_fields = ('created_at', 'altered_at')
+
+
+@admin.register(Order_Pickup)
+class OrderPickupAdmin(admin.ModelAdmin):
+    list_display = ('id', 'date', 'pickup_date', 'total')
+    ordering = ('-pickup_date',)
+    readonly_fields = ('created_at', 'altered_at')
+
+
+@admin.register(Order_Delivery)
+class OrderDeliveryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'date', 'delivery_man', 'dispatch_date', 'delivery_date', 'total')
+    list_filter = ('dispatch_date', 'delivery_man')
+    ordering = ('-dispatch_date',)
+    readonly_fields = ('created_at', 'altered_at')
