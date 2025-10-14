@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-	console.log("manage_profile.js carregado ✅");
+	console.log("delivery_man_profile.js carregado ✅");
 
 	// 🔹 Função utilitária para pegar o token CSRF
 	function getCSRFToken() {

@@ -1,18 +1,16 @@
+
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import update_session_auth_hash
 from django.http import JsonResponse
 from django.shortcuts import render
 from japapou.models import CustomUser
-from django.http import HttpResponseForbidden
 import json
 
 
 @login_required(login_url='/login/')  # ou o caminho real do seu login
 @permission_required(['japapou.view_customuser', 'japapou.change_customuser'], raise_exception=True)
 def manager_profile_view(request):
-	if request.user.tipo_usuario != 'MANAGER':
-		return HttpResponseForbidden("Acesso negado. 403 Forbidden.")
-	return render(request, "manager/profile.html", {"user": request.user})
+    return render(request, "manager/profile.html", {"user": request.user})
 
 @login_required
 def update_user(request):
