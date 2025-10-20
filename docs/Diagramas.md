@@ -13,7 +13,7 @@
 
 ## 1. Diagrama de casos de uso 
 
-![Casos de Uso](imagens/Diagrama_Casos_de_Uso.png)
+![Casos de Uso](imagens/Japapou_CDU.png)
 
 ## 2. Diagrama de classes
 
