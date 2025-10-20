@@ -1,11 +1,6 @@
 from django.urls import path
 from japapou.views import (
     manager_history_view,
-    manager_delivery_man_view,
-    manager_delivery_man_create_view,
-    manager_delivery_man_detail_view,
-    manager_delivery_man_update_view,
-    manager_delivery_man_delete_view,
     manager_menu_view,
     create_menu_view,
     manager_plates_view,
@@ -21,15 +16,6 @@ from japapou.views import (
 
 urlpatterns = [
     path("history/", manager_history_view, name="manager_history"),
-
-    # --- ENTREGADORES ---
-    path("delivery-man/", manager_delivery_man_view, name="manager_delivery_man"),
-    path("delivery-man/create/", manager_delivery_man_create_view, name="manager_delivery_man_create"),
-    path("delivery-man/<int:id>/", manager_delivery_man_detail_view, name="manager_delivery_man_detail"),
-    path("delivery-man/<int:id>/edit/", manager_delivery_man_update_view, name="manager_delivery_man_update"),
-    path("delivery-man/<int:id>/delete/", manager_delivery_man_delete_view, name="manager_delivery_man_delete"),
-
-    # --- OUTROS ---
     path("menu/", manager_menu_view, name="manager_menu"),
     path("menu/create/", create_menu_view, name="create_menu"),
     path("plates/", manager_plates_view, name="manager_plates"),
