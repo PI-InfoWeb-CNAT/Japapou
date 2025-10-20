@@ -1,86 +1,141 @@
+:root {
+    --darker-gray: #222;
+    --lighter-gray: #444;
+    --light-gray: #555;
+    --text-primary: #fff;
+    --gray: #aaa;
+}
+
+/* ======== GRID PRINCIPAL ======== */
 .entregadores {
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-	gap: 32px;
-	padding: 0 32px;
-	width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 32px;
+    padding: 0 32px 64px;
 }
 
+/* ======== CARD ======== */
 .card {
-	background: #000;
-	border: 1px solid var(--darker-gray);
-	display: flex;
-	flex-direction: column;
-
-	h2 {
-		font-size: 16px;
-		font-weight: 600;
-		text-align: center;
-		margin: 12px 0 8px;
-	}
+    background: #000;
+    border: 1px solid var(--darker-gray);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.rating {
-	display: flex;
-	justify-content: center;
-	gap: 8px;
-	margin-bottom: 20px;
-
-	i {
-		font-size: 24px;
-		color: var(--gray);
-	}
+.card:hover {
+    transform: translateY(-4px);
+    border-color: var(--lighter-gray);
 }
 
+.card h2 {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    margin: 12px 0 8px;
+    color: var(--text-primary);
+}
+
+/* ======== FOTO ======== */
 .photo {
-	height: 260px;
-	background: linear-gradient(#b6b6b6, #5b5b5b); /* TODO: add variable */
-	display: flex;
-	align-items: flex-end;
-	justify-content: center;
-	color: black;
-	font-size: 14px;
-
-	img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
+    height: 260px;
+    background: linear-gradient(#b6b6b6, #5b5b5b);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
 }
 
+.photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ======== RATING ======== */
+.rating {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.rating i {
+    font-size: 20px;
+    color: var(--gray);
+}
+
+/* ======== AÇÕES ======== */
 .actions {
-	margin: 0 16px 24px;
-	display: flex;
-	gap: 4px;
-
-	button {
-		flex: 1;
-		border: none;
-		font-weight: 600;
-		padding: 6px 0;
-		cursor: pointer;
-		background: white;
-		color: black;
-		transition: background 0.2s;
-
-		&:hover {
-			background: var(--lighter-gray);
-		}
-	}
+    display: flex;
+    gap: 4px;
+    padding: 12px;
+    justify-content: center;
 }
 
-.add-card {
-	background: var(--lighter-gray);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 48px;
-	color: black;
-	height: 360px;
-	cursor: pointer;
-	transition: background 0.2s;
+.actions button {
+    flex: 1;
+    border: none;
+    font-weight: 600;
+    padding: 8px 0;
+    cursor: pointer;
+    background: white;
+    color: black;
+    transition: background 0.2s ease;
+}
 
-	&:hover {
-		background: var(--light-gray);
-	}
+.actions button:hover {
+    background: var(--lighter-gray);
+}
+
+/* ======== BOTÃO DE ADIÇÃO ======== */
+.add-card {
+    background: var(--lighter-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: black;
+    height: 360px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.add-card:hover {
+    background: var(--light-gray);
+}
+
+.add-card a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* ======== ANIMAÇÕES ======== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ======== RESPONSIVIDADE ======== */
+@media (max-width: 600px) {
+  .entregadores-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card-content h2 {
+    font-size: 1rem;
+  }
+
+  .modal-content {
+    padding: 24px;
+  }
 }

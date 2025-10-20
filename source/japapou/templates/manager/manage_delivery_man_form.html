@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cadastrar Entregador{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/manager/manage_delivery_man_form.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-wrapper">
+  <h1>Cadastrar Novo Entregador</h1>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}
+          <small class="help-text">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <small class="error">{{ error }}</small>
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+    <div class="form-actions">
+      <button type="submit" class="btn-primary">Cadastrar</button>
+      <a href="{% url 'manager_delivery_man' %}" class="btn-secondary">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+    // Adiciona classes Bootstrap aos campos do formulário
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            if (input.type !== 'checkbox' && input.type !== 'radio') {
+                input.classList.add('form-control');
+            }
+            
+            if (input.errors) {
+                input.classList.add('is-invalid');
+            }
+        });
+        
+        // Para checkboxes
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.classList.add('form-check-input');
+        });
+    });
+</script>
+{% endblock %}

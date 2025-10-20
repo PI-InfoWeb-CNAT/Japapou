@@ -109,27 +109,40 @@ class VisitorRegisterForm(forms.ModelForm):
         fields = ['username', 'password', 'email', 'telefone', 'endereco', 'cpf', 'data_nascimento', 'first_name', 'last_name']
         
 
-class DeliveyrRegisterForm(forms.ModelForm):
-    '''
-        Formulário personalizado para que um gerente possa cadastrar um novo entregador
-    '''
+class DeliveryRegisterForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # deixa o campo de senha opcional na edição
+        if self.instance and self.instance.pk:
+            self.fields['password'].required = False
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control'})
 
+    '''
+    Formulário personalizado para que um gerente possa cadastrar um novo entregador
+    '''
     first_name = forms.CharField(required=True, max_length=50)
     last_name = forms.CharField(required=True, max_length=100)
     email = forms.EmailField(required=True, max_length=254)
-    password = forms.CharField(required=True, widget=forms.PasswordInput)
+    password = forms.CharField(required=False, widget=forms.PasswordInput)
     telefone = forms.CharField(required=True, max_length=20)
     cpf = forms.CharField(required=True, max_length=14)
     data_nascimento = forms.DateField(required=True, widget=forms.DateInput(attrs={'type': 'date'}))
     cnh = forms.CharField(required=True, max_length=10)
     modelo_moto = forms.CharField(required=True, max_length=20)
     cor_moto = forms.CharField(required=True, max_length=10)
-    Placa_moto = forms.CharField(required=True, max_length=10)
+    placa_moto = forms.CharField(required=True, max_length=10)
+    foto = forms.ImageField(required=False)
+    
 
+    
     class Meta:
         model = CustomUser
-        fields = ['username', 'password', 'email', 'telefone', 'endereco', 'cpf', 'data_nascimento', 'first_name', 'last_name',
-                  'cnh', 'modelo_moto', 'cor_moto', 'Placa_moto']
+        fields = [
+            'username', 'password', 'email', 'telefone', 'endereco', 'cpf', 'data_nascimento',
+            'first_name', 'last_name', 'cnh', 'modelo_moto', 'cor_moto', 'placa_moto', 'foto'
+        ]
+
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -140,6 +153,6 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser
 
         fields = ('tipo_usuario', 'username', 'email', 'first_name', 'last_name', 'is_staff', 'telefone', 'endereco', 'cpf', 'data_nascimento', 
-                  'foto_perfil', 'cnh', 'modelo_moto', 'cor_moto', 'Placa_moto')
+                  'foto_perfil', 'cnh', 'modelo_moto', 'cor_moto', 'placa_moto', 'foto')
 
          

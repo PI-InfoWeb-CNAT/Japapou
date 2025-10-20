@@ -29,4 +29,5 @@ class CustomUser(AbstractUser):
     cnh = models.CharField(max_length=10, blank=True)
     modelo_moto = models.CharField(max_length=20, blank=True)
     cor_moto = models.CharField(max_length=10, blank=True)
-    Placa_moto = models.CharField(max_length=10, blank=True)
+    placa_moto = models.CharField(max_length=10, blank=True)
+    foto = models.ImageField(blank=True, null=True, upload_to="fotos/")

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ delivery_man.first_name }} {{ delivery_man.last_name }} - Detalhes{% endblock %}
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/manager/manage_delivery_man_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="detail-wrapper">
+  <div class="detail-header">
+    <a href="{% url 'manager_delivery_man' %}" class="btn-back">← Voltar</a>
+    <a href="{% url 'manager_delivery_man_update' delivery_man.id %}" class="btn-edit"><i class="fas fa-edit"></i> Editar</a>
+  </div>
+
+  <div class="profile">
+    {% if delivery_man.foto %}
+      <img src="{{ delivery_man.foto.url }}" class="profile-pic" alt="foto">
+    {% else %}
+      <img src="{% static 'imgs/default-user.png' %}" class="profile-pic" alt="Sem foto">
+    {% endif %}
+    <h1>{{ delivery_man.first_name }} {{ delivery_man.last_name }}</h1>
+  </div>
+
+  <div class="info-grid">
+    <div><strong>Email:</strong> {{ delivery_man.email }}</div>
+    <div><strong>Telefone:</strong> {{ delivery_man.telefone }}</div>
+    <div><strong>CPF:</strong> {{ delivery_man.cpf }}</div>
+    <div><strong>CNH:</strong> {{ delivery_man.cnh }}</div>
+    <div><strong>Modelo Moto:</strong> {{ delivery_man.modelo_moto }}</div>
+    <div><strong>Placa:</strong> {{ delivery_man.placa_moto }}</div>
+  </div>
+</div>
+{% endblock %}

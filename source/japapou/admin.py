@@ -17,18 +17,18 @@ class CustomUserAdmin(UserAdmin):
 
     # Adiciona os campos customizados na lista de exibição
     list_display = ['tipo_usuario', 'username', 'email', 'first_name', 'last_name', 'is_staff', 'telefone', 'endereco', 'cpf', 
-                    'data_nascimento', 'foto_perfil', 'cnh', 'modelo_moto', 'cor_moto', 'Placa_moto']
+                    'data_nascimento', 'foto_perfil', 'cnh', 'modelo_moto', 'cor_moto', 'placa_moto']
 
     # utilizado para mostrar os novos campos que iram aparecer quando editar um usuario na area administrativa
     fieldsets = UserAdmin.fieldsets + (
         ('Informações adicionais', {'fields': ('tipo_usuario', 'telefone', 'endereco', 'cpf', 'data_nascimento', 'foto_perfil')}),
-        ('Informações de Entregador', {'fields': ('cnh', 'modelo_moto', 'cor_moto', 'Placa_moto')}),
+        ('Informações de Entregador', {'fields': ('cnh', 'modelo_moto', 'cor_moto', 'placa_moto')}),
     )
 
     # utilizado para mostrar os novos campos que iram aparecer quando adicionar um novo usuario na area administrativa
     add_fieldsets = UserAdmin.add_fieldsets + (
         ('Informações adicionais', {'fields': ('tipo_usuario', 'telefone', 'endereco', 'cpf', 'data_nascimento', 'foto_perfil')}),
-        ('Informações de Entregador', {'fields': ('cnh', 'modelo_moto', 'cor_moto', 'Placa_moto')}),
+        ('Informações de Entregador', {'fields': ('cnh', 'modelo_moto', 'cor_moto', 'placa_moto')}),
     )
 
 admin.site.register(CustomUser, CustomUserAdmin)

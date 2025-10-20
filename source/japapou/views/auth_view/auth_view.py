@@ -1,19 +1,19 @@
 from django.contrib.auth import logout, login
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm # type: ignore
-from japapou.forms import VisitorRegisterForm, DeliveyrRegisterForm  # type: ignore
+from japapou.forms import VisitorRegisterForm, DeliveryRegisterForm  # type: ignore
 
 
 def delivery_man_register_view(request):
     '''
         View para registro de entregadores (Gerente que registra entregadores).
     '''
-    form = DeliveyrRegisterForm()
+    form = DeliveryRegisterForm()
 
     if request.method == "POST":
         #print(request.POST)
         
-        form = DeliveyrRegisterForm(request.POST)
+        form = DeliveryRegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False) # Salva o usuário, mas não faz commit no banco ainda
             user.tipo_usuario = 'DELIVERY_MAN'  # Define o tipo de usuário como ENTREGADOR
@@ -23,7 +23,7 @@ def delivery_man_register_view(request):
             return redirect("home")
         else:
             print(form.errors)
-            form = DeliveyrRegisterForm()
+            form = DeliveryRegisterForm()
 
     return render(request, "manager/register_delivery_man.html", context={'form': form})
 

@@ -1,0 +1,103 @@
+.form-wrapper {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: #111;
+  padding: 2rem;
+  border-radius: 16px;
+  color: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  text-align: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+label {
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+
+input, select, textarea {
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 0.6rem;
+  color: white;
+  font-size: 1rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #0077ff;
+  outline: none;
+}
+
+.help-text {
+  color: #aaa;
+  font-size: 0.85rem;
+  margin-top: 0.2rem;
+}
+
+.error {
+  color: #e63946;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: #0077ff;
+  transition: background 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #005fcc;
+}
+
+.btn-secondary {
+  background: #333;
+}
+
+.btn-secondary:hover {
+  background: #444;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .form-wrapper {
+    padding: 1.5rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}
