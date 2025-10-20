@@ -13,11 +13,11 @@
 
 ## 1. Diagrama de casos de uso 
 
-![Casos de Uso](imagens/Japapou_CDU.png)
+![Casos de Uso](imagens/Diagrama_Casos_de_Uso.png)
 
 ## 2. Diagrama de classes
 
-![Entidades e Relacionamentos](imagens/japapou_diagrama_classes.png)
+![Entidades e Relacionamentos](imagens/japapou_class_diagram.png)
 
 ## 3. Diagrama de entidades e relacionamentos
 
