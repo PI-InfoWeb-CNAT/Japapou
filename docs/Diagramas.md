@@ -17,7 +17,7 @@
 
 ## 2. Diagrama de classes
 
-![Entidades e Relacionamentos](imagens/japapou_class_diagram.png)
+![Entidades e Relacionamentos](imagens/japapou_diagrama_classes.png)
 
 ## 3. Diagrama de entidades e relacionamentos
 
