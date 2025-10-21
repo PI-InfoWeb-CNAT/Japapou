@@ -2,7 +2,7 @@ from django.contrib import admin  # type: ignore
 from japapou.models import *
 from .models.user import CustomUser
 from django.contrib.auth.admin import UserAdmin
-from .forms import CustomUserCreationForm
+
 
 admin.site.register(Menu)
 admin.site.register(OrderItem)

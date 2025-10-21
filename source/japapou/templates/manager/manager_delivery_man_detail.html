@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Detalhes do Entregador{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/manager/manage_delivery_man.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Cabeçalho -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">
+                <i class="fas fa-motorcycle me-2"></i>Detalhes do Entregador
+            </h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'manager_dashboard' %}">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'manager_delivery_man' %}">Entregadores</a></li>
+                    <li class="breadcrumb-item active">{{ delivery_man.first_name }} {{ delivery_man.last_name }}</li>
+                </ol>
+            </nav>
+        </div>
+        <div>
+            <a href="{% url 'manager_delivery_man_update' delivery_man.id %}" class="btn btn-warning">
+                <i class="fas fa-edit me-1"></i>Editar
+            </a>
+            <a href="{% url 'manager_delivery_man' %}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-1"></i>Voltar
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Informações Pessoais -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h6 class="m-0 font-weight-bold">
+                        <i class="fas fa-user me-1"></i>Informações Pessoais
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        {% if delivery_man.foto %}
+                            <img src="{{ delivery_man.foto.url }}" alt="{{ delivery_man.username }}" 
+                                 class="img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;">
+                        {% else %}
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto" 
+                                 style="width: 120px; height: 120px;">
+                                <i class="fas fa-user fa-3x"></i>
+                            </div>
+                        {% endif %}
+                        <h5 class="mt-3">{{ delivery_man.first_name }} {{ delivery_man.last_name }}</h5>
+                        <p class="text-muted">@{{ delivery_man.username }}</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <strong><i class="fas fa-envelope me-1"></i>Email:</strong>
+                            <p class="text-muted">{{ delivery_man.email }}</p>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <strong><i class="fas fa-phone me-1"></i>Telefone:</strong>
+                            <p class="text-muted">{{ delivery_man.telefone }}</p>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <strong><i class="fas fa-id-card me-1"></i>CPF:</strong>
+                            <p class="text-muted">{{ delivery_man.cpf }}</p>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <strong><i class="fas fa-birthday-cake me-1"></i>Data Nasc.:</strong>
+                            <p class="text-muted">{{ delivery_man.data_nascimento|date:"d/m/Y" }}</p>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <strong><i class="fas fa-map-marker-alt me-1"></i>Endereço:</strong>
+                            <p class="text-muted">{{ delivery_man.endereco }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Informações da Moto -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h6 class="m-0 font-weight-bold">
+                        <i class="fas fa-motorcycle me-1"></i>Informações da Moto
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <strong><i class="fas fa-id-card me-1"></i>CNH:</strong>
+                            <p class="text-muted">{{ delivery_man.cnh }}</p>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <strong><i class="fas fa-motorcycle me-1"></i>Modelo:</strong>
+                            <p class="text-muted">{{ delivery_man.modelo_moto }}</p>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <strong><i class="fas fa-palette me-1"></i>Cor:</strong>
+                            <p class="text-muted">{{ delivery_man.cor_moto }}</p>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <strong><i class="fas fa-car me-1"></i>Placa:</strong>
+                            <p class="text-muted">{{ delivery_man.placa_moto }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informações da Conta -->
+            <div class="card shadow mt-4">
+                <div class="card-header bg-info text-white">
+                    <h6 class="m-0 font-weight-bold">
+                        <i class="fas fa-info-circle me-1"></i>Informações da Conta
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6 mb-3">
+                            <strong><i class="fas fa-calendar me-1"></i>Data Cadastro:</strong>
+                            <p class="text-muted">{{ delivery_man.date_joined|date:"d/m/Y H:i" }}</p>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <strong><i class="fas fa-sign-in-alt me-1"></i>Último Login:</strong>
+                            <p class="text-muted">
+                                {% if delivery_man.last_login %}
+                                    {{ delivery_man.last_login|date:"d/m/Y H:i" }}
+                                {% else %}
+                                    Nunca logou
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

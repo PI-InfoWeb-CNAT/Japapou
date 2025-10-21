@@ -108,6 +108,12 @@ class VisitorRegisterForm(forms.ModelForm):
         model = CustomUser
         fields = ['username', 'password', 'email', 'telefone', 'endereco', 'cpf', 'data_nascimento', 'first_name', 'last_name']
         
+class DateInput(forms.DateInput):
+    input_type = 'date'
+    
+    def __init__(self, **kwargs):
+        kwargs.setdefault('format', '%Y-%m-%d')
+        super().__init__(**kwargs)
 
 class DeliveryRegisterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -115,6 +121,7 @@ class DeliveryRegisterForm(forms.ModelForm):
         # deixa o campo de senha opcional na edição
         if self.instance and self.instance.pk:
             self.fields['password'].required = False
+        
         for field in self.fields.values():
             field.widget.attrs.update({'class': 'form-control'})
 
@@ -127,7 +134,10 @@ class DeliveryRegisterForm(forms.ModelForm):
     password = forms.CharField(required=False, widget=forms.PasswordInput)
     telefone = forms.CharField(required=True, max_length=20)
     cpf = forms.CharField(required=True, max_length=14)
-    data_nascimento = forms.DateField(required=True, widget=forms.DateInput(attrs={'type': 'date'}))
+    data_nascimento = forms.DateField(
+        required=True, 
+        widget=DateInput()
+    )
     cnh = forms.CharField(required=True, max_length=10)
     modelo_moto = forms.CharField(required=True, max_length=20)
     cor_moto = forms.CharField(required=True, max_length=10)
@@ -142,17 +152,3 @@ class DeliveryRegisterForm(forms.ModelForm):
             'username', 'password', 'email', 'telefone', 'endereco', 'cpf', 'data_nascimento',
             'first_name', 'last_name', 'cnh', 'modelo_moto', 'cor_moto', 'placa_moto', 'foto'
         ]
-
-
-
-class CustomUserCreationForm(UserCreationForm):
-    '''
-        Formulário personalizado para criação de usuários no painel de admin
-    '''
-    class Meta(UserCreationForm.Meta):
-        model = CustomUser
-
-        fields = ('tipo_usuario', 'username', 'email', 'first_name', 'last_name', 'is_staff', 'telefone', 'endereco', 'cpf', 'data_nascimento', 
-                  'foto_perfil', 'cnh', 'modelo_moto', 'cor_moto', 'placa_moto', 'foto')
-
-         
