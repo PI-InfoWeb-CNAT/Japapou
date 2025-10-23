@@ -23,7 +23,7 @@ class Review(models.Model):
     usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     class Meta:
-        abstract = True
+        abstract = True # serve para dizer ao django que está é uma classe abstrata
         verbose_name = "Avaliação"
         verbose_name_plural = "Avaliações"
         ordering = ["-created_at"]
