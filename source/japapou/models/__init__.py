@@ -9,4 +9,5 @@ from .order import Order
 from .period import Period
 from .plate_option import PlateOption
 from .plate import Plate
+from .review import PlateReview, CourierReview
 from .user import CustomUser

@@ -10,6 +10,8 @@ admin.site.register(Order)
 admin.site.register(Period)
 admin.site.register(PlateOption)
 admin.site.register(Plate)
+admin.site.register(PlateReview)
+admin.site.register(CourierReview)
 
 
 class CustomUserAdmin(UserAdmin):
