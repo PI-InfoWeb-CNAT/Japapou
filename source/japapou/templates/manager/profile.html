@@ -1,87 +1,151 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}
-  Perfil
-{% endblock %}
+{% block title %}Perfil{% endblock %}
 
 {% block extra_head %}
-  <link rel="stylesheet" href="{% static 'css/manager/profile.css' %}" />
+<link rel="stylesheet" href="{% static 'css/manager/profile.css' %}" />
 {% endblock %}
 
 {% block content %}
-  <h2 class="section-title">Geral</h2>
+<h2 class="section-title">Geral</h2>
 
-  <section>
-    <div class="foto-perfil">
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="foto-container">
+<section>
+  <div class="foto-perfil">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <!-- Adicione o data-user-id ao input ou à div da foto -->
+        <div class="foto-container" data-user-id="{{ user.id }}">
           <label for="fileInput">
-            <img id="previewImage" src="{% static 'imgs/manager/profile.png' %}" alt="Foto de perfil" />
+            {% if user.foto_perfil %}
+              <img id="previewImage" src="{{ user.foto_perfil.url }}" alt="Foto de perfil" />
+            {% else %}
+              <img id="previewImage" src="{% static 'imgs/manager/profile.png' %}" alt="Foto de perfil" />
+            {% endif %}
             <div class="icone-camera">
               <i class="fa-solid fa-camera"></i>
             </div>
           </label>
           <input type="file" name="foto" id="fileInput" accept="image/*" style="display: none" />
         </div>
-        <div>
-          <p class="foto-label">Altere a sua foto de perfil</p>
-          <button type="button" id="removeImageBtn">Remover</button>
-        </div>
-      </form>
-    </div>
-  </section>
+      <div>
+        <p class="foto-label">Altere a sua foto de perfil</p>
+        <button type="button" id="removeImageBtn">Remover</button>
+      </div>
+    </form>
+  </div>
+</section>
 
-  <section>
-    <ul class="informacoes">
-      <li>
-        <strong>Nome</strong>
-        <div class="value-with-icon">
-          <span>Cláudia Martins Soares</span>
-          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-        </div>
-      </li>
-      <li>
-        <strong>Aniversário</strong>
-        <div class="value-with-icon">
-          <span>14 de outubro de 1998</span>
-          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-        </div>
-      </li>
-      <li>
-        <strong>E-mail</strong>
-        <div class="value-with-icon">
-          <span>claudia.martins.gerente@corpflux.com</span>
-          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-        </div>
-      </li>
-    </ul>
-  </section>
+<section>
+  <ul class="informacoes">
+    <li>
+      <strong>Nome</strong>
+      <div class="value-with-icon">
+        <span id="first_name" data-field="first_name" data-id="{{ user.id }}" class="editable-span">{{ user.first_name }}</span>
+        <a href="#" class="edit-icon" data-edit="first_name" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </li>
+    <li>
+      <strong>Sobrenome</strong>
+      <div class="value-with-icon">
+        <span id="last_name" data-field="last_name" data-id="{{ user.id }}" class="editable-span">{{ user.last_name }}</span>
+        <a href="#" class="edit-icon" data-edit="last_name" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </li>
+    <li>
+      <strong>CPF</strong>
+      <div class="value-with-icon">
+        <span id="cpf" data-field="cpf" data-id="{{ user.id }}" class="editable-span">{{ user.cpf }}</span>
+        <a href="#" class="edit-icon" data-edit="cpf" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </li>
+    <li>
+      <strong>Aniversário</strong>
+      <div class="value-with-icon">
+        <span id="data_nascimento" data-field="data_nascimento" data-id="{{ user.id }}" class="editable-span">
+          {{ user.data_nascimento }}
+        </span>
+        <a href="#" class="edit-icon" data-edit="data_nascimento" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </li>
+    <li>
+      <strong>Telefone</strong>
+      <div class="value-with-icon">
+        <span id="telefone" data-field="telefone" data-id="{{ user.id }}" class="editable-span">{{ user.telefone }}</span>
+        <a href="#" class="edit-icon" data-edit="telefone" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </li>
+    <li>
+      <strong>Endereço</strong>
+      <div class="value-with-icon">
+        <span id="endereco" data-field="endereco" data-id="{{ user.id }}" class="editable-span">{{ user.endereco }}</span>
+        <a href="#" class="edit-icon" data-edit="endereco" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </li>
 
-  <section>
-    <h2 class="section-title">Conta</h2>
-    <ul class="informacoes">
-      <li>
-        <strong>Username</strong>
-        <div class="value-with-icon">
-          <span>gerente.01.[nome da filial]</span>
-          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-        </div>
-      </li>
-      <li>
-        <strong>Senha</strong>
-        <div class="value-with-icon">
-          <span>**************</span>
-          <a href="#" class="edit-icon" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-        </div>
-      </li>
-    </ul>
-  </section>
+    {% if user.is_authenticated and user.tipo_usuario == 'DELIVERY_MAN' %}
+    <li>
+      <strong>CNH</strong>
+      <div class="value-with-icon">
+        <span id="cnh" data-field="cnh" data-id="{{ user.id }}" class="editable-span">{{ user.cnh }}</span>
+        <a href="#" class="edit-icon" data-edit="cnh" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </li>
+    <li>
+      <strong>Modelo</strong>
+      <div class="value-with-icon">
+        <span id="modelo_moto" data-field="modelo_moto" data-id="{{ user.id }}" class="editable-span">{{ user.modelo_moto }}</span>
+        <a href="#" class="edit-icon" data-edit="modelo_moto" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </li>
+    <li>
+      <strong>Cor</strong>
+      <div class="value-with-icon">
+        <span id="cor_moto" data-field="cor_moto" data-id="{{ user.id }}" class="editable-span">{{ user.cor_moto }}</span>
+        <a href="#" class="edit-icon" data-edit="cor_moto" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </li>
+    <li>
+      <strong>Placa</strong>
+      <div class="value-with-icon">
+        <span id="placa_moto" data-field="Placa_moto" data-id="{{ user.id }}" class="editable-span">{{ user.Placa_moto }}</span>
+        <a href="#" class="edit-icon" data-edit="placa_moto" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </li>
+    {% endif %}
+  </ul>
+</section>
+
+<section>
+  <h2 class="section-title">Conta</h2>
+  <ul class="informacoes">
+    <li>
+      <strong>Username</strong>
+      <div class="value-with-icon">
+        <span id="username" data-field="username" data-id="{{ user.id }}" class="editable-span">{{ user.username }}</span>
+        <a href="#" class="edit-icon" data-edit="username" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </li>
+    <li>
+      <strong>E-mail</strong>
+      <div class="value-with-icon">
+        <span id="email" data-field="email" data-id="{{ user.id }}" class="editable-span">{{ user.email }}</span>
+        <a href="#" class="edit-icon" data-edit="email" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </li>
+    <li>
+      <strong>Senha</strong>
+      <div class="value-with-icon">
+        <span id="senha" data-field="senha" data-id="{{ user.id }}">**************</span>
+        <a href="#" class="edit-icon" data-edit="senha" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </div>
+    </li>
+  </ul>
+</section>
 {% endblock %}
 
 {% block scripts %}
-  <script>
-    const defaultImagePath = "{% static 'imgs/default_profile.png' %}"
-  </script>
-  <script src="{% static 'js/manager/manage_profile.js' %}"></script>
+<script>
+  const defaultImagePath = "{% static 'imgs/default_profile.png' %}";
+</script>
+<script src="{% static 'js/manager/manage_profile.js' %}"></script>
 {% endblock %}
