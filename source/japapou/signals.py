@@ -19,8 +19,16 @@ def create_user_profile(sender, instance, created, **kwargs):
                 print(f"Usuário {instance.username} adicionado ao grupo {group_name}.")
             except Group.DoesNotExist:
                 print(f"Grupo {group_name} não existe.")
-        elif instance.tipo_usuario == 'DELIVERY':
+        elif instance.tipo_usuario == 'DELIVERY_MAN':
             group_name = 'Entregadores'
+            try:
+                group = Group.objects.get(name=group_name)
+                instance.groups.add(group)
+                print(f"Usuário {instance.username} adicionado ao grupo {group_name}.")
+            except Group.DoesNotExist:
+                print(f"Grupo {group_name} não existe.")
+        else:
+            group_name = 'Gerentes'
             try:
                 group = Group.objects.get(name=group_name)
                 instance.groups.add(group)
