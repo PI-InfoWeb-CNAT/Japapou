@@ -13,33 +13,122 @@
     <p>{{ message }}</p>
 {% endfor %}
 
-<h1>Home</h1>
+<!-- <h1>Home</h1> -->
 
-<p>{{ user.tipo_usuario }}</p>
+<!-- <p>{{ user.tipo_usuario }}</p> -->
 
-{% if user.is_authenticated %}
+<!-- {% if user.is_authenticated %}
     <p>Bem-vindo, {{ user.username }}!</p>
-{% endif %}
-
-
-<div class="container">
-    <div class="coverflow-container">
-        <div class="coverflow">
-
-            {% for prato in ranking %}
-            <div class="slide">
-                <img src="{{ prato.photo.url }}" alt="{{ prato.name }}" width="100">
-                <h4>{{ prato.name }}</h4>
-                <h6>{{ prato.description }}</h6>
-            </div>
-            {% endfor %}
-
-        </div>
+{% endif %} -->
+<div id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'imgs/Carrossel.png' %}" class="d-block w-100" alt="...">
     </div>
-
-    <button id="prev"><img src="{% static 'imgs/seta.png' %}" alt="seta_esquerda"></button>
-    <button id="next"><img src="{% static 'imgs/seta.png' %}" alt="seta_direita"></button>
+    <div class="carousel-item">
+      <img src="{% static 'imgs/Carrossel2.png' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'imgs/Carrossel3.png' %}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
+
+<section class="">
+    <h2><b>Mais Vendidos</b></h2>
+    <div class="container">
+        <div class="coverflow-container">
+            <div class="coverflow">
+    
+                {% for prato in ranking %}
+                <div class="slide">
+                    <img src="{{ prato.photo.url }}" alt="{{ prato.name }}" width="100">
+                    <h4>{{ prato.name }}</h4>
+                    <h6>{{ prato.description }}</h6>
+                </div>
+                {% endfor %}
+    
+            </div>
+        </div>
+    
+        <button id="prev"><img src="{% static 'imgs/seta.png' %}" alt="seta_esquerda"></button>
+        <button id="next"><img src="{% static 'imgs/seta.png' %}" alt="seta_direita"></button>
+    </div> 
+</section>
+
+<div class="container-sushi">
+    <a href="" class="container-btn-sessao"><p class="btn-sessao teste">Compre Agora</p></a>
+    <section class="sushi-benefits">
+        
+        <div class="benefits-grid">
+          <div class="center">
+            <img src="{% static 'imgs/Imagem-centro-vantagens.png' %}" alt="Sushi" class="sushi-img">
+          </div>
+    
+        <div class="benefit right top">
+          <h3><b>Ingredientes Sempre Frescos</b></h3>
+          <p>Trabalhamos com peixes frescos selecionados diariamente, garantindo sabor, textura e segurança alimentar.</p>
+        </div>
+    
+        <div class="benefit left mid-top">
+          <h3><b>Arroz Preparado na Hora</b></h3>
+          <p>Nosso arroz é temperado com receita exclusiva e preparado no mesmo dia para manter a qualidade e o sabor original.</p>
+        </div>
+    
+        
+        <div class="benefit right mid-bottom">
+            <h3><b>Entrega Rápida e Segura</b></h3>
+            <p>Embalagens seladas e transporte refrigerado, garantindo que seu sushi chegue fresco e intacto.</p>
+        </div>
+        
+        <div class="benefit left bottom">
+            <h3><b>Higiene e Segurança</b></h3>
+            <p>Ambiente de produção esterilizado e equipe treinada para manipulação correta de alimentos crus.</p>
+        </div>
+        
+    </div>
+    
+    </section>
+</div>
+
+<section>
+    <a href="" class="container-btn-sessao teste2"><p class="btn-sessao teste2">Contate-nos</p></a>
+    <div class="grid-container">
+        <div class="grid-item area-a">
+            <img src="{% static 'imgs/Grid(area-a).png' %}">
+            <div class="overlay">Sushi Especial</div>
+        </div>
+
+        <div class="grid-item area-b">
+            <img src="{% static 'imgs/Grid(area-b).png' %}">
+            <div class="overlay">Sashimi Fresco</div>
+        </div>
+
+        <div class="grid-item area-c">
+            <img src="{% static 'imgs/Grid(area-c).png' %}">
+            <div class="overlay">Combinado Premium</div>
+        </div>
+
+        <div class="grid-item area-d">
+            <img src="{% static 'imgs/Grid(area-d).png' %}">
+            <div class="overlay">Onigiri</div>
+        </div>
+
+        <div class="grid-item area-e">
+            <img src="{% static 'imgs/Grid(area-e).png' %}">
+            <div class="overlay">Hot Roll Gourmet</div>
+        </div>
+
+    </div>
+</section>
 
 {% endblock content %}
 
