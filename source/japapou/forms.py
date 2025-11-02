@@ -1,5 +1,5 @@
 from django import forms # type: ignore
-from japapou.models import Menu, Plate
+from japapou.models import Menu, Plate, PlateReview, CourierReview
 from japapou.models.user import CustomUser
 from django.contrib.auth.forms import UserCreationForm
 
@@ -152,3 +152,40 @@ class DeliveryRegisterForm(forms.ModelForm):
             'username', 'password', 'email', 'telefone', 'endereco', 'cpf', 'data_nascimento',
             'first_name', 'last_name', 'cnh', 'modelo_moto', 'cor_moto', 'placa_moto', 'foto'
         ]
+
+class PlateReviewForm(forms.ModelForm):
+    '''
+        Formulário para submeter uma avaliacao de um prato
+    '''
+    class Meta:
+        model = PlateReview
+        fields = ['value', 'comment', 'image_review']
+
+        widgets = {
+            'value': forms.HiddenInput(attrs={'id': 'id_nota'}),
+            'comment': forms.Textarea(attrs={
+                'class': 'form-control', 
+                'rows': 4,
+                'placeholder': 'Escreva o seu comentário (opcional)...'
+            }),
+        }
+
+class CourierReviewForm(forms.ModelForm):
+    '''
+    Formulário para submeter uma avaliação de um Entregador.
+    '''
+    class Meta:
+        model = CourierReview
+        
+        fields = ['value', 'comment'] 
+
+        widgets = {
+            
+            'value': forms.HiddenInput(attrs={'id': 'id_nota'}),
+            
+            'comment': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 4,
+                'placeholder': 'Deixe um comentário sobre o entregador...'
+            }),
+        }
