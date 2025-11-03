@@ -2,13 +2,13 @@ from django.shortcuts import render, redirect  # type: ignore
 from japapou.models import Menu, Plate, Period, PlateReview
 from django import forms  # type: ignore
 from datetime import date
-from django.db.models import Avg
-from django.db.models.functions import Round
-from django.urls import reverse
+from django.db.models import Avg # type: ignore
+from django.db.models.functions import Round # type: ignore
+from django.urls import reverse # type: ignore
 from japapou.forms import PlatesForms, MenuForms
-from django.contrib import messages
+from django.contrib import messages # type: ignore
 from japapou.views.manager_views import manage_period_view
-from django.contrib.auth.decorators import permission_required, login_required
+from django.contrib.auth.decorators import permission_required, login_required # type: ignore
 
 
 class Search(forms.Form):

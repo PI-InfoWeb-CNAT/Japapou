@@ -60,30 +60,32 @@
     <h2>{{ selected.name }}</h2>
     <div class="cards">
         {% for plate in menu_plates %}
-        <div class="product-card" data-media="{{ plate.media|default:0 }}"> <!-- mudar isso pra 5 dps -->
+        <a href="{% url "details_plate" %}">
+            <div class="product-card" data-media="{{ plate.media|default:0 }}"> <!-- mudar isso pra 5 dps -->
 
-            <div class="img-estrela">
-                <div class="product-image">
-                    <img src="/media/{{ plate.photo }}" alt="Imagem de sushi de salmão" />
-                </div>
-                <div class="estrelas">
-                    <div class="curved-stars-container">
-                        <i class="star fa-solid fa-star"></i>
-                        <i class="star fa-solid fa-star"></i>
-                        <i class="star fa-solid fa-star"></i>
-                        <i class="star fa-solid fa-star"></i>
-                        <i class="star fa-solid fa-star"></i>
+                <div class="img-estrela">
+                    <div class="product-image">
+                        <img src="/media/{{ plate.photo }}" alt="Imagem de sushi de salmão" />
+                    </div>
+                    <div class="estrelas">
+                        <div class="curved-stars-container">
+                            <i class="star fa-solid fa-star"></i>
+                            <i class="star fa-solid fa-star"></i>
+                            <i class="star fa-solid fa-star"></i>
+                            <i class="star fa-solid fa-star"></i>
+                            <i class="star fa-solid fa-star"></i>
+                        </div>
                     </div>
                 </div>
+                <div class="card-body">
+                    <h3 class="product-name">{{ plate.name }}</h3>
+                    <p class="product-description">{{ plate.description }}</p>
+                </div>
+                <div class="product-price">
+                    <p>R$ {{ plate.price }}</p>
+                </div>
             </div>
-            <div class="card-body">
-                <h3 class="product-name">{{ plate.name }}</h3>
-                <p class="product-description">{{ plate.description }}</p>
-            </div>
-            <div class="product-price">
-                <p>R$ {{ plate.price }}</p>
-            </div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 </section>
