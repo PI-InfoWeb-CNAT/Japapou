@@ -1,1 +1,164 @@
-<h1>Detalhes do prato(avaliacao, preco, descricao etc)</h1>
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    /* Estilo simples para as estrelas */
+    .star-rating {
+        font-size: 2.5rem; /* Tamanho das estrelas */
+        color: #ccc; /* Cor das estrelas vazias */
+        cursor: pointer;
+    }
+    .star-rating .star {
+        display: inline-block;
+        transition: color 0.2s;
+    }
+    /* Cor da estrela preenchida (será controlada pelo JS) */
+    .star-rating .star.filled {
+        color: #f39c12; /* Laranja/Amarelo */
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h1>{{ plate.name }}</h1>
+            <p>{{ plate.description }}</p>
+            <h3>R$ {{ plate.price|floatformat:2 }}</h3>
+            
+            <hr>
+
+            <h2>Deixe sua avaliação</h2>
+            
+            {% if user.is_authenticated %}
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {% for error in form.non_field_errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="form-group mb-3">
+                        <label><strong>Sua Nota:</strong></label>
+                        
+                        {{ form.value }} 
+                        
+                        <div class="star-rating" id="star-widget">
+                            <span class="star" data-value="1">&#9733;</span>
+                            <span class="star" data-value="2">&#9733;</span>
+                            <span class="star" data-value="3">&#9733;</span>
+                            <span class="star" data-value="4">&#9733;</span>
+                            <span class="star" data-value="5">&#9733;</span>
+                        </div>
+                        {% if form.value.errors %}
+                            <div class="text-danger small">{{ form.value.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="{{ form.comment.id_for_label }}"><strong>Comentário:</strong></label>
+                        {{ form.comment }} {% if form.comment.errors %}
+                            <div class="text-danger small">{{ form.comment.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="{{ form.image_review.id_for_label }}"><strong>Foto (Opcional):</strong></label>
+                        {{ form.image_review }} {% if form.image_review.errors %}
+                            <div class="text-danger small">{{ form.image_review.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar Avaliação</button>
+                </form>
+            {% else %}
+                <p><a href="#">Faça login</a> para deixar uma avaliação.</p>
+            {% endif %}
+
+
+            <hr class="mt-5">
+            <h2>Avaliações ({{ reviews.count }})</h2>
+            
+            {% for review in reviews %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ review.usuario.username }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        {% for i in "12345" %}
+                            {% if i|add:0 <= review.value %}
+                                <span style="color: #f39c12;">&#9733;</span>
+                            {% else %}
+                                <span style="color: #ccc;">&#9733;</span>
+                            {% endif %}
+                        {% endfor %}
+                        ({{ review.value }}/5)
+                    </h6>
+                    <p class="card-text">{{ review.comment|linebreaksbr }}</p>
+                    {% if review.image_review %}
+                        <img src="{{ review.image_review.url }}" alt="Foto da avaliação" class="img-fluid rounded" style="max-height: 200px;">
+                    {% endif %}
+                    <small class="text-muted">{{ review.created_at|date:"d/m/Y \à\s H:i" }}</small>
+                </div>
+            </div>
+            {% empty %}
+            <p>Este prato ainda não possui avaliações. Seja o primeiro!</p>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const starWidget = document.getElementById('star-widget');
+        const stars = starWidget.querySelectorAll('.star');
+        // O ID 'id_nota' é definido pelo Django forms (veja o forms.py)
+        const hiddenInput = document.getElementById('id_nota'); 
+
+        // Função para colorir as estrelas
+        function setStarRating(rating) {
+            stars.forEach(star => {
+                const starValue = parseInt(star.dataset.value);
+                if (starValue <= rating) {
+                    star.classList.add('filled');
+                } else {
+                    star.classList.remove('filled');
+                }
+            });
+        }
+
+        // Evento de clique em uma estrela
+        starWidget.addEventListener('click', function(e) {
+            if (e.target.classList.contains('star')) {
+                const rating = parseInt(e.target.dataset.value);
+                hiddenInput.value = rating; // Atualiza o valor do input oculto
+                setStarRating(rating);
+            }
+        });
+
+        // Evento de passar o mouse por cima (hover)
+        starWidget.addEventListener('mouseover', function(e) {
+            if (e.target.classList.contains('star')) {
+                const hoverRating = parseInt(e.target.dataset.value);
+                setStarRating(hoverRating);
+            }
+        });
+
+        // Evento de tirar o mouse: reverte para o valor clicado
+        starWidget.addEventListener('mouseout', function() {
+            const currentRating = parseInt(hiddenInput.value) || 0;
+            setStarRating(currentRating);
+        });
+
+        // Inicializa as estrelas com o valor atual (útil se o form falhar na validação)
+        const initialRating = parseInt(hiddenInput.value) || 0;
+        setStarRating(initialRating);
+    });
+</script>
+
+{% endblock %}
