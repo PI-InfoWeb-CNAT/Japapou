@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required, permission_required  # type: ignore
 from django.shortcuts import render, redirect  # type: ignore
-from japapou.models import Menu, Plate, Period
+from japapou.models import Menu, Plate, Period, PlateReview
 from django.contrib import messages
 from datetime import date
+from django.db.models import Avg
+from django.db.models.functions import Round
 
 
 # pôr uma parte pra pegar a avaliação quando ela for feita 
@@ -13,7 +15,6 @@ from datetime import date
 
 
 @login_required
-@permission_required('japapou.view_menu', login_url='login')
 def client_menu_view(request):
     if request.user.tipo_usuario != 'CLIENT':
         messages.error(request, "Você não tem permissão para acessar essa página.")
@@ -27,10 +28,33 @@ def client_menu_view(request):
 
     menu_plates = Plate.objects.filter(menu=selected_menu)
 
+    avaliacoes = PlateReview.objects.values('plate__name').annotate(media=Round(Avg('value')))
+    # avaliacoes = PlateReview.objects.all()
+    print(avaliacoes)
+
+    
+    avaliacoes_dict = {a['plate__name']: a['media'] for a in avaliacoes}
+    for plate in menu_plates:
+        plate.media = avaliacoes_dict.get(plate.name)  # None se não tiver
+
+
     context = {
         "selected": selected_menu,
-        "menu_plates": menu_plates,       
+        "menu_plates": menu_plates,
+        "avaliacoes": avaliacoes,
     }
     
     return render(request, template_name="client/menu.html", context=context, status=200)
 
+
+'''
+
+select avg(value) 
+from PlateReview pr
+inner join Plate p on p.id = pr.plate_id
+
+
+PlateReview.objects.values('plate__name').annotate(media=Round(Avg('value')))
+
+
+'''
