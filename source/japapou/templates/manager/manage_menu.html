@@ -62,7 +62,7 @@
     <h2>{{ selected.name }}</h2>
     <div class="cards">
       {% for plate in menu_plates %}
-        <div class="product-card">
+        <div class="product-card" data-media="{{ plate.media|default:0}}" >
           <button class="action-button delete-button" plate-id="{{ plate.id }}" aria-label="Deletar">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -110,7 +110,7 @@
     <h2>Available:</h2>
     <div class="cards">
       {% for plate in other_plates %}
-        <div class="product-card">
+        <div class="product-card" data-media="{{ plate.media|default:0 }}">
           <button class="action-button delete-button" aria-label="Deletar">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -216,7 +216,6 @@
       <input type="hidden" id="redirect-after-create" name="next_redirect_url_name" value="manager_menu">
 
       <div id="image-file">
-        
         {{ form.photo }}
         <label for="{{ form.photo.id_for_label }}">
           <p class="material-symbols-outlined">image_arrow_up</p>
@@ -225,23 +224,17 @@
       </div>
 
       <div>
-        
         {{ form.name.label_tag }}
-        
         {{ form.name }}
       </div>
 
       <div>
-        
         {{ form.price.label_tag }}<br />
-        
         {{ form.price }}
       </div>
 
       <div>
-        
-        {{ form.description.label_tag }}<br />
-        
+        {{ form.description.label_tag }}<br/>
         {{ form.description }}
       </div>
       <div class="criar-prato-menus">

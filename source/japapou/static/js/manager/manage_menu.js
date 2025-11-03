@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+
   // Seleciona o modal de edição
   const editDialog = document.getElementById('editar-prato');
 
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
           if (redirectInput) { // Verifica se o campo existe antes de tentar preencher
               redirectInput.value = nextPage;
           }
-
+        
           // 5. Abre o modal
           editDialog.showModal();
         })
@@ -80,32 +81,64 @@ document.addEventListener('DOMContentLoaded', function() {
       deleteDialog.showModal();
     });
   });
+
+  const cards = document.querySelectorAll(".product-card");
+
+  cards.forEach(card => {
+    // 1. Lemos a média (que será 0 se não houver avaliações)
+    const media = parseFloat(card.dataset.media);
+    
+    // 2. Selecionamos todas as 5 estrelas DENTRO deste card
+    const estrelas = card.querySelectorAll(".star");
+
+    // 3. Iteramos por todas as 5 estrelas (index de 0 a 4)
+    estrelas.forEach((star, index) => {
+      
+      
+      // Se o 'index' da estrela for MAIOR ou IGUAL à média,
+      // ela deve ser pintada de cinza (inativa).
+      //
+      // Exemplo (Média = 0):
+      // Index 0: (0 >= 0) -> Adiciona .star-inactive (Cinza)
+      // ... todas ficam cinza
+      
+      if (index >= media) {
+        star.classList.add("star-inactive");
+        console.log(index)
+      }
+      
+      // As estrelas ativas (abaixo da média) simplesmente
+      // não recebem a classe .star-inactive e ficam com a
+      // cor amarela padrão que definimos no CSS.
+    });
+  });
+
 });
 
-const addPratoExisten = document.getElementById("addpratoexistentbtn");
-const addNovoPrato = document.getElementById("addnovopratobtn");
-const modalNovoCardapio = document.getElementById("novo-cardapio");
+  const addPratoExisten = document.getElementById("addpratoexistentbtn");
+  const addNovoPrato = document.getElementById("addnovopratobtn");
+  const modalNovoCardapio = document.getElementById("novo-cardapio");
 
-const modalNovoPrato = document.getElementById("novo-prato");
-const modalAddNovoPrato = document.getElementById("criar-prato");
+  const modalNovoPrato = document.getElementById("novo-prato");
+  const modalAddNovoPrato = document.getElementById("criar-prato");
 
-modalNovoPrato.addEventListener("click", function (event) {
-	if (event.target === modalNovoPrato) {
-		modalNovoPrato.close();
-	}
-});
+  modalNovoPrato.addEventListener("click", function (event) {
+    if (event.target === modalNovoPrato) {
+      modalNovoPrato.close();
+    }
+  });
 
-modalNovoCardapio.addEventListener("click", function (event) {
-	if (event.target === modalNovoCardapio) {
-		modalNovoCardapio.close();
-	}
-});
+  modalNovoCardapio.addEventListener("click", function (event) {
+    if (event.target === modalNovoCardapio) {
+      modalNovoCardapio.close();
+    }
+  });
 
-addPratoExisten.addEventListener("click", () => {
-	modalNovoPrato.close();
-});
+  addPratoExisten.addEventListener("click", () => {
+    modalNovoPrato.close();
+  });
 
-addNovoPrato.addEventListener("click", () => {
-	modalNovoPrato.close();
-	modalAddNovoPrato.showModal();
+  addNovoPrato.addEventListener("click", () => {
+    modalNovoPrato.close();
+    modalAddNovoPrato.showModal();
 });

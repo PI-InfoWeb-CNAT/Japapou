@@ -24,7 +24,7 @@ class PlatesForms(forms.ModelForm):
         model = Plate
         # ATENÇÃO: 'menus' NÃO pode estar nos 'fields' da Meta class,
         # porque ele não é um campo direto da Model Plate.
-        fields = ["price", "photo", "description"]  # Remova 'menus' daqui
+        fields = ["name", "price", "photo", "description"]  # Remova 'menus' daqui
 
         # Personaliza os widgets para os campos específicos (opcional)
         widgets = {
@@ -34,6 +34,7 @@ class PlatesForms(forms.ModelForm):
 
         # Personaliza os rótulos (labels) para os campos (opcional)
         labels = {
+            "name": "name",
             "price": "Preço",
             "photo": "Foto",
             "description": "Descrição",

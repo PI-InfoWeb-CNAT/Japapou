@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect  # type: ignore
-from japapou.models import Menu, Plate, Period
+from japapou.models import Menu, Plate, Period, PlateReview
 from django import forms  # type: ignore
+from datetime import date
+from django.db.models import Avg
+from django.db.models.functions import Round
 from django.urls import reverse
 from japapou.forms import PlatesForms, MenuForms
 from django.contrib import messages
@@ -24,6 +27,41 @@ def manager_menu_view(request):
         messages.error(request, "Você não tem permissão para acessar essa página.")
         return redirect('home')
 
+    selected_menu = None
+    menu_plates = [] 
+    avaliacoes_dict = {}
+    today = date.today()
+
+    periodo_ativo = Period.objects.filter(start_date__lte=today, end_date__gte=today).first()
+
+    if periodo_ativo:
+        # Se encontrámos, definimos o menu
+        selected_menu = periodo_ativo.menu
+        
+        # E buscamos os pratos DESSE menu
+        menu_plates = selected_menu.plates.all()
+
+        # Calculamos as avaliações (o seu código já estava ótimo aqui)
+        avaliacoes = PlateReview.objects.values('plate__name').annotate(media=Round(Avg('value')))
+        
+        # Convertemos para dicionário para ser mais fácil de usar
+        avaliacoes_dict = {a['plate__name']: a['media'] for a in avaliacoes}
+        
+        # Adicionamos a média a cada prato
+        for plate in menu_plates:
+            plate.media = avaliacoes_dict.get(plate.name)  # Retorna None se não houver avaliação
+
+    else:
+        # 4. (Opcional) Se não houver menu ativo, podemos avisar o utilizador
+        messages.warning(request, "De momento, não existe um menu ativo para a data de hoje.")
+
+    periodos = Period.objects.all()
+
+    for periodo in periodos:
+        if periodo.start_date <= date.today() and periodo.end_date >= date.today():
+            selected_menu = periodo.menu
+
+    menu_plates = Plate.objects.filter(menu=selected_menu)
 
     menus = Menu.objects.all()
     choices = [(menu.name, menu.name) for menu in menus]
@@ -62,6 +100,17 @@ def manager_menu_view(request):
     menu_plates = Plate.objects.filter(menu=selected_menu)
     other_plates = Plate.objects.exclude(menu=selected_menu)
 
+    avaliacoes = PlateReview.objects.values('plate__name').annotate(media=Round(Avg('value')))
+    avaliacoes_dict = {a['plate__name']: a['media'] for a in avaliacoes}
+
+    # Aplicamos a média aos pratos DENTRO do menu
+    for plate in menu_plates:
+        plate.media = avaliacoes_dict.get(plate.name)
+
+    # Aplicamos a média aos pratos FORA do menu
+    for plate in other_plates:
+        plate.media = avaliacoes_dict.get(plate.name)
+
     context = {
         "select_menu": search,
         "selected": selected_menu,
@@ -71,6 +120,7 @@ def manager_menu_view(request):
         "form": PlatesForms(),
         "form_menu": MenuForms(request=request),
         "search_period": search_period_form,
+        "avaliacoes": avaliacoes,
         
     }
     

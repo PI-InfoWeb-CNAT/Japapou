@@ -163,7 +163,8 @@ main {
 				.star {
 					position: absolute;
 					font-size: 30px;
-					color:var(--lighter-gray);
+					/*color:var(--lighter-gray);*/
+					color: #FFD700;
 
 					&:nth-child(1) {
 						transform: translate(-58px, 6px) rotate(0deg);
@@ -857,4 +858,21 @@ form {
 		font-size: 100px;
 		margin-top: 20%;
 	}
+}
+
+.img-estrela .estrelas .curved-stars-container .star.star-inactive {
+  color: #b0b0b0; /* Cor cinza claro para estrela inativa */
+  /* Outra opção: 
+     color: #e0e0e0; (um cinza bem suave)
+  */
+}
+
+/* 2. Define a cor para as estrelas INATIVAS */
+/* Quando o JS adicionar a classe .star-inactive, esta
+   regra terá prioridade e mudará a cor da estrela */
+.estrelas .star.star-inactive {
+  color: #b0b0b0; /* Cor cinza claro para estrela inativa */
+  /* Outra opção: 
+     color: #e0e0e0; (um cinza bem suave)
+  */
 }
