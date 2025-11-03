@@ -3,7 +3,8 @@ from japapou.models import *
 from .models.user import CustomUser
 from django.contrib.auth.admin import UserAdmin
 
-
+admin.site.register(Cart)
+admin.site.register(CartItem)
 admin.site.register(Menu)
 admin.site.register(OrderItem)
 admin.site.register(Order)

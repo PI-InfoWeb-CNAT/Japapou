@@ -13,7 +13,7 @@
         display: inline-block;
         transition: color 0.2s;
     }
-    /* Cor da estrela preenchida (será controlada pelo JS) */
+    /* Cor da estrela preenchida */
     .star-rating .star.filled {
         color: #f39c12; /* Laranja/Amarelo */
     }
@@ -22,31 +22,53 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
+            
             <h1>{{ plate.name }}</h1>
             <p>{{ plate.description }}</p>
             <h3>R$ {{ plate.price|floatformat:2 }}</h3>
             
+            {% if user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
+                <form action="{% url 'add_to_cart' %}" method="POST" class="mt-3 mb-4">
+                    {% csrf_token %}
+                    
+                    <input type="hidden" name="plate_id" value="{{ plate.id }}">
+                    
+                    <div class="form-group row g-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="quantity" class="col-form-label"><strong>Quantidade:</strong></label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="number" name="quantity" id="quantity" value="1" min="1" class="form-control" style="width: 80px;">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">
+                                Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            {% elif user.is_authenticated %}
+                <p class="text-muted"><em>(Apenas clientes podem adicionar itens ao carrinho.)</em></p>
+            {% else %}
+                <p class="mt-3"><a href="{% url 'login' %}" class="btn btn-outline-primary">Faça login</a> para adicionar ao carrinho.</p>
+            {% endif %}
             <hr>
 
             <h2>Deixe sua avaliação</h2>
             
             {% if user.is_authenticated %}
-                <form method="POST" enctype="multipart/form-data">
+                <form method="POST" enctype="multipart/form-data" action="{% url 'details_plate' plate.id %}">
                     {% csrf_token %}
                     
                     {% if form.non_field_errors %}
                     <div class="alert alert-danger">
-                        {% for error in form.non_field_errors %}
-                        {{ error }}
-                        {% endfor %}
+                        {% for error in form.non_field_errors %}{{ error }}{% endfor %}
                     </div>
                     {% endif %}
 
                     <div class="form-group mb-3">
                         <label><strong>Sua Nota:</strong></label>
-                        
                         {{ form.value }} 
-                        
                         <div class="star-rating" id="star-widget">
                             <span class="star" data-value="1">&#9733;</span>
                             <span class="star" data-value="2">&#9733;</span>
@@ -61,14 +83,16 @@
 
                     <div class="form-group mb-3">
                         <label for="{{ form.comment.id_for_label }}"><strong>Comentário:</strong></label>
-                        {{ form.comment }} {% if form.comment.errors %}
+                        {{ form.comment }}
+                        {% if form.comment.errors %}
                             <div class="text-danger small">{{ form.comment.errors.0 }}</div>
                         {% endif %}
                     </div>
 
                     <div class="form-group mb-3">
                         <label for="{{ form.image_review.id_for_label }}"><strong>Foto (Opcional):</strong></label>
-                        {{ form.image_review }} {% if form.image_review.errors %}
+                        {{ form.image_review }}
+                        {% if form.image_review.errors %}
                             <div class="text-danger small">{{ form.image_review.errors.0 }}</div>
                         {% endif %}
                     </div>
@@ -76,7 +100,7 @@
                     <button type="submit" class="btn btn-primary">Enviar Avaliação</button>
                 </form>
             {% else %}
-                <p><a href="#">Faça login</a> para deixar uma avaliação.</p>
+                <p><a href="{% url 'login' %}">Faça login</a> para deixar uma avaliação.</p>
             {% endif %}
 
 
@@ -116,48 +140,44 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const starWidget = document.getElementById('star-widget');
-        const stars = starWidget.querySelectorAll('.star');
-        // O ID 'id_nota' é definido pelo Django forms (veja o forms.py)
-        const hiddenInput = document.getElementById('id_nota'); 
+        if (starWidget) {
+            const stars = starWidget.querySelectorAll('.star');
+            const hiddenInput = document.getElementById('id_nota'); 
 
-        // Função para colorir as estrelas
-        function setStarRating(rating) {
-            stars.forEach(star => {
-                const starValue = parseInt(star.dataset.value);
-                if (starValue <= rating) {
-                    star.classList.add('filled');
-                } else {
-                    star.classList.remove('filled');
+            function setStarRating(rating) {
+                stars.forEach(star => {
+                    const starValue = parseInt(star.dataset.value);
+                    if (starValue <= rating) {
+                        star.classList.add('filled');
+                    } else {
+                        star.classList.remove('filled');
+                    }
+                });
+            }
+
+            starWidget.addEventListener('click', function(e) {
+                if (e.target.classList.contains('star')) {
+                    const rating = parseInt(e.target.dataset.value);
+                    hiddenInput.value = rating; 
+                    setStarRating(rating);
                 }
             });
+
+            starWidget.addEventListener('mouseover', function(e) {
+                if (e.target.classList.contains('star')) {
+                    const hoverRating = parseInt(e.target.dataset.value);
+                    setStarRating(hoverRating);
+                }
+            });
+
+            starWidget.addEventListener('mouseout', function() {
+                const currentRating = parseInt(hiddenInput.value) || 0;
+                setStarRating(currentRating);
+            });
+
+            const initialRating = parseInt(hiddenInput.value) || 0;
+            setStarRating(initialRating);
         }
-
-        // Evento de clique em uma estrela
-        starWidget.addEventListener('click', function(e) {
-            if (e.target.classList.contains('star')) {
-                const rating = parseInt(e.target.dataset.value);
-                hiddenInput.value = rating; // Atualiza o valor do input oculto
-                setStarRating(rating);
-            }
-        });
-
-        // Evento de passar o mouse por cima (hover)
-        starWidget.addEventListener('mouseover', function(e) {
-            if (e.target.classList.contains('star')) {
-                const hoverRating = parseInt(e.target.dataset.value);
-                setStarRating(hoverRating);
-            }
-        });
-
-        // Evento de tirar o mouse: reverte para o valor clicado
-        starWidget.addEventListener('mouseout', function() {
-            const currentRating = parseInt(hiddenInput.value) || 0;
-            setStarRating(currentRating);
-        });
-
-        // Inicializa as estrelas com o valor atual (útil se o form falhar na validação)
-        const initialRating = parseInt(hiddenInput.value) || 0;
-        setStarRating(initialRating);
     });
 </script>
 
