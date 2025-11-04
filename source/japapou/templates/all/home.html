@@ -49,7 +49,7 @@
             <div class="coverflow">
                 {% for prato in ranking %}
                     {% if user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
-                        <a href="{% url "details_plate" prato.pk %}"> 
+                        <a href="{% url 'details_plate' %}"> 
                     {% else %}
                         <a href="{% url 'login_register' %}">
                     {% endif %}
@@ -78,7 +78,16 @@
 </section>
 
 <div class="container-sushi">
-    <a href="{% url 'login_register' %}" class="container-btn-sessao"><p class="btn-sessao teste">Compre Agora</p></a>
+    {% if user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
+        <a href="{% url 'client_menu' %}" class="container-btn-sessao"> 
+    {% elif user.is_authenticated and user.tipo_usuario == 'MANAGER' %}
+        <a href="{% url 'manager_menu' %}" class="container-btn-sessao"> 
+    {% elif user.is_authenticated and user.tipo_usuario == 'DELIVERY_MAN' %}
+        <a href="{% url 'login_register' %}" class="container-btn-sessao"> 
+    {% else %}
+        <a href="{% url 'visitor_menu' %}" class="container-btn-sessao">
+    {% endif %}
+            <p class="btn-sessao teste">Compre Agora</p></a>
     <section class="sushi-benefits">
         
         <div class="benefits-grid">
