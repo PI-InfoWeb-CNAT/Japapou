@@ -1,33 +1,139 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/plate_details.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% endblock %}
 
 {% block content %}
 
-<style>
-    /* Estilo simples para as estrelas */
-    .star-rating {
-        font-size: 2.5rem; /* Tamanho das estrelas */
-        color: #ccc; /* Cor das estrelas vazias */
-        cursor: pointer;
-    }
-    .star-rating .star {
-        display: inline-block;
-        transition: color 0.2s;
-    }
-    /* Cor da estrela preenchida */
-    .star-rating .star.filled {
-        color: #f39c12; /* Laranja/Amarelo */
-    }
-</style>
+<section class="plate-detail-section">
+    <div class="plate-detail-content">
+    <div class="plate-image-container">
+      <div class="carousel-plate">
+        <button class="carousel-control prev-control">&#10094;</button>
+        <img src="/media/{{ plate.photo }}" alt="{{ plate.name }}" class="plate-main-img" />
+        <button class="carousel-control next-control">&#10095;</button>
+      </div>
+    </div>
+    
+    <div class="plate-info-container">
+        <h1 class="plate-name"><b>{{ plate.name }}</b></h1>
+        
+        <div class="plate-rating-summary">
+            <div class="stars-display-simple">
+                {% for i in "12345" %}
+                    <span class="star-icon">
+                        {% comment %} i|add:0 é o número da estrela (1 a 5). Compara com a média. {% endcomment %}
+                        {% if i|add:0 <= average_rating|default:0 %} 
+                            <i class="fas fa-star filled-simple"></i>
+                        {% else %}
+                            <i class="fas fa-star unfilled-simple"></i>
+                        {% endif %} 
+                    </span>
+                {% endfor %}
+            </div>
+            <span class="review-count">{{ reviews.count }} Avaliações</span>
+        </div>
+        <h2 class="plate-price"><b>R$ {{ plate.price|floatformat:2 }}</b></h2>
+        
+        <p class="plate-description">{{ plate.description }}</p>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            
-            <h1>{{ plate.name }}</h1>
-            <p>{{ plate.description }}</p>
-            <h3>R$ {{ plate.price|floatformat:2 }}</h3>
-            
-            {% if user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
+        {% if user.is_authenticated... %}
+        {% endif %}
+    </div>
+</section>
+<!-- {% if user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
+  <form action="{% url 'add_to_cart' %}" method="POST" class="add-to-cart-form">
+    {% csrf_token %}
+    <input type="hidden" name="plate_id" value="{{ plate.id }}">
+    <div class="quantity-control">
+      <label for="quantity">Quantidade:</label>
+      <input type="number" name="quantity" id="quantity" value="1" min="1">
+      <button type="submit" class="btn-add-to-cart">Adicionar ao Carrinho</button>
+    </div>
+  </form>
+{% endif %} -->
+<h2>Avaliações</h2>
+<div class="container-avaliacao">
+    <div class="geral-avaliacao">
+        <div class="stars-display-simple">
+            {% for i in "12345" %}
+                <span class="star-icon">
+                    {% comment %} i|add:0 é o número da estrela (1 a 5). Compara com a média. {% endcomment %}
+                    {% if i|add:0 <= average_rating|default:0 %} 
+                        <i class="fas fa-star filled-simple"></i>
+                    {% else %}
+                        <i class="fas fa-star unfilled-simple"></i>
+                    {% endif %} 
+                </span>
+            {% endfor %}
+            <span class="rating-text">{{ average_rating|floatformat:2 }}</span>
+        </div>
+        <br>
+        <span>{{reviews.count}} avaliações</span>
+    </div>
+    <div class="graficos-avaliacao">
+        <div class="linha 1">
+            <div class="estrelas">
+                <i class="fas fa-star filled-simple laranja-claro"></i>
+                <i class="fas fa-star filled-simple laranja-claro"></i>
+                <i class="fas fa-star filled-simple laranja-claro"></i>
+                <i class="fas fa-star filled-simple laranja-claro"></i>
+                <i class="fas fa-star filled-simple laranja-claro"></i>
+            </div>
+            <p>linha 1</p>
+            <p class="laranja-claro">1</p>
+        </div>
+        <div class="linha 2">
+            <div class="estrelas">
+                <i class="fas fa-star filled-simple laranja-claro"></i>
+                <i class="fas fa-star filled-simple laranja-claro"></i>
+                <i class="fas fa-star filled-simple laranja-claro"></i>
+                <i class="fas fa-star filled-simple laranja-claro"></i>
+                <i class="fas fa-star filled-simple azul-claro"></i>
+            </div>
+            <p>linha 2</p>
+            <p class="laranja-claro">2</p>
+        </div>
+        <div class="linha 3">
+            <div class="estrelas">
+                <i class="fas fa-star filled-simple laranja-escuro"></i>
+                <i class="fas fa-star filled-simple laranja-escuro"></i>
+                <i class="fas fa-star filled-simple laranja-escuro"></i>
+                <i class="fas fa-star filled-simple azul-claro"></i>
+                <i class="fas fa-star filled-simple azul-claro"></i>
+            </div>
+            <p>linha 3</p>
+            <p class="laranja-escuro">3</p>
+        </div>
+        <div class="linha 4">
+            <div class="estrelas">
+                <i class="fas fa-star filled-simple laranja-escuro"></i>
+                <i class="fas fa-star filled-simple laranja-escuro"></i>
+                <i class="fas fa-star filled-simple azul-claro"></i>
+                <i class="fas fa-star filled-simple azul-claro"></i>
+                <i class="fas fa-star filled-simple azul-claro"></i>
+            </div>
+            <p>linha 4</p>
+            <p class="laranja-escuro">4</p>
+        </div>
+        <div class="linha 5">
+            <div class="estrelas">
+                <i class="fas fa-star filled-simple vermelho"></i>
+                <i class="fas fa-star filled-simple azul-claro"></i>
+                <i class="fas fa-star filled-simple azul-claro"></i>
+                <i class="fas fa-star filled-simple azul-claro"></i>
+                <i class="fas fa-star filled-simple azul-claro"></i>
+            </div>
+            <p>linha 5</p>
+            <p class="vermelho">5</p>
+        </div>
+        <a href="{% url 'rating' plate.id %}"><p class="botao-avaliar">Avaliar Prato</p></a>
+    </div>
+    <div class="button-avaliação">
+        {% if user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
                 <form action="{% url 'add_to_cart' %}" method="POST" class="mt-3 mb-4">
                     {% csrf_token %}
                     
@@ -35,14 +141,14 @@
                     
                     <div class="form-group row g-3 align-items-center">
                         <div class="col-auto">
-                            <label for="quantity" class="col-form-label"><strong>Quantidade:</strong></label>
+                            <label for="quantity" class="col-form-label"><strong>Quantidade</strong></label>
                         </div>
                         <div class="col-auto">
-                            <input type="number" name="quantity" id="quantity" value="1" min="1" class="form-control" style="width: 80px;">
+                            <input type="number" name="quantity" id="quantity" value="1" min="1" class="form-control" style="width: 80px; text-align: center; background-color: var(--azul-mais-claro); color: white; border: none;">
                         </div>
                         <div class="col-auto">
                             <button type="submit" class="btn btn-primary">
-                                Adicionar ao Carrinho
+                                + Adicionar ao Carrinho
                             </button>
                         </div>
                     </div>
@@ -50,93 +156,40 @@
             {% elif user.is_authenticated %}
                 <p class="text-muted"><em>(Apenas clientes podem adicionar itens ao carrinho.)</em></p>
             {% else %}
-                <p class="mt-3"><a href="{% url 'login' %}" class="btn btn-outline-primary">Faça login</a> para adicionar ao carrinho.</p>
+                <p class="mt-3"><a href="{% url 'login_register' %}" class="btn btn-outline-primary">Faça login</a> para adicionar ao carrinho.</p>
             {% endif %}
-            <hr>
-
-            <h2>Deixe sua avaliação</h2>
-            
-            {% if user.is_authenticated %}
-                <form method="POST" enctype="multipart/form-data" action="{% url 'details_plate' plate.id %}">
-                    {% csrf_token %}
-                    
-                    {% if form.non_field_errors %}
-                    <div class="alert alert-danger">
-                        {% for error in form.non_field_errors %}{{ error }}{% endfor %}
-                    </div>
-                    {% endif %}
-
-                    <div class="form-group mb-3">
-                        <label><strong>Sua Nota:</strong></label>
-                        {{ form.value }} 
-                        <div class="star-rating" id="star-widget">
-                            <span class="star" data-value="1">&#9733;</span>
-                            <span class="star" data-value="2">&#9733;</span>
-                            <span class="star" data-value="3">&#9733;</span>
-                            <span class="star" data-value="4">&#9733;</span>
-                            <span class="star" data-value="5">&#9733;</span>
-                        </div>
-                        {% if form.value.errors %}
-                            <div class="text-danger small">{{ form.value.errors.0 }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="{{ form.comment.id_for_label }}"><strong>Comentário:</strong></label>
-                        {{ form.comment }}
-                        {% if form.comment.errors %}
-                            <div class="text-danger small">{{ form.comment.errors.0 }}</div>
-                        {% endif %}
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="{{ form.image_review.id_for_label }}"><strong>Foto (Opcional):</strong></label>
-                        {{ form.image_review }}
-                        {% if form.image_review.errors %}
-                            <div class="text-danger small">{{ form.image_review.errors.0 }}</div>
-                        {% endif %}
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Enviar Avaliação</button>
-                </form>
-            {% else %}
-                <p><a href="{% url 'login' %}">Faça login</a> para deixar uma avaliação.</p>
-            {% endif %}
-
-
-            <hr class="mt-5">
-            <h2>Avaliações ({{ reviews.count }})</h2>
-            
-            {% for review in reviews %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">{{ review.usuario.username }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">
-                        {% for i in "12345" %}
-                            {% if i|add:0 <= review.value %}
-                                <span style="color: #f39c12;">&#9733;</span>
-                            {% else %}
-                                <span style="color: #ccc;">&#9733;</span>
-                            {% endif %}
-                        {% endfor %}
-                        ({{ review.value }}/5)
-                    </h6>
-                    <p class="card-text">{{ review.comment|linebreaksbr }}</p>
-                    {% if review.image_review %}
-                        <img src="{{ review.image_review.url }}" alt="Foto da avaliação" class="img-fluid rounded" style="max-height: 200px;">
-                    {% endif %}
-                    <small class="text-muted">{{ review.created_at|date:"d/m/Y \à\s H:i" }}</small>
-                </div>
-            </div>
-            {% empty %}
-            <p>Este prato ainda não possui avaliações. Seja o primeiro!</p>
-            {% endfor %}
-
-        </div>
     </div>
 </div>
+<hr class="mt-5">
+<h2>Avaliações ({{ reviews.count }})</h2>
 
+{% for review in reviews %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ review.usuario.username }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+            {% for i in "12345" %}
+                {% if i|add:0 <= review.value %}
+                    <span style="color: var(--laranja-mais-claro);">&#9733;</span>
+                {% else %}
+                    <span style="color: var(--azul-mais-escuro);">&#9733;</span>
+                {% endif %}
+            {% endfor %}
+            ({{ review.value }}/5)
+        </h6>
+        <p class="card-text">{{ review.comment|linebreaksbr }}</p>
+        {% if review.image_review %}
+            <img src="{{ review.image_review.url }}" alt="Foto da avaliação" class="img-fluid rounded" style="max-height: 200px;">
+        {% endif %}
+        <small class="text-muted">{{ review.created_at|date:"d/m/Y \à\s H:i" }}</small>
+    </div>
+</div>
+{% empty %}
+<p>Este prato ainda não possui avaliações. Seja o primeiro!</p>
+{% endfor %}
 
+{% endblock %} 
+{% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const starWidget = document.getElementById('star-widget');
@@ -180,5 +233,4 @@
         }
     });
 </script>
-
 {% endblock %}

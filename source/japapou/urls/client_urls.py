@@ -1,6 +1,7 @@
 from django.urls import path  # type: ignore
 from japapou.views import *  # type: ignore
 from japapou.views.client_views.cart_view import add_to_cart_view, remove_from_cart_view, update_cart_item_view  # type: ignore
+from japapou.views.client_views.cart_view import add_to_cart_view, remove_from_cart_view, update_cart_item_view  # type: ignore
 
 urlpatterns = [
     path("history/", client_history_view, name="client_history"),
@@ -10,7 +11,8 @@ urlpatterns = [
     path("profile/update_user/", update_user, name="update_user"),
     path("profile/update_photo/", update_photo, name="update_photo"),
     path("rating/", client_rating_view, name="client_rating"),
-    path("details_plate/<int:plate_id>/review/", details_plate_view, name="details_plate"),
+    path("details_plate/<int:plate_id>/", details_plate_view, name="details_plate"),
+    path("details_plate/<int:plate_id>/review/", rating_view, name="rating"),
     path("receipt/", client_receipt_view, name="client_receipt"),
     path('cart/', cart_view, name='cart_view'),
     path('cart/add/', add_to_cart_view, name='add_to_cart'),
