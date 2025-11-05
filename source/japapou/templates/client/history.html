@@ -1,1 +1,47 @@
-<h1>Histórico Cliente</h1>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Meu Histórico de Pedidos</h1>
+
+    {% if not pedidos %}
+        <div class="alert alert-info" role="alert">
+            Você ainda não finalizou nenhum pedido.
+        </div>
+        <a href="/" class="btn btn-primary">Começar a comprar</a>
+    
+    {% else %}
+        {% for pedido in pedidos %}
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>Pedido #{{ pedido.id }}</strong>
+                </div>
+                <div>
+                    Realizado em: {{ pedido.created_at|date:"d/m/Y \à\s H:i" }}
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for item in pedido.items.all %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="badge bg-secondary rounded-pill me-2">{{ item.amount }}x</span>
+                            {{ item.prato.name }}
+                        </div>
+                        <span>R$ {{ item.prato.price|floatformat:2 }} (unid)</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="card-footer text-end">
+                <h5 class="mb-0">Total do Pedido: R$ {{ pedido.total|floatformat:2 }}</h5>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+</div>
+{% endblock %}

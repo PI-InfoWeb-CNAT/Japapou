@@ -1,10 +1,21 @@
+# japapou/models/order_item.py
 from django.db import models  # type: ignore
 from japapou.models.plate import Plate
+from .order import Order
 
 class OrderItem(models.Model):
-    prato = models.ForeignKey(Plate, on_delete=models.CASCADE, default=1, related_name='items')
+    
+    order = models.ForeignKey(
+        Order,
+        on_delete=models.CASCADE, 
+        related_name="items" 
+    )
+    
+
+    
+    prato = models.ForeignKey(Plate, on_delete=models.CASCADE, default=1, related_name='order_items_prato')
     amount = models.IntegerField()
-    comment = models.TextField(null=True)
+    comment = models.TextField(null=True, blank=True) # Permitir nulo/branco
     created_at = models.DateTimeField(auto_now_add=True)
     altered_at = models.DateTimeField(auto_now=True)
 

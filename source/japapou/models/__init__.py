@@ -11,3 +11,4 @@ from .plate_option import PlateOption
 from .plate import Plate
 from .review import PlateReview, CourierReview
 from .user import CustomUser
+from .cart import Cart, CartItem

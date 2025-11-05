@@ -1,0 +1,685 @@
+/* .plate-rating-summary {
+    display: flex; 
+    align-items: center;
+    gap: 15px;
+} */
+
+.stars-display-wrapper {
+    position: relative;
+    white-space: nowrap;
+    display: inline-block;
+    font-size: 1.5rem; 
+    line-height: 1; 
+}
+
+/* .stars-background {
+    color: black !important; 
+    font-style: normal; 
+}
+.stars-fill {
+    color: pink !important; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden; 
+    height: 100%;
+    font-style: normal; 
+} */
+
+.stars-display-wrapper .fas.fa-star {
+    margin-right: 2px;
+}
+
+.plate-detail-section {
+  padding: 40px 5%;
+}
+
+.plate-detail-content {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: stretch; 
+}
+
+.plate-info-container {
+    flex: 1;
+    padding-top: 0;
+    height: 100%;
+}
+
+.plate-image-container {
+    flex: 1; 
+    max-width: 600px;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 100%;
+}
+
+.plate-main-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 24px;
+}
+
+.prev-control { left: 10px; }
+.next-control { right: 10px; }
+
+/* .plate-info-container {
+  flex: 1;
+  padding-top: 0;
+  min-height: 400px;
+} */
+
+.plate-name {
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.review-count {
+  color: var(--light-gray);
+  font-size: 0.9rem;
+  margin-left: 10px;
+}
+
+.plate-price {
+  color: white;
+  font-size: 2.5rem;
+  margin: 15px 0;
+}
+
+.plate-description {
+  line-height: 1.6;
+  color: var(--light-gray);
+  margin-bottom: 30px;
+}
+
+/* .plate-rating-summary .stars-display .fas.fa-star.filled {
+  color: white;
+} */
+
+.add-to-cart-form .quantity-control {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.add-to-cart-form #quantity {
+  background: var(--card-bg);
+  border: 1px solid var(--text-muted);
+  color: var(--text-light);
+  width: 80px;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+/* .btn-add-to-cart {
+  background-color: goldenrod;
+  color: var(--dark-bg);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-add-to-cart:hover {
+  background-color: #e68a00; 
+} */
+
+.reviews-section {
+  padding: 40px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  color: var(--text-light);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.review-summary-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+}
+
+.review-stats {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.total-reviews, .average-score {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+/* .btn-open-review-form {
+  background: none;
+  color: white;
+  border: 1px solid white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+} */
+
+/* .btn-open-review-form:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+} */
+
+.rating-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 250px;
+}
+
+.rating-bar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rating-star {
+  color: var(--accent-color);
+  width: 30px;
+  text-align: right;
+  font-size: 1rem;
+}
+
+.bar-bg {
+  flex-grow: 1;
+  height: 10px;
+  background-color: #8892b0;
+  border-radius: 5px;
+}
+
+.bar-fill {
+  height: 100%;
+  background-color: var(--accent-color);
+  border-radius: 5px;
+}
+
+.bar-count {
+  color: var(--text-light);
+}
+
+.review-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.review-card {
+  background-color: var(--card-bg);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.review-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.review-user-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.review-username {
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+/* .review-rating-display .fas.fa-star.filled {
+  color: peru;
+} */
+/* .review-rating-display .fas.fa-star.unfilled {
+  color: palegreen;
+} */
+
+.review-title {
+  font-weight: bold;
+  color: var(--text-light);
+  margin-top: 0;
+}
+
+.review-comment {
+  color: var(--text-muted);
+}
+
+.review-image {
+  max-height: 150px;
+  width: auto;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.review-form-dialog {
+  background-color: var(--card-bg);
+  border: none;
+  border-radius: 8px;
+  padding: 30px;
+  max-width: 500px;
+  color: var(--text-light);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.review-form-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dialog-title {
+  text-align: center;
+  color: var(--text-light);
+  margin-bottom: 25px;
+}
+
+.review-form .form-field, .review-form .form-group-rating {
+  margin-bottom: 15px;
+}
+
+.review-form label {
+  display: none;
+}
+
+.review-form input:not([type="hidden"]), .review-form textarea, .review-form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #334466;
+  background-color: var(--dark-bg);
+  color: var(--text-light);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#star-widget {
+  font-size: 2rem;
+  text-align: center;
+  margin: 10px 0 20px;
+}
+
+#star-widget .star {
+  color: var(--azul-mais-escuro);
+  transition: color 0.2s;
+}
+
+#star-widget .star.filled {
+  color: var(--laranja-mais-claro);
+}
+
+.custom-file-upload {
+  display: block;
+  text-align: center;
+  padding: 15px;
+  border: 2px dashed var(--text-muted);
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: border-color 0.3s;
+}
+
+.custom-file-upload:hover {
+  border-color: var(--accent-color);
+}
+
+.image-upload-field input[type="file"] {
+  display: none; 
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+/* .btn-cancel {
+  background: none;
+  color: var(--text-muted);
+  border: 1px solid var(--text-muted);
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+} */
+
+/* .btn-send {
+  background-color: var(--accent-color);
+  color: var(--dark-bg);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-cancel:hover {
+  color: white;
+  border-color: white;
+} */
+
+@media (max-width: 800px) {
+  .plate-detail-content {
+    flex-direction: column;
+  }
+
+  .plate-image-container {
+    max-width: 100%;
+  }
+
+  .review-summary-bar {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+}
+
+/* :root {
+  --accent-color: #f39c12; /* Cor preenchida
+  --star-empty: #8892b0; /* Cor vazia (Cinza)
+} */
+
+/* .plate-rating-summary {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+} */
+
+/* .stars-display-wrapper {
+  position: relative;
+  white-space: nowrap;
+  display: inline-block;
+  font-size: 1.5rem; 
+  line-height: 1; 
+} */
+/* 
+.stars-background {
+  color: brown;
+  font-style: normal; 
+}
+
+.stars-fill {
+  color: pink;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  height: 100%;
+  font-style: normal; 
+} */
+
+.stars-display-wrapper .fas.fa-star {
+  margin-right: 2px;
+}
+
+/* :root {
+    --accent-color: #f39c12; /* Laranja/Amarelo
+    --star-empty: #8892b0;Cinza
+} */
+
+.stars-display-simple {
+    font-size: 1.5rem; 
+    line-height: 1;
+    display: flex;
+}
+
+.stars-display-simple .filled-simple {
+    color: var(--laranja-mais-claro) !important; 
+}
+
+.stars-display-simple .unfilled-simple {
+    color: var(--azul-mais-claro) !important; 
+}
+
+.plate-rating-summary {
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    margin-bottom: 10px; 
+    flex-direction: column;
+}
+
+.plate-price {
+    color: white;
+    font-size: 2.5rem;
+    margin: 10px 0 10px 0;
+}
+
+.plate-description {
+    line-height: 1.6;
+    color: rgb(177, 177, 177);
+    margin-bottom: 30px; 
+}
+
+p.plate-description {
+    display: block; 
+}
+
+.container-avaliacao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    width: 100%;
+}
+
+.geral-avaliacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px; 
+    text-align: center;
+    flex: 1;
+}
+
+.graficos-avaliacao {
+    flex-grow: 1;
+    max-width: 400px;
+    padding: 0 40px;
+    flex: 1;
+}
+
+.button-avaliação {
+    display: flex;
+    align-self: center;
+    flex: 1;
+}
+
+
+.geral-avaliacao span:last-child {
+    color: var(--light-gray);
+    font-size: 1rem;
+}
+
+.geral-avaliacao span.rating-text {
+    color: white; 
+    margin: 5px 0;
+}
+.button-avaliação button {
+    background-color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin: 0 auto;
+    color: black;
+}
+.geral-avaliacao span:last-child{
+    margin-inline: 20px;
+}
+
+.linha {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+}
+
+.sua-avaliacao{
+    background-color: var(--azul-mais-claro);
+    padding: 2em 10em;
+    margin: 5em;
+}
+
+.laranja-claro{
+    color: var(--laranja-mais-claro);
+}
+.laranja-escuro{
+    color: var(--laranja-mais-escuro);
+}
+.vermelho{
+    color: var(--vermelho);
+}
+.azul-claro{
+    color: var(--azul-mais-claro);
+}
+
+span{
+    color: var(--light-gray);
+}
+
+textarea#id_comment{
+    background-color: var(--azul-mais-escuro);
+    color: white;
+    border: none;
+    resize: none;
+}
+textarea#id_comment::placeholder{
+    background-color: var(--azul-mais-escuro);
+    color: white;
+    border: none;
+}
+.align-items-center{
+    display: flex;
+    flex-direction: column;
+}
+
+.botoes{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 3.5em;
+}
+
+button.btn-primary.enviar{
+    background-color: var(--laranja-mais-claro);
+    border: 1px solid var(--laranja-mais-claro);
+    color: white;
+}
+button.btn-primary.enviar:hover{
+    background-color: var(--azul-mais-escuro);
+    border: 1px solid var(--azul-mais-escuro);
+    color: white;
+    border: 1px solid white;
+}
+.cancelar{
+    background-color: var(--vermelho);
+    border: 1px solid var(--vermelho);
+    color: white;
+    text-decoration: none;
+    padding: 7px;
+    padding-inline: 25px;
+    border-radius: 7px;
+}
+.cancelar:hover{
+    background-color: var(--azul-mais-escuro);
+    border: 1px solid var(--azul-mais-escuro);
+    color: white;
+    border: 1px solid white;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+}
+button.btn-primary{
+    border: 1px solid white;
+}
+button.btn-primary:hover{
+    border: 1px solid white;
+    background-color: var(--azul-mais-escuro);
+    color: white;
+}
+
+.card-body{
+    background-color: var(--azul-mais-claro);
+    color: white;
+    width: 100%;
+}
+small.text-muted{
+    color: white;
+    background-color: white;
+    padding: 5px;
+}
+h6.card-subtitle.mb-2.text-muted{
+    color: white;
+    padding: 5px;
+}
+
+.mb-3{
+    width: 100%;
+}
+.botao-avaliar{
+    background-color: white;
+    border: 1px solid white;
+    color: black;
+    text-decoration: none;
+    padding: 7px;
+    padding-inline: 25px;
+    border-radius: 7px;
+    margin-top: 10px;
+}
+.botao-avaliar:hover{
+    background-color: var(--azul-mais-claro);
+    border: 1px solid white;
+    color: white;
+    text-decoration: none;
+    padding: 7px;
+    padding-inline: 25px;
+    border-radius: 7px;
+    margin-top: 10px;
+}

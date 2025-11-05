@@ -1,1 +1,63 @@
-<h1>Carrinho Cliente</h1>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Meu Carrinho</h1>
+
+    {% if not items %}
+        <p class="lead">Seu carrinho está vazio.</p>
+        <a href="{% url "client_menu" %}" class="btn btn-primary">Ver pratos</a>
+    {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Prato</th>
+                    <th>Preço Unit.</th>
+                    <th>Quantidade</th>
+                    <th>Total Item</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.plate.name }}</td>
+                    <td>R$ {{ item.plate.price|floatformat:2 }}</td>
+                    <td>
+                        <form action="{% url 'update_cart_item' %}" method="POST" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" style="width: 60px;">
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">Atualizar</button>
+                        </form>
+                    </td>
+                    <td><strong>R$ {{ item.get_item_total|floatformat:2 }}</strong></td>
+                    <td>
+                        <form action="{% url 'remove_from_cart' %}" method="POST" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="item_id" value="{{ item.id }}">
+                            <button type="submit" class="btn btn-sm btn-danger">Remover</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <hr>
+
+        <div class="text-end">
+            <h3>Total do Pedido: R$ {{ total|floatformat:2 }}</h3>
+            <form action="{% url 'create_order' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-lg btn-success">
+                    Finalizar Compra
+                </button>
+            </form>
+        </div>
+
+    {% endif %}
+</div>
+
+
+{% endblock %}
