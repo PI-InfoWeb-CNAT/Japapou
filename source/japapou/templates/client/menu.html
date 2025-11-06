@@ -60,7 +60,7 @@
     <h2><b>{{ selected.name }}</b></h2>
     <div class="cards">
         {% for plate in menu_plates %}
-        <a href="{% url 'rating_view' plate.id %}">
+        <a href="{% url 'details_plate' plate.id %}">
             <div class="product-card" data-media="{{ plate.media|default:0 }}"> <!-- mudar isso pra 5 dps -->
 
                 <div class="img-estrela">
