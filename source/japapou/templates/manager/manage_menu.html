@@ -23,20 +23,23 @@
     </div>
 
     <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://s2-oglobo.glbimg.com/WNfch-mHPeyumkfEM-cTtD537PI=/0x0:4990x3331/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2023/X/N/dtFzE8RoW8OucMDjFwng/temakeria-cia-foto-alex-woloch-1-.jpg" class="d-block w-100" alt="Imagem de um temaki" />
-        <div class="carousel-caption"></div>
-      </div>
+        <div class="carousel-item active">
+            <img src="{% static 'imgs/Carrossel-Menu.png' %}"
+                class="d-block w-100" alt="Imagem de um temaki" />
+            <div class="carousel-caption"></div>
+        </div>
 
-      <div class="carousel-item">
-        <img src="https://djapa.com.br/wp-content/uploads/2019/12/comida-japonesa.jpg" class="d-block w-100" alt="Imagem de pratos diversos" />
-        <div class="carousel-caption"></div>
-      </div>
+        <div class="carousel-item">
+            <img src="{% static 'imgs/Carrossel-Menu2.png' %}" class="d-block w-100"
+                alt="Imagem de pratos diversos" />
+            <div class="carousel-caption"></div>
+        </div>
 
-      <div class="carousel-item">
-        <img src="https://djapa.com.br/wp-content/uploads/2022/11/rodizio-de-comida-japonesa.jpg" class="d-block w-100" alt="Imagem de pratos diversos" />
-        <div class="carousel-caption"></div>
-      </div>
+        <div class="carousel-item">
+            <img src="{% static 'imgs/Carrossel-Menu3.png' %}"
+                class="d-block w-100" alt="Imagem de pratos diversos" />
+            <div class="carousel-caption"></div>
+        </div>
     </div>
 
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -59,7 +62,7 @@
   
 
   <section class="categoria">
-    <h2>{{ selected.name }}</h2>
+    <h2><b>{{ selected.name }}</b></h2>
     <div class="cards">
       {% for plate in menu_plates %}
         <div class="product-card" data-media="{{ plate.media|default:0}}" >
@@ -97,17 +100,21 @@
           </div>
         </div>
       {% endfor %}
-      <div class="product-card-branco">
-        <div class="img-estrela">
-          <div class="product-image"></div>
-        </div>
-        <button onclick="document.getElementById('criar-prato').showModal()"><span class="material-symbols-outlined">+</span></button>
-      </div>
+      
+        <button class="botao-criar" onclick="document.getElementById('criar-prato').showModal()">
+          <div class="product-card-branco">
+            <p class="plus-icon-text">+</p> 
+            <div class="img-estrela">
+              <div class="product-image"></div>
+            </div>
+          </div>
+        </button>
+      
     </div>
   </section>
 
   <section class="categoria">
-    <h2>Available:</h2>
+    <h2>Disponível</h2>
     <div class="cards">
       {% for plate in other_plates %}
         <div class="product-card" data-media="{{ plate.media|default:0 }}">
@@ -145,12 +152,14 @@
           </div>
         </div>
       {% endfor %}
-      <div class="product-card-branco">
-        <div class="img-estrela">
-          <div class="product-image"></div>
-        </div>
-        <button onclick="document.getElementById('criar-prato').showModal()"><span class="material-symbols-outlined">+</span></button>
-      </div>
+      <button class="botao-criar" onclick="document.getElementById('criar-prato').showModal()">
+          <div class="product-card-branco">
+            <p class="plus-icon-text">+</p> 
+            <div class="img-estrela">
+              <div class="product-image"></div>
+            </div>
+          </div>
+        </button>
     </div>
   </section>
 

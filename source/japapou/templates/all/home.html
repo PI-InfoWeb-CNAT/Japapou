@@ -47,25 +47,47 @@
     <div class="container">
         <div class="coverflow-container">
             <div class="coverflow">
-    
                 {% for prato in ranking %}
-                <div class="slide">
-                    <img src="{{ prato.photo.url }}" alt="{{ prato.name }}" width="100">
-                    <h4>{{ prato.name }}</h4>
-                    <h6>{{ prato.description }}</h6>
-                </div>
+                    {% if user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
+                        <a href="{% url 'details_plate' prato.id %}">
+                    {% else %}
+                        <a href="{% url 'login_register' %}">
+                    {% endif %}
+                    
+                        <div class="slide card-venda">
+                            <img src="{{ prato.photo.url }}" alt="{{ prato.name }}" width="100"> 
+                            
+                            <div class="slide-content"> 
+                                <h4><b>{{ prato.name }}</b></h4> 
+                                
+                                <p class="product-description">{{ prato.description }}</p> 
+                                
+                                <div class="price-button">
+                                    R$ 40,00 
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                 {% endfor %}
-    
             </div>
         </div>
     
-        <button id="prev"><img src="{% static 'imgs/seta.png' %}" alt="seta_esquerda"></button>
-        <button id="next"><img src="{% static 'imgs/seta.png' %}" alt="seta_direita"></button>
+        <button id="prev" class="butao"><img src="{% static 'imgs/seta.png' %}" alt="seta_esquerda"></button>
+        <button id="next" class="butao"><img src="{% static 'imgs/seta.png' %}" alt="seta_direita"></button>
     </div> 
 </section>
 
 <div class="container-sushi">
-    <a href="" class="container-btn-sessao"><p class="btn-sessao teste">Compre Agora</p></a>
+    {% if user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
+        <a href="{% url 'client_menu' %}" class="container-btn-sessao"> 
+    {% elif user.is_authenticated and user.tipo_usuario == 'MANAGER' %}
+        <a href="{% url 'manager_menu' %}" class="container-btn-sessao"> 
+    {% elif user.is_authenticated and user.tipo_usuario == 'DELIVERY_MAN' %}
+        <a href="{% url 'login_register' %}" class="container-btn-sessao"> 
+    {% else %}
+        <a href="{% url 'visitor_menu' %}" class="container-btn-sessao">
+    {% endif %}
+            <p class="btn-sessao teste">Compre Agora</p></a>
     <section class="sushi-benefits">
         
         <div class="benefits-grid">

@@ -20,6 +20,7 @@ urlpatterns = [
     path("plates/", views.manager_plates_view, name="manager_plates"),
     path("plates/create/", views.create_plates_view, name="create_plates"),
     path("plates/<int:id>/update/", views.plate_update_view, name="plate_update"),
+    path("plates/<int:id>/json", views.plate_get_json, name="plate_json"),
     path("plates/<int:id>/delete/", views.plate_delete_view, name="plate_delete"),
     path("plates/json/", views.plate_get_json, name="plate_get_json"), # JSON API
 

@@ -8,4 +8,4 @@ def home_view(request):
         total_vendido=Sum('order_items_prato__amount')
     ).order_by('-total_vendido')[:10]
 
-    return render(request, template_name="all/home.html", context={"ranking":ranking})
+    return render(request, template_name="all/home.html", context={"ranking":ranking, "plate": Plate.objects.all()})

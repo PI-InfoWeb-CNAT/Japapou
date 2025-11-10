@@ -68,8 +68,7 @@ main {
 	h2 {
 		margin-bottom: 100px;
 		font-size: 45px;
-		color: #f23e2f;
-		
+		color: white;
 	}
 
 	.cards {
@@ -87,8 +86,8 @@ main {
 	transform: translateX(-50%);
 	width: 180px;
 	height: 180px;
-	background-color: #f97316;
-	border: 1px solid black;
+	background-color: none;
+	/*border: 1px solid black;*/
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
@@ -108,20 +107,21 @@ main {
 	position: relative;
 	width: 270px;
 	height: 300px;
-	background-color: #f97316;
+	background-color: var(--azul-mais-claro);
 	border-radius: 25px;
 	padding: 20px;
 	padding-top: 80px;
 	text-align: center;
-	color: black;
+	color: white;
 	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+	border: 1px solid var(--azul-mais-claro);
 
 	.action-button {
 		position: absolute;
 		bottom: -15px;
 		width: 50px;
 		height: 50px;
-		background-color: #ef4444;
+		background-color: var(--laranja-mais-claro);
 		border: 1px solid black;
 		border-radius: 50%;
 		display: flex;
@@ -164,7 +164,8 @@ main {
 				.star {
 					position: absolute;
 					font-size: 30px;
-					color: black;
+					/*color:var(--lighter-gray);*/
+					color: #FFD700;
 
 					&:nth-child(1) {
 						transform: translate(-58px, 6px) rotate(0deg);
@@ -202,7 +203,7 @@ main {
 		}
 
 		.remove-button {
-			background-color: #ef4444;
+			background-color: var(--light-yellow);
 			color: black;
 			border: 1px solid black;
 			border-radius: 15px;
@@ -223,7 +224,7 @@ main {
 		bottom: -20px;
 		left: 50%;
 		transform: translateX(-50%);
-		background-color: #ef4444;
+		background-color: var(--laranja-mais-claro);
 		color: white;
 		border: 1px solid black;
 		border-radius: 10px;
@@ -241,37 +242,82 @@ main {
 .data-cardapio {
 	display: flex;
 	justify-content: space-around;
-	background-color: black;
+	background-color: var(--azul-mais-escuro);
 	width: 100%;
-	padding: 1em 0;
+	height: 5em;
 	margin-bottom: 1em;
+	align-items: center;
+	
 
-	div {
-		border: 1px solid #f97316;
-		color: #f97316;
-		border-radius: 30px;
-		padding: 10px 20px 10px 20px;
+	#period-form {
+		width: 18%;
+		height: 55%;
+
+		select {
+			font-size: 19px;
+			text-align: center;
+		}
+	}
+	div p {
 		display: flex;
-		align-items: center;
+		align-items: center; 
 	}
 
 	.novo-cardapio {
-		border: 1px solid #f97316;
-		color: #f97316;
+		border: 1px solid white;
+		color: white;
 		border-radius: 30px;
-		padding: 10px 20px 10px 20px;
+		margin-inline: 5%;
+	}
+
+	.novo-cardapio:hover{
+		background-color: var(--azul-mais-claro);
 	}
 
 	button {
 		border: none;
-		background-color: black;
+		background-color: var(--azul-mais-escuro);
 		margin-bottom: 0px;
 		padding: 0;
+		width: 8%;
+		height: 55%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 	.material-symbols-outlined {
 		color: #f97316;
 		font-size: 30px;
 		cursor: pointer;
+	}
+	form {
+		width: 16%;
+		height: 55%;
+
+		/* div {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: 1px solid white;
+			color: #f97316;
+			border-radius: 30px;
+			width: 100%;
+			height: 100%;
+			} */
+		label {
+			margin: 0;
+			margin-right: 5px;
+			font-size: 20px;
+		}
+	}
+	form select {
+		background-color: none;
+		font-size: 19px;
+		text-align: center;
+		cursor: pointer;
+	}
+	form select:hover {
+		background-color: var(--azul-mais-claro);
 	}
 }
 
@@ -279,7 +325,7 @@ dialog {
 	z-index: 100;
 
 	h2 {
-		color: #f97316;
+		color: white;
 	}
 
 	&::backdrop {
@@ -301,7 +347,7 @@ form {
 	height: 80%;
 
 	button {
-		background-color: #f23e2f;
+		background-color: var(--laranja-mais-claro);
 		border: 2px solid black;
 		border-radius: 15px;
 		width: 40%;
@@ -324,8 +370,8 @@ form {
 	}
 
 	input {
-		background-color: #f97316;
-		border: none;
+		background-color: var(--azul-mais-claro);
+		border: 1px solid white;
 		border-radius: 6px;
 		height: 25%;
 		width: 100%;
@@ -334,7 +380,7 @@ form {
 
 	label {
 		font-size: 24px;
-		color: #f97316;
+		color: white;
 		margin-bottom: 10px;
 	}
 }
@@ -358,7 +404,18 @@ form {
 	}
 
 	h2 {
-		color: #f97316;
+		color: white;
+	}
+	form #name-menu{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	form #id_name {
+		width: 60%;
+		border: 2px solid white;
+		color: white;
+    	border-radius: 8px;
 	}
 }
 
@@ -367,29 +424,30 @@ form {
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 4%;
-	background-color: #f97316;
-	padding: 20px 20px 20px 20px;
+	background-color: var(--azul-mais-escuro);
+	padding: 20px 0px 20px 0px;
 	width: 100%;
 	height: 70%;
-	border: 2px solid black;
+	border: 2px solid white;
 	border-radius: 8px;
 
 	div {
 		display: flex;
-		align-items: center;
+		align-items: flex-end;
+		/* align-items: center;
 		gap: 1%;
-		height: 5%;
+		height: 5%; */
 
 		label {
-			font-size: 15px;
-			color: black;
+			font-size: 14px;
+			color: white;
 			width: 100px;
-			margin: 0;
+			margin: 0; 
 		}
 
 		input[type="checkbox"] {
 			all: unset;
-			border: 1px solid black;
+			border: 1px solid white;
 			border-radius: 1px;
 			background-color: transparent;
 			width: 20px;
@@ -448,20 +506,28 @@ form {
 				border-radius: 0;
 				margin-bottom: 12%;
 			}
+
 			h2 {
 				font-size: 25px;
 				font-weight: bold;
 				color: black;
 			}
+
 			p {
 				font-size: 13px;
 				color: black;
+			}
+
+			a {
+				width: 100%;
+				height: 100%;
+				text-decoration: none;
 			}
 		}
 	}
 }
 
-#pratos-registrados {
+/* #pratos-registrados {
 	margin: 0 auto;
 	position: fixed;
 	top: 50%;
@@ -493,7 +559,7 @@ form {
 		flex-wrap: wrap;
 		justify-content: center;
 		gap: 5%;
-		background-color: #f97316;
+		background-color: var();
 		padding: 25px 0px 45px 0px;
 		width: 95%;
 		height: 70%;
@@ -531,7 +597,7 @@ form {
 			}
 		}
 	}
-}
+} */
 
 #criar-prato {
 	margin: 0 auto;
@@ -542,9 +608,9 @@ form {
 	z-index: 2;
 	margin: 0;
 	width: 30%;
-	height: 75%;
+	height: 90%;
 	padding: 15px 40px 20px 40px;
-	background-color: #024057;
+	background-color: var(--azul-mais-escuro);
 	border: 1px solid white;
 	border-radius: 20px;
 	place-items: center;
@@ -554,18 +620,22 @@ form {
 	}
 
 	form #image-file {
-		background-color: #f97316;
+		background-color: var(--laranja-mais-claro);
 		width: 35%;
-		height: 30%;
+		height: 25%;
 	}
 
 	form div {
 		text-align: left;
 		width: 100%;
 	}
+	form .criar-prato-menus{
+		display: flex;
+		flex-direction: column;
+	}
 
 	form div textarea {
-		background-color: #f97316;
+		background-color: var(--azul-mais-claro);
 		width: 100%;
 	}
 
@@ -583,7 +653,7 @@ form {
 	}
 
 	form #image-file label {
-		color: black;
+		color: white;
 		font-size: 13px;
 		font-weight: bold;
 		text-align: center;
@@ -607,10 +677,113 @@ form {
 	}
 
 	button {
-		background-color: #f23e2f;
+		background-color: var(--laranja-mais-claro);
 		border: 2px solid black;
 		border-radius: 12px;
-		width: 40%;
+		width: 110%;
+		height: 6%;
+		margin-top: 5%;
+	}
+}
+
+#editar-prato {
+	margin: 0 auto;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	margin: 0;
+	width: 30%;
+	height: 90%;
+	padding: 15px 40px 20px 40px;
+	background-color: var(--azul-mais-escuro);
+	border: 1px solid white;
+	border-radius: 20px;
+	place-items: center;
+
+	form {
+		place-items: center;
+		position: relative;
+	}
+
+	form #image-file-edit {
+		background-color: var(--azul-mais-claro);
+		width: 35%;
+		height: 25%;
+	}
+
+	form div {
+		text-align: left;
+		width: 100%;
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
+	}
+	form .criar-prato-menus{
+		display: flex;
+		flex-direction: column;
+		margin-top: 1%;
+	}
+
+	form div textarea {
+		background-color: var(--azul-mais-claro);
+		width: 100%;
+		color: white;
+	}
+
+	form div label {
+		margin: 0;
+		font-size: 17px;
+	}
+
+	form div input {
+		margin-bottom: 15px;
+		color: white;
+		background-color: var(--azul-mais-claro);
+	}
+
+	form label {
+		margin: 0;
+	}
+	form #label-image {
+		position: absolute;
+		top: 10%;
+        left: 44%;
+		color: transparent;
+	}
+
+	form #image-file-edit label {
+		color: black;
+		font-size: 13px;
+		font-weight: bold;
+		text-align: center;
+		margin: 0;
+		padding: 0px 0px 0px 0px;
+		width: 100%;
+		height: 100%;
+	}
+
+	form label p {
+		margin: 0;
+	}
+
+	form label .material-symbols-outlined {
+		font-size: 60px;
+		
+	}
+
+	form input[type="file"] {
+		display: none;
+	}
+
+	button {
+		background-color: var(--laranja-mais-claro);
+		border: 2px solid black;
+		border-radius: 12px;
+		width: 110%;
 		height: 6%;
 		margin-top: 5%;
 	}
@@ -625,63 +798,29 @@ form {
 	z-index: 2;
 	margin: 0;
 	width: 30%;
-	height: 75%;
+	height: 21%;
 	padding: 15px 40px 20px 40px;
-	background-color: #024057;
+	background-color: var(--azul-mais-escuro);
 	border: 1px solid white;
 	border-radius: 20px;
 	place-items: center;
-
+	
 	form {
 		place-items: center;
+		height: 0%;
 	}
-
+	p {
+		color: white;
+	}
 
 	form div {
-		text-align: left;
-		width: 100%;
-	}
-
-
-	form div label {
-		margin: 0;
-		font-size: 17px;
-	}
-
-	form div input {
-		margin-bottom: 15px;
-	}
-
-	form label {
-		margin: 0;
-	}
-
-	form #image-file label {
-		color: black;
-		font-size: 13px;
-		font-weight: bold;
 		text-align: center;
-		margin: 0;
-		padding: 0px 0px 0px 0px;
 		width: 100%;
-		height: 100%;
-	}
-
-	form label p {
-		margin: 0;
-	}
-
-	form label .material-symbols-outlined {
-		font-size: 60px;
-		margin: 25px 0px 0px 0px;
-	}
-
-	form input[type="file"] {
-		display: none;
+		
 	}
 
 	button {
-		background-color: #f23e2f;
+		background-color: var(--laranja-mais-claro);
 		border: 2px solid black;
 		border-radius: 12px;
 		width: 40%;
@@ -690,12 +829,11 @@ form {
 	}
 }
 
-
 .product-card-branco {
 	position: relative;
 	width: 270px;
 	height: 300px;
-	background-color: #024057;
+	background-color: var(--azul-mais-claro);
 	border-radius: 25px;
 	padding: 20px;
 	padding-top: 80px;
@@ -708,7 +846,7 @@ form {
 
 		.product-image {
 			border-radius: 50%;
-			background-color: #024057;
+			background-color: var(--azul-mais-claro);
 			border: none;
 			top: -55px;
 
@@ -716,7 +854,7 @@ form {
 				border-radius: 50%;
 				width: 100%;
 				height: 100%;
-				background-color: #024057;
+				background-color: var(--azul-mais-claro);
 			}
 		}
 	}
@@ -730,4 +868,108 @@ form {
 		font-size: 100px;
 		margin-top: 20%;
 	}
+}
+
+.img-estrela .estrelas .curved-stars-container .star.star-inactive {
+  color: #b0b0b0; /* Cor cinza claro para estrela inativa */
+  /* Outra opção: 
+     color: #e0e0e0; (um cinza bem suave)
+  */
+}
+
+/* 2. Define a cor para as estrelas INATIVAS */
+/* Quando o JS adicionar a classe .star-inactive, esta
+   regra terá prioridade e mudará a cor da estrela */
+.estrelas .star.star-inactive {
+  color: #b0b0b0; /* Cor cinza claro para estrela inativa */
+  /* Outra opção: 
+     color: #e0e0e0; (um cinza bem suave)
+  */
+}
+
+a:hover > div{
+	background-color: var(--azul-mais-escuro);
+	border: 1px solid white;
+}
+
+.product-card:hover{
+	background-color: var(--azul-mais-escuro);
+	border: 1px solid white;
+}
+
+h2{
+	text-align: center;
+	margin-top: 1em;
+}
+.data-cardapio {
+    select {
+		background-color: var(--azul-mais-escuro);
+		color: white;
+		border-radius: 25px;
+		border: 1px solid white;
+		text-align: center;
+		padding: 10px;
+		margin: 0 auto;
+		padding-inline: 1em;
+	}
+}
+
+/* .data-cardapio {
+    form {
+        label {
+			visibility: hidden;
+		}
+	}
+} */
+
+span.material-symbols-outlined{
+	background-color: var(--azul-mais-escuro);
+	box-shadow: none;
+	border: none;
+}
+
+button{
+	background-color: var(--azul-mais-escuro);
+	box-shadow: none;
+	border: none;
+}
+
+.product-card-branco {
+    align-items: center;
+    padding-top: 20px; 
+}
+
+.product-card-branco .plus-icon-text {
+    font-size: 100px; 
+    color: white; 
+    margin: 0; 
+    line-height: 1; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.product-card-branco .img-estrela .product-image {
+    background-color: var(--azul-mais-claro);
+}
+
+.botao-criar:hover > .product-card-branco .img-estrela .product-image{
+	background-color: palevioletred;
+}
+.botao-criar:hover > .product-card-branco{
+	background-color: palevioletred;
+}
+
+.botao-criar:hover .product-card-branco {
+    background-color: white; 
+}
+
+.botao-criar:hover .product-card-branco .img-estrela .product-image {
+    background-color: white;
+
+}
+
+.botao-criar:hover .plus-icon-text {
+    color: var(--azul-mais-escuro);
 }

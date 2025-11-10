@@ -16,7 +16,7 @@ class Search(forms.Form):
         choices=[],
         required=False,
         widget=forms.Select(attrs={"onchange": "submit();"}),
-        label="Menus"
+        label=""
     )
 
 
@@ -96,6 +96,8 @@ def manager_menu_view(request):
 
     search_period_form = manage_period_view.SearchPeriods(get_data)
     search_period_form.fields["period_field"].choices = period_choices
+
+    search_period_form.fields["period_field"].label = ""
 
     menu_plates = Plate.objects.filter(menu=selected_menu)
     other_plates = Plate.objects.exclude(menu=selected_menu)

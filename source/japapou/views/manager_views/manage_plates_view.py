@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404  # type: ignore
-from japapou.models import Plate
+from japapou.models import Plate, PlateReview
 from django.urls import reverse
 from japapou.forms import PlatesForms
 from django.contrib import messages
 from django.http import JsonResponse
 from django.contrib.auth.decorators import permission_required
+from django.db.models import Avg
+from django.db.models.functions import Round
 
 
 @permission_required('japapou.view_plate', login_url='home')
@@ -12,8 +14,16 @@ def manager_plates_view(request):
     if request.user.tipo_usuario != 'MANAGER':
         messages.error(request, "Você não tem permissão para acessar essa página.")
         return redirect('home')
-
+    
     plates = Plate.objects.all()
+
+    avaliacoes_dict = {}
+    avaliacoes = PlateReview.objects.values('plate__name').annotate(media=Round(Avg('value')))
+
+    avaliacoes_dict = {a['plate__name']: a['media'] for a in avaliacoes}
+
+    for plate in plates:
+            plate.media = avaliacoes_dict.get(plate.name)
 
     if request.method == "POST":
         form = PlatesForms(request.POST, request.FILES)
@@ -35,7 +45,8 @@ def manager_plates_view(request):
 
     context = {
         "plates": plates,
-        "form": form
+        "form": form,
+        "avaliacoes": avaliacoes,
     }
 
     return render(
@@ -80,7 +91,7 @@ def create_plates_view(request):
     # ou se for um acesso GET direto, redireciona para a página principal de pratos.
     return redirect(reverse("manager_plates"))
 
-@permission_required('japapou.view_plate', login_url='home')
+
 def plate_get_json(request, id):
     
     try:

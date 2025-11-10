@@ -5,12 +5,12 @@ main{
 header{
   background-color: var(--azul-mais-escuro);
 }
-.coverflow-container {
+/* .coverflow-container {
   position: relative;
   width: 80%;
   overflow: hidden;
   width: 660px;
-}
+} */
 
 .coverflow {
   display: flex;
@@ -23,19 +23,72 @@ header{
   margin-top: 15em;
 }
 
-.slide {
-  flex: 0 0 200px; 
-  height: 150px;
-  background: #f3f3f3;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2em;
+/* Atualização do estilo do slide para o visual da 2ª imagem */
+/* .slide {
+    flex: 0 0 270px; /* Largura ajustada para o novo layout
+    height: 400px; /* Altura aumentada para o novo layout
+    background-color: var(--azul-mais-escuro); /* Use o fundo do seu body ou um azul escuro
+    color: #fff; /* Cor do texto branca
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Sombra sutil se desejar 
+    padding: 0; Removendo padding inicial */
+    /* Remove a configuração desnecessária da regra anterior se estiver abaixo */
+    /* background-color: var(--azul-mais-claro);  
+}*/
+/* .slide > img {
+    /* Estilo da imagem no topo do cartão
+    width: 100%;
+    height: 50%; /* Ocupa a metade superior do cartão
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+} */
+/* .slide-content {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+} */
+/* .slide-content h4 {
+    font-size: 1.2em;
+    margin-top: 0;
+    margin-bottom: 5px;
+} */
+.product-description {
+    /* Estilo da descrição (simulando o lorem ipsum) */
+    font-size: 0.75em;
+    line-height: 1.4;
+    color: #aaa; /* Cor um pouco mais clara para a descrição */
+    margin-bottom: 15px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* Limita a 4 linhas se necessário */
+    -webkit-box-orient: vertical;
 }
 
-button {
+/* Estilo para o Botão de Preço (R$ 40,00) */
+.price-button {
+    background-color: var(--laranja-mais-claro); /* Cor laranja/âmbar */
+    color: #000; /* Texto preto */
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 80%; /* Ajuste a largura conforme o visual */
+    text-align: center;
+    border: 1px solid var(--laranja-mais-claro);
+}
+
+.price-button:hover {
+    background-color: var(--azul-mais-claro); /* Efeito de hover */
+    color: white;
+    border: 1px solid white;
+}
+
+/* button {
   position: absolute;
   top: 160%;
   transform: translateY(-50%);
@@ -60,15 +113,15 @@ button {
 .container{
     width: 600px;
     display: flex;
-}
+} */
 
 .coverflow::-webkit-scrollbar {
   display: none;
 }
 
-.slide{
+/* .slide{
     display: block;
-}
+} */
 
 div .container{
     width: 800px;
@@ -78,18 +131,18 @@ div .container{
   height: 100vh;
   background-color: var(--azul-mais-escuro);
 }
-.slide{
+/* .slide{
   box-shadow: none;
-}
+} */
 
-.carousel-control-next, .carousel-control-prev {
+/* .carousel-control-next, .carousel-control-prev {
 top: 50%;
 width: 5%;
 }
 .carousel-control-next-icon, .carousel-control-prev-icon {
   width: 50%;
   height: 50%;
-}
+} */
 
 .carousel-inner{
   width: 50%;
@@ -114,6 +167,7 @@ width: 5%;
   font-weight: bold;
   border-radius: 10px;
   cursor: pointer;
+  border: 1px solid var(--laranja-mais-claro);
 }
 
 .btn-sessao.teste{
@@ -218,7 +272,7 @@ div.area-e{grid-area: e;}
 
 .container-sushi{
   width: 100%;
-  margin-top: 20em;
+  margin-top: 10em;
   background-color: var(--azul-mais-claro);
 }
 
@@ -306,4 +360,129 @@ div.area-e{grid-area: e;}
   .benefit::before {
     display: none;
   }
+}
+
+h2{
+  margin-top: 7em;
+  margin-bottom: 1em;
+}
+
+/* .slide{
+  background-color: var(--azul-mais-claro);
+}
+
+.slide.card-venda{
+  border: 2px solid white;
+} */
+
+/* Ajuste no contêiner para centralizar e dar espaço para as setas */
+.container {
+    width: 100%; /* Aumenta a largura do contêiner para caber a nova largura dos slides */
+    max-width: 1200px; /* Limite o tamanho máximo */
+    margin: 0 auto; /* Centraliza o contêiner */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Importante para posicionar as setas */
+}
+
+.coverflow-container {
+    /* Garante que o coverflow ocupe a maior parte do container */
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Ajuste a posição das setas para ficarem laterais ao coverflow */
+.butao {
+    position: absolute;
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%);
+    /* ... demais estilos de botão ... */
+    background: none; /* Remove o fundo para que fique apenas a imagem da seta */
+    border: none;
+    padding: 0;
+    z-index: 10;
+    margin-inline: -10%;
+}
+
+#prev {
+    left: 0px; /* Mais próximo da borda */
+    transform: translateY(-50%) scaleX(-1); /* Mantém o flip */
+}
+
+#next {
+    right: 0px; /* Mais próximo da borda */
+    transform: translateY(-50%);
+}
+
+/* Atualização do estilo do slide para o visual da 2ª imagem */
+.slide.card-venda{
+    flex: 0 0 270px;
+    height: 400px;
+    background-color: var(--azul-mais-claro); 
+    color: #fff;
+    border-radius: 10px;
+    padding: 0;
+    /* ADICIONAR: Transformar o slide em um contêiner flexível */
+    display: flex; 
+    flex-direction: column; /* Organiza os itens (imagem e slide-content) verticalmente */
+    width: 275px;
+  }
+  .slide.card-venda{
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  border: 1px solid white;
+}
+.slide.card-venda > img {
+    /* Estilo da imagem no topo do cartão */
+    width: 100%;
+    height: 50%; 
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.slide-content {
+    /* Container para o texto e botão */
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* Organiza o conteúdo (título, descrição, botão) verticalmente */
+    align-items: center;
+    text-align: center;
+    /* ADICIONAR: Ocupa o espaço restante e empurra o botão para baixo */
+    flex-grow: 1; 
+    justify-content: space-between; /* ESSENCIAL: Distribui o espaço, empurrando o último item (o botão) para a parte inferior */
+}
+
+/* ... mantenha as outras regras (h4, product-description, price-button) como estão ... */
+
+/* Ajuste no padding inferior do slide-content para que o botão não encoste na borda */
+.slide-content {
+    /* ... regras anteriores ... */
+    padding: 15px;
+    padding-bottom: 20px; /* Adiciona um padding maior embaixo para a margem do botão */
+    /* ... regras anteriores ... */
+}
+
+.price-button {
+    /* ADICIONAR: Adiciona uma margem superior para separação, se necessário */
+    margin-top: auto; 
+    /* Isso garante que, mesmo com o 'justify-content: space-between',
+       o botão mantenha-se fixo na base e com a margem interna do padding-bottom */
+
+    background-color: var(--laranja-mais-claro);
+    color: #000;
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 80%;
+    text-align: center;
+}
+a{
+  text-decoration: none;
+}
+a:hover > div.slide.card-venda{
+  border: 1px solid var(--laranja-mais-claro);
+  background-color: var(--azul-mais-escuro);
 }

@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block extra_head %}
-  <link rel="stylesheet" href="{% static 'css/manager/manager_menu.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/manager/manager_plates.css' %}" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=image_arrow_up,keyboard_arrow_down" />
 {% endblock %}
 
@@ -58,14 +58,14 @@
     <h2>Pratos:</h2>
     <div class="cards">
       {% for plate in plates %}
-        <div class="product-card">
+        <div class="product-card" data-media="{{ plate.media|default:0 }}">
           <button class="action-button delete-button" plate-id="{{ plate.id }}" aria-label="Deletar">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           </button>
-          <button class="action-button edit-button" plate-id="{{ plate.id }}" data-url="{% url 'manager_plates_edit' plate.id %}" data-next-page="manager_plates" aria-label="Editar">
+          <button class="action-button edit-button" plate-id="{{ plate.id }}" data-url="{% url 'plate_json' plate.id %}" data-next-page="manager_plates" aria-label="Editar">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
             </svg>
@@ -99,7 +99,7 @@
   
   <dialog id="criar-prato">
     <h2>Criar Novo Prato</h2>
-    <form id="form-criar-prato" action="{% url 'create_plates_view' %}" method="post" enctype="multipart/form-data">
+    <form id="form-criar-prato" action="{% url 'create_plates' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
 
       <input type="hidden" id="redirect-after-update" name="next_redirect_url_name" value="manager_plates">
