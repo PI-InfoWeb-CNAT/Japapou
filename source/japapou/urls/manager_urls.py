@@ -5,6 +5,12 @@ import japapou.views.manager_views as views
 
 urlpatterns = [
 
+    # PEDIDO
+    path("assign_pickup/<int:order_id>/", views.manager_assign_pickup_view, name='assign_pickup'),
+    path('confirm_pickup/<int:order_id>/', views.confirm_pickup_view, name='confirm_pickup'),
+    path("assign_delivery/<int:order_id>/", views.manager_assign_delivery_view, name='assign_delivery'),
+    #path('confirm_dispatch/<int:order_id>/', views.confirm_dispatch_view, name='confirm_dispatch'),
+
     # DELIVERY MAN (Motoboys/Entregadores)
     path("delivery-man/", views.manage_delivery_man_view, name="manager_delivery_man"),
     path("delivery-man/create/", views.manager_delivery_man_create_view, name="manager_delivery_man_create"),

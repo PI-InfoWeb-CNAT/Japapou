@@ -14,7 +14,7 @@ def client_history_view(request):
 
    
     
-    pedidos_do_cliente = OrderPickup.objects.filter(
+    pedidos_do_cliente = Order.objects.filter(
         usuario=request.user
     ).prefetch_related(
         'items', 'items__prato' 
