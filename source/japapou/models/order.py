@@ -58,7 +58,7 @@ class Order(models.Model):
             return f"[{tipo}] {id_pedido} (Retirado) - R$ {self.total} - Cliente {self.usuario}"
         if self.tipo_pedido == self.TipoPedido.ENTREGA:
             tipo = self.get_tipo_pedido_display()
-            f"[{tipo}] {id_pedido} (Entregue) - R$ {self.total}"
+            return f"[{tipo}] {id_pedido} (Entregue) - R$ {self.total}"
             
     
 
