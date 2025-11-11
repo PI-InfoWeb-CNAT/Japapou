@@ -32,19 +32,19 @@
                     <h2>Cadastro</h2>
                     <form method="post">
                         {% csrf_token %}
-                        <label for="id_username">Username:</label>
+                        <label for="id_username">Username</label>
                         {{ register_form.username }}
 
-                        <label for="id_email">Email:</label>
+                        <label for="id_email">Email</label>
                         {{ register_form.email }}
 
-                        <label for="id_password">Password:</label>
+                        <label for="id_password">Password</label>
                         {{ register_form.password }}
 
-                        <label for="id_cpf">CPF:</label>
+                        <label for="id_cpf">CPF</label>
                         {{ register_form.cpf }}
 
-                        <label for="id_data_nascimento">Data de Nascimento:</label>
+                        <label for="id_data_nascimento">Data de Nascimento</label>
                         {{ register_form.data_nascimento}}
                         
 

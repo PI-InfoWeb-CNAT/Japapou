@@ -143,7 +143,7 @@ header {
 /* FOOTER */
 footer {
 	width: 100%;
-	background: #333;
+	background: var(--azul-mais-escuro);
 	color: #d9d9d9;
 	padding: 32px 24px;
 
@@ -211,6 +211,10 @@ footer {
 				}
 			}
 		}
+	}
+
+	i.fa-solid{
+		margin-right: 0.3em;
 	}
 }
 

@@ -11,68 +11,65 @@
 {% block content %}
 <section id="carouselExampleIndicators" class="carousel slide">
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
 
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="https://s2-oglobo.glbimg.com/WNfch-mHPeyumkfEM-cTtD537PI=/0x0:4990x3331/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_da025474c0c44edd99332dddb09cabe8/internal_photos/bs/2023/X/N/dtFzE8RoW8OucMDjFwng/temakeria-cia-foto-alex-woloch-1-.jpg"
+            <img src="{% static 'imgs/Carrossel-Menu.png' %}"
                 class="d-block w-100" alt="Imagem de um temaki" />
             <div class="carousel-caption"></div>
         </div>
 
         <div class="carousel-item">
-            <img src="https://djapa.com.br/wp-content/uploads/2019/12/comida-japonesa.jpg" class="d-block w-100"
+            <img src="{% static 'imgs/Carrossel-Menu2.png' %}" class="d-block w-100"
                 alt="Imagem de pratos diversos" />
             <div class="carousel-caption"></div>
         </div>
 
         <div class="carousel-item">
-            <img src="https://djapa.com.br/wp-content/uploads/2022/11/rodizio-de-comida-japonesa.jpg"
+            <img src="{% static 'imgs/Carrossel-Menu3.png' %}"
                 class="d-block w-100" alt="Imagem de pratos diversos" />
             <div class="carousel-caption"></div>
         </div>
     </div>
 
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="prev">
-        <span class="carousel-control-prev-icon seta-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon seta-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Próximo</span>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Próximo</span>
     </button>
-</section>
+  </section>
 
 <section  class="container">
     <div class="linha-decorativa">
-        <p class="linha1">Lorem Ipsum</p>
-        <h2><b>Lorem Ipsum</b></h2>
-        <p class="texto-principal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae corrupti, doloremque eum molestias consequuntur optio quasi, deleniti eaque labore fugit similique repellat, minima illo provident magni nihil commodi ipsa quas?</p>
+        <div class="header-with-line">
+            <p class="linha1">Informações do Restaurante</p>
+          </div>
+        <h2><b>Japapouu</b></h2>
+        <p class="texto-principal">Japapou é o seu restaurante preferido para a autêntica culinária japonesa. Oferecemos peças frescas, saborosas e preparadas com ingredientes de alta qualidade, garantindo uma experiência premium. Faça seu pedido com a facilidade de um clique e receba o melhor do Japão diretamente na sua casa.</p>
         <div class="grid-container2">
-            <div  class="grid-item2 area-a2"><div><i class="fa-solid fa-map-location"></i></div><p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ipsam sunt eveniet libero corrupti officia, explicabo impedit facere qui ex porro asperiores fuga aperiam nam obcaecati totam minima. Odit, fugit.</p></div>
-            <div class="grid-item2 area-b2"><div><i class="fa-solid fa-phone"></i></div><p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ipsam sunt eveniet libero corrupti officia, explicabo impedit facere qui ex porro asperiores fuga aperiam nam obcaecati totam minima. Odit, fugit.</p></div>
-            <div class="grid-item2 area-c2"><div><i class="fa-solid fa-envelope"></i></div><p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ipsam sunt eveniet libero corrupti officia, explicabo impedit facere qui ex porro asperiores fuga aperiam nam obcaecati totam minima. Odit, fugit.</p></div>
-            <div class="grid-item2 area-d2"><div><i class="fa-solid fa-clock"></i></div><p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ipsam sunt eveniet libero corrupti officia, explicabo impedit facere qui ex porro asperiores fuga aperiam nam obcaecati totam minima. Odit, fugit.</p></div>
+            <div  class="grid-item2 area-a2"><div><i class="fa-solid fa-map-location"></i></div><p> Rua dos Sushis, 1530 – Centro, São Paulo/SP – CEP 01234-567. <br> <b>Apenas para retiradas pré-agendadas.</b> </p></div>
+            <div class="grid-item2 area-b2"><div><i class="fa-solid fa-phone"></i></div><p> Ligue ou nos chame no WhatsApp: (11) 5555-1234. <br> <b>Atendimento e suporte imediato das 18h às 23h.</b> </p></div>
+            <div class="grid-item2 area-c2"><div><i class="fa-solid fa-envelope"></i></div><p> Para dúvidas, parcerias e sugestões, responda o formulário ao lado ou envie um e-mail para: <b>contato@japapouu.com.br.</b> </p></div>
+            <div class="grid-item2 area-d2"><div><i class="fa-solid fa-clock"></i></div><p> Pedidos online de terça a domingo, das 18h às 23h. <br> <b>Fechado apenas às segundas-feiras.</b> </p></div>
         </div>
     </div> 
     <form class="forms" action="">
-        <h2><b>Lorem ipsum dolor</b></h2>
-        <p>Lorem ipsum dolor sit amet consectetur</p>
-        <label for="">Nome * <br> <input placeholder="lorem ipsum" type="text"></label>
+        <h2><b>Entre em Contato!</b></h2>
+        <p>Responderemos seu chamado em até 24h</p>
+        <label for="">Nome<span>*</span>  <br> <input placeholder="Digite seu nome" type="text"></label>
         <br>
-        <label for="">E-mail * <input placeholder="lorem ipsum" type="text"></label>
+        <label for="">E-mail<span>*</span> <input placeholder="Digite um e-mail para entrarmos em contato de volta" type="text"></label>
         <br>
-        <label for="">Lorem Ipsum * <input placeholder="lorem ipsum" type="text"></label>
+        <label for="">Telefone<span>*</span> <input placeholder="Digite um telefone (caso o e-mail não funcione)" type="text"></label>
         <br>
-        <label for="">Lorem Ipsum * <br> <textarea placeholder="lorem ipsum" name="" id=""></textarea></label>
+        <label for="">Mensagem<span>*</span> <br> <textarea placeholder="Conte-nos, sobre o que deseja falar?" name="" id=""></textarea></label>
         <input type="submit">
     </form>
 </section>

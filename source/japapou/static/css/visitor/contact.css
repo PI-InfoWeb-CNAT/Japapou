@@ -237,26 +237,26 @@ div.area-c2{grid-area: c2;}
 div.area-d2{grid-area: d2;}
 
 .linha-decorativa{
-	border-bottom: 1px solid white;
-	width: 80%;
+	border-bottom: 2px solid white;
 	padding-bottom: 2em;
 }
 .texto-principal{
 	margin-bottom: 2em;
 	font-size: 1em;
+	text-align: justify;
 }
 form{
 	height: 40%;
 }
-.linha-decorativa > p.linha1{
-	font-size: 1.4em;
+.linha-decorativa2 > p.linha1{
+	font-size: 1.1em;
 }
 label{
 	font-size: 1.2em;
 }
 
-div.linha-decorativa{grid-area: a3;width: 100%;}
-form.forms{grid-area: b3; width: 100%;text-align: left;}
+.linha-decorativa2{grid-area: a3; width: 100%;}
+form.forms{grid-area: b3; width: 100%; text-align: left;}
 label{
 	width: 100%;
 	margin-top: 1em;
@@ -308,4 +308,68 @@ input[type="submit"]:hover{
 form > p {
 	font-size: 1em;
 	margin-bottom: 0.5em;
+}
+
+section{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.header-with-line {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.header-with-line .linha1::before {
+    content: "";
+    display: block; 
+    width: 80px; 
+    height: 2px; 
+    margin-right: 0;
+}
+
+.header-with-line .linha1 {
+    color: #ffffff; 
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 2px;
+    padding: 0 15px; 
+    white-space: nowrap;
+}
+.header-with-line .linha1::after {
+    content: "";
+    display: block; 
+    width: 80px; 
+    height: 2px; 
+    margin-left: 0; 
+}
+
+.header-with-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; 
+}
+
+.header-with-line::before,
+.header-with-line::after {
+    content: "";
+    flex-grow: 1; 
+    height: 2px; 
+    background-color: #ffffff; 
+    min-width: 20px; 
+}
+
+.header-with-line .linha1 {
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 2px;
+    white-space: nowrap; 
+}
+
+form > span{
+	color: var(--laranja-mais-claro);
 }
