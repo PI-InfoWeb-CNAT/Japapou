@@ -69,7 +69,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.4);
+  background: none;
   color: white;
   border: none;
   padding: 10px;
@@ -651,12 +651,13 @@ button.btn-primary:hover{
     width: 100%;
 }
 small.text-muted{
-    color: white;
-    background-color: white;
+    color: white !important;
+    background-color: var(--azul-mais-claro) !important;
     padding: 5px;
+    font-style: italic;
 }
 h6.card-subtitle.mb-2.text-muted{
-    color: white;
+    color: white !important;
     padding: 5px;
 }
 
@@ -682,4 +683,76 @@ h6.card-subtitle.mb-2.text-muted{
     padding-inline: 25px;
     border-radius: 7px;
     margin-top: 10px;
+}
+.card-body > h5{
+  font-weight: 700;
+}
+
+h2 > span{
+  color: var(--light-gray);
+}
+
+#quantity {
+  -moz-appearance: textfield; 
+}
+
+#quantity::-webkit-outer-spin-button,
+#quantity::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+img#image-preview{
+  margin: 0 auto;
+}
+input#id_image_review{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid burlywood;
+}
+.file-name-display {
+  display: block !important; 
+  
+  color: #999; 
+  margin-top: 5px; 
+  width: 100%; 
+}
+i.fa-solid.fa-arrow-up-from-bracket{
+  margin: 0.2em;
+  font-size: 70px;
+  padding: 0.6em;
+  background-color: var(--azul-mais-escuro);
+  border: 1px solid var(--azul-mais-escuro);
+  cursor: pointer;
+}
+i.fa-solid.fa-arrow-up-from-bracket:hover{
+  background-color: var(--azul-mais-claro);
+  color: var(--laranja-mais-claro);
+  border: 1px solid var(--laranja-mais-claro);
+}
+label{
+  cursor: none;
+}
+.file-upload-wrapper{
+  cursor: default;
+}
+
+.image-preview {
+  /* Largura e Altura fixas */
+  width: 550px;  /* Largura fixa da prévia (ajuste como preferir) */
+  
+  /* Como a imagem deve se ajustar dentro das dimensões fixas */
+  object-fit: cover; 
+  /* 'cover': A imagem preenche o contêiner, cortando as bordas se necessário.
+     'contain': A imagem é redimensionada para caber totalmente no contêiner, mantendo a proporção. Pode deixar espaços vazios.
+     'fill': A imagem preenche o contêiner, esticando ou comprimindo para caber (pode distorcer).
+     'scale-down': Compara 'none' e 'contain' e usa o menor.
+     'none': A imagem não é redimensionada. */
+
+  /* Outros estilos que você já tinha ou pode querer adicionar */
+  margin-top: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: block; /* Garante que ela ocupe sua própria linha */
+  cursor: default;
 }
