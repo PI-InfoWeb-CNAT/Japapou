@@ -8,13 +8,13 @@ class OrderItem(models.Model):
     order = models.ForeignKey(
         Order,
         on_delete=models.CASCADE, 
-        related_name="items" 
+        related_name="itens" 
     )
     
 
     
     prato = models.ForeignKey(Plate, on_delete=models.CASCADE, default=1, related_name='order_items_prato')
-    amount = models.IntegerField()
+    amount = models.IntegerField(default=1)
     comment = models.TextField(null=True, blank=True) # Permitir nulo/branco
     created_at = models.DateTimeField(auto_now_add=True)
     altered_at = models.DateTimeField(auto_now=True)
@@ -25,4 +25,5 @@ class OrderItem(models.Model):
         ordering = ["created_at"]
 
     def __str__(self):
-        return f"{self.amount} : {self.comment}"
+        prato_nome = getattr(self.prato, 'name', 'Prato Desconhecido') 
+        return f"{self.amount}x {prato_nome} (Pedido: {self.order.id})"

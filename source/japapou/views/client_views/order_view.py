@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404 # type: ignore
 from django.contrib.auth.decorators import login_required, permission_required # type: ignore
 from django.db import transaction # Importar transaction
 from django.utils import timezone # Importar timezone
-from japapou.models import Cart, Order, OrderItem # Importar modelos necessários
+from japapou.models import Cart, Order,OrderItem # Importar modelos necessários
 
 
 @login_required
@@ -13,6 +13,7 @@ def client_order_view(request):
     """
     View para o cliente ver seus próprios pedidos.
     """
+    
     if request.user.tipo_usuario != "CLIENT":
         return render(request, "403.html", status=403)
 
