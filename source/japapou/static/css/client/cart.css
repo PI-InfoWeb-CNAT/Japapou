@@ -1,0 +1,132 @@
+/* Estilos globais e variáveis */
+:root {
+    --color-primary: #1e3a8a; /* Dark Blue */
+    --color-success: #10b981; /* Emerald Green */
+    --color-danger: #ef4444; /* Red */
+}
+
+/* Estilos personalizados para o input de quantidade (para parecer um grupo de botões) */
+.quantity-control input[type="number"] {
+    /* Firefox */
+    -moz-appearance: textfield; 
+    appearance: textfield;
+    text-align: center;
+}
+.quantity-control input::-webkit-outer-spin-button,
+.quantity-control input::-webkit-inner-spin-button {
+    /* Chrome, Safari, Edge */
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.bg-dark-bg.min-h-screen.text-text-light.p-4.sm\:p-8.font-inter{
+    background-color: var(--azul-mais-escuro);
+    width: 100%;
+}
+.max-w-4xl{
+    max-width: none !important;
+}
+
+.bg-card-bg.rounded-xl.p-4.sm\:p-6.flex.flex-col.md\:flex-row.items-start.md\:items-center.justify-between.shadow-xl.border.border-gray-700.hover\:border-primary-blue.transition.duration-300{
+    background-color: var(--azul-mais-escuro);
+    border: none !important;
+    box-shadow: none;
+}
+
+.flex.justify-between.items-center.px-4.md\:px-0.mt-6.border-b.border-gray-700.pb-3.font-semibold.text-gray-400.uppercase.text-sm{
+    border-bottom: 1px solid white;
+}
+
+hr.my-8.border-gray-700{
+    border-bottom: 1px solid white;
+    opacity: 1;
+}
+
+.flex.justify-between.items-end.border-t.pt-4.border-gray-700{
+    align-items: center;
+}
+
+.text-4xl.font-extrabold.text-white{
+    margin: 1em;
+}
+span{
+    color: white;
+}
+
+form.inline-flex.items-center.justify-center.quantity-control.bg-gray-800.rounded-lg.overflow-hidden.border.border-gray-700.mx-auto.md\:mx-0{
+    margin: 0;
+    background-color: var(--azul-mais-escuro);
+    border-radius: 20px;
+}
+button.text-sm.font-medium.text-danger-red.hover\:text-red-600.transition.duration-200.border.border-danger-red\/50.rounded-md.px-2.py-1.bg-danger-red\/10{
+    background-color: var(--laranja-mais-escuro);
+    border: none !important;
+    color: white;
+    padding: 0.3em !important;
+    padding-inline: 2em !important;
+    border-radius: 14px;
+}
+
+.w-full.md\:w-1\/5.text-right.font-bold.text-xl.text-success-green{
+    color: white;
+}
+
+.w-full.sm\:w-1\/5.text-center.hidden.sm\:block.font-medium.text-lg.text-gray-300{
+    color: white;
+}
+
+button.p-2.w-8.h-8.flex.items-center.justify-center.text-xl.font-bold.text-gray-400.hover\:bg-gray-700.transition.duration-150.rounded-l-lg.border-r.border-gray-700{
+    border-right: 1px solid white;
+    color: white;
+}
+button.p-2.w-8.h-8.flex.items-center.justify-center.text-xl.font-bold.text-gray-400.hover\:bg-gray-700.transition.duration-150.rounded-l-lg.border-r.border-gray-700:hover{
+    background-color: var(--laranja-mais-claro);
+}
+
+button.p-2.w-8.h-8.flex.items-center.justify-center.text-xl.font-bold.text-gray-400.hover\:bg-gray-700.transition.duration-150.rounded-r-lg.border-l.border-gray-700{
+    color: white;
+    border-left: 1px solid white;
+}
+
+button.p-2.w-8.h-8.flex.items-center.justify-center.text-xl.font-bold.text-gray-400.hover\:bg-gray-700.transition.duration-150.rounded-r-lg.border-l.border-gray-700:hover{
+    background-color: var(--laranja-mais-claro);
+}
+
+.space-y-6.p-4.sm\:p-6.bg-card-bg.rounded-xl.shadow-xl{
+    background-color: var(--azul-mais-escuro);
+    box-shadow: none;
+}
+
+.flex.justify-between.items-end.border-t.pt-4.border-gray-700{
+    border-top: none;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+button.text-sm.font-medium.text-danger-red.hover\:text-red-600.transition.duration-200.border.border-danger-red\/50.rounded-md.px-2.py-1.bg-danger-red\/10:hover{
+    background-color: var(--vermelho);
+}
+
+button.w-full.max-w-sm.px-8.py-4.bg-white.text-dark-bg.font-extrabold.text-xl.rounded-xl.hover\:bg-gray-200.transition.duration-300.shadow-2xl.shadow-primary-blue\/30{
+    border: 1px solid white;
+    border-radius: 50px;
+    padding: 0.5em !important;
+}
+button.w-full.max-w-sm.px-8.py-4.bg-white.text-dark-bg.font-extrabold.text-xl.rounded-xl.hover\:bg-gray-200.transition.duration-300.shadow-2xl.shadow-primary-blue\/30:hover{
+    background-color: var(--azul-mais-escuro) !important;
+    border: 1px solid white;
+    color: white;
+}
+
+select.block.w-full.px-4.py-3.bg-gray-800.border.border-gray-700.text-text-light.rounded-lg.focus\:ring-primary-blue.focus\:border-primary-blue.appearance-none.pr-10{
+    background-color: var(--azul-mais-escuro);
+    border-radius: 50px;
+}
+select.block.w-full.px-4.py-3.bg-gray-800.border.border-gray-700.text-text-light.rounded-lg.focus\:ring-primary-blue.focus\:border-primary-blue.appearance-none.pr-10:hover{
+    background-color: var(--azul-mais-claro);
+}
