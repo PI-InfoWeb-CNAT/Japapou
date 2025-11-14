@@ -2,7 +2,7 @@
 
 ## Sistema para Restaurante (e-commerce / agendaemento) - 1.0
 
-Sistema para um restaurante, permitindo a gestão de produtos, receitas, pedidos, mesas e reservas.
+Sistema para um restaurante, permitindo fazer pedidos com as opções de entrega e retirada, gerenciar pratos, gerenciar entregadores e gerenciar menus e períodos.
 
 Todo material está publicado sob licença [GPL-3.0](https://www.gnu.org/licenses/quick-guide-gplv3.pt-br.html).
 
