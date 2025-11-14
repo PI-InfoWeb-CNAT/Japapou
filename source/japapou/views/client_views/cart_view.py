@@ -13,7 +13,7 @@ def cart_view(request: HttpRequest):
     Exibe o carrinho de compras do usuário logado.
     """
     # Encontra o carrinho do usuário ou cria um se não existir
-    cart, created = Cart.objects.get_or_create(usuario=request.user)
+    cart = Cart.objects.get_or_create(usuario=request.user)
     
     items = cart.items.all().order_by('plate__name') # Pega todos os itens do carrinho
     total = cart.get_cart_total() # Calcula o total
@@ -34,15 +34,15 @@ def add_to_cart_view(request: HttpRequest):
     Adiciona um prato ao carrinho.
     Espera um 'plate_id' e 'quantity' no POST.
     """
-    plate_id = request.POST.get('plate_id')
-    # Pega a quantidade do formulário, com padrão 1
-    quantity = int(request.POST.get('quantity', 1)) 
+    plate_id = request.POST.get('plate_id') # tenta pegar o id do prato passado no post
+    
+    quantity = int(request.POST.get('quantity', 1)) # Pega a quantidade do formulário, com padrão 1
     
     if not plate_id:
-        # Lógica de erro (ex: retornar com mensagem)
+        # Lógica de erro caso o prato não exista
         return redirect('alguma_pagina_de_erro_ou_anterior')
 
-    plate = get_object_or_404(Plate, id=plate_id)
+    plate = get_object_or_404(Plate, id=plate_id) # pega o objeto pelo id ou exibe um erro 404
     cart, cart_created = Cart.objects.get_or_create(usuario=request.user)
     
     # Tenta encontrar o item no carrinho
@@ -53,13 +53,13 @@ def add_to_cart_view(request: HttpRequest):
         defaults={'quantity': quantity}
     )
     
-    if not item_created:
+    if not item_created: #
         # Se o item já existia, apenas atualiza a quantidade
-        cart_item.quantity += quantity
+        cart_item.quantity += quantity 
         cart_item.save()
         
-    # Redireciona o usuário para a página do carrinho
-    return redirect('cart_view') # (Você precisará nomear essa URL como 'cart_view')
+    
+    return redirect('cart_view')
 
 
 @login_required

@@ -17,7 +17,7 @@ def delivery_man_register_view(request):
         if form.is_valid():
             user = form.save(commit=False) # Salva o usuário, mas não faz commit no banco ainda
             user.tipo_usuario = 'DELIVERY_MAN'  # Define o tipo de usuário como ENTREGADOR
-            user.set_password(form.cleaned_data['password'])  # Hash da senha
+            user.set_password(form.cleaned_data['password'])  # set_password para criar o hash da senha
             user.save()  # Agora faz o commit no banco
             login(request, user)
             return redirect("home")
