@@ -1,6 +1,5 @@
 __pycache__/
 .mypy_cache/
-
 venv/
 db.sqlite3
 .vscode/
