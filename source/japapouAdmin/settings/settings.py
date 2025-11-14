@@ -130,7 +130,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "japapou.CustomUser"
 
 #login e logout
-LOGIN_URL = '/login'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_URL = '/logout'
-LOGOUT_REDIRECT_URL = '/login'
+LOGIN_URL = 'login_register'
+LOGOUT_REDIRECT_URL = 'logout'

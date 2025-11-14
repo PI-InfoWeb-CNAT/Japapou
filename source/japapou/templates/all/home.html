@@ -48,11 +48,8 @@
         <div class="coverflow-container">
             <div class="coverflow">
                 {% for prato in ranking %}
-                    {% if user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
+                    
                         <a href="{% url 'details_plate' prato.id %}">
-                    {% else %}
-                        <a href="{% url 'login_register' %}">
-                    {% endif %}
                     
                         <div class="slide card-venda">
                             <img src="{{ prato.photo.url }}" alt="{{ prato.name }}" width="100"> 

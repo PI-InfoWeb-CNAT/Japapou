@@ -110,7 +110,7 @@
             <h4><a href="{% url 'manager_delivery_man' %}"><i class="fa-solid fa-gear"></i> Entregadores</a></h4>
           </div>
           <div class="footer-column">
-            <h4><a href="{% url 'manager_orders' %}"><i class="fa-solid fa-gear"></i> Pedidos</a></h4>
+            <h4><a href="{% url 'manager_orders' %}"><i class="fa-solid fa-gear"></i> Pedidos Pendentes</a></h4>
           </div>
           <div class="footer-column">
             <h4><a href="{% url 'manager_history' %}"><i class="fa-solid fa-gear"></i> Histórico</a></h4>
@@ -151,7 +151,7 @@
               <h4><a href="{% url 'client_menu' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
             </div>
             <div class="footer-column">
-              <h4><a href="{% url 'client_order' %}"><i class="fa-solid fa-gear"></i>Meus Pedidos</a></h4>
+              <h4><a href="{% url 'delivery_man_orders' %}"><i class="fa-solid fa-gear"></i>Pedidos Pendentes</a></h4>
             </div>
             <div class="footer-column">
               <h4><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></h4>
@@ -161,13 +161,13 @@
         {% else %}
           <div class="footer-links">
             <div class="footer-column">
-              <h4><a href="{% url 'login_register' %}"><i class="fa-solid fa-gear"></i>Minha Conta</a></h4>
+              <h4><a href="{% url 'client_profile' %}"><i class="fa-solid fa-gear"></i>Minha Conta</a></h4>
             </div>
             <div class="footer-column">
               <h4><a href="{% url 'visitor_menu' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
             </div>
             <div class="footer-column">
-              <h4><a href="{% url 'login_register' %}"><i class="fa-solid fa-gear"></i>Meus Pedidos</a></h4>
+              <h4><a href="{% url 'client_order' %}"><i class="fa-solid fa-gear"></i>Meus Pedidos</a></h4>
             </div>
           </div>
         {% endif %}

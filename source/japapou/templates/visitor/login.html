@@ -16,6 +16,9 @@
                         {% csrf_token %}
                         {{ login_form.as_p}}
                         <!-- <a href="">Esqueci minha senha</a> -->
+                        
+                        <input type="hidden" name="next" value="{{ next }}">
+
                         <button name="login_submit" type="submit">Entrar</button>
                     </form>
                     
@@ -47,6 +50,7 @@
                         <label for="id_data_nascimento">Data de Nascimento</label>
                         {{ register_form.data_nascimento}}
                         
+                        <input type="hidden" name="next" value="{{ next }}">
 
                         <!-- <a href="">Esqueci minha senha</a> -->
                         <button name="register_submit" type="submit">Cadastrar</button>

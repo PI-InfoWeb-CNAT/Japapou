@@ -4,7 +4,7 @@ from django.db.models import Avg # <<-- Adicione esta importação
 from japapou.models import Plate, PlateReview 
 from japapou.forms import PlateReviewForm
 
-
+@login_required
 def rating_view(request, plate_id):
     plate = get_object_or_404(Plate, pk=plate_id)
     reviews = plate.avaliacoes_pratos.all().order_by('-created_at')
@@ -31,11 +31,13 @@ def rating_view(request, plate_id):
         'plate': plate,
         'reviews': reviews,
         'form': form,
-        'average_rating': average_rating_value
+        'average_rating': average_rating_value,
+        'next': request.GET.get('next', ''), # O .get() com '' evita erros se 'next' não existir
     }
     
     return render(request, template_name="client/rating.html", context=context, status=200)
 
+@login_required
 def details_plate_view(request, plate_id):
     plate = get_object_or_404(Plate, pk=plate_id)
     reviews = plate.avaliacoes_pratos.all().order_by('-created_at')
@@ -62,6 +64,7 @@ def details_plate_view(request, plate_id):
         'plate': plate,
         'reviews': reviews,
         'form': form,
-        'average_rating': average_rating_value
+        'average_rating': average_rating_value,
+        
     }
     return render(request, template_name="client/details_plate.html", context=context, status=200)

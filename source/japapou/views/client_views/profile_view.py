@@ -6,7 +6,7 @@ from japapou.models import CustomUser
 import json
 
 
-@login_required(login_url='/login/')  # ou o caminho real do seu login
+@login_required
 @permission_required(['japapou.view_customuser', 'japapou.change_customuser'], raise_exception=True)
 def client_profile_view(request):
     return render(request, "client/profile.html", {"user": request.user})
