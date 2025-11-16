@@ -1,5 +1,6 @@
 from django.db import models  # type: ignore
 from django.conf import settings # type: ignore # Importar settings
+from japapou.models.adress import Endereco
 
 class Order(models.Model):
     
@@ -14,6 +15,15 @@ class Order(models.Model):
     total = models.DecimalField(max_digits=10, decimal_places=2, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     altered_at = models.DateTimeField(auto_now=True)
+
+
+    endereco_entrega = models.ForeignKey(
+        Endereco,
+        on_delete=models.SET_NULL, 
+        null=True,                 
+        blank=True,                
+        related_name="pedidos_neste_endereco"
+    )
 
     usuario = models.ForeignKey(
         settings.AUTH_USER_MODEL,

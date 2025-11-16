@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Adicionar Novo Endereço</h2>
+    <p>
+        Preencha os dados abaixo. Após salvar, você será 
+        redirecionado de volta para o checkout.
+    </p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}success{% endif %}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div class="mb-3">
+                {{ field.label_tag }}
+                
+                {{ field }}
+                
+                {% if field.errors %}
+                    <div class="invalid-feedback" style="display: block;">
+                        {{ field.errors.as_text }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <hr>
+        
+        <button type="submit" class="btn btn-primary">Salvar Endereço</button>
+        
+        <a href="{% url 'checkout' %}" class="btn btn-secondary">
+            Voltar para o Checkout
+        </a>
+    </form>
+
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Finalizar Pedido</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div style="display: flex; gap: 20px;">
+        <div style="flex: 1;">
+            <h3>Resumo do seu Carrinho</h3>
+            {% for item in cart_items %}
+                <p>
+                    {{ item.quantity }}x <strong>{{ item.plate.name }}</strong>
+                    (R$ {{ item.get_item_total|floatformat:2 }})
+                </p>
+            {% endfor %}
+            <hr>
+            <p><strong>Subtotal: R$ {{ subtotal|floatformat:2 }}</strong></p>
+        </div>
+
+        <div style="flex: 1;">
+            <h3>Escolha o Método</h3>
+            
+            <form method="POST" action="{% url 'checkout' %}">
+                {% csrf_token %}
+
+                <h4>Tipo de Pedido:</h4>
+                
+                <input type="radio" id="retirada" name="tipo_pedido" value="{{ TipoPedido.RETIRADA }}" required>
+                <label for="retirada">
+                    <strong>Retirada na Loja</strong> 
+                    (Total: R$ {{ subtotal|floatformat:2 }})
+                </label>
+                <br>
+                <br>
+                
+                <input type="radio" id="entrega" name="tipo_pedido" value="{{ TipoPedido.ENTREGA }}" required>
+                <label for="entrega">
+                    <strong>Entrega (Delivery)</strong>
+                    (Taxa: R$ {{ taxa_entrega|floatformat:2 }}) - 
+                    <strong>Total: R$ {{ total_com_entrega|floatformat:2 }}</strong>
+                </label>
+
+                <div id="bloco-enderecos" style="margin-left: 25px; margin-top: 10px; padding: 10px; border: 1px solid #eee;">
+                    
+                    <h5>Selecione o endereço de entrega:</h5>
+
+                    {% if enderecos %}
+                        {% for endereco in enderecos %}
+                            <input type="radio" 
+                                   id="endereco-{{ endereco.id }}" 
+                                   name="endereco_id" 
+                                   value="{{ endereco.id }}" 
+                                   required> <label for="endereco-{{ endereco.id }}">
+                                <strong>{{ endereco.apelido|default:"Endereço" }}:</strong> 
+                                {{ endereco.logradouro }}, {{ endereco.numero }} 
+                                ({{ endereco.bairro }})
+                            </label>
+                            <br>
+                        {% endfor %}
+
+                    {% else %}
+                        <p style="color: red;">
+                            Você não possui endereços cadastrados para entrega.
+                        </p>
+                    {% endif %}
+                    
+                    <a href="{% url 'add_endereco' %}" style="font-size: 0.9em; margin-top: 10px; display: inline-block;">
+                        + Adicionar novo endereço
+                    </a>
+                </div>
+                <hr>
+                
+                <button type="submit" class="btn btn-lg btn-success">
+                    Confirmar e Pagar (Simulado)
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Pedido Confirmado!</h2>
+
+<p>
+    Obrigado, {{ request.user.username }}!
+</p>
+<p>
+    Seu pedido <strong>#{{ pedido.id }}</strong> foi recebido com sucesso.
+</p>
+<p>
+    Valor Total: R$ {{ pedido.total }}
+</p>
+
+<a href="{% url 'home' %}">Voltar para a página inicial</a>
+<a href="{% url 'client_order' %}">Ver meus pedidos</a>
+
+{% endblock %}

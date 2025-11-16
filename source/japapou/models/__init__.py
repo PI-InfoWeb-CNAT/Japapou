@@ -12,3 +12,4 @@ from .plate import Plate
 from .review import PlateReview, CourierReview
 from .user import CustomUser
 from .cart import Cart, CartItem
+from .adress import Endereco

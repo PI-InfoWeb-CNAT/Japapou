@@ -13,7 +13,7 @@ def cart_view(request: HttpRequest):
     Exibe o carrinho de compras do usuário logado.
     """
     # Encontra o carrinho do usuário ou cria um se não existir
-    cart = Cart.objects.get_or_create(usuario=request.user)
+    cart, created = Cart.objects.get_or_create(usuario=request.user)
     
     items = cart.items.all().order_by('plate__name') # Pega todos os itens do carrinho
     total = cart.get_cart_total() # Calcula o total

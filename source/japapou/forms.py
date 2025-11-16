@@ -2,6 +2,7 @@ from django import forms # type: ignore
 from japapou.models import Menu, Plate, PlateReview, CourierReview
 from japapou.models.user import CustomUser
 from django.contrib.auth.forms import UserCreationForm
+from japapou.models import Endereco
 
 
 class PlatesForms(forms.ModelForm):
@@ -190,3 +191,44 @@ class CourierReviewForm(forms.ModelForm):
                 'placeholder': 'Deixe um comentário sobre o entregador...'
             }),
         }
+
+class EnderecoForm(forms.ModelForm):
+    class Meta:
+        model = Endereco
+        # Liste os campos que o USUÁRIO deve preencher
+        fields = [
+            'apelido', 
+            'logradouro', 
+            'numero', 
+            'complemento', 
+            'bairro', 
+            'cidade', 
+            'estado', 
+            'cep'
+        ]
+        # 'usuario' e 'id' são preenchidos automaticamente na view.
+
+    def __init__(self, *args, **kwargs):
+        """
+        Sobrescreve o __init__ para adicionar classes de CSS (Bootstrap) 
+        e placeholders para deixar o formulário mais bonito.
+        """
+        super().__init__(*args, **kwargs)
+        
+        # Adiciona placeholders
+        placeholders = {
+            'apelido': 'Ex: Casa, Trabalho',
+            'logradouro': 'Ex: Rua da Mooca',
+            'numero': 'Ex: 123',
+            'complemento': 'Ex: Apto 45B',
+            'bairro': 'Ex: Mooca',
+            'cidade': 'Ex: São Paulo',
+            'estado': 'Ex: SP',
+            'cep': 'Ex: 01234-567',
+        }
+
+        # Adiciona a classe 'form-control' (Bootstrap) em todos os campos
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+            if field_name in placeholders:
+                field.widget.attrs['placeholder'] = placeholders[field_name]

@@ -46,14 +46,9 @@
 
         <hr>
 
-        <div class="text-end">
+        <<div class="text-end">
             <h3>Total do Pedido: R$ {{ total|floatformat:2 }}</h3>
-            <form action="{% url 'create_order' %}" method="POST">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-lg btn-success">
-                    Finalizar Compra
-                </button>
-            </form>
+            <a href="{% url 'checkout' %}" class="btn btn-lg btn-success">Finalizar Compra</a>
         </div>
 
     {% endif %}
