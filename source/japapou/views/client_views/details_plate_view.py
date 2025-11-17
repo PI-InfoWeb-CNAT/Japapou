@@ -50,18 +50,19 @@ def details_plate_view(request, plate_id):
 
     contagem_por_estrela = (
         PlateReview.objects
-        .filter(plate=plate)
-        .values('value')
-        .annotate(count=Count('value'))
+        .filter(plate=plate) # filtra apenas as avaliações daquele prato em especifico
+        .values('value') # agrupa os dados pela coluna value
+        .annotate(count=Count('value')) # aqui ele conta a quantidade de valores que existe em cada "value"
     )
     
-    dados_contagem = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
+    dados_contagem = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0} # dicionario molde
     for item in contagem_por_estrela:
+        # atualiza o dicionario molde com os valores reais
         dados_contagem[item['value']] = item['count']
 
     rating_distribution = []
 
-    for i in range(5, 0, -1):
+    for i in range(5, 0, -1): # percoe a lista de tras pra frente, do maior para o menor
         count = dados_contagem[i]
         
         # Calcula a percentagem (evita divisão por zero)
