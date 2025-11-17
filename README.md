@@ -1,6 +1,6 @@
 # Projeto Integrador InfoWeb - IFRN
 
-## Sistema para Restaurante (e-commerce / agendaemento) - 1.0
+## Sistema para Restaurante (e-commerce / agendamento) - 1.0
 
 Sistema para um restaurante, permitindo fazer pedidos com as opções de entrega e retirada, gerenciar pratos, gerenciar entregadores e gerenciar menus e períodos.
 
