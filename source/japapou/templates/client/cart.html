@@ -3,183 +3,144 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/client/cart.css' %}">
-    <!-- Carrega o Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'dark-bg': '#101720', /* Fundo principal escuro */
-                        'card-bg': '#171f2a', /* Fundo dos cards/items */
-                        'text-light': '#e5e7eb', /* Texto claro */
-                        'primary-blue': '#2563eb',
-                        'success-green': '#10b981',
-                        'danger-red': '#ef4444',
-                    }
-                }
+
+<script>
+    // Funções JavaScript para atualizar a quantidade e submeter o formulário
+    function updateQuantity(itemId, change) {
+        const input = document.getElementById('quantity-' + itemId);
+        let current = parseInt(input.value);
+        let newValue = current + change;
+
+        if (newValue >= 1) {
+            input.value = newValue;
+            
+            // Submete o formulário quando a quantidade muda
+            const form = input.closest('form');
+            if (form) {
+                form.submit();
             }
         }
-
-        // Funções JavaScript para atualizar a quantidade e submeter o formulário
-        function updateQuantity(itemId, change) {
-            const input = document.getElementById('quantity-' + itemId);
-            let current = parseInt(input.value);
-            let newValue = current + change;
-
-            if (newValue >= 1) {
-                input.value = newValue;
-                
-                // Submete o formulário quando a quantidade muda
-                const form = input.closest('form');
-                if (form) {
-                    form.submit();
-                }
-            }
-        }
-    </script>
+    }
+</script>
 {% endblock %}
 
 {% block content %}
-<div class="bg-dark-bg min-h-screen text-text-light p-4 sm:p-8 font-inter">
-    <div class="max-w-4xl mx-auto">
-        
-        <!-- HEADER SUBSTITUÍDO POR DIV -->
-        <div class="text-center mb-10 pt-4">
-            <h1 class="text-4xl font-extrabold tracking-tight text-white mb-2">Meu Carrinho</h1>
-            <!-- Cabeçalhos das colunas (Visível em desktop) -->
-            <div class="flex justify-between items-center px-4 md:px-0 mt-6 border-b border-gray-700 pb-3 font-semibold text-gray-400 uppercase text-sm">
-                <span class="w-2/5">Produto</span>
-                <span class="w-1/5 text-center hidden sm:block">Preço Unit.</span>
-                <span class="w-1/5 text-center">Quantidade</span>
-                <span class="w-1/5 text-right">Subtotal</span>
-            </div>
+<div class="container-carrinho">
+    <div class="carrinho-header">
+        <h1 class="carrinho-titulo">Meu Carrinho</h1>
+        <div class="coluna-cabecalho">
+            <span class="cab-produto">Produto</span>
+            <span class="cab-preco-unitario">Preço Unit.</span>
+            <span class="cab-quantidade">Quantidade</span>
+            <span class="cab-subtotal">Subtotal</span>
         </div>
-        <!-- FIM DA DIV SUBSTITUTA -->
+    </div>
 
-        {% if not items %}
-            <div class="text-center py-20 bg-card-bg rounded-xl shadow-lg">
-                <p class="text-xl mb-6">Seu carrinho está vazio.</p>
-                <a href="{% url 'client_menu' %}" class="px-6 py-3 bg-primary-blue hover:bg-blue-700 text-white font-bold rounded-lg transition duration-200">Ver pratos</a>
-            </div>
-        {% else %}
-            
-            <div class="space-y-6">
-                <!-- Itera sobre os itens do carrinho -->
-                {% for item in items %}
-                <div class="bg-card-bg rounded-xl p-4 sm:p-6 flex flex-col md:flex-row items-start md:items-center justify-between shadow-xl border border-gray-700 hover:border-primary-blue transition duration-300">
-                    
-                    <!-- DETALHES DO ITEM (PRODUTO) -->
-                    <div class="flex items-start w-full md:w-2/5 mb-4 md:mb-0">
-                        <!-- Imagem Placeholder -->
-                        <img 
-                            src="https://placehold.co/100x100/1e293b/a5b4fc?text=Sushi" 
-                            alt="{{ item.plate.name }}" 
-                            class="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg mr-4 border-2 border-gray-600"
-                        />
-                        <div>
-                            <p class="text-lg font-semibold text-white">{{ item.plate.name }}</p>
-                            <!-- Simula a seção de Especificações/Descrição (ajuste conforme seu modelo) -->
-                            <p class="text-xs text-gray-400 mt-1">Especificações: Sem adição de pimenta.</p> 
-                            
-                            <!-- Formulário para Remover Item -->
-                            <form action="{% url 'remove_from_cart' %}" method="POST" class="mt-2">
-                                {% csrf_token %}
-                                <input type="hidden" name="item_id" value="{{ item.id }}">
-                                <button type="submit" class="text-sm font-medium text-danger-red hover:text-red-600 transition duration-200 border border-danger-red/50 rounded-md px-2 py-1 bg-danger-red/10">
-                                    Remover
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <!-- PREÇO UNITÁRIO (Oculto em Mobile) -->
-                    <div class="w-full sm:w-1/5 text-center hidden sm:block font-medium text-lg text-gray-300">
-                        R$ {{ item.plate.price|floatformat:2 }}
-                    </div>
-
-                    <!-- QUANTIDADE (com botões +/-) -->
-                    <div class="w-full md:w-1/5 text-center mb-4 md:mb-0">
-                        <form action="{% url 'update_cart_item' %}" method="POST" class="inline-flex items-center justify-center quantity-control bg-gray-800 rounded-lg overflow-hidden border border-gray-700 mx-auto md:mx-0">
+    {% if not items %}
+        <div class="carrinho-vazio">
+            <p>Seu carrinho está vazio.</p>
+            <a href="{% url 'client_menu' %}" class="btn-ver-pratos">Ver pratos</a>
+        </div>
+    {% else %}
+        
+        <div class="lista-itens">
+            {% for item in items %}
+            <div class="item-carrinho"> 
+                
+                <div class="item-detalhes">
+                    <img 
+                        src="https://placehold.co/100x100/1e293b/a5b4fc?text=Sushi" 
+                        alt="{{ item.plate.name }}" 
+                        class="item-imagem"
+                    />
+                    <div>
+                        <p class="item-nome">{{ item.plate.name }}</p>
+                        <p class="item-especificacoes">Especificações: Sem adição de pimenta.</p> 
+                        
+                        <form action="{% url 'remove_from_cart' %}" method="POST" class="form-remover">
                             {% csrf_token %}
                             <input type="hidden" name="item_id" value="{{ item.id }}">
-                            
-                            <!-- Botão de Decremento -->
-                            <button type="button" onclick="updateQuantity('{{ item.id }}', -1)" class="p-2 w-8 h-8 flex items-center justify-center text-xl font-bold text-gray-400 hover:bg-gray-700 transition duration-150 rounded-l-lg border-r border-gray-700">
-                                –
-                            </button>
-
-                            <!-- Input de Quantidade (ID necessário para JS) -->
-                            <input 
-                                type="number" 
-                                name="quantity" 
-                                id="quantity-{{ item.id }}" 
-                                value="{{ item.quantity }}" 
-                                min="1" 
-                                max="99" 
-                                class="w-12 h-8 bg-transparent text-center border-none focus:ring-0 text-text-light"
-                                onchange="this.form.submit()"
-                            >
-
-                            <!-- Botão de Incremento -->
-                            <button type="button" onclick="updateQuantity('{{ item.id }}', 1)" class="p-2 w-8 h-8 flex items-center justify-center text-xl font-bold text-gray-400 hover:bg-gray-700 transition duration-150 rounded-r-lg border-l border-gray-700">
-                                +
+                            <button type="submit" class="btn-remover">
+                                Remover
                             </button>
                         </form>
                     </div>
-
-                    <!-- TOTAL ITEM (SUBTOTAL) -->
-                    <div class="w-full md:w-1/5 text-right font-bold text-xl text-success-green">
-                        R$ {{ item.get_item_total|floatformat:2 }}
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-
-            <hr class="my-8 border-gray-700">
-
-            <!-- SEÇÃO DE TOTAL E CHECKOUT -->
-            <div class="space-y-6 p-4 sm:p-6 bg-card-bg rounded-xl shadow-xl">
-                
-                <!-- ESTIMA FRETE (Simulação de um Dropdown) -->
-                <div class="flex justify-center">
-                    <div class="relative w-full max-w-sm">
-                        <select class="block w-full px-4 py-3 bg-gray-800 border border-gray-700 text-text-light rounded-lg focus:ring-primary-blue focus:border-primary-blue appearance-none pr-10">
-                            <option>Estimar Frete</option>
-                            <option>Retirada no Local (R$ 0,00)</option>
-                            <option>Entrega Padrão (R$ 10,00)</option>
-                        </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                        </div>
-                    </div>
                 </div>
 
-                <!-- TOTAL FINAL -->
-                <div class="container">
-                    <div class="flex justify-between items-end border-t pt-4 border-gray-700">
-                    <div>
-                        <h3 class=" flex-1 text-3xl font-extrabold text-white">TOTAL</h3>
-                    </div>
-                    <div class="flex-1 text-4xl font-extrabold text-white">
-                        R$ {{ total|floatformat:2 }}
-                    </div>
-                </div>
-                <p class=" flex-1 text-sm text-gray-400 mt-1">Taxa de frete incluída. Com tudo finalizado, vá ao Check Out</p>
+                <div class="item-preco-unitario">
+                    R$ {{ item.plate.price|floatformat:2 }}
                 </div>
 
-                <!-- BOTÃO FINALIZAR COMPRA (Check Out) -->
-                <div class="text-center pt-4">
-                    <form action="{% url 'create_order' %}" method="POST">
+                <div class="item-quantidade">
+                    <form action="{% url 'update_cart_item' %}" method="POST" class="quantidade-control">
                         {% csrf_token %}
-                        <button type="submit" class="w-full max-w-sm px-8 py-4 bg-white text-dark-bg font-extrabold text-xl rounded-xl hover:bg-gray-200 transition duration-300 shadow-2xl shadow-primary-blue/30">
-                            Check Out
+                        <input type="hidden" name="item_id" value="{{ item.id }}">
+                        
+                        <button type="button" onclick="updateQuantity('{{ item.id }}', -1)" class="btn-quant btn-quant-decremento">
+                            –
+                        </button>
+
+                        <input 
+                            type="number" 
+                            name="quantity" 
+                            id="quantity-{{ item.id }}" 
+                            value="{{ item.quantity }}" 
+                            min="1" 
+                            max="99" 
+                            class="input-quantidade"
+                            onchange="this.form.submit()"
+                        >
+
+                        <button type="button" onclick="updateQuantity('{{ item.id }}', 1)" class="btn-quant btn-quant-incremento">
+                            +
                         </button>
                     </form>
                 </div>
+
+                <div class="item-subtotal">
+                    R$ {{ item.get_item_total|floatformat:2 }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <hr class="separador">
+
+        <div class="checkout-box">
+            
+            <div class="frete-dropdown-container">
+                <div class="frete-dropdown-wrapper">
+                    <select class="frete-dropdown">
+                        <option>Estimar Frete</option>
+                        <option>Retirada no Local (R$ 0,00)</option>
+                        <option>Entrega Padrão (R$ 10,00)</option>
+                    </select>
+                    <div class="frete-dropdown-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
             </div>
 
-        {% endif %}
-    </div>
+            <div class="total-final-container">
+                <div class="total-final-row">
+                    <h3 class="total-titulo">TOTAL</h3>
+                    <div class="total-valor">
+                        R$ {{ total|floatformat:2 }}
+                    </div>
+                </div>
+                <p class="total-descricao">Taxa de frete incluída. Com tudo finalizado, vá ao Check Out</p>
+            </div>
+
+            <div class="checkout-btn-container">
+                <form action="{% url 'create_order' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-checkout">
+                        Check Out
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    {% endif %}
 </div>
 {% endblock %}
