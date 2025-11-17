@@ -1,132 +1,791 @@
-/* Estilos globais e variáveis */
+/* Definição das variáveis de cor */
 :root {
-    --color-primary: #1e3a8a; /* Dark Blue */
-    --color-success: #10b981; /* Emerald Green */
-    --color-danger: #ef4444; /* Red */
+    --dark-bg: #101720; /* Fundo principal escuro */
+    --card-bg: #171f2a; /* Fundo dos cards/items */
+    --text-light: #e5e7eb; /* Texto claro */
+    --primary-blue: #2563eb;
+    --primary-blue-hover: #1d4ed8; /* Cor um pouco mais escura para hover */
+    --success-green: #10b981;
+    --danger-red: #ef4444;
+    --gray-400: #9ca3af;
+    --gray-700: #374151;
+    --gray-600: #4b5563;
+    --gray-800: #1f2937;
+    --white: #ffffff;
 }
 
-/* Estilos personalizados para o input de quantidade (para parecer um grupo de botões) */
-.quantity-control input[type="number"] {
-    /* Firefox */
-    -moz-appearance: textfield; 
-    appearance: textfield;
+main{
+    background-color: var(--azul-mais-escuro);
+    padding: 0 !important;
+}
+
+body {
+    background-color: var(--azul-mais-escuro);
+    min-height: 100vh;
+    color: var(--text-light);
+    padding: 0;
+    font-family: 'Inter', sans-serif; /* font-inter */
+}
+
+.container-carrinho {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* HEADER/Título */
+.carrinho-header {
+    text-align: center;
+    margin-bottom: 2.5rem; /* mb-10 */
+    padding-top: 1rem; /* pt-4 */
+}
+
+.carrinho-titulo {
+    font-size: 2.25rem; /* text-4xl */
+    font-weight: 800; /* font-extrabold */
+    letter-spacing: -0.05em; /* tracking-tight */
+    color: var(--white);
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+
+/* Cabeçalhos das Colunas */
+.coluna-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem; /* px-4 */
+    border-bottom: 1px solid var(--gray-700);
+    padding-bottom: 0.75rem; /* pb-3 */
+    font-weight: 600; /* font-semibold */
+    color: var(--gray-400);
+    text-transform: uppercase;
+    font-size: 0.875rem; /* text-sm */
+}
+
+@media (min-width: 768px) {
+    .coluna-cabecalho {
+        padding: 0; /* md:px-0 */
+    }
+    .cab-preco-unitario {
+        display: block !important; /* sm:block */
+    }
+}
+
+.cab-produto {
+    width: 40%; /* w-2/5 */
+}
+
+.cab-preco-unitario {
+    width: 20%; /* w-1/5 */
+    text-align: center;
+    display: none; /* hidden */
+}
+
+.cab-quantidade {
+    width: 20%; /* w-1/5 */
     text-align: center;
 }
-.quantity-control input::-webkit-outer-spin-button,
-.quantity-control input::-webkit-inner-spin-button {
-    /* Chrome, Safari, Edge */
-    -webkit-appearance: none;
-    margin: 0;
+
+.cab-subtotal {
+    width: 20%; /* w-1/5 */
+    text-align: right;
 }
 
-.bg-dark-bg.min-h-screen.text-text-light.p-4.sm\:p-8.font-inter{
+/* Carrinho Vazio */
+.carrinho-vazio {
+    text-align: center;
+    padding: 5rem 0; /* py-20 */
     background-color: var(--azul-mais-escuro);
+    border-radius: 0.75rem; /* rounded-xl */
+}
+
+.carrinho-vazio p {
+    font-size: 1.25rem; /* text-xl */
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+
+.btn-ver-pratos {
+    padding: 0.75rem 1.5rem; /* px-6 py-3 */
+    background-color: var(--azul-mais-claro);
+    color: var(--white);
+    font-weight: bold;
+    border-radius: 0.5rem; /* rounded-lg */
+    transition: background-color 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-ver-pratos:hover {
+    background-color: var(--laranja-mais-claro); /* hover:bg-blue-700 */
+}
+
+/* Lista de Itens */
+.lista-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* space-y-6 */
+}
+
+/* Item Individual */
+.item-carrinho {
+    background-color: var(--card-bg);
+    border-radius: 0.75rem; /* rounded-xl */
+    padding: 1rem; /* p-4 */
+    display: flex;
+    flex-direction: column; /* flex-col */
+    align-items: flex-start; /* items-start */
+    justify-content: space-between;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
+    border: 1px solid var(--gray-700);
+    transition: border 0.3s;
+}
+
+.item-carrinho:hover {
+    border-color: var(--primary-blue);
+}
+
+@media (min-width: 768px) {
+    .item-carrinho {
+        flex-direction: row; /* md:flex-row */
+        align-items: center; /* md:items-center */
+        padding: 1.5rem; /* sm:p-6 */
+    }
+}
+
+/* Detalhes do Produto */
+.item-detalhes {
+    display: flex;
+    align-items: flex-start;
+    width: 100%; /* w-full */
+    margin-bottom: 1rem; /* mb-4 */
+}
+
+@media (min-width: 768px) {
+    .item-detalhes {
+        width: 40%; /* md:w-2/5 */
+        margin-bottom: 0; /* md:mb-0 */
+    }
+}
+
+.item-imagem {
+    width: 5rem; /* w-20 */
+    height: 5rem; /* h-20 */
+    object-fit: cover;
+    border-radius: 0.5rem; /* rounded-lg */
+    margin-right: 1rem; /* mr-4 */
+    border: 2px solid var(--gray-600);
+}
+
+@media (min-width: 640px) {
+    .item-imagem {
+        width: 6rem; /* sm:w-24 */
+        height: 6rem; /* sm:h-24 */
+    }
+}
+
+.item-nome {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-semibold */
+    color: var(--white);
+}
+
+.item-especificacoes {
+    font-size: 0.75rem; /* text-xs */
+    color: var(--gray-400);
+    margin-top: 0.25rem; /* mt-1 */
+}
+
+/* Botão Remover */
+.form-remover {
+    margin-top: 0.5rem; /* mt-2 */
+}
+
+.btn-remover {
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    color: var(--danger-red);
+    transition: color 0.2s;
+    border: 1px solid rgba(239, 68, 68, 0.5); /* border border-danger-red/50 */
+    border-radius: 0.375rem; /* rounded-md */
+    padding: 0.25rem 0.5rem; /* px-2 py-1 */
+    background-color: rgba(239, 68, 68, 0.1); /* bg-danger-red/10 */
+    cursor: pointer;
+}
+
+.btn-remover:hover {
+    color: #b91c1c; /* hover:text-red-600 */
+}
+
+/* Preço Unitário */
+.item-preco-unitario {
+    width: 100%; /* w-full */
+    text-align: center;
+    font-weight: 500; /* font-medium */
+    font-size: 1.125rem; /* text-lg */
+    color: var(--gray-300);
+    display: none; /* hidden */
+}
+
+@media (min-width: 640px) {
+    .item-preco-unitario {
+        width: 20%; /* sm:w-1/5 */
+        display: block; /* sm:block */
+    }
+}
+
+/* Controle de Quantidade */
+.item-quantidade {
+    width: 100%; /* w-full */
+    text-align: center;
+    margin-bottom: 1rem; /* mb-4 */
+}
+
+@media (min-width: 768px) {
+    .item-quantidade {
+        width: 20%; /* md:w-1/5 */
+        margin-bottom: 0; /* md:mb-0 */
+    }
+}
+
+.quantidade-control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 0.5rem; /* rounded-lg */
+    overflow: hidden;
+    border: 1px solid white;
+    margin: 0 auto; /* mx-auto */
+}
+
+@media (min-width: 768px) {
+    .quantidade-control {
+        margin: 0; /* md:mx-0 */
+    }
+}
+
+.btn-quant {
+    padding: 0.5rem; /* p-2 */
+    width: 2rem; /* w-8 */
+    height: 2rem; /* h-8 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem; /* text-xl */
+    font-weight: bold;
+    color: var(--gray-400);
+    transition: background-color 0.15s;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-quant-decremento {
+    border-right: 1px solid var(--gray-700);
+    border-top-left-radius: 0.5rem; /* rounded-l-lg */
+    border-bottom-left-radius: 0.5rem;
+}
+
+.btn-quant-incremento {
+    border-left: 1px solid var(--gray-700);
+    border-top-right-radius: 0.5rem; /* rounded-r-lg */
+    border-bottom-right-radius: 0.5rem;
+}
+
+.btn-quant:hover {
+    background-color: var(--gray-700);
+}
+
+.input-quantidade {
+    width: 3rem; /* w-12 */
+    height: 2rem; /* h-8 */
+    background-color: transparent;
+    text-align: center;
+    border: none;
+    color: var(--text-light);
+}
+
+/* Subtotal Item */
+.item-subtotal {
+    width: 100%; /* w-full */
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.25rem; /* text-xl */
+    color: var(--success-green);
+}
+
+@media (min-width: 768px) {
+    .item-subtotal {
+        width: 20%; /* md:w-1/5 */
+    }
+}
+
+/* Separador (HR) */
+.separador {
+    margin-top: 2rem; /* my-8 */
+    margin-bottom: 2rem;
+    border-top: 1px solid var(--gray-700);
+}
+
+/* Seção Total e Checkout */
+.checkout-box {
+    padding: 1rem; /* p-4 */
+    background-color: var(--card-bg);
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-xl */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* space-y-6 */
+}
+
+@media (min-width: 640px) {
+    .checkout-box {
+        padding: 1.5rem; /* sm:p-6 */
+    }
+}
+
+/* Dropdown Frete */
+.frete-dropdown-container {
+    display: flex;
+    justify-content: center;
+}
+
+.frete-dropdown-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 28rem; /* max-w-sm */
+}
+
+.frete-dropdown {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem; /* px-4 py-3 */
+    background-color: var(--gray-800);
+    border: 1px solid white;
+    color: var(--text-light);
+    border-radius: 0.5rem; /* rounded-lg */
+    /* Remove a aparência padrão e adiciona padding para o ícone */
+    padding-right: 2.5rem; /* pr-10 */
+}
+
+.frete-dropdown-icon {
+    pointer-events: none;
+    position: absolute;
+    inset-y: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    /* Reduza ou ajuste o padding-right aqui */
+    padding-right: 1rem; /* Alterado de 0.5rem (px-2) para 1rem para dar mais espaço */
+    color: var(--gray-400);
+}
+
+.frete-dropdown-icon svg {
+    fill: currentColor;
+    height: 1rem; /* h-4 */
+    width: 1rem; /* w-4 */
+}
+
+/* Total Final */
+.total-final-container {
     width: 100%;
 }
-.max-w-4xl{
-    max-width: none !important;
+
+.total-final-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid var(--gray-700);
+    padding-top: 1rem; /* pt-4 */
 }
 
-.bg-card-bg.rounded-xl.p-4.sm\:p-6.flex.flex-col.md\:flex-row.items-start.md\:items-center.justify-between.shadow-xl.border.border-gray-700.hover\:border-primary-blue.transition.duration-300{
-    background-color: var(--azul-mais-escuro);
-    border: none !important;
-    box-shadow: none;
+.total-titulo {
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: 800; /* font-extrabold */
+    color: var(--white);
+    flex: 1;
+    margin: 0;
+    text-align: left;
 }
 
-.flex.justify-between.items-center.px-4.md\:px-0.mt-6.border-b.border-gray-700.pb-3.font-semibold.text-gray-400.uppercase.text-sm{
-    border-bottom: 1px solid white;
+.total-valor {
+    font-size: 2.25rem; /* text-4xl */
+    font-weight: 800; /* font-extrabold */
+    color: var(--white);
+    flex: 1;
+    text-align: right;
 }
 
-hr.my-8.border-gray-700{
-    border-bottom: 1px solid white;
+.total-descricao {
+    font-size: 0.875rem; /* text-sm */
+    color: var(--gray-400);
+    margin-top: 0.25rem; /* mt-1 */
+    flex: 1;
+}
+
+/* Botão Check Out */
+.checkout-btn-container {
+    text-align: center;
+    padding-top: 1rem; /* pt-4 */
+}
+
+.btn-checkout {
+    width: 100%;
+    max-width: 28rem; /* max-w-sm */
+    padding: 1rem 2rem; /* px-8 py-4 */
+    background-color: var(--white);
+    color: var(--dark-bg);
+    font-weight: 800; /* font-extrabold */
+    font-size: 1.25rem; /* text-xl */
+    border-radius: 0.75rem; /* rounded-xl */
+    transition: background-color 0.3s;
+    box-shadow: 0 25px 50px -12px rgba(37, 99, 235, 0.3); /* shadow-2xl shadow-primary-blue/30 */
+    cursor: pointer;
+    border: none;
+}
+
+.btn-checkout:hover {
+    background-color: #e5e7eb; /* hover:bg-gray-200 */
+}
+
+/* --- Correção para Remover Setinhas/Spinners em todos os navegadores --- */
+
+/* 1. Alvo Principal: Chrome, Safari, Edge (Motores WebKit) */
+/* Usamos a classe específica do INPUT para maior precisão */
+.input-quantidade::-webkit-outer-spin-button,
+.input-quantidade::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Essencial para evitar que o espaço dos botões permaneça */
+}
+
+/* 2. Alvo Secundário: Firefox e outros que suportam a propriedade 'appearance' */
+.input-quantidade {
+    -moz-appearance: textfield; /* Remove os spinners no Firefox */
+    appearance: textfield; /* Padrão moderno */
+    text-align: center; /* Mantém o texto centralizado */
+    /* Garanta que o estilo de largura, altura, background, etc., esteja aqui ou nas outras regras do .input-quantidade */
+}
+
+/* --- REGRAS DE SOBRESCRITA / CUSTOMIZAÇÃO --- */
+
+/* 1. Corpo/Container Principal */
+/* Classe .container-carrinho (substitui .bg-dark-bg.min-h-screen...) */
+.container-carrinho {
+    width: 90%;
+}
+/* Reaplicando fundo, pois a regra original estava no body, mas a sua estava na div principal */
+.bg-dark-bg.min-h-screen.text-text-light.p-4.sm\:p-8.font-inter {
+    background-color: var(--azul-mais-escuro); /* bg-dark-bg */
+    width: 100%;
+}
+/* (Atenção: A classe acima é feia, mas é a que você usou como seletor. É melhor usar o body/root/container-carrinho para isso) */
+
+
+/* 2. Item Individual (Card) */
+/* Classe .item-carrinho (substitui .bg-card-bg.rounded-xl.p-4.sm\:p-6.flex...) */
+.item-carrinho {
+    background-color: var(--azul-mais-escuro); /* bg-card-bg */
+    border: none !important; /* border, border-gray-700 */
+    box-shadow: none; /* shadow-xl */
+}
+
+/* 3. Cabeçalho das Colunas */
+/* Classe .coluna-cabecalho (substitui .flex.justify-between.items-center.px-4...) */
+.coluna-cabecalho {
+    border-bottom: 1px solid var(--white); /* border-b border-gray-700 */
+}
+
+/* 4. Separador (HR) */
+/* Classe .separador (substitui hr.my-8.border-gray-700) */
+.separador {
+    border-color: var(--white); /* border-gray-700 */
     opacity: 1;
 }
 
-.flex.justify-between.items-end.border-t.pt-4.border-gray-700{
-    align-items: center;
+/* 5. Título do Carrinho */
+/* Classe .carrinho-titulo (substitui .text-4xl.font-extrabold.text-white) */
+.carrinho-titulo {
+    margin: 1em 0;
 }
 
-.text-4xl.font-extrabold.text-white{
-    margin: 1em;
-}
-span{
-    color: white;
+/* 6. Cor dos Span no Cabeçalho das Colunas */
+/* Span (substitui seletor 'span') */
+.coluna-cabecalho span {
+    color: var(--white);
 }
 
-form.inline-flex.items-center.justify-center.quantity-control.bg-gray-800.rounded-lg.overflow-hidden.border.border-gray-700.mx-auto.md\:mx-0{
-    margin: 0;
-    background-color: var(--azul-mais-escuro);
+/* 7. Controle de Quantidade */
+/* Classe .quantidade-control (substitui form.inline-flex.items-center...) */
+.quantidade-control {
+    margin: 0 !important; /* mx-auto md:mx-0 */
+    background-color: var(--azul-mais-escuro); /* bg-gray-800 */
     border-radius: 20px;
+    border: 1px solid white;
 }
-button.text-sm.font-medium.text-danger-red.hover\:text-red-600.transition.duration-200.border.border-danger-red\/50.rounded-md.px-2.py-1.bg-danger-red\/10{
+
+/* 8. Botão Remover */
+/* Classe .btn-remover (substitui button.text-sm.font-medium.text-danger-red...) */
+.btn-remover {
     background-color: var(--laranja-mais-escuro);
-    border: none !important;
-    color: white;
-    padding: 0.3em !important;
-    padding-inline: 2em !important;
+    border: none !important; /* border.border-danger-red/50 */
+    color: var(--white);
+    padding: 0.3em 2em; /* px-2.py-1, padding: 0.3em !important; padding-inline: 2em !important; */
     border-radius: 14px;
 }
-
-.w-full.md\:w-1\/5.text-right.font-bold.text-xl.text-success-green{
-    color: white;
+.btn-remover:hover {
+    background-color: var(--vermelho); /* hover:bg-red-600 */
+    color: var(--white);
 }
 
-.w-full.sm\:w-1\/5.text-center.hidden.sm\:block.font-medium.text-lg.text-gray-300{
-    color: white;
+/* 9. Preços (Subtotal e Unitário) */
+/* Classe .item-subtotal (substitui .w-full.md\:w-1\/5.text-right...) */
+.item-subtotal {
+    color: var(--white); /* text-success-green */
+}
+/* Classe .item-preco-unitario (substitui .w-full.sm\:w-1\/5.text-center...) */
+.item-preco-unitario {
+    color: var(--white); /* text-gray-300 */
 }
 
-button.p-2.w-8.h-8.flex.items-center.justify-center.text-xl.font-bold.text-gray-400.hover\:bg-gray-700.transition.duration-150.rounded-l-lg.border-r.border-gray-700{
-    border-right: 1px solid white;
-    color: white;
+/* 10. Botões de Incremento/Decremento */
+/* Classe .btn-quant-decremento (substitui button.p-2.w-8.h-8...rounded-l-lg...) */
+.btn-quant-decremento {
+    border-right: 1px solid var(--white); /* border-r.border-gray-700 */
+    color: var(--white);
 }
-button.p-2.w-8.h-8.flex.items-center.justify-center.text-xl.font-bold.text-gray-400.hover\:bg-gray-700.transition.duration-150.rounded-l-lg.border-r.border-gray-700:hover{
-    background-color: var(--laranja-mais-claro);
-}
-
-button.p-2.w-8.h-8.flex.items-center.justify-center.text-xl.font-bold.text-gray-400.hover\:bg-gray-700.transition.duration-150.rounded-r-lg.border-l.border-gray-700{
-    color: white;
-    border-left: 1px solid white;
+.btn-quant-decremento:hover {
+    background-color: var(--laranja-mais-claro); /* hover:bg-gray-700 */
 }
 
-button.p-2.w-8.h-8.flex.items-center.justify-center.text-xl.font-bold.text-gray-400.hover\:bg-gray-700.transition.duration-150.rounded-r-lg.border-l.border-gray-700:hover{
-    background-color: var(--laranja-mais-claro);
+/* Classe .btn-quant-incremento (substitui button.p-2.w-8.h-8...rounded-r-lg...) */
+.btn-quant-incremento {
+    color: var(--white);
+    border-left: 1px solid var(--white); /* border-l.border-gray-700 */
+}
+.btn-quant-incremento:hover {
+    background-color: var(--laranja-mais-claro); /* hover:bg-gray-700 */
 }
 
-.space-y-6.p-4.sm\:p-6.bg-card-bg.rounded-xl.shadow-xl{
-    background-color: var(--azul-mais-escuro);
-    box-shadow: none;
+/* 11. Box de Checkout */
+/* Classe .checkout-box (substitui .space-y-6.p-4.sm\:p-6.bg-card-bg...) */
+.checkout-box {
+    background-color: var(--azul-mais-escuro); /* bg-card-bg */
+    box-shadow: none; /* shadow-xl */
 }
 
-.flex.justify-between.items-end.border-t.pt-4.border-gray-700{
-    border-top: none;
+/* 12. Linha do Total Final */
+/* Classe .total-final-row (substitui .flex.justify-between.items-end.border-t...) */
+.total-final-row {
+    border-top: none; /* border-t.border-gray-700 */
+    align-items: center; /* items-end */
+    width: 35%;
+    max-width: 28em;
 }
 
-.container{
+/* 13. Container do Total Final */
+/* Classe .total-final-container (substitui .container) */
+.total-final-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-button.text-sm.font-medium.text-danger-red.hover\:text-red-600.transition.duration-200.border.border-danger-red\/50.rounded-md.px-2.py-1.bg-danger-red\/10:hover{
-    background-color: var(--vermelho);
+/* 14. Botão Check Out */
+/* Classe .btn-checkout (substitui button.w-full.max-w-sm.px-8.py-4.bg-white...) */
+.btn-checkout {
+    border: 1px solid var(--white);
+    border-radius: 50px;
+    padding: 0.5em 2rem; /* Mantendo largura original com padding lateral, mas ajustando a altura com 0.5em */
+    /* Removemos o 'shadow-2xl.shadow-primary-blue/30' pois a sombra não é mais desejada */
 }
 
-button.w-full.max-w-sm.px-8.py-4.bg-white.text-dark-bg.font-extrabold.text-xl.rounded-xl.hover\:bg-gray-200.transition.duration-300.shadow-2xl.shadow-primary-blue\/30{
-    border: 1px solid white;
-    border-radius: 50px;
-    padding: 0.5em !important;
-}
-button.w-full.max-w-sm.px-8.py-4.bg-white.text-dark-bg.font-extrabold.text-xl.rounded-xl.hover\:bg-gray-200.transition.duration-300.shadow-2xl.shadow-primary-blue\/30:hover{
-    background-color: var(--azul-mais-escuro) !important;
-    border: 1px solid white;
-    color: white;
+.btn-checkout:hover {
+    background-color: var(--azul-mais-escuro) !important; /* hover:bg-gray-200 */
+    border: 1px solid var(--white);
+    color: var(--white);
 }
 
-select.block.w-full.px-4.py-3.bg-gray-800.border.border-gray-700.text-text-light.rounded-lg.focus\:ring-primary-blue.focus\:border-primary-blue.appearance-none.pr-10{
-    background-color: var(--azul-mais-escuro);
-    border-radius: 50px;
+/* 15. Dropdown de Frete */
+/* Classe .frete-dropdown (substitui select.block.w-full.px-4.py-3.bg-gray-800...) */
+.frete-dropdown {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--azul-mais-escuro); /* Ajustado na resposta anterior */
+    border: 1px solid white;
+    color: var(--text-light);
+    border-radius: 50px; /* Seu estilo customizado de borda arredondada */
+    
+    /* Regras para esconder a seta nativa */
+    -moz-appearance: none;    /* Firefox */
+    
+    /* Adicionamos padding extra à direita para o ícone customizado */
+    padding-right: 2.5rem; /* pr-10, mantendo o valor que você usou */
 }
-select.block.w-full.px-4.py-3.bg-gray-800.border.border-gray-700.text-text-light.rounded-lg.focus\:ring-primary-blue.focus\:border-primary-blue.appearance-none.pr-10:hover{
+
+.frete-dropdown:hover {
     background-color: var(--azul-mais-claro);
+}
+
+form{
+    margin-bottom: 5%;
+}
+
+.item-detalhes > div{
+    width:100%;
+}
+
+
+
+.btn-sessao:hover{
+  background: var(--azul-mais-claro);
+  color: var(--laranja-mais-claro);
+  border: 1px solid var(--laranja-mais-claro);
+  margin: -1.2px;
+}
+
+/* GRID */
+.grid-container {
+    display: grid;
+    padding: 0;
+    /* grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 260px; */
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+            "a a b c"
+            "d e e c"
+            ;
+}
+
+/* Segunda linha só tem 2 imagens, então centralizar
+.grid-container > :nth-child(4) {
+    grid-column: 1 / 3; /* ocupa da coluna 1 até a 2} */
+
+/* .grid-container > :nth-child(5) {
+    grid-column: 2 / 4; /* ocupa da coluna 2 até a 3
+} */
+
+/* Estilo dos itens */
+.grid-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .4s;
+}
+
+/* Efeito de escurecer no hover */
+.grid-item:hover img {
+    filter: brightness(40%);
+    /* background: var(--laranja-mais-claro); */
+}
+
+/* Texto no hover */
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    opacity: 0;
+    transition: .4s;
+}
+
+.grid-item:hover .overlay {
+    opacity: 1;
+}
+
+div.area-a{grid-area: a;} 
+div.area-b{grid-area: b;}
+div.area-c{grid-area: c;}
+div.area-d{grid-area: d;}
+div.area-e{grid-area: e;}
+
+.container-sushi{
+  width: 100%;
+  margin-top: 10em;
+  background-color: var(--azul-mais-claro);
+}
+
+.sushi-benefits {
+  background: var(--azul-mais-claro);
+  padding-bottom: 50px;
+  color: #fff;
+  text-align: center;
+  margin: 0 auto;
+  width: 65%;
+}
+
+.container-btn-sessao {
+  text-align: center;
+  padding: 15px 0;
+  text-decoration: none;
+}
+
+.btn-sessao {
+  background: var(--laranja-mais-claro);
+  border: none;
+  padding: 15px 30px;
+  font-size: 20px;
+  color: #000;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid var(--laranja-mais-claro);
+}
+
+.btn-sessao.teste2{
+   margin: 0 auto;
+  margin-top: 2em;
+  width: 25%;
+  margin-bottom: -2%;
+  position: relative;
+  z-index: 9;
+}
+.btn-sessao.teste2:hover{
+  margin: 0 auto;
+  margin-top: 2em;
+  background-color: var(--azul-mais-escuro);
+  margin-bottom: -2%;
+}
+
+.icones-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 3em;
+}
+
+.btn-icone {
+    background: none; /* Fundo transparente */
+    border: none; /* Sem borda visível */
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.2s, opacity 0.2s;
+    font-size: 24px; /* Tamanho do ícone */
+}
+
+/* Estiliza o ícone em si, se usarmos o Font Awesome */
+.btn-icone i {
+    /* O Font Awesome já dá o contorno, mas podemos ajustar a cor do hover */
+    display: block;
+}
+
+.btn-icone:hover {
+    color: var(--laranja-mais-claro); /* Um azul suave no hover, por exemplo */
+}
+
+/* Ajuste específico para o ícone de Adicionar (se for um círculo com sinal de mais) */
+/* A classe fa-plus-circle do Font Awesome já se parece com o ícone da sua imagem. */
+
+.laranja{
+  color: var(--laranja-mais-claro);
 }
