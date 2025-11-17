@@ -555,9 +555,10 @@ p.plate-description {
 
 .linha {
     display: flex;
-    justify-content: space-evenly;
+    /*justify-content: flex-end;*/
     align-items: center;
     gap: 10px;
+    height: 20px;
 }
 
 .sua-avaliacao{
@@ -682,4 +683,43 @@ h6.card-subtitle.mb-2.text-muted{
     padding-inline: 25px;
     border-radius: 7px;
     margin-top: 10px;
+}
+.estrelas {
+  display: flex;
+}
+
+
+.graficos-avaliacao .linha {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espaçamento entre os itens */
+    margin-bottom: 5px; /* Espaçamento entre as linhas */
+    color: #333;
+}
+.graficos-avaliacao .estrelas {
+    flex-basis: 80px; /* Largura fixa para as estrelas */
+    flex-shrink: 0; /* Não encolher */
+    font-size: 14px;
+}
+.graficos-avaliacao .barra-container {
+    background-color: var(--azul-mais-claro); /* Cor de fundo da barra */
+    border-radius: 5px;
+    height: 10px;
+    width: 65%;
+    overflow: hidden; 
+}
+
+.graficos-avaliacao .contagem {
+    flex-basis: 30px; /* Largura fixa para o número */
+    flex-shrink: 0;
+    text-align: right;
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+    margin: 0; /* Remove margem padrão do <p> */
+}
+.graficos-avaliacao .barra-progresso {
+    height: 100%;
+    border-radius: 5px;
+    /* A largura será definida pelo style inline */
 }
