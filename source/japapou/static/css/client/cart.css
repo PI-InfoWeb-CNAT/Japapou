@@ -129,7 +129,6 @@ body {
 .item-carrinho {
     background-color: var(--card-bg);
     border-radius: 0.75rem; /* rounded-xl */
-    padding: 1rem; /* p-4 */
     display: flex;
     flex-direction: column; /* flex-col */
     align-items: flex-start; /* items-start */
@@ -147,7 +146,6 @@ body {
     .item-carrinho {
         flex-direction: row; /* md:flex-row */
         align-items: center; /* md:items-center */
-        padding: 1.5rem; /* sm:p-6 */
     }
 }
 
@@ -171,14 +169,13 @@ body {
     height: 5rem; /* h-20 */
     object-fit: cover;
     border-radius: 0.5rem; /* rounded-lg */
-    margin-right: 1rem; /* mr-4 */
     border: 2px solid var(--gray-600);
 }
 
 @media (min-width: 640px) {
     .item-imagem {
-        width: 6rem; /* sm:w-24 */
-        height: 6rem; /* sm:h-24 */
+        width: 8rem; /* sm:w-24 */
+        height: 8rem; /* sm:h-24 */
     }
 }
 
@@ -486,6 +483,7 @@ body {
     background-color: var(--azul-mais-escuro); /* bg-card-bg */
     border: none !important; /* border, border-gray-700 */
     box-shadow: none; /* shadow-xl */
+    padding-left: 1.5em;
 }
 
 /* 3. Cabeçalho das Colunas */
@@ -511,6 +509,7 @@ body {
 /* Span (substitui seletor 'span') */
 .coluna-cabecalho span {
     color: var(--white);
+    text-align: center;
 }
 
 /* 7. Controle de Quantidade */
@@ -540,6 +539,7 @@ body {
 /* Classe .item-subtotal (substitui .w-full.md\:w-1\/5.text-right...) */
 .item-subtotal {
     color: var(--white); /* text-success-green */
+    text-align: center;
 }
 /* Classe .item-preco-unitario (substitui .w-full.sm\:w-1\/5.text-center...) */
 .item-preco-unitario {
@@ -633,6 +633,7 @@ form{
 
 .item-detalhes > div{
     width:100%;
+    margin: auto;
 }
 
 

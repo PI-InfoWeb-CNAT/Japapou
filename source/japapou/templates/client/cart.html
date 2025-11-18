@@ -3,6 +3,7 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/client/cart.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <script>
     // Funções JavaScript para atualizar a quantidade e submeter o formulário
@@ -26,11 +27,16 @@
 
 {% block content %}
 <div class="container-carrinho">
+    
     <div class="carrinho-header">
         <h1 class="carrinho-titulo">Meu Carrinho</h1>
 
         <p>Compre mais R$ <b class="laranja">[valor]</b> para adquirir frete grátis </p>
         <p>gráfico que a parte concluída é var(--laranja-mais-claro) e o back é var(--azul-mais-claro)</p>
+        {# Adicionei um div simples para o gráfico de progresso (a ser estilizado com CSS) #}
+        <div class="frete-progress-bar" style="background-color: var(--azul-mais-claro);">
+            <div class="progress-fill" style="background-color: var(--laranja-mais-claro); width: 60%;"></div>
+        </div>
 
         <div class="icones-container">
             <button class="btn-icone" aria-label="Pesquisar">
@@ -48,9 +54,10 @@
             <span class="cab-produto">Produto</span>
             <span class="cab-preco-unitario">Preço Unit.</span>
             <span class="cab-quantidade">Quantidade</span>
-            <span class="cab-subtotal">Subtotal</span>
+            <span class="cab-subtotal"><b>Subtotal</b></span>
         </div>
     </div>
+    {# FECHAMENTO DE DIV MUDOU DE LUGAR PARA COBRIR SOMENTE O HEADER #}
 
     {% if not items %}
         <div class="carrinho-vazio">
@@ -65,7 +72,7 @@
                 
                 <div class="item-detalhes">
                     <img 
-                        src="https://placehold.co/100x100/1e293b/a5b4fc?text=Sushi" 
+                        src="{{ item.plate.photo.url }}"
                         alt="{{ item.plate.name }}" 
                         class="item-imagem"
                     />
@@ -117,33 +124,21 @@
                     R$ {{ item.get_item_total|floatformat:2 }}
                 </div>
             </div>
-            {% endfor %}
-        </div>
+            {% endfor %} {# Fim do loop FOR #}
 
         <hr class="separador">
 
         <div class="checkout-box">
-            <!-- <div class="frete-dropdown-container">
-                <div class="frete-dropdown-wrapper">
+            
+            <div class="frete-dropdown-container">
+                <div class="frete-dropdown-wrapper"> 
                     <select class="frete-dropdown">
                         <option>Estimar Frete</option>
                         <option>Retirada no Local (R$ 0,00)</option>
                         <option>Entrega Padrão (R$ 10,00)</option>
                     </select>
-                    <div class="frete-dropdown-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                    </div>
                 </div>
-            </div> -->
-            <div class="frete-dropdown-container">
-                <div class="frete-dropdown-wrapper"> <select class="frete-dropdown">
-                        <option>Estimar Frete</option>
-                        <option>Retirada no Local (R$ 0,00)</option>
-                        <option>Entrega Padrão (R$ 10,00)</option>
-                        </select>
-                    <!-- <div class="frete-dropdown-icon"> <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg> -->
-                    </div>
-                </div>
+                {# O SVG de ícone foi removido aqui para corresponder ao seu código mais recente #}
             </div>
 
             <div class="total-final-container">
@@ -167,6 +162,7 @@
         </div>
 
     {% endif %}
+</div>
 </div>
 
 <section>
