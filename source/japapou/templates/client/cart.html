@@ -94,9 +94,7 @@
                     R$ {{ item.plate.price|floatformat:2 }}
                 </div>
 
-        <div class="text-end">
-            <h3>Total do Pedido: R$ {{ total|floatformat:2 }}</h3>
-            <a href="{% url 'checkout' %}" class="btn btn-lg btn-success">Finalizar Compra</a>
+        
                 <div class="item-quantidade">
                     <form action="{% url 'update_cart_item' %}" method="POST" class="quantidade-control">
                         {% csrf_token %}
