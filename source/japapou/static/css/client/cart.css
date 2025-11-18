@@ -790,3 +790,107 @@ div.area-e{grid-area: e;}
 .laranja{
   color: var(--laranja-mais-claro);
 }
+
+/* Exemplo de CSS para 'client/cart.css' */
+
+#order-date-select {
+    /* Estilização para dark mode e borda arredondada */
+    background-color: transparent; /* Fundo transparente */
+    color: #ffffff; /* Cor do texto branca */
+    border: 1px solid #ffffff; /* Borda branca */
+    border-radius: 25px; /* Bordas arredondadas */
+    padding: 8px 15px; /* Espaçamento interno */
+    font-size: 1rem;
+    cursor: pointer;
+    /* Remover o foco padrão do navegador */
+    box-shadow: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; 
+
+    /* Adicionar ícone de seta customizado (se o Bootstrap não fornecer o desejado) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 12px;
+    padding-right: 30px; /* Mais espaço para o ícone customizado */
+    max-width: 250px; /* Limita a largura do dropdown */
+}
+
+/* Garante que as opções do dropdown tenham fundo escuro */
+#order-date-select option {
+    background-color: #1a1a1a; /* Fundo mais escuro para as opções */
+    color: #ffffff;
+}
+
+/* Oculta os cartões inicialmente (o JS exibe o primeiro) */
+.order-detail-card {
+    display: none;
+}
+.mb-4{
+    margin-bottom: 0 !important;
+}
+.teste{
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+/* Adicione esta regra ao seu arquivo CSS para alinhar os botões lado a lado */
+.checkout-btn-container {
+    text-align: center;
+    padding-top: 1rem;
+    /* Adições para alinhar os botões em linha */
+    display: flex;
+    justify-content: space-between; /* Espaço entre os botões */
+    gap: 1rem; /* Espaçamento entre eles */
+}
+
+/* Garanta que o botão 'Avaliações e Recibo' use o estilo correto da 2ª imagem (fundo escuro, borda branca) */
+/* O estilo foi adicionado inline no HTML para sobrescrever, mas se você quiser via CSS: */
+.checkout-btn-container form:first-child .btn-checkout {
+    background-color: transparent !important;
+    color: var(--white) !important;
+    border: 1px solid var(--white) !important;
+}
+
+/* E o botão 'Adicionar ao carrinho' (background branco) */
+.checkout-btn-container form:last-child .btn-checkout {
+    background-color: var(--white) !important;
+    color: var(--dark-bg) !important;
+    border: none !important;
+}
+
+/* Para o dropdown se parecer com a segunda imagem (sem o ícone de pesquisa ao lado): */
+.teste{
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Centraliza o dropdown se o botão de pesquisa for removido */
+    align-content: center;
+}
+
+/* Ocultar o 'Preço Unit.' na coluna de cabeçalho e manter apenas 'Preço' no HTML. */
+/* Se a classe .cab-preco-unitario ainda estiver presente no HTML, remova a regra 'display: none;' */
+@media (min-width: 768px) {
+    .cab-preco-unitario {
+        display: block !important; /* sm:block */
+        width: 20%; /* Certifique-se que ele ocupa a largura correta */
+    }
+}
+
+.order-final-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end !important;
+    justify-content: center;
+}
+.total-final-row.order{
+    width: 20%;
+}
+
+.total-titulo.order{
+    font-size: 1.5em;
+}
+.total-valor.order{
+    font-size: 1.5em;
+}

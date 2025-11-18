@@ -24,6 +24,9 @@ class OrderItem(models.Model):
         verbose_name_plural = "Itens de Pedidos"
         ordering = ["created_at"]
 
+
+    def get_item_total(self):
+        return self.prato.price * self.amount
     def __str__(self):
         prato_nome = getattr(self.prato, 'name', 'Prato Desconhecido') 
         return f"{self.amount}x {prato_nome} (Pedido: {self.order.id})"

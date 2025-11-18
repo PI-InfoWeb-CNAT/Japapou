@@ -4,84 +4,31 @@
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/client/cart.css' %}">
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"> -->
-
-<script>
-    // Funções JavaScript para atualizar a quantidade e submeter o formulário
-    function updateQuantity(itemId, change) {
-        const input = document.getElementById('quantity-' + itemId);
-        let current = parseInt(input.value);
-        let newValue = current + change;
-
-        if (newValue >= 1) {
-            input.value = newValue;
-            
-            // Submete o formulário quando a quantidade muda
-            const form = input.closest('form');
-            if (form) {
-                form.submit();
-            }
-        }
-    }
-</script>
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1 class="mb-4">Meu Histórico de Pedidos</h1>
-
-    {% if not pedidos %}
-        <div class="alert alert-info" role="alert">
-            Você ainda não finalizou nenhum pedido.
-        </div>
-        <a href="/" class="btn btn-primary">Começar a comprar</a>
-    
-    {% else %}
-        {% for pedido in pedidos %}
-        <div class="card mb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <div>
-                    <strong>Pedido #{{ pedido.id }}</strong>
-                </div>
-                <div>
-                    Realizado em: {{ pedido.created_at|date:"d/m/Y \à\s H:i" }}
-                </div>
-            </div>
-            
-            <div class="card-body">
-                <ul class="list-group list-group-flush">
-                    {% for item in pedido.itens.all %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div>
-                            <span class="badge bg-secondary rounded-pill me-2">{{ item.amount }}x</span>
-                            {{ item.prato.name }}
-                        </div>
-                        <span>R$ {{ item.prato.price|floatformat:2 }} (unid)</span>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-
-            <div class="card-footer text-end">
-                <h5 class="mb-0">Total do Pedido: R$ {{ pedido.total|floatformat:2 }}</h5>
-            </div>
-        </div>
-        {% endfor %}
-    {% endif %}
-
-</div>
 <div class="container-carrinho">
-    
-    <div class="carrinho-header">
-        <h1 class="carrinho-titulo">Meu Carrinho</h1>
 
-        <p>Compre mais R$ <b class="laranja">[valor]</b> para adquirir frete grátis </p>
-        <p>gráfico que a parte concluída é var(--laranja-mais-claro) e o back é var(--azul-mais-claro)</p>
-        {# Adicionei um div simples para o gráfico de progresso (a ser estilizado com CSS) #}
+    <div class="carrinho-header">
+        <h1 class="carrinho-titulo"> <b>Meu Histórico</b> </h1>
         <div class="frete-progress-bar" style="background-color: var(--azul-mais-claro);">
             <div class="progress-fill" style="background-color: var(--laranja-mais-claro); width: 60%;"></div>
         </div>
 
-        <div class="icones-container">
+
+        <div class="teste">
+            <div class="d-flex align-items-center mb-4">
+                <select id="order-date-select" class="form-select" onchange="showOrderDetails(this.value)">
+                    {% for pedido in pedidos %}
+                        {# Valor será 'pedido-ID' para ser usado no JS e ID da div #}
+                        <option value="pedido-{{ pedido.id }}" {% if forloop.first %}selected{% endif %}>
+                            #{{ pedido.id }} - {{ pedido.created_at|date:"d/m/Y" }}
+                        </option>
+                    {% empty %}
+                        <option value="" disabled selected>Nenhum pedido encontrado</option>
+                    {% endfor %}
+                </select>
+            </div>
             <button class="btn-icone" aria-label="Pesquisar">
                 <i class="fas fa-search"></i>
             </button>
@@ -94,82 +41,92 @@
             <span class="cab-subtotal"><b>Subtotal</b></span>
         </div>
     </div>
-    {# FECHAMENTO DE DIV MUDOU DE LUGAR PARA COBRIR SOMENTE O HEADER #}
+    {# Fim do carrinho-header #}
 
     {% if not pedidos %}
-        <div class="carrinho-vazio">
-            <p>Seu carrinho está vazio.</p>
-            <a href="{% url 'client_menu' %}" class="btn-ver-pratos">Ver pratos</a>
+        <div class="alert alert-info" role="alert">
+            Você ainda não finalizou nenhum pedido.
         </div>
+        <a href="/" class="btn btn-primary">Começar a comprar</a>
     {% else %}
-        
-        <div class="lista-itens">
-            {% for pedido in pedidos %}
-                {{ pedido.created_at|date:"d/m/Y \à\s H:i" }}
-                {% for item in pedido.itens.all %}
-                    <div class="item-carrinho"> 
-                        
-                        <div class="item-detalhes">
-                            <img 
-                                src="{{ item.prato.photo.url }}"
-                                alt="{{ item.prato.name }}" 
-                                class="item-imagem"
-                            />
-                            <div>
-                                <p class="item-nome">{{ item.prato.name }}</p>
-                                <p class="item-especificacoes">Especificações: Sem adição de pimenta.</p> 
-                                
-                                <form action="{% url 'remove_from_cart' %}" method="POST" class="form-remover">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="item_id" value="{{ item.id }}">
-                                    <button type="submit" class="btn-remover">
-                                        Remover
-                                    </button>
-                                </form>
+
+        {# Itera sobre CADA PEDIDO e cria uma DIV PAI para cada um #}
+        {% for pedido in pedidos %}
+            {# DIV PAI que será controlada pelo JavaScript. O display: none é substituído pelo JS ao carregar #}
+            <div class="order-detail-card" id="pedido-{{ pedido.id }}" style="display: none;">
+                
+                {# Adicionando uma pequena informação sobre a data/hora do pedido dentro do bloco de detalhes #}
+                <p class="text-muted small mt-2">
+                    Realizado em: {{ pedido.created_at|date:"d/m/Y \à\s H:i" }}
+                </p>
+
+                <div class="lista-itens">
+                    {% for item in pedido.itens.all %}
+                        <div class="item-carrinho">
+                            <div class="item-detalhes">
+                                <img
+                                    src="{{ item.prato.photo.url }}"
+                                    alt="{{ item.prato.name }}"
+                                    class="item-imagem"
+                                />
+
+                                <div>
+                                    <p class="item-nome">{{ item.prato.name }}</p>
+                                    <p class="item-especificacoes">Especificações: Sem adição de pimenta.</p>
+                                </div>
+                            </div>
+
+                            <div class="item-preco-unitario">
+                                R$ {{ item.prato.price|floatformat:2 }}
+                            </div>
+
+                            <div class="item-quantidade">
+                                {{ item.amount }}x
+                            </div>
+
+                            <div class="item-subtotal">
+                                R$ {{ item.get_item_total|floatformat:2 }}
                             </div>
                         </div>
+                    {% endfor %}
+                </div>
+                <hr class="separador">
 
-                        <div class="item-preco-unitario">
-                            R$ {{ item.prato.price|floatformat:2 }}
-                        </div>
-
-                        <div class="item-quantidade">
-                            {{ item.amount }}x
-                        </div>
-
-                        <div class="item-subtotal">
-                            R$ {{ item.get_item_total|floatformat:2 }}
+                <div class="checkout-box">
+                    <div class="order-final-container">
+                        <div class="total-final-row order">
+                            <h3 class="total-titulo order">TOTAL: </h3>
+                            <div class="total-valor order">
+                                {# Mostra o total APENAS do pedido atual #}
+                                <b>R$ {{ pedido.total|floatformat:2 }}</b>
+                            </div>
                         </div>
                     </div>
-                {% endfor %} 
-            {% endfor %}
-        <hr class="separador">
 
-        <div class="checkout-box">
-            <div class="total-final-container">
-                <div class="total-final-row">
-                    <h3 class="total-titulo">TOTAL</h3>
-                    <div class="total-valor">
-                        R$ {{ total|floatformat:2 }}
+                    <div class="checkout-btn-container">
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-checkout">
+                                Avaliações e Recibo
+                            </button>
+                        </form>
+                        <form action="{% url 'add_to_cart' %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-checkout">
+                                + Adicionar ao Carrinho
+                            </button>
+                        </form>
                     </div>
                 </div>
-            </div>
 
-            <div class="checkout-btn-container">
-                <form action="{% url 'add_to_cart' %}" method="POST">
-                    {% csrf_token %}
-                    <button type="submit" class="btn-checkout">
-                       + Adicionar ao Carrinho
-                    </button>
-                </form>
             </div>
-        </div>
+            {# Fim da DIV PAI do pedido (order-detail-card) #}
+        {% endfor %}
 
     {% endif %}
-</div>
-</div>
 
-<!-- <section>
+</div>
+<section>
     <a href="" class="container-btn-sessao teste2"><p class="btn-sessao teste2">Contate-nos</p></a>
     <div class="grid-container">
         <div class="grid-item area-a">
@@ -198,6 +155,35 @@
         </div>
 
     </div>
-</section> -->
+</section>
+    
+    <script>
+        // Nova função JavaScript para lidar com a seleção no dropdown
+        function showOrderDetails(selectedId) {
+            // Oculta todos os detalhes dos pedidos
+            const allOrders = document.querySelectorAll('.order-detail-card');
+            allOrders.forEach(card => {
+                card.style.display = 'none';
+            });
+    
+            // Exibe o pedido selecionado
+            const selectedOrder = document.getElementById(selectedId);
+            if (selectedOrder) {
+                selectedOrder.style.display = 'block';
+            }
+        }
+    
+        // Chama a função ao carregar a página para exibir o primeiro pedido por padrão
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const selectElement = document.getElementById('order-date-select');
+            if (selectElement && selectElement.options.length > 0) {
+                // Certifica-se de que o primeiro item selecionado está visível ao carregar
+                showOrderDetails(selectElement.value);
+            }
+        });
+    
+        // Funções JavaScript existentes (updateQuantity, etc., permanecem aqui se necessário)
+    </script>
+
 
 {% endblock %}
