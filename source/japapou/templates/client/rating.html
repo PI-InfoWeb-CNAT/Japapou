@@ -61,7 +61,6 @@
         <div class="stars-display-simple">
             {% for i in "12345" %}
                 <span class="star-icon">
-                    {% comment %} i|add:0 é o número da estrela (1 a 5). Compara com a média. {% endcomment %}
                     {% if i|add:0 <= average_rating|default:0 %} 
                         <i class="fas fa-star filled-simple"></i>
                     {% else %}
@@ -193,9 +192,23 @@
                 {% endif %}
             </div>
             
-            <div class="form-group mb-3">
-                <label for="{{ form.image_review.id_for_label }}"><strong>Foto (Opcional)</strong></label><br>
-                {{ form.image_review }}
+            <div class="form-group mb-3 custom-file-upload">
+                <label for="{{ form.image_review.id_for_label }}"><strong>Foto (Opcional)</strong></label>
+                
+                <div style="display: none;">
+                    {{ form.image_review }} 
+                </div>
+            
+                <div class="file-upload-wrapper">
+                    <label for="{{ form.image_review.id_for_label }}" class="custom-upload-button">
+                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                    </label>
+                    
+                    <span id="file-name-display" class="file-name-display"></span>
+                </div>
+                
+                <img id="image-preview" src="#" alt="Prévia da imagem" class="image-preview" style="display: none;">
+            
                 {% if form.image_review.errors %}
                 <div class="text-danger small">{{ form.image_review.errors.0 }}</div>
                 {% endif %}
@@ -210,13 +223,13 @@
         <p><a href="{% url 'login' %}">Faça login</a> para deixar uma avaliação.</p>
     {% endif %}
 
-    <hr class="mt-5">
-    <h2>Avaliações ({{ reviews.count }})</h2>
+    <!-- <hr class="mt-5"> -->
+    <h2>Avaliações <span class="teste-span"> ({{ reviews.count }}) </span> </h2>
     
     {% for review in reviews %}
     <div class="card mb-3">
         <div class="card-body">
-            <h5 class="card-title">{{ review.usuario.username }}</h5>
+            <h5 class="card-title"><b>{{ review.usuario.username }}</b></h5>
             <h6 class="card-subtitle mb-2 text-muted">
                 {% for i in "12345" %}
                     {% if i|add:0 <= review.value %}
@@ -283,6 +296,73 @@
             const initialRating = parseInt(hiddenInput.value) || 0;
             setStarRating(initialRating);
         }
+        
+        // =========================================================
+    // CÓDIGO REVISADO PARA PRÉVIA, TROCA E VISIBILIDADE DE ELEMENTOS
+    // =========================================================
+    // VERIFIQUE SE ESTE ID ESTÁ CORRETO NO HTML FINAL
+    const fileInput = document.getElementById('{{ form.image_review.id_for_label }}'); 
+    const imagePreview = document.getElementById('image-preview');
+    const fileNameDisplay = document.getElementById('file-name-display'); 
+    const uploadButton = document.querySelector('.custom-upload-button');
+
+    if (fileInput && imagePreview && fileNameDisplay && uploadButton) {
+        
+        console.log("Elementos de upload encontrados. Listener ativo.");
+
+        function toggleUploadElements(showUpload) {
+            uploadButton.style.display = showUpload ? 'inline-block' : 'none';
+            fileNameDisplay.style.display = showUpload ? 'block' : 'none';
+            
+            // Note que o imagePreview é configurado AQUI, dependendo do estado
+            imagePreview.style.display = showUpload ? 'none' : 'block';
+            imagePreview.style.cursor = showUpload ? 'default' : 'pointer';
+        }
+
+        imagePreview.addEventListener('click', function() {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', function(event) {
+            console.log("Evento 'change' disparado.");
+            
+            if (event.target.files && event.target.files[0]) {
+                const file = event.target.files[0];
+                
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        // ESTE É O PONTO CHAVE: Chama a função APÓS o carregamento da imagem
+                        toggleUploadElements(false); 
+                        fileNameDisplay.textContent = file.name;
+                        fileNameDisplay.style.color = '#333';
+                        console.log("Prévia carregada e exibida.");
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    // Arquivo inválido
+                    fileNameDisplay.textContent = 'Arquivo inválido. Selecione uma imagem.';
+                    fileNameDisplay.style.color = 'red';
+                    imagePreview.src = '#';
+                    toggleUploadElements(true); 
+                }
+
+            } else {
+                // Seleção cancelada
+                fileNameDisplay.style.color = '#999';
+                imagePreview.src = '#';
+                toggleUploadElements(true);
+            }
+        });
+        
+        // Define o estado inicial
+        toggleUploadElements(true);
+    } else {
+        console.error("ERRO: Um ou mais elementos de upload não foram encontrados no DOM. Verifique o ID/Classe.");
+    }
+    // =========================================================
     });
 </script>
 {% endblock %}
