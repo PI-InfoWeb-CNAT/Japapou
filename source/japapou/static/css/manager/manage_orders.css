@@ -28,27 +28,64 @@
 	justify-content: center;
 }
 
+/* Regra base para a caixa de imagens */
 .pedido-imagens {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 10px;
-	width: 180px;
+    display: grid;
+    /* Removemos o grid-template-columns e o width fixos daqui */
+    gap: 10px;
+    width: 200px; /* Definindo uma largura padrão para a caixa */
+}
 
-	img {
-		width: 100%;
-		height: auto;
-		border-radius: 10px;
-		object-fit: cover;
-		cursor: pointer;
-		border: 1px solid var(--dark-gray);
-		filter: brightness(0.95);
-		transition: transform 0.3s ease, filter 0.3s ease;
+/* 1 ITEM: Imagem única, ocupando todo o espaço */
+.pedido-imagens--1 {
+    grid-template-columns: 1fr;
+}
 
-		&:hover {
-			transform: scale(1.05);
-			filter: brightness(1.1);
-		}
-	}
+/* 2 ITENS: Duas colunas, dividindo a largura */
+.pedido-imagens--2 {
+    grid-template-columns: 1fr 1fr;
+}
+
+/* 3 ITENS: Três imagens em uma linha (pode forçar para 2 colunas para melhor visualização) */
+.pedido-imagens--3 {
+    /* Opção 1: 3 colunas, dividindo o espaço em uma única linha */
+    grid-template-columns: 1fr 1fr 1fr;
+    /* Ajuste a largura para acomodar 3 colunas sem quebrar */
+    width: 300px; 
+}
+/* Ou Opção 2: 2 colunas, com a terceira imagem na linha de baixo (grid mais complexo)
+.pedido-imagens--3 {
+    grid-template-columns: 1fr 1fr;
+} 
+Se usar esta opção, o CSS dos `img` abaixo pode precisar de ajuste para que o 3º item ocupe 2 colunas. */
+
+/* 4 OU MAIS ITENS: Grid 2x2 */
+.pedido-imagens--4 {
+    grid-template-columns: 1fr 1fr;
+    /* Mantém a largura base ou define uma específica se desejar */
+    width: 200px;
+}
+
+.pedido-imagens img {
+    width: 100%;
+    height: 100%; /* Permite que o height seja controlado pelo container */
+    border-radius: 10px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 1px solid var(--dark-gray);
+    filter: brightness(0.95);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.pedido-imagens img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* Regra para garantir que a imagem única ocupe a altura total (se o pedido-imagens tiver altura definida) */
+.pedido-imagens--1 img {
+    /* Garantir que a imagem única preencha o espaço sem ser cortada, se necessário */
+    height: auto; 
 }
 
 .pedido-info {
@@ -140,9 +177,64 @@
 		align-items: center;
 	}
 
+		/* Regra base para a caixa de imagens */
 	.pedido-imagens {
+		display: grid;
+		/* Removemos o grid-template-columns e o width fixos daqui */
+		gap: 10px;
+		width: 200px; /* Definindo uma largura padrão para a caixa */
+	}
+
+	/* 1 ITEM: Imagem única, ocupando todo o espaço */
+	.pedido-imagens--1 {
+		grid-template-columns: 1fr;
+	}
+
+	/* 2 ITENS: Duas colunas, dividindo a largura */
+	.pedido-imagens--2 {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	/* 3 ITENS: Três imagens em uma linha (pode forçar para 2 colunas para melhor visualização) */
+	.pedido-imagens--3 {
+		/* Opção 1: 3 colunas, dividindo o espaço em uma única linha */
+		grid-template-columns: 1fr 1fr 1fr;
+		/* Ajuste a largura para acomodar 3 colunas sem quebrar */
+		width: 300px; 
+	}
+	/* Ou Opção 2: 2 colunas, com a terceira imagem na linha de baixo (grid mais complexo)
+	.pedido-imagens--3 {
+		grid-template-columns: 1fr 1fr;
+	} 
+	Se usar esta opção, o CSS dos `img` abaixo pode precisar de ajuste para que o 3º item ocupe 2 colunas. */
+
+	/* 4 OU MAIS ITENS: Grid 2x2 */
+	.pedido-imagens--4 {
+		grid-template-columns: 1fr 1fr;
+		/* Mantém a largura base ou define uma específica se desejar */
+		width: 200px;
+	}
+
+	.pedido-imagens img {
 		width: 100%;
-		max-width: 320px;
+		height: 100%; /* Permite que o height seja controlado pelo container */
+		border-radius: 10px;
+		object-fit: cover;
+		cursor: pointer;
+		border: 1px solid var(--dark-gray);
+		filter: brightness(0.95);
+		transition: transform 0.3s ease, filter 0.3s ease;
+	}
+
+	.pedido-imagens img:hover {
+		transform: scale(1.05);
+		filter: brightness(1.1);
+	}
+
+	/* Regra para garantir que a imagem única ocupe a altura total (se o pedido-imagens tiver altura definida) */
+	.pedido-imagens--1 img {
+		/* Garantir que a imagem única preencha o espaço sem ser cortada, se necessário */
+		height: auto; 
 	}
 
 	.pedido-info {

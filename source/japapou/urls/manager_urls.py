@@ -9,6 +9,7 @@ urlpatterns = [
     path("assign_pickup/<int:order_id>/", views.manager_assign_pickup_view, name='assign_pickup'),
     path('confirm_pickup/<int:order_id>/', views.confirm_pickup_view, name='confirm_pickup'),
     path("assign_delivery/<int:order_id>/", views.manager_assign_delivery_view, name='assign_delivery'),
+    path('confirm_dispatch/<int:order_id>/', views.confirm_dispatch_view, name='confirm_dispatch'),
     #path('confirm_dispatch/<int:order_id>/', views.confirm_dispatch_view, name='confirm_dispatch'),
 
     # DELIVERY MAN (Motoboys/Entregadores)
@@ -32,7 +33,7 @@ urlpatterns = [
 
     # GERAIS
     path("history/", views.manager_history_view, name="manager_history"),
-    path("orders/", views.manager_orders_view, name="manager_orders"),
+    path("orders/", views.manage_orders_view, name="manager_orders"),
     path("profile/", views.manager_profile_view, name="manager_profile"),
     path("dashboard/", views.manager_dashboard_view, name="manager_dashboard"),
     path("assign-delivery/", views.manager_assign_delivery_view, name="manager_assign_delivery"),

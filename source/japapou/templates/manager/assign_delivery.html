@@ -1,237 +1,156 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}
-  Confirmar Entrega
-{% endblock %}
+{% block title %}Confirmar Entrega{% endblock %}
 
 {% block extra_head %}
-  <link rel="stylesheet" href="{% static 'css/manager/assign_delivery.css' %}" />
+ <link rel="stylesheet" href="{% static 'css/manager/assign_delivery.css' %}" />
 {% endblock %}
 
 {% block content %}
-  <div>
-    <div class="coverflow-container">
-      <div class="coverflow">
-        <div class="slide">
-          <div class="div-principal">
-            <div class="conteudo">
-              <div class="images">
-                <img class="img-principal" src="{% static 'imgs/manager/orders/img_jap1.png' %}" alt="" />
-                <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" />
-              </div>
-              <div class="prato">
-                <h3>1x Lamen com Gyoza</h3>
-                <p>Macarrão instantâneo bem cozido, folhas verdes (como bok choy ou acelga), cogumelos salteados, cebolinha e gyozas cozidos no vapor ou levemente grelhados, além de molho aromático, sementes de gergelim preto.</p>
-              </div>
-
-              <div class="detalhes">
-                <div class="circles">
-                  <div class="circ-2">
-                    <p>$</p>
-                  </div>
-                  <div class="circ-1">
-                    <p>69</p>
-                  </div>
-                </div>
-                <div class="especificacao">
-                  <h5>Especificações</h5>
-                  <p>Tirar cogumelos, colocar gyozas grelhados em vez de cozidos, sem cebolinha e molho à parte (não misturar no caldo).</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="slide">
-          <div class="div-principal">
-            <div class="test">
-              <div class="images">
-                <img class="img-principal" src="{% static 'imgs/manager/orders/img_jap2.png' %}" alt="" />
-                <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" />
-              </div>
-              <div class="prato">
-                <h3>Comida</h3>
-                <p>Macarrão instantâneo bem cozido, folhas verdes (como bok choy ou acelga), cogumelos salteados, cebolinha e gyozas cozidos no vapor ou levemente grelhados, além de molho aromático, sementes de gergelim preto.</p>
-              </div>
-
-              <div class="detalhes">
-                <div class="circles">
-                  <div class="circ-2">
-                    <p>$</p>
-                  </div>
-                  <div class="circ-1">
-                    <p>69</p>
-                  </div>
-                </div>
-                <div class="especificacao">
-                  <h5>Especificações</h5>
-                  <p>Tirar cogumelos, colocar gyozas grelhados em vez de cozidos, sem cebolinha e molho à parte (não misturar no caldo).</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="slide">
-          <div class="div-principal">
-            <div class="test">
-              <div class="images">
-                <img class="img-principal" src="{% static 'imgs/manager/orders/img_jap3.png' %}" alt="" />
-                <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" />
-              </div>
-              <div class="prato">
-                <h3>1x Lamen com Gyoza</h3>
-                <p>Macarrão instantâneo bem cozido, folhas verdes (como bok choy ou acelga), cogumelos salteados, cebolinha e gyozas cozidos no vapor ou levemente grelhados, além de molho aromático, sementes de gergelim preto.</p>
-              </div>
-
-              <div class="detalhes">
-                <div class="circles">
-                  <div class="circ-2">
-                    <p>$</p>
-                  </div>
-                  <div class="circ-1">
-                    <p>69</p>
-                  </div>
-                </div>
-                <div class="especificacao">
-                  <h5>Especificações</h5>
-                  <p>Tirar cogumelos, colocar gyozas grelhados em vez de cozidos, sem cebolinha e molho à parte (não misturar no caldo).</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="slide">
-          <div class="div-principal">
-            <div class="test">
-              <div class="images">
-                <img class="img-principal" src="{% static 'imgs/manager/orders/img_jap4.png' %}" alt="" />
-                <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" />
-              </div>
-              <div class="prato">
-                <h3>1x Lamen com Gyoza</h3>
-                <p>Macarrão instantâneo bem cozido, folhas verdes (como bok choy ou acelga), cogumelos salteados, cebolinha e gyozas cozidos no vapor ou levemente grelhados, além de molho aromático, sementes de gergelim preto.</p>
-              </div>
-
-              <div class="detalhes">
-                <div class="circles">
-                  <div class="circ-2">
-                    <p>$</p>
-                  </div>
-                  <div class="circ-1">
-                    <p>69</p>
-                  </div>
-                </div>
-                <div class="especificacao">
-                  <h5>Especificações</h5>
-                  <p>Tirar cogumelos, colocar gyozas grelhados em vez de cozidos, sem cebolinha e molho à parte (não misturar no caldo).</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="slide">
-          <div class="div-principal">
-            <div class="test">
-              <div class="images">
-                <img class="img-principal" src="{% static 'imgs/manager/orders/img_jap5.png' %}" alt="" />
-                <img class="img-secundaria" src="{% static 'imgs/manager/orders/imagem_sec.png' %}" alt="" />
-              </div>
-              <div class="prato">
-                <h3>1x Lamen com Gyoza</h3>
-                <p>Macarrão instantâneo bem cozido, folhas verdes (como bok choy ou acelga), cogumelos salteados, cebolinha e gyozas cozidos no vapor ou levemente grelhados, além de molho aromático, sementes de gergelim preto.</p>
-              </div>
-
-              <div class="detalhes">
-                <div class="circles">
-                  <div class="circ-2">
-                    <p>$</p>
-                  </div>
-                  <div class="circ-1">
-                    <p>69</p>
-                  </div>
-                </div>
-                <div class="especificacao">
-                  <h5>Especificações</h5>
-                  <p>Tirar cogumelos, colocar gyozas grelhados em vez de cozidos, sem cebolinha e molho à parte (não misturar no caldo).</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button id="prev"><img src="{% static 'imgs/manager/orders/Seta.png' %}" alt="" /></button>
-      <button id="next"><img src="{% static 'imgs/manager/orders/Seta.png' %}" alt="" /></button>
+<div>
+ <div class="coverflow-container">
+  <div class="coverflow">
+   {% for item in items %}
+ <div class="slide">
+  <div class="div-principal">
+   <div class="conteudo">
+    <div class="images">
+     <img class="img-principal" src="{{ item.prato.photo.url }}" alt="{{ item.prato.name }}" />
+     <i class="fa-regular fa-heart img-secundaria"></i>
     </div>
+
+    <div class="prato">
+     <h3>{{ item.amount }}x {{ item.prato.name }}</h3>
+     <p>{{ item.prato.description }}</p>
+    </div>
+
+    <div class="detalhes">
+     <div class="circles">
+      <div class="circ-2"><p>$</p></div>
+      <div class="circ-1"><p>{{ item.prato.price | floatformat:0 }}</p></div>
+     </div>
+
+     {% if item.comment %}
+      <div class="especificacao">
+       <h5>Especificações</h5>
+       <p>{{ item.comment }}</p>
+      </div>
+     {% endif %}
+    </div>
+   </div>
+  </div>
+ </div>
+{% endfor %}
+
   </div>
 
-  <section>
-    <div class="destaque">
-      <p>Seu pedido em</p>
-      <h2>japapou [Rua]</h2>
-    </div>
-    <div id="detalhes">
-      <div id="detalhes-p1">
-        <div>
-          <div class="secundario">
-            <p>Subtotal</p>
-            <p class="resp">R$70</p>
-          </div>
+  <button id="prev"><i class="fa-solid fa-arrow-left"></i></button>
+  <button id="next"><i class="fa-solid fa-arrow-right"></i></button>
+ </div>
+</div>
 
-          <div class="secundario">
-            <p>Entrega</p>
-            <p class="resp">R$ 7.00</p>
-          </div>
+<section>
+ <div class="destaque">
+  <p>Seu pedido em</p>
+  <h2>Japapou</h2>
+ </div>
 
-          <div class="principal">
-            <h4>Total</h4>
-            <h4 class="resp">R$77.00</h4>
-          </div>
-        </div>
-
-        <div class="button">
-          <div id="button-1">
-            <h4>Concluído</h4>
-          </div>
-        </div>
-      </div>
-
-      <div id="detalhes-p2">
-        <p>Ponto de referencia: descrição</p>
-        <p>Complemento: [complemento], [Bairro], [Rua], [Número], [Cidade], [Estado]</p>
-      </div>
+ <div id="detalhes">
+  <div id="detalhes-p1">
+   <div>
+    <div class="secundario">
+     <p>Subtotal</p>
+     <p class="resp">R$ {{ order.estimate|default_if_none:"0.00" }}</p>
     </div>
 
-    <div id="detalhes-entregador">
-      <div class="secundario">
-        <p>Nome</p>
-        <p class="resp">Diegooooooo</p>
-      </div>
-      <div class="secundario">
-        <p>Modelo</p>
-        <p class="resp">hondaaaaaaaa</p>
-      </div>
-      <div class="secundario">
-        <p>Cor</p>
-        <p class="resp">Vermelho</p>
-      </div>
-      <div class="secundario">
-        <p>Placa</p>
-        <p class="resp">frbgfwo</p>
-      </div>
-
-      <div class="button">
-        <div id="button-2">
-          <h4>Atribuir entregador</h4>
-        </div>
-      </div>
-      <div class="button">
-        <div id="button-3">
-          <h4>Confirmar saída para entrega</h4>
-        </div>
-      </div>
+    <div class="secundario">
+     <p>Entrega</p>
+     {# CORRIGIDO: Usando 'taxa_entrega' #}
+     <p class="resp">R$ {{ order.taxa_entrega|default_if_none:"0.00" }}</p>
     </div>
-  </section>
+
+    <div class="principal">
+     <h4>Total</h4>
+     <h4 class="resp">R$ {{ order.total|floatformat:2 }}</h4>
+    </div>
+   </div>
+
+   <div class="button">
+    <div id="button-1"><h4>Concluído</h4></div>
+   </div>
+  </div>
+
+  <div id="detalhes-p2">
+   {# CORRIGIDO: Usando o campo 'endereco_entrega' do pedido #}
+   <p>{{ order.endereco_entrega }}</p>
+  </div>
+ </div>
+
+ {# CORRIGIDO: Usando 'order.entregador' #}
+ {% if order.entregador %}
+  {# Usando order.entregador, que é o objeto CustomUser atribuído #}
+  <div id="detalhes-entregador" data-order-id="{{ order.id }}" data-csrf="{{ csrf_token }}">
+   <div class="secundario"><p>Nome</p><p class="resp">{{ order.entregador.get_full_name|default:order.entregador.username }}</p></div>
+   
+   {# Presumindo que 'modelo_moto', 'cor_moto' e 'Placa_moto' são campos do CustomUser #}
+   <div class="secundario"><p>Modelo</p><p class="resp">{{ order.entregador.modelo_moto }}</p></div>
+   <div class="secundario"><p>Cor</p><p class="resp">{{ order.entregador.cor_moto }}</p></div>
+   <div class="secundario"><p>Placa</p><p class="resp">{{ order.entregador.Placa_moto }}</p></div>
+
+   <div class="button">
+    <div class="assign-delivery-btn"><h4>Alterar entregador</h4></div>
+   </div>
+   
+   {# CORRIGIDO: Usando 'data_saida' #}
+   {% if order.data_saida %}
+    <div class="button">
+     <div id="button-3" class="confirmed">
+      <h4>Já saiu para entrega ({{ order.data_saida|date:"d/m/Y H:i" }})</h4>
+     </div>
+    </div>
+   {% else %}
+    <div class="button">
+     <div id="button-3"><h4>Confirmar saída para entrega</h4></div>
+    </div>
+   {% endif %}
+
+  </div>
+ {% else %}
+  <div id="detalhes-entregador" data-order-id="{{ order.id }}" data-csrf="{{ csrf_token }}">
+   <p>Nenhum entregador atribuído.</p>
+   <div class="button">
+    <div class="assign-delivery-btn"><h4>Atribuir entregador</h4></div>
+   </div>
+  </div>
+ {% endif %}
+</section>
+
+<div id="modalDeliveryMan" class="modal">
+ <div class="modal-content">
+  <span id="closeModal" class="close">&times;</span>
+  <h3>Selecionar Entregador</h3>
+
+  <ul id="deliveryManList">
+   {% for dm in delivery_men %}
+    <li>
+     {# Adicionado checked para selecionar o primeiro por padrão #}
+     <input type="radio" name="selectedDeliveryMan" id="dm{{ dm.id }}" value="{{ dm.id }}" {% if forloop.first %}checked{% endif %}>
+     <label for="dm{{ dm.id }}">
+      <span>{{ dm.get_full_name }}</span> - 
+      {{ dm.modelo_moto }} {{ dm.cor_moto }} ({{ dm.Placa_moto }})
+     </label>
+    </li>
+   {% empty %}
+        {# Adicionada mensagem de fallback, caso a lista venha vazia #}
+        <li>Nenhum entregador disponível.</li>
+   {% endfor %}
+  </ul>
+
+  <button id="assignDeliveryManBtn">Atribuir</button>
+ </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
-  <script src="{% static 'js/manager/assign_delivery.js' %}"></script>
+ <script src="{% static 'js/manager/assign_delivery.js' %}"></script>
 {% endblock %}

@@ -858,7 +858,7 @@ div.area-e{grid-area: e;}
 .checkout-btn-container form:last-child .btn-checkout {
     background-color: var(--white) !important;
     color: var(--dark-bg) !important;
-    border: none !important;
+    border: 1px solid var(--white) !important;
 }
 
 /* Para o dropdown se parecer com a segunda imagem (sem o ícone de pesquisa ao lado): */
@@ -867,6 +867,7 @@ div.area-e{grid-area: e;}
     align-items: center;
     justify-content: space-between; /* Centraliza o dropdown se o botão de pesquisa for removido */
     align-content: center;
+    margin-bottom: 1em;
 }
 
 /* Ocultar o 'Preço Unit.' na coluna de cabeçalho e manter apenas 'Preço' no HTML. */
@@ -893,4 +894,34 @@ div.area-e{grid-area: e;}
 }
 .total-valor.order{
     font-size: 1.5em;
+}
+
+.alert-info{
+    background-color: var(--azul-mais-claro) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.btn-primary{
+    background-color: var(--laranja-mais-claro) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.btn-primary:hover{
+    background-color: var(--laranja-mais-escuro) !important;;
+}
+
+select#order-date-select:hover{
+    background-color: var(--azul-mais-claro) !important;
+}
+
+.checkout-btn-container form:first-child .btn-checkout:hover{
+    background-color: var(--laranja-mais-escuro) !important;
+    border: 1px solid var(--laranja-mais-escuro) !important;
+}
+
+.checkout-btn-container form:last-child .btn-checkout:hover{
+    background-color: var(--laranja-mais-claro) !important;
+    border: 1px solid var(--laranja-mais-claro) !important;
 }
