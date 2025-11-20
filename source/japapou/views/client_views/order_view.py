@@ -1,7 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404 # type: ignore
+from django.shortcuts import render # type: ignore
 from django.contrib.auth.decorators import login_required, permission_required # type: ignore
-from django.db import transaction # Importar transaction
-from japapou.models import Cart, Order,OrderItem # Importar modelos necessários
+from japapou.models import Order # Importar modelos necessários
 
 
 @login_required
@@ -20,55 +19,55 @@ def client_order_view(request):
 
 
 
-@login_required
-@transaction.atomic 
-def create_order_view(request):
-    """
-    Processa o checkout 
-    """
+# @login_required
+# @transaction.atomic 
+# def create_order_view(request):
+#     """
+#     Processa o checkout 
+#     """
     
-    if request.method != "POST":
-        return redirect('cart_view') 
+#     if request.method != "POST":
+#         return redirect('cart_view') 
 
     
-    try:
-        cart = request.user.cart 
-        cart_items = cart.items.all() 
-    except Cart.DoesNotExist:
-        return redirect('home_page') 
+#     try:
+#         cart = request.user.cart 
+#         cart_items = cart.items.all() 
+#     except Cart.DoesNotExist:
+#         return redirect('home_page') 
 
     
-    if not cart_items.exists():
-        return redirect('cart_view')
+#     if not cart_items.exists():
+#         return redirect('cart_view')
 
     
-    try:
-        total = cart.get_cart_total()
+#     try:
+#         total = cart.get_cart_total()
         
-        new_order = Order.objects.create(
-            usuario=request.user,
-            total=total,
-            estimate=total 
+#         new_order = Order.objects.create(
+#             usuario=request.user,
+#             total=total,
+#             estimate=total 
             
-        )
+#         )
         
-        items_para_criar = []
-        for item in cart_items:
-            items_para_criar.append(
-                OrderItem(
-                    order=new_order,
-                    prato=item.plate,
-                    amount=item.quantity,
-                )
-            )
+#         items_para_criar = []
+#         for item in cart_items:
+#             items_para_criar.append(
+#                 OrderItem(
+#                     order=new_order,
+#                     prato=item.plate,
+#                     amount=item.quantity,
+#                 )
+#             )
         
-        # bulk create para otimizar a inserção dos itens do pedido no banco de dados, é necessario passar uma lista de objetos OrderItem
-        OrderItem.objects.bulk_create(items_para_criar)
+#         # bulk create para otimizar a inserção dos itens do pedido no banco de dados, é necessario passar uma lista de objetos OrderItem
+#         OrderItem.objects.bulk_create(items_para_criar)
 
         
-        cart_items.delete()
+#         cart_items.delete()
 
-        return redirect('client_history')
+#         return redirect('client_history')
 
-    except Exception as e:
-        return redirect('cart_view')
+#     except Exception as e:
+#         return redirect('cart_view')

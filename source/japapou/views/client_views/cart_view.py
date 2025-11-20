@@ -1,11 +1,12 @@
-# Em um arquivo de views, ex: cart_views.py
-
 from django.shortcuts import render, get_object_or_404, redirect # type: ignore
 from django.contrib.auth.decorators import login_required # type: ignore
 from django.http import HttpRequest # type: ignore
 from django.views.decorators.http import require_POST # type: ignore
 from japapou.models import Plate, Cart, CartItem # Importe os novos modelos
+from decimal import Decimal
 # (E o CustomUser, se necessário)
+
+TAXA_ENTREGA = Decimal("5.00")
 
 @login_required
 def cart_view(request: HttpRequest):
@@ -22,6 +23,7 @@ def cart_view(request: HttpRequest):
         'cart': cart,
         'items': items,
         'total': total,
+        'taxa': TAXA_ENTREGA,
     }
     # Renderiza o template do carrinho
     return render(request, 'client/cart.html', context)
