@@ -1,0 +1,6 @@
+#bloco-enderecos {
+    opacity: 100%; /* para mudar depois no js */
+    pointer-events: all; /* para mudar depois no js */
+
+    transition: all 0.5s ease;
+}

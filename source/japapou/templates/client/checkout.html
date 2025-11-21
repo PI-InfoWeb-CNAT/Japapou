@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/client/checkout.css' %}">
+{% endblock extra_head %}
 
 {% block content %}
 <div class="container">
@@ -85,4 +90,9 @@
         </div>
     </div>
 </div>
+
+{% block scripts %}
+    <script src="{% static 'js/client/checkout.js' %}"></script>
+{% endblock %}
+
 {% endblock %}

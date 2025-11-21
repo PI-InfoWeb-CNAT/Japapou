@@ -49,11 +49,11 @@ def checkout_view(request):
 
         
         total_final = subtotal
-        taxa = Decimal("0.00")
-        endereco_escolhido = None
+        taxa = Decimal("0.00") # caso o tipo de pedido seja RETIRADA faz a taxa ser zero
+        endereco_escolhido = None # caso o tipo de pedido seja RETIRADA ja salva como None no banco de dados
 
         if tipo_pedido == Order.TipoPedido.ENTREGA:
-            endereco_id_selecionado = request.POST.get('endereco_id')
+            endereco_id_selecionado = request.POST.get('endereco_id') # pega o endereco do forms
 
             if not endereco_id_selecionado:
                 messages.error(request, "Por favor, selecione um endereço para a entrega.")
@@ -77,7 +77,7 @@ def checkout_view(request):
                 estimate=total_final,        
                 tipo_pedido=tipo_pedido,     
                 taxa_entrega=taxa,
-                endereco_entrega=endereco_escolhido,            
+                endereco_entrega=endereco_escolhido, # atribui o endereço ao pedido, caso seja retirada vai ser None      
             )
             
             
@@ -155,7 +155,7 @@ def add_endereco_view(request):
             
             messages.success(request, "Novo endereço salvo com sucesso!")
             
-            # 💡 PONTO-CHAVE: Redireciona de volta ao checkout!
+            # Redireciona de volta ao checkout!
             return redirect('checkout')
         
         else:
