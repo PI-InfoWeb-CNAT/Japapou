@@ -136,7 +136,7 @@
                     <select class="frete-dropdown">
                         <option>Estimar Frete</option>
                         <option>Retirada no Local (R$ 0,00)</option>
-                        <option>Entrega Padrão ({{ taxa }})</option>
+                        <option>Entrega Padrão ({{ taxa|floatformat:2 }})</option>
                     </select>
                 </div>
                 {# O SVG de ícone foi removido aqui para corresponder ao seu código mais recente #}
@@ -146,7 +146,7 @@
                 <div class="total-final-row">
                     <h3 class="total-titulo">TOTAL</h3>
                     <div class="total-valor">
-                        R$ {{ total|floatformat:2 }}
+                        R$ {{ total }}
                     </div>
                 </div>
                 <p class="total-descricao">Taxa de frete incluída. Com tudo finalizado, vá ao Check Out</p>
@@ -198,6 +198,10 @@
 </section>
 
 {% block scripts %}
+
+    <script id="dados-do-django" type="application/json">
+        {{ dados_js|safe }}
+    </script>
 
 <script src="{% static 'js/client/cart.js' %}"></script>
 {% endblock %}

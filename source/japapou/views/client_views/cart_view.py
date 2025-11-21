@@ -4,9 +4,10 @@ from django.http import HttpRequest # type: ignore
 from django.views.decorators.http import require_POST # type: ignore
 from japapou.models import Plate, Cart, CartItem # Importe os novos modelos
 from decimal import Decimal
+import json
 # (E o CustomUser, se necessário)
 
-TAXA_ENTREGA = Decimal("5.00")
+TAXA_ENTREGA = 5.0
 
 @login_required
 def cart_view(request: HttpRequest):
@@ -18,12 +19,17 @@ def cart_view(request: HttpRequest):
     
     items = cart.items.all().order_by('plate__name') # Pega todos os itens do carrinho
     total = cart.get_cart_total() # Calcula o total
+
+    dados_js = {
+        "taxa_entrega": TAXA_ENTREGA
+    }
     
     context = {
         'cart': cart,
         'items': items,
         'total': total,
         'taxa': TAXA_ENTREGA,
+        'dados_js': json.dumps(dados_js)
     }
     # Renderiza o template do carrinho
     return render(request, 'client/cart.html', context)

@@ -41,7 +41,7 @@ def manager_menu_view(request):
         # E buscamos os pratos DESSE menu
         menu_plates = selected_menu.plates.all()
 
-        # Calculamos as avaliações (o seu código já estava ótimo aqui)
+        # Calculamos as avaliações 
         avaliacoes = PlateReview.objects.values('plate__name').annotate(media=Round(Avg('value')))
         
         # Convertemos para dicionário para ser mais fácil de usar
@@ -52,7 +52,7 @@ def manager_menu_view(request):
             plate.media = avaliacoes_dict.get(plate.name)  # Retorna None se não houver avaliação
 
     else:
-        # 4. (Opcional) Se não houver menu ativo, podemos avisar o utilizador
+        # Se não houver menu ativo, podemos avisar o utilizador
         messages.warning(request, "De momento, não existe um menu ativo para a data de hoje.")
 
     periodos = Period.objects.all()
