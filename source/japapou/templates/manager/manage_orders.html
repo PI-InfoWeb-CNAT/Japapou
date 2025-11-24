@@ -18,10 +18,8 @@ Visualizar Pedidos
 
 <div class="pedido-conteudo">
 
-{# Define a contagem total de itens #}
 {% with item_count=pedido.itens.count|default:0 %}
 
- {# Lógica para determinar o valor da classe (1, 2, 3, ou 4) #}
  {% if item_count >= 4 %}
   {% with item_count_class='4' %}
   {% endwith %}
@@ -33,10 +31,8 @@ Visualizar Pedidos
   {% endwith %}
  {% endif %}
 
- {# Reutiliza a variável item_count_class no escopo global do pedido para a div #}
  {% with class_value=item_count_class %}
   
-  {# Adiciona a classe dinâmica baseada na contagem: pedido-imagens--1, pedido-imagens--2, etc. #}
   <div class="pedido-imagens pedido-imagens--{{ class_value }}">
  {% for item in pedido.itens.all|slice:":4" %}
  <img src="{{ item.prato.photo.url }}" alt="{{ item.prato.name }}" />
@@ -59,7 +55,6 @@ Visualizar Pedidos
 {% for item in pedido.itens.all %}
 {{ item.amount }}x {{ item.prato.name }} - R$ {{ item.prato.price|floatformat:2 }}<br />
 {% endfor %}
-{# TOTAL #}
 <strong>Total:</strong> R$ {{ pedido.total|floatformat:2 }}
 </p>
 </div>

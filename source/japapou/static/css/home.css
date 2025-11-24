@@ -486,3 +486,7 @@ a:hover > div.slide.card-venda{
   border: 1px solid var(--laranja-mais-claro);
   background-color: var(--azul-mais-escuro);
 }
+
+#grid-espaco{
+  width: 100%;
+}
