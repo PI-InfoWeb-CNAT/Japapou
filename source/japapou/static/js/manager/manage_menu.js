@@ -6,13 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // Adiciona o evento de clique para TODOS os botões de edição
   document.querySelectorAll('.edit-button').forEach(button => {
     button.addEventListener('click', function() {
-      // 1. Pega o ID do prato do atributo 'plate-id' do botão
+      // Pega o ID do prato do atributo 'plate-id' do botão
       const plateId = this.getAttribute('plate-id');
       
-      // 2. Constrói a URL correta para buscar os dados do prato
+      // Constrói a URL correta para buscar os dados do prato
       //    A URL deve corresponder ao que está em 'manager_urls.py'
-      //const url = `/plates/${plateId}/edit/`;
+      //const url = `/plates/${plateId}/json/`;
       const url = this.getAttribute('data-url');
+      console.log(url);
 
       const nextPage = this.getAttribute('data-next-page');
 
@@ -104,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (index >= media) {
         star.classList.add("star-inactive");
-        console.log(index)
+        // console.log(index)
       }
       
       // As estrelas ativas (abaixo da média) simplesmente
@@ -112,6 +113,35 @@ document.addEventListener('DOMContentLoaded', function() {
       // cor amarela padrão que definimos no CSS.
     });
   });
+
+  const photoPreview = document.getElementById('edit-photo-preview');
+  const photoInput = document.getElementById('edit-photo-input');
+  const photoContainer = document.getElementById('image-file-edit-container');
+
+  // Apenas executa se os elementos existirem (boa prática)
+  if (photoPreview && photoInput && photoContainer) {
+  
+      // 1. Permite clicar na imagem para abrir o seletor de ficheiros
+      // (O clique no #upload-label já funciona via HTML/Label, mas este melhora a usabilidade)
+      photoContainer.addEventListener('click', () => {
+          photoInput.click();
+      });
+    
+      // 2. Pré-visualização Imediata da Nova Foto
+      photoInput.addEventListener('change', function() {
+          if (this.files && this.files[0]) {
+              const reader = new FileReader(); 
+              
+              reader.onload = function(e) {
+                  // Atualiza o atributo 'src' da imagem com a nova foto
+                  photoPreview.src = e.target.result;
+                  photoPreview.style.display = 'block'; 
+              };
+              
+              reader.readAsDataURL(this.files[0]);
+          }
+      });
+  }
 
 });
 

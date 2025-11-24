@@ -14,11 +14,9 @@ class PlatesForms(forms.ModelForm):
     # pois ele não está diretamente na Model Plate, mas queremos exibi-lo.
     menus = forms.ModelMultipleChoiceField(
         queryset=Menu.objects.all(),  # Todos os objetos Menu disponíveis para seleção
-        widget=forms.SelectMultiple(
-            attrs={"class": "seu-estilo-css"}
-        ),  # Adicione suas classes CSS
         required=False,  # Defina como True se a seleção de menus for obrigatória
         label="Menus Associados",  # Rótulo que aparecerá no formulário
+        widget=forms.SelectMultiple(attrs={'size':'3'}) # Defina o número de opções visíveis
     )
 
     class Meta:
@@ -29,7 +27,7 @@ class PlatesForms(forms.ModelForm):
 
         # Personaliza os widgets para os campos específicos (opcional)
         widgets = {
-            "description": forms.Textarea(attrs={"rows": 8}),
+            "description": forms.Textarea(attrs={"rows": 3}),
             # O widget para 'menus' já foi definido no campo explícito acima
         }
 
