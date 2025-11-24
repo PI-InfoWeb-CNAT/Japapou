@@ -136,8 +136,8 @@
      {# Adicionado checked para selecionar o primeiro por padrão #}
      <input type="radio" name="selectedDeliveryMan" id="dm{{ dm.id }}" value="{{ dm.id }}" {% if forloop.first %}checked{% endif %}>
      <label for="dm{{ dm.id }}">
-      <span>{{ dm.get_full_name }}</span> - 
-      {{ dm.modelo_moto }} {{ dm.cor_moto }} ({{ dm.Placa_moto }})
+      <span>{{ dm.username }}</span> - 
+      {{ dm.modelo_moto }} {{ dm.cor_moto }} ({{ dm.placa_moto }})
      </label>
     </li>
    {% empty %}
