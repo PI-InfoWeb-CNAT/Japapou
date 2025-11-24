@@ -248,14 +248,35 @@ main {
 	margin-bottom: 1em;
 	align-items: center;
 	
+	select {
+		appearance: none;
+		background-color: transparent;
+		color: white;
+		border: none;
+		text-align: center;
+		margin: 0 auto;
+		font-size: 20px;
+		
+	}
+	
+	
 
 	#period-form {
 		width: 18%;
 		height: 55%;
 
 		select {
-			font-size: 19px;
-			text-align: center;
+			appearance: none;
+        	background-color: transparent;
+        	color: white;
+        	border: none;
+        	text-align: center;
+        	margin: 0 auto;
+        	font-size: 20px;
+
+			option {
+				background-color: var(--azul-mais-escuro);
+			}
 		}
 	}
 	div p {
@@ -289,10 +310,16 @@ main {
 		color: #f97316;
 		font-size: 30px;
 		cursor: pointer;
+		background-color: transparent;
 	}
 	form {
 		width: 16%;
 		height: 55%;
+		border-radius: 25px;
+		border: 1px solid white;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
 		/* div {
 			display: flex;
@@ -310,13 +337,8 @@ main {
 			font-size: 20px;
 		}
 	}
-	form select {
-		background-color: none;
-		font-size: 19px;
-		text-align: center;
-		cursor: pointer;
-	}
-	form select:hover {
+	
+	form:hover {
 		background-color: var(--azul-mais-claro);
 	}
 }
@@ -991,26 +1013,7 @@ h2{
 	text-align: center;
 	margin-top: 1em;
 }
-.data-cardapio {
-    select {
-		background-color: var(--azul-mais-escuro);
-		color: white;
-		border-radius: 25px;
-		border: 1px solid white;
-		text-align: center;
-		padding: 10px;
-		margin: 0 auto;
-		padding-inline: 1em;
-	}
-}
 
-/* .data-cardapio {
-    form {
-        label {
-			visibility: hidden;
-		}
-	}
-} */
 
 span.material-symbols-outlined{
 	background-color: var(--azul-mais-escuro);

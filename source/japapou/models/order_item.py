@@ -11,7 +11,10 @@ class OrderItem(models.Model):
         related_name="itens" 
     )
     
-
+    '''
+        mudar depois para guardar o preço do prato no momento da compra
+        caso o preço do prato mude depois da compra
+    '''
     
     prato = models.ForeignKey(Plate, on_delete=models.CASCADE, default=1, related_name='order_items_prato')
     amount = models.IntegerField(default=1)
