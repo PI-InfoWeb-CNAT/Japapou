@@ -87,22 +87,16 @@ precisa ser atribuido entregador a este pedido
 </div>
 </div>
  <br>
-{# --- ALTERAÇÃO AQUI: Botão de Ação Condicional --- #}
 
 {% if pedido.tipo_pedido == 'ENTREGA' %}
     <a href="{% url 'assign_delivery' order_id=pedido.id %}" class="btn-toggle">
         Atribuir Entregador
     </a>
 {% else %}
-    {# Assume que 'RETIRADA' é o outro tipo de pedido. #}
     <a href="{% url 'assign_pickup' order_id=pedido.id %}" class="btn-toggle">
         Confirmar Retirada
     </a>
 {% endif %}
-
-{# O bloco de detalhes deve ser ativado por outro elemento se o botão for para navegação. #}
-{# Se você quer que o botão de atribuição TAMBÉM mostre os detalhes, #}
-{# você pode usar o JavaScript abaixo, mas a navegação será prioritária. #}
 
 <div class="detalhes">
 <p>
@@ -130,9 +124,6 @@ Nenhum pedido encontrado.
 {% block scripts %}
 <script src="{% static 'js/manager/manage_orders.js' %}"></script>
 <script>
-// A função toggleDetalhes não será chamada se o botão for um link <a>.
-// Se você ainda deseja que os detalhes sejam exibidos, será necessário um elemento separado.
-// Caso contrário, esta função pode ser removida se não houver outro elemento chamando-a.
 function toggleDetalhes(button) {
 const detalhesDiv = button.nextElementSibling;
 if (detalhesDiv.style.display === "block") {

@@ -65,7 +65,6 @@
 
     <div class="secundario">
      <p>Entrega</p>
-     {# CORRIGIDO: Usando 'taxa_entrega' #}
      <p class="resp">R$ {{ order.taxa_entrega|default_if_none:"0.00" }}</p>
     </div>
 
@@ -81,27 +80,20 @@
   </div>
 
   <div id="detalhes-p2">
-   {# CORRIGIDO: Usando o campo 'endereco_entrega' do pedido #}
    <p>{{ order.endereco_entrega }}</p>
   </div>
  </div>
-
- {# CORRIGIDO: Usando 'order.entregador' #}
  {% if order.entregador %}
-  {# Usando order.entregador, que é o objeto CustomUser atribuído #}
   <div id="detalhes-entregador" data-order-id="{{ order.id }}" data-csrf="{{ csrf_token }}">
    <div class="secundario"><p>Nome</p><p class="resp">{{ order.entregador.get_full_name|default:order.entregador.username }}</p></div>
-   
-   {# Presumindo que 'modelo_moto', 'cor_moto' e 'Placa_moto' são campos do CustomUser #}
    <div class="secundario"><p>Modelo</p><p class="resp">{{ order.entregador.modelo_moto }}</p></div>
    <div class="secundario"><p>Cor</p><p class="resp">{{ order.entregador.cor_moto }}</p></div>
-   <div class="secundario"><p>Placa</p><p class="resp">{{ order.entregador.Placa_moto }}</p></div>
+   <div class="secundario"><p>Placa</p><p class="resp">{{ order.entregador.placa_moto }}</p></div>
 
    <div class="button">
     <div class="assign-delivery-btn"><h4>Alterar entregador</h4></div>
    </div>
    
-   {# CORRIGIDO: Usando 'data_saida' #}
    {% if order.data_saida %}
     <div class="button">
      <div id="button-3" class="confirmed">
@@ -133,7 +125,6 @@
   <ul id="deliveryManList">
    {% for dm in delivery_men %}
     <li>
-     {# Adicionado checked para selecionar o primeiro por padrão #}
      <input type="radio" name="selectedDeliveryMan" id="dm{{ dm.id }}" value="{{ dm.id }}" {% if forloop.first %}checked{% endif %}>
      <label for="dm{{ dm.id }}">
       <span>{{ dm.username }}</span> - 
@@ -141,7 +132,6 @@
      </label>
     </li>
    {% empty %}
-        {# Adicionada mensagem de fallback, caso a lista venha vazia #}
         <li>Nenhum entregador disponível.</li>
    {% endfor %}
   </ul>

@@ -242,3 +242,8 @@ Se usar esta opção, o CSS dos `img` abaixo pode precisar de ajuste para que o 
 		align-items: center;
 	}
 }
+.alert-info{
+	background-color: var(--azul-mais-claro) !important;
+	border: 1px solid white !important;
+	color: white !important;
+}
