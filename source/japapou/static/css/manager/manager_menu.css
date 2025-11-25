@@ -248,35 +248,91 @@ main {
 	margin-bottom: 1em;
 	align-items: center;
 	
-	select {
-		appearance: none;
-		background-color: transparent;
-		color: white;
-		border: none;
-		text-align: center;
-		margin: 0 auto;
-		font-size: 20px;
-		
+	.text-ruler {
+    	font-size: 20px;
+		visibility: hidden; /* Torna-o invisível */
+    	position: absolute; /* Remove-o do fluxo de layout */
+    	white-space: nowrap; /* Impede que o texto quebre linhas */
+    	padding: 0;
+    	margin: 0;
+    	/* Adicione quaisquer outros estilos de fonte, como padding (se aplicável) */
 	}
+
+	div {
+		position: relative; /* Essencial para posicionar o pseudo-elemento */
+		display: inline-block; /* Para que o wrapper se ajuste ao tamanho do select */
+		width: 100%;
+
+		select {
+			cursor: pointer;
+			background-color: transparent;
+			color: white;
+			border: none;
+			text-align: center;
+			margin: 0 auto;
+			font-size: 20px;
+			width: 100%;
+
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+
+			background-image: url('../../imgs/seta_baixo.png');
+			background-repeat: no-repeat;
+			background-size: 20px 10px;
+			background-position: right 5% center;
+
+			option {
+				background-color: var(--azul-mais-escuro);
+			}
+
+		}
+		select:focus {
+			outline: none;
+		}
+	}
+
 	
 	
 
 	#period-form {
-		width: 18%;
+		display: inline-block;
+		align-content: center;
+		width: 20%;
 		height: 55%;
 
 		select {
-			appearance: none;
+			cursor: pointer;
         	background-color: transparent;
         	color: white;
         	border: none;
         	text-align: center;
         	margin: 0 auto;
         	font-size: 20px;
+			width: 100%;
+
+			background-color: transparent;
+			color: white;
+			text-align: center;
+			margin: 0 auto;
+			font-size: 20px;
+
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+
+			background-image: url('../../imgs/seta_baixo.png');
+			background-repeat: no-repeat;
+			background-size: 7% 37%;
+			background-position: right 3% center;
+
 
 			option {
 				background-color: var(--azul-mais-escuro);
 			}
+		}
+		select:focus {
+			outline: none;
 		}
 	}
 	div p {
@@ -313,24 +369,17 @@ main {
 		background-color: transparent;
 	}
 	form {
-		width: 16%;
+		/*width: 15%;*/
+		/*max-width: 20%;*/
 		height: 55%;
 		border-radius: 25px;
 		border: 1px solid white;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+		display: inline-block;
+		align-content: center;
+		/* display: flex;
+		justify-content: space-around;
+		align-items: center; */
 
-		/* div {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			border: 1px solid white;
-			color: #f97316;
-			border-radius: 30px;
-			width: 100%;
-			height: 100%;
-			} */
 		label {
 			margin: 0;
 			margin-right: 5px;

@@ -143,7 +143,61 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
 
+  function getOptionTextWidth(optionElement) {
+    
+    const optionText = optionElement.textContent;
+    
+    // Tenta encontrar o elemento régua, se já existir
+    let ruler = document.querySelector('.text-ruler');
+
+    // Se a régua não existir, cria e a adiciona ao corpo do documento
+    if (!ruler) {
+        ruler = document.createElement('span');
+        ruler.classList.add('text-ruler');
+        document.body.appendChild(ruler);
+    }
+    
+    // 2. Define o texto da opção na régua
+    ruler.textContent = optionText;
+    
+    // 3. Mede a largura do elemento régua
+    // getBoundingClientRect().width é a mais precisa.
+    const larguraCalculada = ruler.getBoundingClientRect().width;
+    
+    // 4. (Opcional) Remove a régua do DOM após a medição (ou a reutiliza para eficiência)
+    // Se você for medir várias vezes, é melhor mantê-la e reutilizá-la.
+    // document.body.removeChild(ruler); 
+
+    // Retorna a largura calculada, adicionando uma pequena margem (ex: 5px)
+    return larguraCalculada + 5; 
+  }
+
+  const selectMenu = document.getElementById('id_field');
+  const selectPeriod = document.getElementById('id_period_field');
+
+  const formSelectMenu = document.getElementById('form-select-menu');
+  const formPeriodMenu = document.getElementById('period-form');
+
+  console.log(selectMenu);
+  console.log(selectPeriod);
+  console.log(formPeriodMenu);
+  console.log(formSelectMenu);
+
+  const valorAtual = selectMenu.options[selectMenu.selectedIndex];
+
+  function copiarLargura() {
+    const valorAtual = selectMenu.options[selectMenu.selectedIndex];
+
+    let larguraValorAtual = getOptionTextWidth(valorAtual);
+    console.log("Largura:", (larguraValorAtual));
+    
+    formSelectMenu.style.width = (larguraValorAtual+130) + "px";
+
+  };
+  console.log(getOptionTextWidth(valorAtual))
+  copiarLargura()
 });
+
 
   const addPratoExisten = document.getElementById("addpratoexistentbtn");
   const addNovoPrato = document.getElementById("addnovopratobtn");
@@ -172,3 +226,5 @@ document.addEventListener('DOMContentLoaded', function() {
     modalNovoPrato.close();
     modalAddNovoPrato.showModal();
 });
+
+

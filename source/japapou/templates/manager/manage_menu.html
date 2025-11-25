@@ -53,21 +53,16 @@
   </section>
 
   <div class="data-cardapio">
-    
       <form id="period-form" method="get">
           {{ search_period }}
-          
-            <span class="material-symbols-outlined seta-baixo">keyboard_arrow_down</span>
-          
+            <!--<span class="material-symbols-outlined seta-baixo">keyboard_arrow_down</span>-->
       </form>
       
-      <form method="get">
+      <form id="form-select-menu" method="get">
           {{ select_menu }}
-          
-            <span class="material-symbols-outlined seta-baixo">keyboard_arrow_down</span>
-          
+            <!--<span class="material-symbols-outlined seta-baixo">keyboard_arrow_down</span>-->
       </form>
-    
+      <p class="text-ruler"></p>
       <button class="novo-cardapio" onclick="document.getElementById('novo-cardapio').showModal()"><p>+ Novo Menu</p></button>
     </div>
   
