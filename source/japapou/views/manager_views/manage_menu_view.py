@@ -100,7 +100,7 @@ def manager_menu_view(request):
     search_period_form.fields["period_field"].label = ""
 
     menu_plates = Plate.objects.filter(menu=selected_menu)
-    other_plates = Plate.objects.exclude(menu=selected_menu)
+    other_plates = Plate.objects.exclude(menu=selected_menu) # pratos que não estáo inseridos no menu atual.
 
     avaliacoes = PlateReview.objects.values('plate__name').annotate(media=Round(Avg('value')))
     avaliacoes_dict = {a['plate__name']: a['media'] for a in avaliacoes}

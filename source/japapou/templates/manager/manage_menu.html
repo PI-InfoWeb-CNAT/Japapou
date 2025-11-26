@@ -107,7 +107,7 @@
         </div>
       {% endfor %}
       
-        <button class="botao-criar" onclick="document.getElementById('criar-prato').showModal()">
+        <button class="botao-criar" onclick="document.getElementById('novo-prato').showModal()">
           <div class="product-card-branco">
             <p class="plus-icon-text">+</p> 
             <div class="img-estrela">
@@ -130,7 +130,7 @@
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           </button>
-          <button class="action-button edit-button" plate-id="{{ plate.id }}" data-url="{% url 'plate_update' plate.id %}" data-next-page="manager_menu" aria-label="Editar">
+          <button class="action-button edit-button" plate-id="{{ plate.id }}" data-url="{% url 'plate_get_json' plate.id %}" data-next-page="manager_menu" aria-label="Editar">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
             </svg>
@@ -195,20 +195,46 @@
     </form>
   </dialog>
 
+  <dialog id="novo-prato">
+    <div id="div-novo-prato">
+      <div>
+        <button id="addpratoexistentbtn" onclick="document.getElementById('pratos-registrados').showModal()"><img src="{% static 'imgs/manager/icons/addpratoexistente.png' %}" alt="Ícone de adicionar um prato existente" width="60%" /></button>
+        <h2>Adicionar um Já Existente</h2>
+        <p>Exibir os pratos ja registrados no sistema não incluídos no menu atual</p>
+      </div>
+      <div>
+        <button id="addnovopratobtn"><img src="{% static 'imgs/manager/icons/addnovoprato.png' %}" alt="Ícone de adicionar um novo prato" width="60%" /></button>
+        <h2>Adicionar um Novo Prato</h2>
+        <p>Adicionar um novo prato com foto imagem descrição, preço.</p>
+      </div>
+    </div>
+    <!-- <button onclick="document.getElementById('novo-prato').close()">fechar modal</button> -->
+  </dialog>
+
+  <dialog id="pratos-registrados">
+    <h2>Pratos já Registrados no Sistema</h2>
+      <form action="{% url 'create_menu' %}" method="post">
+      {% csrf_token %}
+        <div id="outros-pratos">
+          
+        </div>
+    </form>
+    <button onclick="document.getElementById('pratos-registrados').close()">+ Adicionar ao Menu</button>
+  </dialog>
+
   <dialog id="criar-prato">
     <h2>Criar Novo Prato</h2>
     <form id="form-criar-prato" action="{% url 'create_plates' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
 
-      
       <input type="hidden" id="redirect-after-create" name="next_redirect_url_name" value="manager_menu">
 
       <div id="image-file">
         {{ form.photo }}
         <label for="{{ form.photo.id_for_label }}">
           <p class="material-symbols-outlined">image_arrow_up</p>
+          <!-- <p>Faça o upload da foto do produto com fundo transparente</p> -->
         </label>
-        <p>Faça o upload da foto do produto com fundo transparente</p>
       </div>
 
       <div>
@@ -236,7 +262,7 @@
             {% endfor %}
           </ul>
         {% endif %}
-      </div>
+        </div>
       <button name="btn-create-plate" type="submit" onclick="document.getElementById('criar-prato').close()">+ Adicionar ao Menu</button>
     </form>
   </dialog>

@@ -144,7 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function getOptionTextWidth(optionElement) {
-    
+    // função para pegar o tamanho width e um texto para usar como regua
+
     const optionText = optionElement.textContent;
     
     // Tenta encontrar o elemento régua, se já existir
@@ -178,15 +179,18 @@ document.addEventListener('DOMContentLoaded', function() {
   const formSelectMenu = document.getElementById('form-select-menu');
   const formPeriodMenu = document.getElementById('period-form');
 
-  console.log(selectMenu);
-  console.log(selectPeriod);
-  console.log(formPeriodMenu);
-  console.log(formSelectMenu);
+  // console.log(selectMenu);
+  // console.log(selectPeriod);
+  // console.log(formPeriodMenu);
+  // console.log(formSelectMenu);
 
   const valorAtual = selectMenu.options[selectMenu.selectedIndex];
 
   function copiarLargura() {
+    // função que copia largura do nome do menu para evitar que
+    // caso o nome seja muito grande fique passando
     const valorAtual = selectMenu.options[selectMenu.selectedIndex];
+    
 
     let larguraValorAtual = getOptionTextWidth(valorAtual);
     console.log("Largura:", (larguraValorAtual));

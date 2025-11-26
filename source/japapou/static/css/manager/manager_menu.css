@@ -464,9 +464,9 @@ form {
 	z-index: 1;
 	margin: 0;
 	width: 35%;
+	height: 90%;
 	padding: 15px 30px 0px 30px;
-	height: 72%;
-	background-color: #024057;
+	background-color: var(--azul-mais-escuro);
 	border: 1px solid white;
 	border-radius: 20px;
 
@@ -476,6 +476,10 @@ form {
 
 	h2 {
 		color: white;
+		margin: 0;
+	}
+	label {
+		margin: 0;
 	}
 	form #name-menu{
 		display: flex;
@@ -484,9 +488,10 @@ form {
 	}
 	form #id_name {
 		width: 60%;
-		border: 2px solid white;
+		border: 1px solid white;
 		color: white;
     	border-radius: 8px;
+		background-color: var(--azul-mais-claro);
 	}
 }
 
@@ -495,11 +500,11 @@ form {
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 4%;
-	background-color: var(--azul-mais-escuro);
+	background-color: var(--azul-mais-claro);
 	padding: 20px 0px 20px 0px;
 	width: 100%;
-	height: 70%;
-	border: 2px solid white;
+	height: 80%;
+	border: 1px solid white;
 	border-radius: 8px;
 
 	div {
@@ -537,8 +542,8 @@ form {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	margin: 0;
-	width: 50%;
-	height: 45%;
+	width: 60%;
+	height: 50%;
 	border: none;
 	background-color: transparent;
 
@@ -557,6 +562,7 @@ form {
 			border-radius: 15px;
 			padding: 20px 25px 0px 25px;
 			place-items: center;
+			cursor: default;
 
 			> div {
 				padding: 0px;
@@ -570,18 +576,21 @@ form {
 
 			button {
 				padding: 0px;
-				width: 200px;
-				height: 200px;
+				width: 70%;
+				height: 60%;
 				background-color: #f97316;
 				border: 2px solid black;
 				border-radius: 0;
-				margin-bottom: 12%;
+				margin: 0;
+				
 			}
 
 			h2 {
 				font-size: 25px;
 				font-weight: bold;
 				color: black;
+				margin: 0;
+				margin-top: 5%;
 			}
 
 			p {
@@ -598,7 +607,7 @@ form {
 	}
 }
 
-/* #pratos-registrados {
+#pratos-registrados {
 	margin: 0 auto;
 	position: fixed;
 	top: 50%;
@@ -606,42 +615,39 @@ form {
 	transform: translate(-50%, -50%);
 	z-index: 1;
 	margin: 0;
-	width: 30%;
-	height: 75%;
+	width: 35%;
+	height: 90%;
 	padding: 15px 20px 20px 20px;
-	background-color: #024057;
+	background-color: var(--azul-mais-escuro);
 	border: 1px solid white;
 	border-radius: 20px;
 	place-items: center;
 
 	h2 {
 		font-size: 36px;
-		margin-bottom: 15px;
+		margin: 0;
+		margin-bottom: 3%;
 	}
 
 	button {
-		width: 40%;
-		height: 6%;
-		margin-top: 5%;
+		background-color: var(--laranja-mais-claro);
+        border: 2px solid black;
+        border-radius: 15px;
+        width: 40%;
+        height: 7%;
+        margin-top: 3%;
 	}
 
 	form {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 5%;
-		background-color: var();
-		padding: 25px 0px 45px 0px;
-		width: 95%;
-		height: 70%;
-		border: 2px solid black;
-		border-radius: 8px;
 
-		div {
+		#outros-pratos {
 			display: flex;
 			align-items: center;
-			gap: 1%;
-			height: 5%;
+			width: 100%;
+			height: 95%;
+			background-color: var(--azul-mais-claro);
+			border: 1px solid white;
+			border-radius: 8px;
 		}
 
 		label {
@@ -668,7 +674,8 @@ form {
 			}
 		}
 	}
-} */
+} 
+
 
 #criar-prato {
 	margin: 0 auto;
@@ -685,7 +692,7 @@ form {
 	border: 1px solid white;
 	border-radius: 20px;
 	place-items: center;
-	
+
 	p {
 		margin: 0;
         font-size: x-small;
@@ -709,6 +716,7 @@ form {
         display: flex;
         flex-direction: column;
         justify-content: center;
+		cursor: pointer;
 	}
 
 	form div {
@@ -757,6 +765,7 @@ form {
 
 	form label .material-symbols-outlined {
 		font-size: 50px;
+		cursor: pointer;
 		/* margin: 25px 0px 0px 0px; */ 
 	}
 
