@@ -1,6 +1,126 @@
+// manage_menu.js
+
+// Função auxiliar para obter o token CSRF do cookie
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Verifica se o nome do cookie corresponde ao que procuramos
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+
 document.addEventListener('DOMContentLoaded', function() {
 
-  // Seleciona o modal de edição
+    // --- NOVO EVENT LISTENER: ADICIONAR AO MENU ---
+    document.querySelectorAll('.add-to-menu-button').forEach(button => {
+        button.addEventListener('click', function() {
+            
+            const plateId = this.getAttribute('data-plate-id');
+            const menuId = this.getAttribute('data-menu-id');
+            const url = "/manager/plates/add_single_to_menu/";
+            
+            // Elemento a ser removido (na seção 'Disponível')
+            const cardElement = document.getElementById(`available-plate-card-${plateId}`); 
+
+            if (!menuId || menuId === "None") {
+                alert('Erro: Nenhum menu selecionado para adicionar o prato.');
+                return;
+            }
+
+            // Cria os dados que serão enviados no POST
+            const formData = new URLSearchParams();
+            // A view 'add_plates_to_menu_view' espera 'plates_to_add' como array/list,
+            // mas para um único item, podemos enviar como string.
+            formData.append('plates_to_add', plateId); 
+            formData.append('menu_id', menuId);
+            formData.append('csrfmiddlewaretoken', csrftoken); // Inclui o token
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrftoken 
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // SUCESSO: Remove o card da visualização (dinamicamente)
+                    if (cardElement) {
+                        cardElement.remove();
+                    }
+                    
+                    // Recarrega a página para que o prato apareça na seção principal
+                    window.location.reload(); 
+                } else {
+                    // ERRO
+                    alert('Erro ao adicionar prato: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Erro na requisição Fetch:', error);
+                alert('Ocorreu um erro de comunicação com o servidor.');
+            });
+        });
+    });
+
+
+    // --- NOVO EVENT LISTENER: REMOVER DO MENU ---
+    document.querySelectorAll('.remove-from-menu-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const plateId = this.getAttribute('data-plate-id');
+            const menuId = this.getAttribute('data-menu-id');
+            const url = this.getAttribute('data-url');
+            const cardElement = document.getElementById(`plate-card-${plateId}`); // O card a ser removido
+
+            // Cria os dados que serão enviados no POST
+            const formData = new URLSearchParams();
+            formData.append('plate_id', plateId);
+            formData.append('menu_id', menuId);
+
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrftoken // Adiciona o token CSRF
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // SUCESSO: Remove o card da visualização sem recarregar a página
+                    if (cardElement) {
+                        cardElement.remove();
+                    }
+              
+                    
+                    window.location.reload(); 
+                } else {
+                    // ERRO
+                    alert('Erro ao remover prato: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Erro na requisição Fetch:', error);
+                alert('Ocorreu um erro de comunicação com o servidor.');
+            });
+        });
+    });
+
+    // Seleciona o modal de edição
   const editDialog = document.getElementById('editar-prato');
 
   // Adiciona o evento de clique para TODOS os botões de edição
@@ -11,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Constrói a URL correta para buscar os dados do prato
       //    A URL deve corresponder ao que está em 'manager_urls.py'
-      //const url = `/plates/${plateId}/json/`;
+      // const url = `/plates/${plateId}/json/`;
       const url = this.getAttribute('data-url');
       console.log(url);
 
@@ -31,6 +151,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
           // Define a action do formulário para a URL de update correta
           form.action = `/manager/plates/${data.id}/update/`; // Vamos criar essa URL no passo 3
+
+          // console.log(form.action);
 
           // Preenche os campos de texto e número
           form.querySelector('#edit-name').value = data.name;
@@ -53,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
             option.selected = data.menus.includes(parseInt(option.value));
           });
           
+    
           const redirectInput = form.querySelector('#redirect-after-update');
           if (redirectInput) { // Verifica se o campo existe antes de tentar preencher
               redirectInput.value = nextPage;
@@ -65,21 +188,6 @@ document.addEventListener('DOMContentLoaded', function() {
           console.error("Houve um erro ao buscar os dados do prato:", error);
           alert("Não foi possível carregar os dados para edição.");
         });
-    });
-  });
-  const deleteDialog = document.getElementById('excluir-prato');
-  const deleteForm = document.getElementById('form-excluir-prato');
-
-  document.querySelectorAll('.delete-button').forEach(button => {
-    button.addEventListener('click', function() {
-      // 1. Pega o ID do prato do botão clicado
-      const plateId = this.getAttribute('plate-id');
-
-      // 2. Monta a URL de action para o formulário de exclusão
-      deleteForm.action = `/manager/plates/${plateId}/delete/`;
-
-      // 3. Abre o modal de confirmação
-      deleteDialog.showModal();
     });
   });
 
@@ -200,7 +308,16 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   console.log(getOptionTextWidth(valorAtual))
   copiarLargura()
+
 });
+
+
+
+
+
+
+  
+
 
 
   const addPratoExisten = document.getElementById("addpratoexistentbtn");

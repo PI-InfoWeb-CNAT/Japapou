@@ -28,7 +28,10 @@ urlpatterns = [
     path("plates/create/", views.create_plates_view, name="create_plates"),
     path("plates/<int:id>/update/", views.plate_update_view, name="plate_update"),
     path("plates/<int:id>/json", views.plate_get_json, name="plate_get_json"),
+    path("plates/remove_from_menu/", views.remove_plate_from_menu_view, name="remove_plate_from_menu"),
+    path("plates/add_single_to_menu/", views.add_single_plate_to_menu_view, name="add_single_plate_to_menu"),
     path("plates/<int:id>/delete/", views.plate_delete_view, name="plate_delete"),
+    path("plates/add_to_menu/", views.add_plates_to_menu_view, name="add_plates_to_menu"),
     
 
     # GERAIS

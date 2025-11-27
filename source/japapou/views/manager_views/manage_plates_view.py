@@ -131,7 +131,18 @@ def plate_update_view(request, id):
         print(request.resolver_match.url_name)
 
         if form.is_valid():
-            form.save()
+            new_plate_instance = form.save(commit=False)
+            new_plate_instance.save() # Garante que a instância tem um PK atualizada
+            
+            # Pega a lista de objetos Menu selecionados do formulário
+            selected_menus = form.cleaned_data.get("menus")
+            
+            new_plate_instance.menu_set.clear()
+
+            # Adiciona as novas associações (se houver)
+            if selected_menus:
+                for menu_obj in selected_menus:
+                    menu_obj.plates.add(new_plate_instance)
             messages.success(request, "Prato atualizado com sucesso.")
             return redirect(reverse(redirect_to_url_name))
             

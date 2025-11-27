@@ -71,8 +71,12 @@
     <h2><b>{{ selected.name }}</b></h2>
     <div class="cards">
       {% for plate in menu_plates %}
-        <div class="product-card" data-media="{{ plate.media|default:0}}" >
-          <button class="action-button delete-button" plate-id="{{ plate.id }}" aria-label="Deletar">
+        <div class="product-card" id="plate-card-{{ plate.id }}" data-media="{{ plate.media|default:0}}" >
+          <button class="action-button delete-button remove-from-menu-button" 
+                  data-plate-id="{{ plate.id }}" 
+                  data-menu-id="{{ selected.id }}"
+                  data-url="{% url 'remove_plate_from_menu' %}" 
+                  aria-label="Remover do Menu">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -124,10 +128,14 @@
     <div class="cards">
       {% for plate in other_plates %}
         <div class="product-card" data-media="{{ plate.media|default:0 }}">
-          <button class="action-button delete-button" aria-label="Deletar">
+          <button class="action-button delete-button add-to-menu-button" 
+                  data-plate-id="{{ plate.id }}" 
+                  data-menu-id="{{ selected.id }}"
+                  aria-label="Adicionar ao Menu">
+
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
           </button>
           <button class="action-button edit-button" plate-id="{{ plate.id }}" data-url="{% url 'plate_get_json' plate.id %}" data-next-page="manager_menu" aria-label="Editar">
@@ -213,13 +221,18 @@
 
   <dialog id="pratos-registrados">
     <h2>Pratos já Registrados no Sistema</h2>
-      <form action="{% url 'create_menu' %}" method="post">
+      <form action="{% url 'add_plates_to_menu' %}" method="post">
       {% csrf_token %}
+
+        {% if selected %}
+          <input type="hidden" name="menu_id" value="{{ selected.id }}" />
+        {% endif %}
+
         <div id="outros-pratos">
-          
+          {{ add_plates_form.plates_to_add }}
         </div>
+        <button name="btn-add-plates-to-menu" type="submit">+ Adicionar ao Menu</button>
     </form>
-    <button onclick="document.getElementById('pratos-registrados').close()">+ Adicionar ao Menu</button>
   </dialog>
 
   <dialog id="criar-prato">

@@ -23,7 +23,7 @@ class PlatesForms(forms.ModelForm):
         model = Plate
         # ATENÇÃO: 'menus' NÃO pode estar nos 'fields' da Meta class,
         # porque ele não é um campo direto da Model Plate.
-        fields = ["name", "price", "photo", "description"]  # Remova 'menus' daqui
+        fields = ["name", "price", "photo", "description"]
 
         # Personaliza os widgets para os campos específicos (opcional)
         widgets = {
@@ -43,8 +43,9 @@ class PlatesForms(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(PlatesForms, self).__init__(*args, **kwargs)
         self.fields['photo'].required = False
-        if self.instance and self.instance.pk:
-            self.fields['menus'].initial = self.instance.menu_set.all()
+        # if self.instance and self.instance.pk:
+        #     self.fields['menus'].initial = self.instance.menu_set.all()
+
 
 class PlateChoiceField(forms.ModelMultipleChoiceField):
     """
@@ -55,6 +56,23 @@ class PlateChoiceField(forms.ModelMultipleChoiceField):
     # O que ele retornar será usado como o label do checkbox.
     def label_from_instance(self, obj):
         return obj.name
+    
+class AddPlatesToMenuForm(forms.Form):
+
+    plates_to_add = PlateChoiceField( # Usamos o campo personalizado
+        queryset=Plate.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=True,
+        label="Pratos a Adicionar"
+    )
+
+    menu_id = forms.IntegerField(widget=forms.HiddenInput())
+
+    def __init__(self, *args, menu=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        if menu:
+            # Filtra o queryset para mostrar apenas os pratos que NÃO estão no menu atual
+            self.fields['plates_to_add'].queryset = Plate.objects.exclude(menu=menu).order_by('name')
 
 class MenuForms(forms.ModelForm):
 
