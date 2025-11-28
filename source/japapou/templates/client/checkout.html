@@ -18,74 +18,70 @@
     {% endif %}
 
     <div id="cards-pratos">
-
         <p>aqui sera exibido os cards dos pratos</p>
     </div>
 
-    <div style="display: flex; gap: 20px;">
-        <div style="flex: 1;">
-            <h3>Resumo do seu Carrinho</h3>
-            {% for item in cart_items %}
-                <p>
-                    {{ item.quantity }}x <strong>{{ item.plate.name }}</strong>
-                    (R$ {{ item.get_item_total|floatformat:2 }})
-                </p>
-            {% endfor %}
-            <hr>
-            <p><strong>Subtotal: R$ {{ subtotal|floatformat:2 }}</strong></p>
+    <div id="resumo-container">
+        <div id="titulo-resumo">
+            <span>Seu pedido em</span>
+            <h3>Japapou [rua]</h3>
         </div>
+        <div id="resumo-pedido">
+            <div id="container-resumo"> 
+                <div><p>Subtotal</p><p>R$ {{ subtotal }}</p></div>
+                <div><p>Entrega</p><p>R$ {{ taxa_entrega }}</p></div>
+                <div><h4>Total</h4><h4>R$ {{ total }}</h4></div>
+            </div>
+            <a href="{% url 'cart_view' %}"><i class="fa-solid fa-pencil"></i>Editar</a>
+        </div>
+    </div>
 
-        <div style="flex: 1;">
-            <h3>Escolha o Método</h3>
-            
+        <div id="container-tipo-pedido">
             <form method="POST" action="{% url 'checkout' %}">
                 {% csrf_token %}
-
-                <h4>Tipo de Pedido:</h4>
                 
-                <input type="radio" id="retirada" name="tipo_pedido" value="{{ TipoPedido.RETIRADA }}" required>
-                <label for="retirada">
-                    <strong>Retirada na Loja</strong> 
-                    (Total: R$ {{ subtotal|floatformat:2 }})
-                </label>
-                <br>
-                <br>
-                
-                <input type="radio" id="entrega" name="tipo_pedido" value="{{ TipoPedido.ENTREGA }}" required>
-                <label for="entrega">
-                    <strong>Entrega (Delivery)</strong>
-                    (Taxa: R$ {{ taxa_entrega|floatformat:2 }}) - 
-                    <strong>Total: R$ {{ total_com_entrega|floatformat:2 }}</strong>
-                </label>
+                <div class="radio-group">
+                    <input type="radio" id="entrega" name="tipo_pedido" value="{{ TipoPedido.ENTREGA }}" required>
+                    <label for="entrega">Entrega</label>
+                    <input type="radio" id="retirada" name="tipo_pedido" value="{{ TipoPedido.RETIRADA }}" required>
+                    <label for="retirada">Retirada</label>
+                </div>
 
-                <div id="bloco-enderecos" style="margin-left: 25px; margin-top: 10px; padding: 10px; border: 1px solid #eee;">
-                    
-                    <h5>Selecione o endereço de entrega:</h5>
+                <div id="bloco-enderecos">
+
+                    <div><img src="../../static/imgs/localization-icon.png"></img></div>
+
+                    <div>
+                        <h3>[Bairro], [Rua], [Numero]</h3>
+                        <p>complemento: [Complemento]</p>
+                    </div>
 
                     {% if enderecos %}
-                        {% for endereco in enderecos %}
-                            <input type="radio" 
-                                   id="endereco-{{ endereco.id }}" 
-                                   name="endereco_id" 
-                                   value="{{ endereco.id }}" 
-                                   required> <label for="endereco-{{ endereco.id }}">
-                                <strong>{{ endereco.apelido|default:"Endereço" }}:</strong> 
-                                {{ endereco.logradouro }}, {{ endereco.numero }} 
-                                ({{ endereco.bairro }})
-                            </label>
-                            <br>
-                        {% endfor %}
-
+                        <button type="button" id="btn-abrir-modal">
+                            Escolher
+                        </button>
+                        <input type="hidden" id="input-endereco-id" name="endereco_id" value="">
                     {% else %}
                         <p style="color: red;">
                             Você não possui endereços cadastrados para entrega.
                         </p>
                     {% endif %}
+
                     
-                    <a href="{% url 'add_endereco' %}" style="font-size: 0.9em; margin-top: 10px; display: inline-block;">
+                    {% comment %} <a href="{% url 'add_endereco' %}" style="font-size: 0.9em; margin-top: 10px; display: inline-block;">
                         + Adicionar novo endereço
-                    </a>
+                    </a> {% endcomment %}
                 </div>
+
+                <div id="tipo-entrega">
+                    <h3>[Data entrega], [estimativa]min</h3>
+                    <div>
+                        <h3>Padrão<h3>
+                        <p>Hoje, 35min</p>
+                        <strong>R$ 5,00</strong>
+                    </div>
+                </div>
+
                 <hr>
                 
                 <button type="submit" class="btn btn-lg btn-success">
@@ -96,8 +92,20 @@
     </div>
 </div>
 
-{% block scripts %}
-    <script src="{% static 'js/client/checkout.js' %}"></script>
+<dialog id="modal-enderecos">
+    {% for endereco in enderecos %}
+        <div class="endereco-item" data-id="{{ endereco.id }}" 
+             data-logradouro="{{ endereco.logradouro }}"
+             data-numero="{{ endereco.numero }}"
+             data-bairro="{{ endereco.bairro }}">
+            <strong>{{ endereco.apelido|default:"Endereço" }}:</strong> 
+            {{ endereco.logradouro }}, {{ endereco.numero }} ({{ endereco.bairro }})
+        </div>
+    {% endfor %}
+</dialog>
+
 {% endblock %}
 
+{% block scripts %}
+    <script src="{% static 'js/client/checkout.js' %}"></script>
 {% endblock %}

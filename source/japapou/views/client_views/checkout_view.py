@@ -113,7 +113,7 @@ def checkout_view(request):
             'cart_items': cart_items,
             'subtotal': subtotal,
             'taxa_entrega': TAXA_ENTREGA, 
-            'total_com_entrega': subtotal + TAXA_ENTREGA,
+            'total': subtotal + TAXA_ENTREGA,
             'TipoPedido': Order.TipoPedido,
             'enderecos': enderecos_do_usuario,
         }
