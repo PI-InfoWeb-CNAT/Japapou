@@ -18,7 +18,9 @@ def checkout_view(request):
           cria o Order e limpa o carrinho.
     """
     
-    
+    # metodos validos de pagamento para aumentar a segurança
+    METODOS_VALIDOS = [m[0] for m in Order.MetodoPagamento.choices]
+
     try:
         cart = request.user.cart 
         cart_items = cart.items.all() 
@@ -36,9 +38,16 @@ def checkout_view(request):
     subtotal = cart.get_cart_total()
 
     enderecos_do_usuario = request.user.enderecos.all()
-    
+    endereco_padrao = enderecos_do_usuario.first()
+    tipo_pedido_padrao = Order.TipoPedido.ENTREGA if endereco_padrao else Order.TipoPedido.RETIRADA
+
     if request.method == "POST":
         
+        metodo_pagamento = request.POST.get('metodo_pagamento')
+        
+        if not metodo_pagamento or metodo_pagamento not in METODOS_VALIDOS:
+            messages.error(request, "Por favor, escolha um método de pagamento válido.")
+            return redirect('checkout')
         
         tipo_pedido = request.POST.get('tipo_pedido') 
 
@@ -77,7 +86,8 @@ def checkout_view(request):
                 estimate=total_final,        
                 tipo_pedido=tipo_pedido,     
                 taxa_entrega=taxa,
-                endereco_entrega=endereco_escolhido, # atribui o endereço ao pedido, caso seja retirada vai ser None      
+                endereco_entrega=endereco_escolhido, # atribui o endereço ao pedido, caso seja retirada vai ser None    
+                metodo_pagamento=metodo_pagamento,  
             )
             
             
@@ -108,14 +118,19 @@ def checkout_view(request):
 
    
     else:
+        taxa_inicial = TAXA_ENTREGA if tipo_pedido_padrao == Order.TipoPedido.ENTREGA else Decimal("0.00")
+        total_inicial = subtotal + taxa_inicial
         
         contexto = {
             'cart_items': cart_items,
             'subtotal': subtotal,
             'taxa_entrega': TAXA_ENTREGA, 
-            'total': subtotal + TAXA_ENTREGA,
+            'total': total_inicial,
             'TipoPedido': Order.TipoPedido,
             'enderecos': enderecos_do_usuario,
+            'endereco_padrao': endereco_padrao,
+            'tipo_pedido_padrao': tipo_pedido_padrao,
+            'MetodoPagamento': Order.MetodoPagamento,
         }
         
         

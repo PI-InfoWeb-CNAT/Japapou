@@ -6,7 +6,12 @@
 }
 
 .container {
-    height: 100vh;
+    position: relative;
+    /*height: 100vh;*/
+    
+    div {
+        /*margin-bottom: 5%;*/
+    }
 }
 
 
@@ -17,6 +22,8 @@
     height: 30%;
     width: 70%;
     padding: 1% 0% 1% 0%;
+    margin: 0 auto;
+    margin-bottom: 5%;
 
     #titulo-resumo {
         background-color: var(--azul-mais-escuro);
@@ -43,15 +50,17 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            margin: 0;
 
             :nth-child(3) {
                 margin-top: 15px;
             }
 
             div {
-            display: flex;
-            justify-content: space-between;
-            width: 95%;
+                display: flex;
+                justify-content: space-between;
+                width: 95%;
+                margin: 0;
             }
 
         }
@@ -76,13 +85,14 @@
 /* CSS DA PARTE DO TIPO PEDIDO */
 #container-tipo-pedido {
     width: 100%;
-    height: 100%;
+    height: 70%;
     
     form {
         height: 100%;
         width: 100%;
 
         .radio-group {
+        margin-bottom: 2%;
         display: flex;
         justify-content: flex-start;
         gap: 100px;
@@ -91,10 +101,18 @@
                 cursor: pointer;
                 font-size: 25px;
                 border-bottom: 1px solid white;
+
             }
 
             input[type="radio"] {
                 display: none; 
+            }
+            
+            #label-retirada {
+                opacity: 1;
+            }
+            #label-entrega {
+                opacity: 1;
             }
         }
 
@@ -103,8 +121,10 @@
             align-items: center;
             justify-content: space-evenly;
             width: 60%;
-            height: 20%;
+            height: 150px;
             border: 2px solid white;
+            margin: 0 auto;
+            margin-bottom: 5%;
 
             button {
                 appearance: none;
@@ -121,23 +141,151 @@
         }
 
         #tipo-entrega {
+            height: 25%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 5%;
+            transition: all 0.5s ease;
+
             div {
                 width: 35%;
+                height: 100%;
                 border: 2px solid white;
                 border-radius: 8px;
+                padding: 10px 10px 10px 10px;
+                margin: 0;
+                
 
-                p {
-                    font-size: 15px;
+                div {
+                    border: none;
+                    text-align: left;
+                    padding: 0;
+                    height: auto;
+
+                    h3 {
+                        margin: 0;
+                    }
+                    p {
+                        text-align: -webkit-center;
+                    }
                 }
 
                 strong {
-                    width: 80%;
+                    width: 90%;
+                    height: 45px;
+                    display: block;
                     color: var(--azul-mais-escuro);
                     background-color: white;
+                    border-radius: 6px;
+                    margin: 0 auto;
+                    margin-top: 30px;
+                    align-content: center;
                 }
+                
+            }
+            
+            #express-opcao {
+                    opacity: 60%;
+
             }
         }
     }
     
 }
 /* CSS DA PARTE DO TIPO PEDIDO */
+
+/* CSS DA PARTE DO METODO PAGAMENTO */
+#container-metodo-pagamento{
+    transition: all 0.5s ease;
+
+    #radio-group-categoria {
+        margin-bottom: 2%;
+        display: flex;
+        gap: 50px;
+
+        input[type="radio"] {
+            display: none; 
+        }
+        label {
+            cursor: pointer;
+            font-size: 25px;
+            border-bottom: 1px solid white;
+            margin: 0;
+            padding-bottom: 5px;
+            
+        }
+    }
+    #mostrar-metodo-atual-online {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 60%;
+        height: 150px;
+        border: 2px solid white;
+        margin: 0 auto;
+        margin-bottom: 5%;
+
+        button {
+            appearance: none;
+            border: none;
+            border-radius: 6px;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--azul-mais-escuro);
+            background-color: white;
+            height: 23%;
+            padding: 0px 10px 0px 10px;
+        }
+    }
+
+    #mostrar-metodo-atual-local {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 60%;
+        height: 150px;
+        border: 2px solid white;
+        margin: 0 auto;
+        margin-bottom: 5%;
+
+        button {
+            appearance: none;
+            border: none;
+            border-radius: 6px;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--azul-mais-escuro);
+            background-color: white;
+            height: 23%;
+            padding: 0px 10px 0px 10px;
+        }
+    }
+
+}
+/* CSS DA PARTE DO METODO PAGAMENTO */
+
+
+/* MODAL DO METODO DE PAGAMENTO */
+#modal-tipo-pagamento {
+    position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+/* MODAL DO METODO DE PAGAMENTO */
+
+/* MODAL DE ENDEREÇOS */
+#modal-enderecos {
+    position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    height: 60%;
+    width: 30%;
+    background-color: var(--azul-mais-escuro);
+    border: 1px solid white;
+    border-radius: 8px;
+    color: white;
+}
+/* MODAL DE ENDEREÇOS */

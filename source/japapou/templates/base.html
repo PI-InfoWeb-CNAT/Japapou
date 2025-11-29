@@ -38,17 +38,17 @@
       {% csrf_token %}
       <div id="logo">
         {% if user.is_authenticated and user.tipo_usuario == "MANAGER" and user.foto_perfil %}
-          <a href="{% url 'manager_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a>
+          <a href="{% url 'manager_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" />{{request.user.username}}</a>
         {% elif user.is_authenticated and user.tipo_usuario == "CLIENT" and user.foto_perfil %}
-          <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a>
+          <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" />{{request.user.username}}</a>
         {% elif user.is_authenticated and user.tipo_usuario == "DELIVERY_MAN" and user.foto_perfil %}
-          <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a>
+          <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" />{{request.user.username}}</a>
         {% elif user.is_authenticated and user.tipo_usuario == "MANAGER" %}
-          <a href="{% url 'manager_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
+          <a href="{% url 'manager_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a>
         {% elif user.is_authenticated and user.tipo_usuario == "CLIENT" %}
-          <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
+          <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a>
         {% elif user.is_authenticated and user.tipo_usuario == "DELIVERY_MAN" %}
-          <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
+          <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a>
         {% else %}
           <a href="{% url 'login_register' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
         {% endif %}
