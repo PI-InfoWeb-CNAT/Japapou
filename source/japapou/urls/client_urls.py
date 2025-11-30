@@ -20,6 +20,6 @@ urlpatterns = [
     path('orders/', order_view.client_order_view, name='client_history'),
     path('checkout/', checkout_view, name='checkout'),
     path('checkout/adicionar-endereco/', add_endereco_view, name='add_endereco'),
-    path('pedido/sucesso/<int:order_id>/', order_success_view, name='order_success'),
+    path('order/sucesso/<int:order_id>/', order_success_view, name='order_success'),
 
 ]

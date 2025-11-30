@@ -28,18 +28,28 @@
         </div>
         <div id="resumo-pedido">
             <div id="container-resumo"> 
-                <div><p>Subtotal</p><p>R$ {{ subtotal }}</p></div>
-                <div><p>Entrega</p><p>R$ {{ taxa_entrega }}</p></div>
-                <div><h4>Total</h4><h4>R$ {{ total }}</h4></div>
+                <div><p>Subtotal</p><p id="resumo-subtotal" data-valor="{{ subtotal|stringformat:'.2f' }}">R$ {{ subtotal }}</p></div>
+                <div><p>Entrega</p><p id="resumo-taxa" data-valor="{{ taxa_entrega|stringformat:'.2f' }}">R$ {{ taxa_entrega }}</p></div>
+                <div><h4>Total</h4><h4 id="resumo-total">R$ {{ total }}</h4></div>
             </div>
             <a href="{% url 'cart_view' %}"><i class="fa-solid fa-pencil"></i>Editar</a>
         </div>
     </div>
 
     <div id="container-tipo-pedido">
-        <form method="POST" action="{% url 'checkout' %}">
+        <form method="POST" action="{% url 'checkout' %}" id="form-checkout">
             {% csrf_token %}
             
+            {% if pix_selecionado %}
+                <input type="hidden" name="pix_confirmado" value="True">
+                <input type="hidden" name="endereco_id" value="{{ endereco_selecionado_id }}">
+                <input type="hidden" name="tipo_pedido" value="{{ tipo_pedido_selecionado }}">
+
+                {% comment %} <div class="alert alert-success">
+                    QR Code gerado com sucesso! Realize o pagamento e confirme abaixo.
+                </div> {% endcomment %}
+            {% endif %}
+
             <div class="radio-group">
                 {% comment %} <input type="radio" id="entrega" name="tipo_pedido" value="{{ TipoPedido.ENTREGA }}" required>
                 <label for="entrega">Entrega</label>
@@ -123,32 +133,62 @@
 
                 <div id="container-metodo-local">
                     <div id="mostrar-metodo-atual-local">
-
-                        <input type="radio" id="pagamento-dinheiro" name="metodo_pagamento" value="{{ TipoPedido.DINHEIRO }}" required>
+                        <input type="checkbox" id="pagamento-dinheiro" name="metodo_pagamento" value="{{ MetodoPagamento.DINHEIRO }}">
                         <label for="pagamento-dinheiro">Pagamento no Dinheiro?</label>
                     </div>
+
+                    <div id="container-dinheiro">
+                        <h3>Pagamento em Dinheiro</h3>
+                        <label for="input-troco">Precisa de troco para quanto?</label>
+                        <input type="number" id="input-troco" name="troco_para" min="0" step="0.01" placeholder="Ex: 50.00">
+                    </div>
                 </div>
-                
             </div>
+              
+            <div id="container-pix" style="{% if not pix_selecionado %}display: none;{% endif %} text-align: center;">
+                {% if pix_selecionado %}
+                    <img id="img-qr-code" src="data:image/png;base64,{{ qr_code_base64 }}" alt="QR Code PIX" style="width: 200px; height: 200px; margin-bottom: 10px;">
+
+                    <p style="font-weight: bold;">Copia e cola:</p>
+
+                    <textarea id="codigo-pix-copia" readonly style="width: 100%; height: 60px; font-size: 0.8em; margin-bottom: 5px;">{{ codigo_pix }}</textarea>
+
+                    <button type="button" id="btn-copiar-pix-final" style="margin-bottom: 15px; cursor: pointer;">
+                        Copiar Código
+                    </button>
+                {% else %}
+                    <img src="../../static/imgs/icon-pix.png" style="width: 50px;">
+                    <p>Ao confirmar, o QR Code será gerado na próxima tela.</p>
+                {% endif %}
+            </div>
+
+            <div id="container-cartao">
+                <h3>Pagamento em Cartão</h3>
+            </div>
+
             <hr>
-            
-            <button type="submit" class="btn btn-lg btn-success">
-                Confirmar e Pagar (Simulado)
+
+            <button type="submit" class="btn btn-lg btn-success" id="btn-submit-checkout">
+                    CONFIRMAR E PAGAR (SIMULADO)
             </button>
+            
+
+            <dialog id="modal-tipo-pagamento">
+                <h3>Selecione o Método de Pagamento</h3>
+
+                <input type="radio" id="pagamento-cartao" name="metodo_pagamento" value="{{ MetodoPagamento.CARTAO }}" required>
+                <label for="pagamento-cartao">Cartão</label>
+
+                <input type="radio" id="pagamento-pix" name="metodo_pagamento" value="{{ MetodoPagamento.PIX }}" required checked>
+                <label for="pagamento-pix">Pix</label> 
+            </dialog>
+
         </form>
     </div>
 </div>
 
 
-<dialog id="modal-tipo-pagamento">
-    <h3>Selecione o Método de Pagamento</h3>
 
-    <input type="radio" id="pagamento-cartao" name="metodo_pagamento" value="{{ TipoPedido.CARTAO }}" required>
-    <label for="pagamento-cartao">Cartão</label>
-
-    <input type="radio" id="pagamento-pix" name="metodo_pagamento" value="{{ TipoPedido.PIX }}" required>
-    <label for="pagamento-pix">Pix</label> 
-</dialog>
 
 
 <dialog id="modal-enderecos">

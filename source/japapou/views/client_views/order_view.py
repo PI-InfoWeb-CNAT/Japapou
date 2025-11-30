@@ -1,6 +1,7 @@
 from django.shortcuts import render # type: ignore
 from django.contrib.auth.decorators import login_required, permission_required # type: ignore
 from japapou.models import Order # Importar modelos necessários
+from django.shortcuts import render, get_object_or_404
 
 
 @login_required
@@ -17,7 +18,10 @@ def client_order_view(request):
     
     return render(request, template_name="client/orders_history.html", context={'pedidos': pedidos}, status=200)
 
-
+@login_required
+def order_success_view(request, order_id):
+    pedido = get_object_or_404(Order, id=order_id, usuario=request.user)
+    return render(request, 'client/order_success.html', {'pedido': pedido})
 
 # @login_required
 # @transaction.atomic 
