@@ -9,8 +9,7 @@ from japapou.forms import EnderecoForm
 from japapou.utils import gerar_pix_simulado
 from django.http import JsonResponse
 import stripe
-from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
+
 
 TAXA_ENTREGA = Decimal("5.00")
 
@@ -58,6 +57,9 @@ def checkout_view(request):
     if not cart_items.exists():
         messages.error(request, "Seu carrinho está vazio.")
         return redirect('cart_view') 
+
+    for item in cart_items:
+        print(item.plate.price)
 
     subtotal = cart.get_cart_total()
 
