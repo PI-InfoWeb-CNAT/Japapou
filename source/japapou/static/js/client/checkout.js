@@ -252,9 +252,6 @@ function verificarTipoPagamento() {
         
     }
 
-    inputCategoriaLocal.addEventListener('change', console.log("input categoria local", inputCategoriaLocal.checked));
-    inputCategoriaOnline.addEventListener('change', console.log("input categoria online", inputCategoriaOnline.checked));
-
     modalMetodoPagamento.close();
 }
 
@@ -361,3 +358,70 @@ async function atualizarPixViaAjax() {
         console.error("Erro na requisição AJAX:", error);
     }
 }
+
+
+
+// 1. Inicializa o Stripe com a tua CHAVE PÚBLICA
+const stripe = Stripe(STRIPE_PUBLIC_KEY);
+const elements = stripe.elements();
+
+// 2. Cria e monta o elemento do cartão
+const card = elements.create('card', {
+    style: {
+        base: {
+            color: '#32325d',
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: 'antialiased',
+            fontSize: '16px',
+            '::placeholder': {
+                color: '#aab7c4'
+            }
+        },
+        invalid: {
+            color: '#fa755a',
+            iconColor: '#fa755a'
+        }
+    }
+});
+// Só monta se o elemento existir na página
+if (document.getElementById('card-element')) {
+    card.mount('#card-element');
+}
+
+// 3. Intercepta o envio do formulário
+const formCheckout = document.getElementById('form-checkout');
+
+formCheckout.addEventListener('submit', async (event) => {
+    // Verifica se o método selecionado é Cartão
+    const isCartao = document.getElementById('categoria-online').checked && 
+                     document.getElementById('pagamento-cartao').checked;
+
+    if (isCartao) {
+        event.preventDefault(); // Impede o envio imediato
+
+        console.log("Processando Stripe...");
+
+        // Cria o Método de Pagamento no Stripe
+        const result = await stripe.createPaymentMethod({
+            type: 'card',
+            card: card,
+            billing_details: {
+                // Podes adicionar dados do utilizador aqui se quiseres
+                // name: 'Nome do Cliente',
+            },
+        });
+
+        if (result.error) {
+            // Mostra erro ao utilizador
+            const errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+        } else {
+            // Sucesso! Temos o ID (ex: pm_12345...)
+            console.log("PaymentMethod ID:", result.paymentMethod.id);
+            
+            // Coloca o ID no input hidden e envia o formulário
+            document.getElementById('stripePaymentMethodId').value = result.paymentMethod.id;
+            formCheckout.submit();
+        }
+    }
+});

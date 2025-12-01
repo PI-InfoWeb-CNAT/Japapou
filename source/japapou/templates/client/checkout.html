@@ -3,6 +3,7 @@
 
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/client/checkout.css' %}">
+    <script src="https://js.stripe.com/v3/"></script>
 {% endblock extra_head %}
 
 {% block content %}
@@ -163,7 +164,15 @@
             </div>
 
             <div id="container-cartao">
-                <h3>Pagamento em Cartão</h3>
+                <h3>Dados do Cartão (Stripe)</h3>
+                <div class="cartao-wrapper">
+                    <div id="card-element" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: white;">
+                        </div>
+                    
+                    <div id="card-errors" role="alert" style="color: red; margin-top: 10px; font-size: 0.9em;"></div>
+                    
+                    <input type="hidden" id="stripePaymentMethodId" name="stripePaymentMethodId">
+                </div>
             </div>
 
             <hr>
@@ -208,5 +217,10 @@
 {% endblock %}
 
 {% block scripts %}
+
+    <script>
+        const STRIPE_PUBLIC_KEY = "{{ STRIPE_PUBLIC_KEY }}";
+    </script>
+
     <script src="{% static 'js/client/checkout.js' %}"></script>
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404 # type: ignore
+from django.conf import settings
 from django.contrib.auth.decorators import login_required # type: ignore
 from django.db import transaction # type: ignore
 from django.contrib import messages # type: ignore
@@ -7,7 +8,9 @@ from japapou.models import Cart, Order, OrderItem, Endereco
 from japapou.forms import EnderecoForm
 from japapou.utils import gerar_pix_simulado
 from django.http import JsonResponse
-
+import stripe
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
 
 TAXA_ENTREGA = Decimal("5.00")
 
@@ -41,7 +44,8 @@ def _calcular_total_e_endereco(request, subtotal, enderecos_do_usuario):
 @login_required
 @transaction.atomic
 def checkout_view(request):
-    
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+
     METODOS_VALIDOS = [m[0] for m in Order.MetodoPagamento.choices]
 
     try:
@@ -63,6 +67,8 @@ def checkout_view(request):
 
     # Configuração de contexto inicial para o GET ou falha
     contexto_base = {
+        'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY,
+
         'cart_items': cart_items,
         'subtotal': subtotal,
         'taxa_entrega': TAXA_ENTREGA, 
@@ -160,6 +166,11 @@ def checkout_view(request):
             try:
                 # Converte para Decimal para salvar no banco
                 val_troco = Decimal(troco_para.replace(',', '.'))
+
+                if val_troco < total_final:
+                    messages.error(request, f"O valor para troco (R$ {val_troco}) não pode ser menor que o total do pedido (R$ {total_final}).")
+                    return redirect('checkout')
+                
             except:
                 val_troco = None
 
