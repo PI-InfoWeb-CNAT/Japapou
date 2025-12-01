@@ -86,10 +86,10 @@
  </div>
 
  <div id="confirm-delivery-container" data-order-id="{{ order.id }}" data-csrf="{{ csrf_token }}">
-  {% if order.delivery_date %}
+  {% if order.data_entrega%}
     <div class="button">
       <div id="confirm-delivery-btn" class="confirmed">
-        <h4>Entrega registrada ({{ order.delivery_date|date:"d/m/Y H:i" }})</h4>
+        <h4>Entrega registrada ({{ order.data_entrega|date:"d/m/Y H:i" }})</h4>
       </div>
     </div>
   {% else %}
