@@ -18,10 +18,8 @@ Visualizar Pedidos
 
 <div class="pedido-conteudo">
 
-{# Define a contagem total de itens #}
 {% with item_count=pedido.itens.count|default:0 %}
 
- {# Lógica para determinar o valor da classe (1, 2, 3, ou 4) #}
  {% if item_count >= 4 %}
   {% with item_count_class='4' %}
   {% endwith %}
@@ -33,10 +31,8 @@ Visualizar Pedidos
   {% endwith %}
  {% endif %}
 
- {# Reutiliza a variável item_count_class no escopo global do pedido para a div #}
  {% with class_value=item_count_class %}
   
-  {# Adiciona a classe dinâmica baseada na contagem: pedido-imagens--1, pedido-imagens--2, etc. #}
   <div class="pedido-imagens pedido-imagens--{{ class_value }}">
  {% for item in pedido.itens.all|slice:":4" %}
  <img src="{{ item.prato.photo.url }}" alt="{{ item.prato.name }}" />
@@ -59,7 +55,6 @@ Visualizar Pedidos
 {% for item in pedido.itens.all %}
 {{ item.amount }}x {{ item.prato.name }} - R$ {{ item.prato.price|floatformat:2 }}<br />
 {% endfor %}
-{# TOTAL #}
 <strong>Total:</strong> R$ {{ pedido.total|floatformat:2 }}
 </p>
 </div>
@@ -92,22 +87,16 @@ precisa ser atribuido entregador a este pedido
 </div>
 </div>
  <br>
-{# --- ALTERAÇÃO AQUI: Botão de Ação Condicional --- #}
 
 {% if pedido.tipo_pedido == 'ENTREGA' %}
     <a href="{% url 'assign_delivery' order_id=pedido.id %}" class="btn-toggle">
         Atribuir Entregador
     </a>
 {% else %}
-    {# Assume que 'RETIRADA' é o outro tipo de pedido. #}
     <a href="{% url 'assign_pickup' order_id=pedido.id %}" class="btn-toggle">
         Confirmar Retirada
     </a>
 {% endif %}
-
-{# O bloco de detalhes deve ser ativado por outro elemento se o botão for para navegação. #}
-{# Se você quer que o botão de atribuição TAMBÉM mostre os detalhes, #}
-{# você pode usar o JavaScript abaixo, mas a navegação será prioritária. #}
 
 <div class="detalhes">
 <p>
@@ -135,9 +124,6 @@ Nenhum pedido encontrado.
 {% block scripts %}
 <script src="{% static 'js/manager/manage_orders.js' %}"></script>
 <script>
-// A função toggleDetalhes não será chamada se o botão for um link <a>.
-// Se você ainda deseja que os detalhes sejam exibidos, será necessário um elemento separado.
-// Caso contrário, esta função pode ser removida se não houver outro elemento chamando-a.
 function toggleDetalhes(button) {
 const detalhesDiv = button.nextElementSibling;
 if (detalhesDiv.style.display === "block") {
