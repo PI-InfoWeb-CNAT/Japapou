@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/client/receipt.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -8,74 +7,91 @@
 
 {% block content %}
 
-<h2>Compra finalizada com sucesso!</h2>
+<h2><b>Compra finalizada com sucesso!</b></h2>
 <i class="fa-solid fa-circle-check"></i>
 
 <h2 id="titulo-recibo">Meu Recibo</h2>
 <section class="detalhes-pedido">
     <h3><b>Detalhes do Pedido</b></h3>
     <div class="linha">
-        <p><b>Número do Pedido:</b></p>
-        <p>#[id]</p>
+        <p class="esquerda"><b>Número do Pedido:</b></p>
+        <p class="direita">#{{ detalhes_pedido.id }}</p> 
     </div>
     <div class="linha">
-        <p><b>Cliente:</b></p>
-        <p>[nome]]</p>
+        <p class="esquerda"><b>Cliente:</b></p>
+        <p class="direita">{{ detalhes_pedido.nome_cliente }}</p>
     </div>
     <div class="linha">
-        <p><b>Data do Pedido:</b></p>
-        <p>[data de criacao]]</p>
+        <p class="esquerda"><b>Data do Pedido:</b></p>
+        <p class="direita">{{ detalhes_pedido.data_criacao }}</p>
     </div>
     <div class="linha">
-        <p><b>Pedido para:</b></p>
-        <p>retirada na loja</p>
+        <p class="esquerda"><b>Pedido para:</b></p>
+        <p class="direita">{{ detalhes_pedido.tipo_pedido }}</p>
     </div>
 </section>
 
 <section class="preco-pedido">
     <table>
         <thead>
-            <tr colspam="2">Produto</tr>
-            <tr>Subtotal</tr>
+            <tr>
+                <th colspan="2" class="esquerda">Produto</th>
+                <th class="direita">Subtotal</th>
+            </tr>
         </thead>
         <tbody>
-            <tr>[produto]</tr>
-            <tr>[quantidade]x[preco]</tr>
-            <tr>[sutotal do produto]</tr>
+            {% for item in itens_pedido %}
+            <tr>
+                <td class="esquerda">{{ item.produto }}</td> 
+                <td class="centro">({{ item.quantidade }}x R$ {{ item.preco_unitario }})</td> 
+                <td class="direita">R$ {{ item.subtotal }}</td> 
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">Nenhum item encontrado para este pedido.</td>
+            </tr>
+            {% endfor %}
         </tbody>
         <tfoot>
-            <tr colspam="2">Total</tr>
-            <tr>[preco final]</tr>
+            <tr>
+                <td colspan="2" class="esquerda">Total</td>
+                <td class="direita">R$ {{ total_final }}</td>
+            </tr>
         </tfoot>
     </table>
 </section>
 
+{% if detalhes_entrega.eh_entrega %}
 <section class="detalhes-pedido">
     <h3><b>Detalhes da Entrega</b></h3>
     <div class="linha">
-        <p><b>Entregador:</b></p>
-        <p>[nome entregador]]</p>
+        <p class="esquerda"><b>Entregador:</b></p>
+        <p class="direita">{{ detalhes_entrega.nome_entregador }}</p>
     </div>
     <div class="linha">
-        <p><b>Automóvel:</b></p>
-        <p>[modelo]</p>
+        <p class="esquerda"><b>Automóvel:</b></p>
+        <p class="direita">{{ detalhes_entrega.automovel }}</p>
     </div>
     <div class="linha">
-        <p><b>Cor:</b></p>
-        <p>[data de criacao]</p>
+        <p class="esquerda"><b>Cor:</b></p>
+        <p class="direita">{{ detalhes_entrega.cor }}</p>
     </div>
     <div class="linha">
-        <p><b>Placa:</b></p>
-        <p>[placa]</p>
+        <p class="esquerda"><b>Placa:</b></p>
+        <p class="direita">{{ detalhes_entrega.placa }}</p>
     </div>
     <div class="linha">
-        <p><b>Avaliação:</b></p>
-        <p>[média da avaliacao]</p>
+        <p class="esquerda"><b>Avaliação:</b></p>
+        <p class="direita">{{ detalhes_entrega.avaliacao_media }}</p>
     </div>
 </section>
+{% else %}
+{% endif %}
 
-<h3>Agradecimento Japapou</h3>
-<p>Obrigado por escolher o Japapou! Esperamos vê-lo novamente em breve para mais sabores inesquecíveis.</p>
-<img src="{% static 'imgs/Agradecimento.png' %}" alt="">
+<div class="Agradecimento">
+    <h3>Agradecimento Japapou</h3>
+    <p>Obrigado por escolher o Japapou! Esperamos vê-lo novamente em breve para mais sabores inesquecíveis.</p>
+    <img src="{% static 'imgs/Agradecimento.png' %}" alt="">
+</div>
 
 {% endblock %}

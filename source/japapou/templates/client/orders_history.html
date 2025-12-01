@@ -106,7 +106,7 @@
                     <div class="checkout-btn-container histórico">
                         <form action="" method="POST">
                             {% csrf_token %}
-                            <a href="{% url 'client_receipt' %}">
+                            <a href="{% url 'client_receipt' order_id=pedido.id %}">
                                 <button type="submit" class="btn-checkout">
                                     Avaliações e Recibo
                                 </button>
