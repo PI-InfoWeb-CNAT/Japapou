@@ -206,6 +206,7 @@ def checkout_view(request):
             for item in cart_items:
                 items_para_criar.append(
                     OrderItem(
+                        preco_prato=item.plate.price, # preco do prato no momento da compra
                         order=new_order,
                         prato=item.plate,
                         amount=item.quantity,

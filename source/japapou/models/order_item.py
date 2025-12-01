@@ -16,6 +16,7 @@ class OrderItem(models.Model):
         caso o preço do prato mude depois da compra
     '''
     
+    preco_prato = models.DecimalField(max_digits=8, decimal_places=2, default=0.00) # Preço do prato no momento da compra
     prato = models.ForeignKey(Plate, on_delete=models.CASCADE, default=1, related_name='order_items_prato')
     amount = models.IntegerField(default=1)
     comment = models.TextField(null=True, blank=True) # Permitir nulo/branco
@@ -29,7 +30,8 @@ class OrderItem(models.Model):
 
 
     def get_item_total(self):
-        return self.prato.price * self.amount
+        return self.preco_prato * self.amount
+    
     def __str__(self):
         prato_nome = getattr(self.prato, 'name', 'Prato Desconhecido') 
         return f"{self.amount}x {prato_nome} (Pedido: {self.order.id})"

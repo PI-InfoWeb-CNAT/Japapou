@@ -14,7 +14,11 @@ def client_order_view(request):
         return render(request, "403.html", status=403)
 
     # Lógica para buscar os pedidos do cliente
-    pedidos = Order.objects.filter(usuario=request.user).order_by('-created_at').prefetch_related('itens__prato')
+    pedidos = Order.objects.filter(
+        usuario=request.user
+    ).order_by('-created_at').prefetch_related('itens__prato')
+
+    # print("Pedidos do cliente:", pedidos)
     
     return render(request, template_name="client/orders_history.html", context={'pedidos': pedidos}, status=200)
 
