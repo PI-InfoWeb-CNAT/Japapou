@@ -1,1 +1,81 @@
-<h1>Recibo Cliente</h1>
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/client/receipt.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+
+<h2>Compra finalizada com sucesso!</h2>
+<i class="fa-solid fa-circle-check"></i>
+
+<h2 id="titulo-recibo">Meu Recibo</h2>
+<section class="detalhes-pedido">
+    <h3><b>Detalhes do Pedido</b></h3>
+    <div class="linha">
+        <p><b>Número do Pedido:</b></p>
+        <p>#[id]</p>
+    </div>
+    <div class="linha">
+        <p><b>Cliente:</b></p>
+        <p>[nome]]</p>
+    </div>
+    <div class="linha">
+        <p><b>Data do Pedido:</b></p>
+        <p>[data de criacao]]</p>
+    </div>
+    <div class="linha">
+        <p><b>Pedido para:</b></p>
+        <p>retirada na loja</p>
+    </div>
+</section>
+
+<section class="preco-pedido">
+    <table>
+        <thead>
+            <tr colspam="2">Produto</tr>
+            <tr>Subtotal</tr>
+        </thead>
+        <tbody>
+            <tr>[produto]</tr>
+            <tr>[quantidade]x[preco]</tr>
+            <tr>[sutotal do produto]</tr>
+        </tbody>
+        <tfoot>
+            <tr colspam="2">Total</tr>
+            <tr>[preco final]</tr>
+        </tfoot>
+    </table>
+</section>
+
+<section class="detalhes-pedido">
+    <h3><b>Detalhes da Entrega</b></h3>
+    <div class="linha">
+        <p><b>Entregador:</b></p>
+        <p>[nome entregador]]</p>
+    </div>
+    <div class="linha">
+        <p><b>Automóvel:</b></p>
+        <p>[modelo]</p>
+    </div>
+    <div class="linha">
+        <p><b>Cor:</b></p>
+        <p>[data de criacao]</p>
+    </div>
+    <div class="linha">
+        <p><b>Placa:</b></p>
+        <p>[placa]</p>
+    </div>
+    <div class="linha">
+        <p><b>Avaliação:</b></p>
+        <p>[média da avaliacao]</p>
+    </div>
+</section>
+
+<h3>Agradecimento Japapou</h3>
+<p>Obrigado por escolher o Japapou! Esperamos vê-lo novamente em breve para mais sabores inesquecíveis.</p>
+<img src="{% static 'imgs/Agradecimento.png' %}" alt="">
+
+{% endblock %}

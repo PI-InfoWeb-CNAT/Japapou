@@ -1,0 +1,21 @@
+.linha{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+section{
+    border: 1px solid white;
+    padding: 1em;
+    width: 100%;
+    text-align: left;
+    margin: 1em;
+}
+i{
+    font-size: 150px;
+}
+h2{
+    text-align: left;
+}
+#titulo-recibo{
+    width: 100%;
+}
