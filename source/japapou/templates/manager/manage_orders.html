@@ -2,16 +2,18 @@
 {% load static %}
 
 {% block title %}
-Visualizar Pedidos
+Visualizar Pedidos Pendentes
 {% endblock %}
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/manager/manage_orders.css' %}" />
 {% endblock %}
 
 {% block content %}
-<h1>Pedidos</h1>
+<h1>Pedidos Pendentes</h1>
 
 {% for pedido in pedidos %}
+{# FILTRAGEM: Exibe apenas se nenhuma das datas estiver preenchida #}
+{% if not pedido.data_entrega and not pedido.data_saida and not pedido.data_retirada %}
 <div class="pedido-box">
 
 <div class="pedido-header">Pedido #{{ pedido.id }} - {{ pedido.get_tipo_pedido_display }}</div>
@@ -20,26 +22,26 @@ Visualizar Pedidos
 
 {% with item_count=pedido.itens.count|default:0 %}
 
- {% if item_count >= 4 %}
-  {% with item_count_class='4' %}
-  {% endwith %}
- {% elif item_count > 0 %}
-  {% with item_count_class=item_count %}
-  {% endwith %}
- {% else %}
-  {% with item_count_class='1' %}
-  {% endwith %}
- {% endif %}
-
- {% with class_value=item_count_class %}
-  
-  <div class="pedido-imagens pedido-imagens--{{ class_value }}">
- {% for item in pedido.itens.all|slice:":4" %}
- <img src="{{ item.prato.photo.url }}" alt="{{ item.prato.name }}" />
- {% endfor %}
- </div>
-
+{% if item_count >= 4 %}
+ {% with item_count_class='4' %}
  {% endwith %}
+{% elif item_count > 0 %}
+ {% with item_count_class=item_count %}
+ {% endwith %}
+{% else %}
+ {% with item_count_class='1' %}
+ {% endwith %}
+{% endif %}
+
+{% with class_value=item_count_class %}
+ 
+ <div class="pedido-imagens pedido-imagens--{{ class_value }}">
+{% for item in pedido.itens.all|slice:":4" %}
+<img src="{{ item.prato.photo.url }}" alt="{{ item.prato.name }}" />
+{% endfor %}
+</div>
+
+{% endwith %}
 
 {% endwith %}
 
@@ -86,16 +88,20 @@ precisa ser atribuido entregador a este pedido
 
 </div>
 </div>
- <br>
+<br>
 
-{% if pedido.tipo_pedido == 'ENTREGA' %}
+{% if pedido.tipo_pedido == 'ENTREGA' and not pedido.entregador %}
+  <a href="{% url 'assign_delivery' order_id=pedido.id %}" class="btn-toggle">
+    Atribuir Entregador
+  </a>
+{% elif pedido.tipo_pedido == 'ENTREGA'and pedido.entregador and not pedido.data_saida %}
     <a href="{% url 'assign_delivery' order_id=pedido.id %}" class="btn-toggle">
-        Atribuir Entregador
+        Confirmar Saída
     </a>
 {% else %}
-    <a href="{% url 'assign_pickup' order_id=pedido.id %}" class="btn-toggle">
-        Confirmar Retirada
-    </a>
+  <a href="{% url 'assign_pickup' order_id=pedido.id %}" class="btn-toggle">
+    Confirmar Retirada
+  </a>
 {% endif %}
 
 <div class="detalhes">
@@ -110,6 +116,7 @@ precisa ser atribuido entregador a este pedido
 </p>
 </div>
 </div>
+{% endif %} {# FIM DA FILTRAGEM #}
 {% empty %}
 <div class="alert alert-info" role="alert">
 Nenhum pedido encontrado.
