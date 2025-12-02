@@ -1,6 +1,7 @@
-from django.urls import path  # type: ignore
-from japapou.views.client_views import *  # type: ignore
+from django.urls import path 
+from japapou.views.client_views import *  
 from japapou.views.client_views.cart_view import add_to_cart_view, remove_from_cart_view, update_cart_item_view  # type: ignore
+from japapou.views.client_views.receipt_view import submit_courier_review
 
 urlpatterns = [
     path("menu/", client_menu_view, name="client_menu"),
@@ -12,6 +13,11 @@ urlpatterns = [
     path("details_plate/<int:plate_id>/", details_plate_view, name="details_plate"),
     path("details_plate/<int:plate_id>/review/", rating_view, name="rating"),
     path("receipt/<int:order_id>", client_receipt_view, name="client_receipt"),
+    
+    # Rota API/AJAX para submeter a avaliação do entregador (CourierReview)
+    # Deve ser o mesmo URL usado na função fetch do JavaScript: '/api/review/courier/'
+    path('api/review/courier/', submit_courier_review, name='submit_courier_review'), # <--- NOVO
+    
     path('cart/', cart_view, name='cart_view'),
     path('cart/add/', add_to_cart_view, name='add_to_cart'),
     path('cart/remove/', remove_from_cart_view, name='remove_from_cart'),
