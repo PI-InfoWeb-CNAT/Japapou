@@ -228,3 +228,26 @@ button.btn-submit.btn-plate-rate{
 p.avaliacao-incentivo{
     margin-bottom: 2em !important;
 }
+div.linha.item-prato-multi{
+    display: flex;
+    width: 100%;
+}
+.linha.item-prato-multi > p.esquerda{
+    width: 50%;
+    text-align: left;
+}
+.linha.item-prato-multi{
+    margin-top: 1em;
+}
+a.btn-submit.btn-plate-rate-list{
+    background-color: var(--laranja-mais-claro) !important;
+    color: white !important;
+    text-decoration: none !important;
+    padding: 0.3em !important;
+    padding-inline: 15% !important;
+    border-radius: 50px !important;
+}
+a.btn-submit.btn-plate-rate-list:hover{
+    background-color: var(--laranja-mais-escuro) !important;
+    color: white !important;
+}

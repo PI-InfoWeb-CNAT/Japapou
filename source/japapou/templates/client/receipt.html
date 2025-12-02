@@ -178,10 +178,10 @@
                     {% for item in itens_pedido %}
                         {% if item.prato_id %}
                             <div class="linha item-prato-multi" style="align-items: center; margin-bottom: 15px;">
-                                <p class="esquerda" style="width: 60%; text-align: left;">
+                                <p class="esquerda" style=" text-align: left;">
                                     {{ item.produto }}
                                 </p>
-                                <p>
+                                <p class="direita">
                                     <a href="{% url 'rating' plate_id=item.prato_id %}" class="btn-submit btn-plate-rate-list">
                                         Avaliar Prato
                                     </a>
