@@ -8,10 +8,6 @@
 .container {
     position: relative;
     /*height: 100vh;*/
-    
-    div {
-        /*margin-bottom: 5%;*/
-    }
 }
 
 
@@ -290,15 +286,49 @@
 }
 /* MODAL DE ENDEREÇOS */
 
-#cards-pratos {
-    margin-bottom: 5%;
-    display: flex;
-}
 
-    .button {
-    	height: 3em;
-    	display: flex;
-    	justify-content: center;
+
+#container-cards {
+	/*width: 10em;*/
+	/*height: 20em;*/
+    
+    .coverflow-container {
+	    position: relative;
+	    width: 90%;
+	    max-width: 700px;
+	    perspective: 1200px;
+    }
+
+    .coverflow {
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    transform-style: preserve-3d;
+    }
+
+    .slide {
+	   /* position: absolute;*/
+	    transition: transform 0.5s ease, z-index 0.5s ease;
+    }
+
+    .slide img {
+	    width: 200px;
+	    height: 300px;
+	    border-radius: 10px;
+	    object-fit: cover;
+	    pointer-events: none;
+    }
+
+    button {
+	    position: absolute;
+	    top: 50%;
+	    transform: translateY(-50%);
+	    font-size: 2rem;
+	    background: none;
+	    border: none;
+	    color: white;
+	    cursor: pointer;
+	    z-index: 10;
     }
 
     .div-principal {
@@ -313,8 +343,7 @@
     	padding: 1em;
     }
 
-    .div-principal h3,
-    .div-principal p {
+    .div-principal h3, .div-principal p {
     	text-align: center;
     }
 
@@ -337,19 +366,19 @@
     }
 
     div .img-secundaria {
-    	width: 72px;
-    	height: 72px;
-    	position: absolute;
-    	top: -4vh;
-    	left: 20vw;
-    	font-size: 7em;
+	    width: 72px;
+	    height: 72px;
+	    position: absolute;
+	    top: -4vh;
+	    left: 20vw;
+	    font-size: 7em;
     }
 
     div .img-secundaria:hover {
-    	color: var(--vermelho);
+	    color: var(--vermelho);
     }
 
-    .detalhes {
+        .detalhes {
     	display: flex;
     	justify-content: space-evenly;
     	align-items: center;
@@ -413,8 +442,7 @@
     	padding: 0.3em;
     }
 
-    .especificacao h5,
-    .especificacao p {
+    .especificacao h5, .especificacao p {
     	text-align: center;
     }
 
@@ -439,10 +467,5 @@
     	color: var(--vermelho);
     }
 
-    .slide img {
-    	width: 200px;
-    	height: 300px;
-    	border-radius: 10px;
-    	object-fit: cover;
-    	pointer-events: none;
-    }
+
+}

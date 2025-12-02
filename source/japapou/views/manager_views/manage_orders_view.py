@@ -7,11 +7,11 @@ from japapou.models import Order # Certifique-se de importar o modelo Order
 # Se você tiver um campo 'is_staff' no usuário ou um 'tipo_usuario'
 # que indique que ele é gerente/admin, use user_passes_test.
 # Exemplo assumindo que apenas 'is_staff' pode ver essa página:
-def is_manager(user):
-    return user.is_staff
+#def is_manager(user):
+    #return user.is_staff
 
 @login_required
-@user_passes_test(is_manager) # Restringe o acesso apenas para usuários gerentes/staff
+#@user_passes_test(is_manager) # Restringe o acesso apenas para usuários gerentes/staff
 def manage_orders_view(request):
     """
     Exibe uma lista de todos os pedidos, ordenados do mais recente
@@ -25,6 +25,8 @@ def manage_orders_view(request):
 
     # Se você quiser filtrar por pedidos ativos/pendentes:
     # pedidos = Order.objects.filter(status__in=['PENDENTE', 'EM_PREPARACAO']).order_by('-created_at')
+
+    #print(pedidos)
 
     contexto = {
         'pedidos': pedidos

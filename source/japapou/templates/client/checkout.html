@@ -18,40 +18,48 @@
         {% endfor %}
     {% endif %}
 
-<div id="cards-pratos">
-    {% for item in cart_items %}
-        <div class="slide">
-            <div class="div-principal">
-                <div class="conteudo">
-                    <div class="images">
-                        <img class="img-principal" src="{{ item.plate.photo.url }}" alt="{{ item.plate.name }}" />
-                        <i class="fa-regular fa-heart img-secundaria"></i> <!-- ABRIR UM MODAL DE AVALIAÇÃO QUANDO FOR CLICADO E ENVIAR -->
-                    </div>
-                    <div class="prato">
-                        <h3>{{ item.amount }}x {{ item.plate.name }}</h3>
-                        <p>{{ item.prato.description }}</p>
-                    </div>
-                    <div class="detalhes">
-                        <div class="circles">
-                        <div class="circ-2"><p>$</p></div>
-                        <div class="circ-1"><p>{{ item.plate.price | floatformat:0 }}</p></div>
-                    </div>
-                    {% if item.comment %}
-                        <div class="especificacao">
-                            <h5>Especificações</h5>
-                            <p>{{ item.comment }}</p>
+<div id="container-cards">
+    <div class="coverflow-container">
+        <div class="coverflow">
+            {% for item in cart_items %}
+                <div class="slide">
+                    <div class="div-principal">
+                        <div class="conteudo">
+                            <div class="images">
+                                <img class="img-principal" src="{{ item.plate.photo.url }}" alt="{{ item.plate.name }}" />
+                                <i class="fa-regular fa-heart img-secundaria"></i>
+                            </div>
+
+                            <div class="prato">
+                                <h3>{{ item.amount }}x {{ item.plate.name }}</h3>
+                                <p>{{ item.plate.description }}</p>
+                            </div>
+
+                            <div class="detalhes">
+                                <div class="circles">
+                                    <div class="circ-2"><p>$</p></div>
+                                    <div class="circ-1"><p>{{ item.plate.price|floatformat:0 }}</p></div>
+                                </div>
+                                {% if item.comment %}
+                                    <div class="especificacao">
+                                        <h5>Especificações</h5>
+                                        <p>{{ item.comment }}</p>
+                                    </div>
+                                {% else %}
+                                    <div class="especificacao">
+                                        <h5>Especificações</h5>
+                                        <p>sem especificações</p>
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
-                    {% else %}
-                        <div class="especificacao">
-                            <h5>Especificações</h5>
-                            <p>vazio</p>
-                        </div>
-                    {% endif %}
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </div>
+    <button id="prev"><i class="fa-solid fa-arrow-left"></i></button>
+    <button id="next"><i class="fa-solid fa-arrow-right"></i></button>
 </div>
 
     <div id="resumo-container">

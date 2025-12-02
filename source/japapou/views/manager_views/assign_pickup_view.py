@@ -8,7 +8,7 @@ from datetime import datetime
 import pytz
 
 @login_required
-@permission_required('view_order', login_url='home')
+#@permission_required('view_order', login_url='home')
 def manager_assign_pickup_view(request, order_id):
     '''View para carregar a pagina de pedidos para o gerente'''
 
@@ -34,7 +34,7 @@ def manager_assign_pickup_view(request, order_id):
     })
 
 @login_required
-@permission_required('change_order', raise_exception=True)
+#@permission_required('change_order', raise_exception=True)
 @require_POST
 def confirm_pickup_view(request, order_id):
     '''View para o gerente confirmar a retirada de um pedido'''
@@ -46,6 +46,7 @@ def confirm_pickup_view(request, order_id):
         return JsonResponse({"status": "error", "message": "Pedido não encontrado"}, status=404)
 
     order.data_retirada = datetime.now(timezone)
+    order.status = order.Status.CONCLUIDO
     order.save()
 
     return JsonResponse({
