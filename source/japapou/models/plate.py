@@ -7,7 +7,7 @@ class Plate(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, null=False)
     description = models.TextField(null=False)
     keywords = models.TextField(blank=True)
-    photo = models.ImageField(null=False)
+    photo = models.ImageField(null=False, upload_to="pratos")
     options = models.ManyToManyField(PlateOption, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     altered_at = models.DateTimeField(auto_now=True)

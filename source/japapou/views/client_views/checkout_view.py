@@ -86,6 +86,9 @@ def checkout_view(request):
     taxa_inicial = TAXA_ENTREGA if tipo_pedido_padrao == Order.TipoPedido.ENTREGA else Decimal("0.00")
     contexto_base['total'] = subtotal + taxa_inicial
 
+    print(cart_items)
+    for item in cart_items:
+        print(item.quantity)
 
     if request.method == "POST":
         

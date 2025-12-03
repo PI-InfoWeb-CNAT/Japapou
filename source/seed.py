@@ -21,6 +21,42 @@ except ImportError:
     print("Não foi possivel encontrar as models, MENU, PLATE, PERIOD e CUSTOMUSER")
     exit()
 
+def limpar_arquivos_midia():
+    print("\nIniciando limpeza da pasta MEDIA...")
+    
+    
+    SUBFOLDER = 'pratos'
+    media_subfolder_path = os.path.join(settings.MEDIA_ROOT, SUBFOLDER)
+    
+    
+    if not os.path.isdir(media_subfolder_path):
+        print(f"  - Subpasta '{SUBFOLDER}' não encontrada, ignorando limpeza.")
+        print("--- LIMPEZA DA PASTA MEDIA CONCLUÍDA ---\n")
+        return # Sai da função se a pasta não existir
+        
+    
+    arquivos_a_limpar = [
+        'sushi.jpg', 
+        'yakisoba.jpg', 
+        'temaki.jpg', 
+        'onigiri.jpg'
+    ]
+    
+    
+    for filename in arquivos_a_limpar:
+        # Agora o caminho do ficheiro aponta para dentro da subpasta:
+        file_path = os.path.join(media_subfolder_path, filename)
+        
+        if os.path.exists(file_path):
+            try:
+                os.remove(file_path)
+                print(f"  - Arquivo '{filename}' excluído com sucesso.")
+            except Exception as e:
+                print(f"  - ERRO ao excluir '{filename}': {e}")
+        else:
+            print(f"  - Arquivo '{filename}' não encontrado, ignorando.")
+            
+    print("--- LIMPEZA DA PASTA MEDIA CONCLUÍDA ---\n")
 
 
 def criar_grupos_permissoes():
@@ -419,6 +455,7 @@ def criar_pratos():
 if __name__ == "__main__":
     try:
         with transaction.atomic():
+            limpar_arquivos_midia()
             criar_grupos_permissoes()
             criar_users()
             criar_menus_periodos()
