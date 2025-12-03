@@ -70,7 +70,7 @@
         <div id="resumo-pedido">
             <div id="container-resumo">
                 {% for item in cart_items %}
-                    <div><p> {{item.plate.name}} x {{ item.quantity }}</p><p>R$ [valor]</p></div>
+                    <div><p> {{item.plate.name}} x {{ item.quantity }}</p><p>R$ {{ item.quantity }}</p></div>
                 {% endfor %}
                 <div><p>Subtotal</p><p id="resumo-subtotal" data-valor="{{ subtotal|stringformat:'.2f' }}">R$ {{ subtotal }}</p></div>
                 <div><p>Entrega</p><p id="resumo-taxa" data-valor="{{ taxa_entrega|stringformat:'.2f' }}">R$ {{ taxa_entrega }}</p></div>
