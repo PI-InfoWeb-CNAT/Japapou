@@ -19,72 +19,74 @@
         {% endfor %}
     {% endif %}
 
-<div id="container-cards">
-    <div class="coverflow-container">
-        <div class="coverflow">
-            {% for item in cart_items %}
-                <div class="slide">
-                    <div class="div-principal">
-                        <div class="conteudo">
-                            <div class="images">
-                                <img class="img-principal" src="{{ item.plate.photo.url }}" alt="{{ item.plate.name }}" />
-                                <a href={% url "rating" item.plate.id %}><i class="fa-regular fa-heart img-secundaria"></i></a>
-                            </div>
-
-                            <div class="prato">
-                                <h3>{{ item.plate.name }}</h3>
-                                <p>{{ item.plate.description }}</p>
-                            </div>
-
-                            <div class="detalhes">
-                                <div class="circles">
-                                    <div class="circ-2"><p>$</p></div>
-                                    <div class="circ-1"><p>{{ item.plate.price|floatformat:0 }}</p></div>
-                                </div>
-                                {% if item.comment %}
-                                    <div class="especificacao">
-                                        <h5>Especificações</h5>
-                                        <p>{{ item.comment }}</p>
-                                    </div>
-                                {% else %}
-                                    <div class="especificacao">
-                                        <h5>Especificações</h5>
-                                        <p>sem especificações</p>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-        <button id="prev"><i class="fa-solid fa-arrow-left"></i></button>
-        <button id="next"><i class="fa-solid fa-arrow-right"></i></button>
-    </div>
-</div>
-
-    <div id="resumo-container">
-        <div id="titulo-resumo">
-            <span>Seu pedido em</span>
-            <h3>Japapou [rua]</h3>
-        </div>
-        <div id="resumo-pedido">
-            <div id="container-resumo">
-                {% for item in cart_items %}
-                    <div><p> {{item.plate.name}} x {{ item.quantity }}</p><p>R$ {{ item.total_item_prato }}</p></div>
-                {% endfor %}
-                <hr>
-                <div><p>Subtotal</p><p id="resumo-subtotal" data-valor="{{ subtotal|stringformat:'.2f' }}">R$ {{ subtotal }}</p></div>
-                <div><p>Entrega</p><p id="resumo-taxa" data-valor="{{ taxa_entrega|stringformat:'.2f' }}">R$ {{ taxa_entrega }}</p></div>
-                <div><h4>Total</h4><h4 id="resumo-total">R$ {{ total }}</h4></div>
-            </div>
-            <a href="{% url 'cart_view' %}"><i class="fa-solid fa-pencil"></i>Editar</a>
-        </div>
-    </div>
-
     <div id="container-tipo-pedido">
         <form method="POST" action="{% url 'checkout' %}" id="form-checkout">
             {% csrf_token %}
+
+            <div id="container-cards">
+                <div class="coverflow-container">
+                    <div class="coverflow">
+                        {% for item in cart_items %}
+                            <div class="slide">
+                                <div class="div-principal">
+                                    <div class="conteudo">
+                                        <div class="images">
+                                            <img class="img-principal" src="{{ item.plate.photo.url }}" alt="{{ item.plate.name }}" />
+                                            <a href={% url "rating" item.plate.id %}><i class="fa-regular fa-heart img-secundaria"></i></a>
+                                        </div>
+                                    
+                                        <div class="prato">
+                                            <h3>{{ item.plate.name }}</h3>
+                                            <p>{{ item.plate.description }}</p>
+                                        </div>
+                                    
+                                        <div class="detalhes">
+                                            <div class="circles">
+                                                <div class="circ-2"><p>$</p></div>
+                                                <div class="circ-1"><p>{{ item.plate.price|floatformat:0 }}</p></div>
+                                            </div>
+                                            <div class="especificacao">
+                                                <label for="comment_{{ item.plate.id }}" class="label-especificacao"></label>
+                                                <textarea 
+                                                    name="comment_{{ item.plate.id }}" 
+                                                    id="comment_{{ item.plate.id }}" 
+                                                    rows="3" 
+                                                    placeholder="Ex: Sem cebola, molho à parte, bem passado..."
+                                                    maxlength="255"
+                                                    class="input-especificacao"
+                                                ></textarea>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button id="prev"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button id="next"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div id="resumo-container">
+                    <div id="titulo-resumo">
+                        <span>Seu pedido em</span>
+                        <h3>Japapou [rua]</h3>
+                    </div>
+                    <div id="resumo-pedido">
+                        <div id="container-resumo">
+                            {% for item in cart_items %}
+                                <div><p> {{item.plate.name}} x {{ item.quantity }}</p><p>R$ {{ item.total_item_prato }}</p></div>
+                            {% endfor %}
+                            <hr>
+                            <div><p>Subtotal</p><p id="resumo-subtotal" data-valor="{{ subtotal|stringformat:'.2f' }}">R$ {{ subtotal }}</p></div>
+                            <div><p>Entrega</p><p id="resumo-taxa" data-valor="{{ taxa_entrega|stringformat:'.2f' }}">R$ {{ taxa_entrega }}</p></div>
+                            <div><h4>Total</h4><h4 id="resumo-total">R$ {{ total }}</h4></div>
+                        </div>
+                        <a href="{% url 'cart_view' %}"><i class="fa-solid fa-pencil"></i>Editar</a>
+                    </div>
+                </div>
+
+
             
             {% if pix_selecionado %}
                 <input type="hidden" name="pix_confirmado" value="True">

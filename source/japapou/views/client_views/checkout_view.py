@@ -211,12 +211,20 @@ def checkout_view(request):
             # 3. Criação dos OrderItem
             items_para_criar = []
             for item in cart_items:
+
+                comment_key = f'comment_{item.plate.id}'
+                item_comment = request.POST.get(comment_key, '').strip()
+
+                if not item_comment:
+                    item_comment = None
+
                 items_para_criar.append(
                     OrderItem(
                         preco_prato=item.plate.price, # preco do prato no momento da compra
                         order=new_order,
                         prato=item.plate,
                         amount=item.quantity,
+                        comment=item_comment,
                     )
                 )
             OrderItem.objects.bulk_create(items_para_criar)
