@@ -40,7 +40,7 @@
         align-items: center;
 
         #container-resumo {
-            width: 45%;
+            width: 60%;
             height: 100%;
             border-right: 2px solid var(--azul-mais-escuro);
             display: flex;
@@ -48,15 +48,15 @@
             justify-content: center;
             margin: 0;
 
-            :nth-child(3) {
-                margin-top: 15px;
-            }
-
             div {
                 display: flex;
                 justify-content: space-between;
                 width: 95%;
                 margin: 0;
+            }
+
+            hr {
+                width: 95%;
             }
 
         }
@@ -68,7 +68,7 @@
             padding: 3px 4% 3px 4%;
             color: white;
             border-radius: 7px;
-            margin-left: 22%;
+            margin-left: 115px;
             
             i {
                 margin-right: 8px;
@@ -191,6 +191,20 @@
 }
 /* CSS DA PARTE DO TIPO PEDIDO */
 
+
+
+
+#btn-copiar-pix-final {
+        appearance: none;
+        border: none;
+        border-radius: 6px;
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--azul-mais-escuro);
+        background-color: white;
+        height: 23%;
+        padding: 0px 10px 0px 10px;
+    }
 /* CSS DA PARTE DO METODO PAGAMENTO */
 #container-metodo-pagamento{
     transition: all 0.5s ease;
@@ -296,10 +310,16 @@
     align-items: center;
     height: 75vh;
 
+    a{
+        text-decoration: none;
+        color: white;
+    }
+
     .coverflow-container {
         position: relative;
         width: 90%; 
         max-width: 900px;
+        height: 100%;
         perspective: 1200px;
 
         button {
@@ -332,13 +352,15 @@
         }
     }
     .coverflow {
-        display: flex;
+        position: relative;
         width: 100%;
         height: 100%;
     }
     .slide {
-        
-        width: 300px;
+        position: absolute;
+        top: 50%; 
+        left: 50%;
+        transition: transform 0.5s ease, z-index 0.5s ease;
     }
 
     .div-principal {
@@ -351,6 +373,9 @@
         justify-content: flex-end;
         border-radius: 17px;
         padding: 1em;
+
+        margin-left: 1em;
+        margin-right: 1em;
 
         h3, p {
             text-align: center;
@@ -370,7 +395,8 @@
                 height: 12em;
                 position: absolute;
                 top: -30px;
-                left: 7.3vw;
+                left: 6.3vw;
+                border-radius: 10px;
             }
 
             .img-secundaria {

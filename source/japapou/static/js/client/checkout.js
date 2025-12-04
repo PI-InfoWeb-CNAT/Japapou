@@ -267,6 +267,95 @@ inputMetodoCartao.addEventListener('change', verificarTipoPagamento);
 inputMetodoDinheiro.addEventListener('change', verificarTipoPagamento);
 
 document.addEventListener('DOMContentLoaded', () => {
+    
+    const btnCopiar = document.getElementById('btn-copiar-pix-final');
+        if (btnCopiar) {
+            btnCopiar.addEventListener('click', copiarPix);
+    }
+
+// Coverflow
+  const slides = document.querySelectorAll('.slide');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  let current = slides.length >= 3 ? 1 : 0; // Inicia no segundo slide (índice 1) se houver 3 ou mais.
+
+  function updateSlides() {
+    slides.forEach((slide, i) => {
+      const offset = i - current;
+      const absOffset = Math.abs(offset);
+      const prato = slide.querySelector('.prato');
+      const especificacao = slide.querySelector('.especificacao');
+      const circ_2 = slide.querySelector('.circ-2>p');
+      const circ_1 = slide.querySelector('.circ-1');
+      const maxVisible = 2; // Garante que os slides -2, -1, 0, 1, 2 são processados
+
+      if (absOffset > maxVisible) {
+        slide.style.opacity = '0';
+        slide.style.pointerEvents = 'none';
+        
+        // Mantém a centralização mesmo quando o slide está fora de vista
+        slide.style.transform = 'scale(0.5) translate(-50%, -50%)'; 
+        slide.style.zIndex = 0;
+        return;
+      }
+
+      slide.style.opacity = '1';
+      slide.style.pointerEvents = 'auto';
+      slide.style.zIndex = 10 - absOffset;
+
+      // Movimento ajustado (0.65 da largura do slide para não sair da tela)
+      const slideMovement = slides[0].offsetWidth * 0.9;
+      
+      // CRUCIAL: Esta transformação compensa o position: absolute (top: 50%; left: 50%) do CSS,
+      // garantindo que o ponto de origem do slide é o centro do contêiner.
+      const centeringTransform = 'translate(-50%, -50%)'; 
+
+      if (offset === 0) {
+        // Slide Central: Centrado + Sem translação X + Scale 1
+        slide.style.transform = `${centeringTransform} translateX(0) scale(1)`;
+        if (prato) prato.style.color = 'white';
+        if (especificacao) especificacao.style.backgroundColor = 'var(--azul-mais-escuro)';
+        if (circ_2) circ_2.style.color = 'var(--azul-mais-escuro)';
+        if (circ_1) circ_1.style.backgroundColor = 'var(--azul-mais-escuro)';
+        slide.style.pointerEvents = "all";
+      } 
+      else {
+        // Slides Laterais: Centrado + Translação X (offset * slideMovement) + Scale 0.7
+        slide.style.transform = `${centeringTransform} translateX(${offset * slideMovement}px) scale(0.7)`;
+        if (prato) prato.style.color = 'white';
+        if (especificacao) especificacao.style.backgroundColor = 'var(--vermelho)';
+        if (circ_2) circ_2.style.color = 'var(--vermelho)';
+        if (circ_1) circ_1.style.backgroundColor = 'var(--vermelho)';
+        slide.style.pointerEvents = "none";
+      }
+    });
+  }
+
+  function goNext() { 
+        if (current < slides.length - 1) { 
+            current++; 
+            updateSlides(); 
+        } 
+    }
+
+    function goPrev() { 
+        if (current > 0) { 
+            current--; 
+            updateSlides(); 
+        } 
+    }
+    
+    prevBtn.addEventListener('click', goPrev);
+    nextBtn.addEventListener('click', goNext);
+
+    // Se houver menos de 3 slides, desativa os botões 
+    if (slides.length < 3) {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+    }
+
+    updateSlides();
+    
     // 1. Executa a função para aplicar os estilos iniciais (opacidade/pointer-events)
     //    com base no input de rádio pre-selecionado no HTML.
     verificarTipoPedido();
@@ -282,28 +371,75 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const btnCopiar = document.getElementById('btn-copiar-pix-final');
-        if (btnCopiar) {
-            btnCopiar.addEventListener('click', copiarPix);
-    }
-
 });
 
 function copiarPix() {
-    const codigoInput = document.getElementById('codigo-pix-copia');
-    if (codigoInput) {
-        codigoInput.select();
-        codigoInput.setSelectionRange(0, 99999); // Mobile
-        
-        // Tenta API moderna, fallback para antigo
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(codigoInput.value)
-                .then(() => alert('Código PIX copiado!'))
-                .catch(() => alert('Erro ao copiar.'));
-        } else {
-            document.execCommand('copy');
-            alert('Código PIX copiado!');
+    // 1. Encontra o elemento 'textarea' que contém o código Pix.
+    // Assumimos que a textarea tem um ID, por exemplo, 'codigo-pix-area'
+    // **NOTA:** Ajusta o ID abaixo ('codigo-pix-area') para o ID real da tua textarea!
+    const pixCodeElement = document.getElementById('codigo-pix-area');
+
+    if (!pixCodeElement) {
+        console.error("Elemento da área de texto do Pix não encontrado.");
+        return; // Sai da função se a área de texto não existir
+    }
+
+    try {
+        // 2. Tenta usar a API moderna (navigator.clipboard)
+        // Esta é a forma mais recomendada e assíncrona
+        navigator.clipboard.writeText(pixCodeElement.value)
+            .then(() => {
+                console.log("Código Pix copiado com sucesso (API moderna)!");
+                
+                // Feedback visual (Opcional)
+                const btn = document.getElementById('btn-copiar-pix-final');
+                if (btn) {
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = 'Copiado!';
+                    
+                    // Volta ao texto original após 2 segundos
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                    }, 2000);
+                }
+            })
+            .catch(err => {
+                // Se a API moderna falhar (geralmente por permissões), usa o método de fallback
+                console.warn('Falha ao usar a API moderna. Usando método de fallback...', err);
+                fallbackCopyTextToClipboard(pixCodeElement);
+            });
+
+    } catch (err) {
+        // 3. Fallback para métodos mais antigos (sincronizados)
+        console.warn('Navegador não suporta navigator.clipboard. Usando método de fallback.');
+        fallbackCopyTextToClipboard(pixCodeElement);
+    }
+}
+
+// Função de fallback para navegadores mais antigos (usa document.execCommand)
+function fallbackCopyTextToClipboard(element) {
+    // Seleciona o texto na textarea
+    element.select();
+    element.setSelectionRange(0, 99999); // Para dispositivos móveis
+
+    try {
+        // Executa o comando de cópia
+        document.execCommand('copy');
+        console.log('Código Pix copiado com sucesso (Fallback)!');
+
+        // Feedback visual
+        const btn = document.getElementById('btn-copiar-pix-final');
+        if (btn) {
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Copiado!';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+            }, 2000);
         }
+    } catch (err) {
+        console.error('Falha ao tentar copiar o texto por comando: ', err);
+        alert('Falha ao copiar o código Pix. Por favor, selecione e copie manualmente.');
     }
 }
 

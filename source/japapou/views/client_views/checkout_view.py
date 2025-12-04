@@ -58,8 +58,10 @@ def checkout_view(request):
         messages.error(request, "Seu carrinho está vazio.")
         return redirect('cart_view') 
 
+    print(cart_items)
     for item in cart_items:
-        print(item.plate.price)
+        print(item.get_item_total())
+        item.total_item_prato = item.get_item_total() # adicionando atributo de total item para cada prato dinamicamente para uso no template
 
     subtotal = cart.get_cart_total()
 

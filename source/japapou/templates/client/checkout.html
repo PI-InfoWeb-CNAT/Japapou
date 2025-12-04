@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/client/checkout.css' %}">
     <script src="https://js.stripe.com/v3/"></script>
@@ -27,7 +28,7 @@
                         <div class="conteudo">
                             <div class="images">
                                 <img class="img-principal" src="{{ item.plate.photo.url }}" alt="{{ item.plate.name }}" />
-                                <i class="fa-regular fa-heart img-secundaria"></i>
+                                <a href={% url "rating" item.plate.id %}><i class="fa-regular fa-heart img-secundaria"></i></a>
                             </div>
 
                             <div class="prato">
@@ -70,8 +71,9 @@
         <div id="resumo-pedido">
             <div id="container-resumo">
                 {% for item in cart_items %}
-                    <div><p> {{item.plate.name}} x {{ item.quantity }}</p><p>R$ {{ item.quantity }}</p></div>
+                    <div><p> {{item.plate.name}} x {{ item.quantity }}</p><p>R$ {{ item.total_item_prato }}</p></div>
                 {% endfor %}
+                <hr>
                 <div><p>Subtotal</p><p id="resumo-subtotal" data-valor="{{ subtotal|stringformat:'.2f' }}">R$ {{ subtotal }}</p></div>
                 <div><p>Entrega</p><p id="resumo-taxa" data-valor="{{ taxa_entrega|stringformat:'.2f' }}">R$ {{ taxa_entrega }}</p></div>
                 <div><h4>Total</h4><h4 id="resumo-total">R$ {{ total }}</h4></div>
@@ -195,7 +197,7 @@
 
                     <p style="font-weight: bold;">Copia e cola:</p>
 
-                    <textarea id="codigo-pix-copia" readonly style="width: 100%; height: 60px; font-size: 0.8em; margin-bottom: 5px;">{{ codigo_pix }}</textarea>
+                    <textarea id="codigo-pix-area" readonly style="width: 100%; height: 30px; font-size: 0.8em; margin-bottom: 5px;" rows="1">{{ codigo_pix }}</textarea>
 
                     <button type="button" id="btn-copiar-pix-final" style="margin-bottom: 15px; cursor: pointer;">
                         Copiar Código
