@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
+{% block title %}
+  Recibo do Pedido  
+{% endblock %}
 {% block extra_head %}
-    <link rel="stylesheet" href="{% static 'css/client/receipt.css' %}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/client/receipt.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 {% endblock %}
 
 {% block content %}
@@ -12,356 +15,315 @@
 
 <h2 id="titulo-recibo">Meu Recibo</h2>
 <section class="detalhes-pedido">
-    <h3><b>Detalhes do Pedido</b></h3>
-    <div class="linha">
-        <p class="esquerda"><b>Número do Pedido:</b></p>
-        <p class="direita">#{{ detalhes_pedido.id }}</p> 
-    </div>
-    <div class="linha">
-        <p class="esquerda"><b>Cliente:</b></p>
-        <p class="direita">{{ detalhes_pedido.nome_cliente }}</p>
-    </div>
-    <div class="linha">
-        <p class="esquerda"><b>Data do Pedido:</b></p>
-        <p class="direita">{{ detalhes_pedido.data_criacao }}</p>
-    </div>
-    <div class="linha">
-        <p class="esquerda"><b>Pedido para:</b></p>
-        <p class="direita">{{ detalhes_pedido.tipo_pedido }}</p>
-    </div>
+  <h3><b>Detalhes do Pedido</b></h3>
+  <div class="linha">
+    <p class="esquerda"><b>Número do Pedido:</b></p>
+    <p class="direita">#{{ detalhes_pedido.id }}</p> 
+  </div>
+  <div class="linha">
+    <p class="esquerda"><b>Cliente:</b></p>
+    <p class="direita">{{ detalhes_pedido.nome_cliente }}</p>
+  </div>
+  <div class="linha">
+    <p class="esquerda"><b>Data do Pedido:</b></p>
+    <p class="direita">{{ detalhes_pedido.data_criacao }}</p>
+  </div>
+  <div class="linha">
+    <p class="esquerda"><b>Pedido para:</b></p>
+    <p class="direita">{{ detalhes_pedido.tipo_pedido }}</p>
+  </div>
 </section>
 
 <section class="preco-pedido">
-    <table>
-        <thead>
-            <tr>
-                <th colspan="2" class="esquerda">Produto</th>
-                <th class="direita">Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in itens_pedido %}
-            <tr>
-                <td class="esquerda">{{ item.produto }}</td> 
-                <td class="centro">({{ item.quantidade }}x R$ {{ item.preco_unitario }})</td> 
-                <td class="direita">R$ {{ item.subtotal }}</td> 
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="3">Nenhum item encontrado para este pedido.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="2" class="esquerda">Total</td>
-                <td class="direita">R$ {{ total_final }}</td>
-            </tr>
-        </tfoot>
-    </table>
+  <table>
+    <thead>
+      <tr>
+        <th colspan="2" class="esquerda">Produto</th>
+        <th class="direita">Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in itens_pedido %}
+      <tr>
+        <td class="esquerda">{{ item.produto }}</td> 
+        <td class="centro">({{ item.quantidade }}x R$ {{ item.preco_unitario }})</td> 
+        <td class="direita">R$ {{ item.subtotal }}</td> 
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3">Nenhum item encontrado para este pedido.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" class="esquerda">Total</td>
+        <td class="direita">R$ {{ total_final }}</td>
+      </tr>
+    </tfoot>
+  </table>
 </section>
 
 {% if detalhes_entrega.eh_entrega %}
 <section class="detalhes-pedido">
-    <h3><b>Detalhes da Entrega</b> </h3>
-    <div class="linha">
-        <p class="esquerda"><b>Entregador:</b></p>
-        <p class="direita">{{ detalhes_entrega.nome_entregador }}</p>
-    </div>
-    <div class="linha">
-        <p class="esquerda"><b>Automóvel:</b></p>
-        <p class="direita">{{ detalhes_entrega.automovel }}</p>
-    </div>
-    <div class="linha">
-        <p class="esquerda"><b>Cor:</b></p>
-        <p class="direita">{{ detalhes_entrega.cor }}</p>
-    </div>
-    <div class="linha">
-        <p class="esquerda"><b>Placa:</b></p>
-        <p class="direita">{{ detalhes_entrega.placa }}</p>
-    </div>
-    <div class="linha">
-        <p class="esquerda"><b>Avaliação:</b></p>
-        <p class="direita">{{ detalhes_entrega.avaliacao_media }}</p>
-    </div>
+  <h3><b>Detalhes da Entrega</b></h3>
+  <div class="linha">
+    <p class="esquerda"><b>Entregador:</b></p>
+    <p class="direita">{{ detalhes_entrega.nome_entregador }}</p>
+  </div>
+  <div class="linha">
+    <p class="esquerda"><b>Automóvel:</b></p>
+    <p class="direita">{{ detalhes_entrega.automovel }}</p>
+  </div>
+  <div class="linha">
+    <p class="esquerda"><b>Cor:</b></p>
+    <p class="direita">{{ detalhes_entrega.cor }}</p>
+  </div>
+  <div class="linha">
+    <p class="esquerda"><b>Placa:</b></p>
+    <p class="direita">{{ detalhes_entrega.placa }}</p>
+  </div>
+  <div class="linha">
+    <p class="esquerda"><b>Avaliação:</b></p>
+    <p class="direita">{{ detalhes_entrega.avaliacao_media }}</p>
+  </div>
 </section>
 {% endif %}
 
 <div class="Agradecimento">
-    <h3>Agradecimento Japapou</h3>
-    <p>Obrigado por escolher o Japapou! Esperamos vê-lo novamente em breve para mais sabores inesquecíveis.</p>
-    <img src="{% static 'imgs/Agradecimento.png' %}" alt="">
+  <h3>Agradecimento Japapou</h3>
+  <p>Obrigado por escolher o Japapou! Esperamos vê-lo novamente em breve para mais sabores inesquecíveis.</p>
+  <img src="{% static 'imgs/Agradecimento.png' %}" alt="">
 </div>
 
 <!-- Modal 1: Avaliação do Entregador (SÓ é renderizado se necessário) -->
 {% if detalhes_entrega.entregador_id and detalhes_entrega.mostrar_modal_avaliacao %}
-    <div id="ratingModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-btn" onclick="handleCourierModalClose()">&times;</span>
-            <h2>AVALIAÇÃO PARA O ENTREGADOR {{ detalhes_entrega.nome_entregador }}</h2>
-            
-            <div class="rating-stars interactive-rating" id="userRating">
-                <i class="far fa-star star" data-rating="1"></i>
-                <i class="far fa-star star" data-rating="2"></i>
-                <i class="far fa-star star" data-rating="3"></i>
-                <i class="far fa-star star" data-rating="4"></i>
-                <i class="far fa-star star" data-rating="5"></i>
-            </div>
-            
-            <div class="delivery-details">
-                <div class="linha">
-                    <p class="esquerda"><b>MÉDIA DO ENTREGADOR:</b></p>
-                    <p class="direita">
-                        {% if detalhes_entrega.avaliacao_media_arredondada > 0 %}
-                            <span class="entregador-media">
-                                {% for i in "12345"|make_list %}
-                                    {% if forloop.counter <= detalhes_entrega.avaliacao_media_arredondada %}
-                                        <i class="fas fa-star filled"></i>
-                                    {% else %}
-                                        <i class="far fa-star"></i>
-                                    {% endif %}
-                                {% endfor %}
-                                <span style="margin-left: 8px;">({{ detalhes_entrega.avaliacao_media }})</span>
-                            </span>
-                        {% else %}
-                            <span class="entregador-media">
-                                <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-                                <span style="margin-left: 8px;">(--)</span>
-                            </span>
-                        {% endif %}
-                    </p>
-                </div>
-                <div class="linha">
-                    <p class="esquerda"><b>NA EMPRESA DESDE:</b></p>
-                    <p class="direita">{{ detalhes_entrega.data_ingresso }}</p>
-                </div>
-                <div class="linha">
-                    <p class="esquerda"><b>Nº DE ENTREGAS:</b></p>
-                    <p class="direita">{{ detalhes_entrega.num_entregas }}</p>
-                </div>
-                
-                <p class="observacoes-label esquerda"> <b>OBSERVAÇÕES:</b> <i>(Opcional)</i></p>
-                <textarea id="observacoes" placeholder="Por exemplo: entregador chegou com antecedência, a comida chegou desorganizada ..."></textarea>
-                
-                <button onclick="submitRating()" class="btn-submit">SUBMETER</button>
-            </div>
+  <div id="ratingModal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-btn" onclick="handleCourierModalClose()">&times;</span>
+      <h2>AVALIAÇÃO PARA O ENTREGADOR {{ detalhes_entrega.nome_entregador }}</h2>
+      
+      <div class="rating-stars interactive-rating" id="userRating">
+        <i class="far fa-star star" data-rating="1"></i>
+        <i class="far fa-star star" data-rating="2"></i>
+        <i class="far fa-star star" data-rating="3"></i>
+        <i class="far fa-star star" data-rating="4"></i>
+        <i class="far fa-star star" data-rating="5"></i>
+      </div>
+      
+      <div class="delivery-details">
+        <div class="linha">
+          <p class="esquerda"><b>MÉDIA DO ENTREGADOR:</b></p>
+          <p class="direita">
+            {% if detalhes_entrega.avaliacao_media_arredondada > 0 %}
+              <span class="entregador-media">
+                {% for i in "12345"|make_list %}
+                  {% if forloop.counter <= detalhes_entrega.avaliacao_media_arredondada %}
+                    <i class="fas fa-star filled"></i>
+                  {% else %}
+                    <i class="far fa-star"></i>
+                  {% endif %}
+                {% endfor %}
+                <span style="margin-left: 8px;">({{ detalhes_entrega.avaliacao_media }})</span>
+              </span>
+            {% else %}
+              <span class="entregador-media">
+                <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                <span style="margin-left: 8px;">(--)</span>
+              </span>
+            {% endif %}
+          </p>
         </div>
+        <div class="linha">
+          <p class="esquerda"><b>NA EMPRESA DESDE:</b></p>
+          <p class="direita">{{ detalhes_entrega.data_ingresso }}</p>
+        </div>
+        <div class="linha">
+          <p class="esquerda"><b>Nº DE ENTREGAS:</b></p>
+          <p class="direita">{{ detalhes_entrega.num_entregas }}</p>
+        </div>
+        
+        <p class="observacoes-label esquerda"> <b>OBSERVAÇÕES:</b> <i>(Opcional)</i></p>
+        <textarea id="observacoes" placeholder="Por exemplo: entregador chegou com antecedência, a comida chegou desorganizada ..."></textarea>
+        
+        <button onclick="submitRating()" class="btn-submit">SUBMETER</button>
+      </div>
     </div>
+  </div>
 {% endif %}
 
-<!-- Modal 2: Avaliação dos Pratos (SEMPRE renderizado se houver itens no pedido) -->
-{% if itens_pedido %}
-    <div id="plateRatingModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closePlateRatingModal()">&times;</span>
-            <h2>AVALIE OS PRATOS</h2>
-            <p class="avaliacao-incentivo">Nos ajude a melhorar sua próxima experiência gastronômica!</p>
+{% if mostrar_modal_pratos %}
+  <div id="plateRatingModal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closePlateRatingModal()">&times;</span>
+      <h2>AVALIE OS PRATOS</h2>
+      <p class="avaliacao-incentivo">Nos ajude a melhorar sua próxima experiência gastronômica!</p>
 
-            {% comment %} 
-                FIX para NoReverseMatch: 
-                O template precisa garantir que 'plate_id' não seja vazio antes de chamar a tag 'url'.
-                Vamos usar um loop que verifica a existência do prato ID em cada item.
-            {% endcomment %}
-            
-            {% if itens_pedido|length == 1 and itens_pedido.0.prato_id %}
-                <!-- Formato para 1 prato único (e ele tem um ID válido) -->
-                {% with item=itens_pedido.0 %}
-                    <div class="linha item-prato-unico">
-                        <button onclick="window.location.href='{% url 'rating' plate_id=item.prato_id %}'" class="btn-submit btn-plate-rate">
-                            AVALIAR PRATO
-                        </button>
-                    </div>
-                {% endwith %}
-            {% else %}
-                <!-- Caso contrário (múltiplos pratos ou 1 prato sem ID), usa o loop -->
-                <div class="lista-pratos" style="max-height: 250px; overflow-y: auto; margin-bottom: 20px; padding-right: 10px;">
-                    {% for item in itens_pedido %}
-                        {% if item.prato_id %}
-                            <div class="linha item-prato-multi" style="align-items: center; margin-bottom: 15px;">
-                                <p class="esquerda" style=" text-align: left;">
-                                    {{ item.produto }}
-                                </p>
-                                <p class="direita">
-                                    <a href="{% url 'rating' plate_id=item.prato_id %}" class="btn-submit btn-plate-rate-list">
-                                        Avaliar Prato
-                                    </a>
-                                </p>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            {% endif %}
-        </div>
+      <div class="lista-pratos" style="max-height: 250px; overflow-y: auto; margin-bottom: 20px; padding-right: 10px;">
+        {% for item in itens_para_avaliar %}
+          <div class="linha item-prato-multi" style="align-items: center; margin-bottom: 15px;">
+            <p class="esquerda" style="text-align: left;">
+              {{ item.produto }}
+            </p>
+            <p class="direita">
+              <a href="{% url 'rating' plate_id=item.prato_id %}" class="btn-submit btn-plate-rate-list">
+                Avaliar Prato
+              </a>
+            </p>
+          </div>
+        {% empty %}
+          <p>Obrigado! Você já avaliou todos os pratos deste pedido.</p>
+        {% endfor %}
+      </div>
     </div>
+  </div>
 {% endif %}
 
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        // Configuração de tempo (5 segundos)
-        const DELAY_MS = 5000;
+  <script>
+    const DELAY_MS = 5000;
 
-        // --- Funções do Modal 1 (Entregador) ---
+    function openCourierRatingModal() {
+      const modal = document.getElementById('ratingModal');
+      if (modal) {
+        modal.style.display = 'flex';
+      }
+    }
 
-        // Abre o modal do entregador
-        function openCourierRatingModal() {
-            const modal = document.getElementById('ratingModal');
-            if (modal) {
-                modal.style.display = 'flex';
-            }
-        }
+    function closeCourierRatingModal() {
+      const modal = document.getElementById('ratingModal');
+      if (modal) {
+        modal.style.display = 'none';
+      }
+    }
 
-        // Fecha o modal do entregador
-        function closeCourierRatingModal() {
-            const modal = document.getElementById('ratingModal');
-            if (modal) {
-                modal.style.display = 'none';
-            }
-        }
+    function startPlateModalDelay() {
+      const plateModalExists = document.getElementById('plateRatingModal');
+      if (plateModalExists) {
+        setTimeout(() => {
+          openPlateRatingModal();
+        }, DELAY_MS);
+      }
+    }
 
-        // Inicia o processo do Modal 2 após o Modal 1 ser fechado ou submetido
-        function startPlateModalDelay() {
-            // Atraso de 5 segundos
-            setTimeout(() => {
-                openPlateRatingModal();
-            }, DELAY_MS);
-        }
+    function handleCourierModalClose() {
+      closeCourierRatingModal();
+      startPlateModalDelay();
+    }
 
-        // Lidar com o fechamento do modal do entregador (botão X)
-        function handleCourierModalClose() {
-            closeCourierRatingModal();
-            // Inicia o atraso para o modal de pratos
-            startPlateModalDelay();
-        }
+    let currentRating = 0;
 
-        // Lógica de Submissão do Entregador
-        let currentRating = 0; // Moveu para escopo global ou fora do DOMContentLoaded
+    function submitRating() {
+      if (currentRating === 0) {
+        console.error("Por favor, selecione uma nota de 1 a 5 estrelas antes de submeter.");
+        return;
+      }
 
-        function submitRating() {
-            if (currentRating === 0) {
-                console.error("Por favor, selecione uma nota de 1 a 5 estrelas antes de submeter.");
-                return;
-            }
+      const observacoes = document.getElementById('observacoes').value;
+      const entregadorIdStr = '{{ detalhes_entrega.entregador_id|default:"null" }}'; 
+      const entregadorId = entregadorIdStr === 'null' ? null : parseInt(entregadorIdStr);
+      const csrfToken = '{{ csrf_token }}';
 
-            const observacoes = document.getElementById('observacoes').value;
-            // A variável de template Django é segura para ser puxada aqui, pois está fora do JS puro
-            const entregadorIdStr = '{{ detalhes_entrega.entregador_id|default:"null" }}'; 
-            const entregadorId = entregadorIdStr === 'null' ? null : parseInt(entregadorIdStr);
-            const csrfToken = '{{ csrf_token }}';
+      if (!entregadorId) {
+        console.error("Erro: ID do entregador não encontrado.");
+        closeCourierRatingModal();
+        startPlateModalDelay();
+        return;
+      }
 
-            if (!entregadorId) {
-                console.error("Erro: ID do entregador não encontrado.");
-                // Mesmo com erro, encadeia para o próximo modal
-                startPlateModalDelay();
-                return;
-            }
+      fetch('/client/api/review/courier/', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify({
+          entregador_id: entregadorId, 
+          rating: currentRating,
+          comment: observacoes
+        })
+      }).then(response => {
+        return response.json().then(data => {
+          closeCourierRatingModal();
+          startPlateModalDelay(); 
 
-            // Requisição FETCH real para salvar a avaliação no Django
-            fetch('/client/api/review/courier/', { 
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken
-                },
-                body: JSON.stringify({
-                    entregador_id: entregadorId, 
-                    rating: currentRating,
-                    comment: observacoes
-                })
-            }).then(response => {
-                return response.json().then(data => {
-                    closeCourierRatingModal();
-                    // Garante que o próximo modal é chamado, independentemente do resultado
-                    startPlateModalDelay(); 
-
-                    if (response.ok) {
-                        console.log(data.message || 'Avaliação enviada com sucesso!');
-                    } else {
-                        console.error(`Erro (${response.status}): ${data.message || 'Falha ao enviar avaliação.'}`);
-                    }
-                });
-            }).catch(error => {
-                console.error('Erro de rede/comunicação:', error);
-                closeCourierRatingModal();
-                // Em caso de falha de rede, chama o próximo modal
-                startPlateModalDelay();
-            });
-        }
+          if (response.ok) {
+            console.log(data.message || 'Avaliação enviada com sucesso!');
+          } else {
+            console.error(`Erro (${response.status}): ${data.message || 'Falha ao enviar avaliação.'}`);
+          }
+        });
+      }).catch(error => {
+        console.error('Erro de rede/comunicação:', error);
+        closeCourierRatingModal();
+        startPlateModalDelay();
+      });
+    }
 
 
-        // --- Funções do Modal 2 (Pratos) ---
+    function openPlateRatingModal() {
+      const modal = document.getElementById('plateRatingModal');
+      if (modal) {
+        modal.style.display = 'flex';
+      }
+    }
 
-        // Abre o modal de avaliação dos pratos
-        function openPlateRatingModal() {
-            const modal = document.getElementById('plateRatingModal');
-            if (modal) {
-                modal.style.display = 'flex';
-            }
-        }
-
-        // Fecha o modal de avaliação dos pratos
-        function closePlateRatingModal() {
-            const modal = document.getElementById('plateRatingModal');
-            if (modal) {
-                modal.style.display = 'none';
-            }
-        }
+    function closePlateRatingModal() {
+      const modal = document.getElementById('plateRatingModal');
+      if (modal) {
+        modal.style.display = 'none';
+      }
+    }
 
 
-        // --- Lógica de Inicialização e Encadeamento ---
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const courierModalExists = document.getElementById('ratingModal');
-            const plateModalExists = document.getElementById('plateRatingModal');
-            
-            if (courierModalExists) {
-                // Caso 1: Modal 1 existe. Abre Modal 1 após 5s. 
-                // O Modal 2 será chamado após o fechamento/submissão do Modal 1.
-                setTimeout(() => {
-                    openCourierRatingModal(); 
-                }, DELAY_MS);
+    document.addEventListener('DOMContentLoaded', () => {
+      const courierModalExists = document.getElementById('ratingModal');
+      const plateModalExists = document.getElementById('plateRatingModal');
+      
+      if (courierModalExists) {
+        setTimeout(() => {
+          openCourierRatingModal(); 
+        }, DELAY_MS);
 
-            } else if (plateModalExists) {
-                // Caso 2: Modal 1 não existe, mas Modal 2 existe. Abre Modal 2 após 5s.
-                setTimeout(() => {
-                    openPlateRatingModal();
-                }, DELAY_MS);
-            }
-            // Se nenhum dos modais existir, nada acontece.
-
-            // --- Lógica de Interatividade das Estrelas (Modal 1) ---
-            const stars = document.querySelectorAll('.interactive-rating .star');
-            
-            stars.forEach(star => {
-                star.addEventListener('mouseover', () => {
-                    const ratingValue = parseInt(star.getAttribute('data-rating'));
-                    stars.forEach(s => {
-                        const sValue = parseInt(s.getAttribute('data-rating'));
-                        s.classList.remove('far', 'filled');
-                        s.classList.add(sValue <= ratingValue ? 'fas' : 'far');
-                    });
-                });
-
-                star.addEventListener('mouseout', () => {
-                    stars.forEach(s => {
-                        const sValue = parseInt(s.getAttribute('data-rating'));
-                        s.classList.remove('far', 'fas');
-                        s.classList.add(sValue <= currentRating ? 'fas' : 'far');
-                    });
-                });
-
-                star.addEventListener('click', () => {
-                    currentRating = parseInt(star.getAttribute('data-rating'));
-                    stars.forEach(s => {
-                        const sValue = parseInt(s.getAttribute('data-rating'));
-                        s.classList.remove('far', 'fas');
-                        s.classList.add(sValue <= currentRating ? 'fas' : 'far');
-                    });
-                });
-            });
-
+      } else if (plateModalExists) {
+        setTimeout(() => {
+          openPlateRatingModal();
+        }, DELAY_MS);
+      }
+      const stars = document.querySelectorAll('.interactive-rating .star');
+      
+      stars.forEach(star => {
+        star.addEventListener('mouseover', () => {
+          const ratingValue = parseInt(star.getAttribute('data-rating'));
+          stars.forEach(s => {
+            const sValue = parseInt(s.getAttribute('data-rating'));
+            s.classList.remove('far', 'filled');
+            s.classList.add(sValue <= ratingValue ? 'fas' : 'far');
+          });
         });
 
-    </script>
+        star.addEventListener('mouseout', () => {
+          stars.forEach(s => {
+            const sValue = parseInt(s.getAttribute('data-rating'));
+            s.classList.remove('far', 'fas');
+            s.classList.add(sValue <= currentRating ? 'fas' : 'far');
+          });
+        });
+
+        star.addEventListener('click', () => {
+          currentRating = parseInt(star.getAttribute('data-rating'));
+          stars.forEach(s => {
+            const sValue = parseInt(s.getAttribute('data-rating'));
+            s.classList.remove('far', 'fas');
+            s.classList.add(sValue <= currentRating ? 'fas' : 'far');
+          });
+        });
+      });
+
+    });
+
+  </script>
 {% endblock %}

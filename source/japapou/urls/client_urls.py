@@ -11,7 +11,9 @@ urlpatterns = [
     path("profile/update_photo/", update_photo, name="update_photo"),
     path("rating/", client_rating_view, name="client_rating"),
     path("details_plate/<int:plate_id>/", details_plate_view, name="details_plate"),
-    path("details_plate/<int:plate_id>/review/", rating_view, name="rating"),
+    path("details_plate/review/<int:plate_id>/", rating_view, name="rating"),
+    path('review/edit/<int:review_id>/', edit_review_view, name='edit_review'),
+    path('review/delete/<int:review_id>/', delete_review_view, name='delete_review'),
     path("receipt/<int:order_id>", client_receipt_view, name="client_receipt"),
     
     # Rota API/AJAX para submeter a avaliação do entregador (CourierReview)

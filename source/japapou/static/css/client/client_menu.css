@@ -973,3 +973,54 @@ button{
 .botao-criar:hover .plus-icon-text {
     color: var(--azul-mais-escuro);
 }
+
+.search-container {
+	margin-top: 0.5em;
+    padding: 20px 15px;
+    background-color: var(--azul-mais-claro); /* Um fundo claro para destacar */
+	margin-bottom: 2.5em;
+}
+/* .search-container .form-control {
+    border-radius: 20px;
+    padding-left: 15px;
+} */
+.search-container {
+    background-color: var(--azul-mais-claro); /* Cor de destaque */
+    border-color: var(--azul-mais-claro);
+	padding: 0em !important;
+	border-radius: 50px !important;
+}
+
+.search-container input{
+	background-color: var(--azul-mais-claro);
+	border: none;
+	padding: 0.5em;
+	margin: 0.5em;
+	margin-left: 0em;
+	color: white;
+}
+.search-container input::placeholder{
+	color: white;
+}
+
+.btn.btn-warning.text-white{
+	color: white;
+	background-color: var(--azul-mais-claro);
+	padding: 0.5em !important;
+	border: none;
+	margin: 0em;
+	width: 5%;
+	font-size: 25px;
+	border-radius: 70px;
+}
+
+.search-container input:focus{
+	outline: none;
+	background-color: var(--azul-mais-claro);
+}
+.form-control:focus{
+    outline: none;
+    box-shadow: none; /* remove qualquer sombra que possa simular o contorno */
+    border-color: inherit; /* Garante que a borda original seja mantida, se houver */
+	color: white;
+}

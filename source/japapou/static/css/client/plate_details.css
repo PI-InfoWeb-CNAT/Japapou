@@ -796,3 +796,42 @@ label{
   display: block; /* Garante que ela ocupe sua própria linha */
   cursor: default;
 }
+
+.container-botao{
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+#botao-excluir{
+  background-color: var(--laranja-mais-escuro);
+  border: 1px solid var(--laranja-mais-escuro);
+  color: white;
+  text-decoration: none;
+  padding: 7px;
+  border-radius: 7px;
+  margin-top: 10px;
+  cursor: pointer;
+  padding-inline: 50px;
+  text-align: center;
+}
+#botao-excluir:hover{
+  background-color: var(--vermelho);
+  border: 1px solid var(--vermelho);
+}
+#botao-editar{
+  background-color: var(--laranja-mais-claro);
+  border: 1px solid var(--laranja-mais-claro);
+  color: white;
+  text-decoration: none;
+  padding: 7px;
+  border-radius: 7px;
+  margin-top: 10px;
+  cursor: pointer;
+  padding-inline: 50px;
+  text-align: center;
+}
+#botao-editar:hover{
+  background-color: var(--laranja-mais-escuro);
+  border: 1px solid var(--laranja-mais-escuro);
+}
