@@ -5,11 +5,22 @@
     Pedidos Pendentes 
 {% endblock %}
 {% block extra_head %}
-    <link rel="stylesheet" href="{% static 'css/manager/manage_orders.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/delivery_man/orders.css' %}" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
 {% endblock %}
 
 {% block content %}
     <h1>Pedidos Pendente</h1>
+
+    <button id="btn-google-maps" onclick="gerarRotaGoogle()">
+        <i class="fa-solid fa-route"></i> Criar Rota com Todos os Pedidos (Google Maps)
+    </button>
+
+    <div id="container-mapa">
+        <div id="mapa-entregas"></div>
+    </div>
+
 
     {% for pedido in pedidos %}
     {% if pedido.tipo_pedido == 'ENTREGA' and not pedido.data_entrega and not pedido.data_saida %}
@@ -104,20 +115,32 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{% static 'js/manager/manage_orders.js' %}"></script>
-<script>
-    // A função toggleDetalhes não será chamada se o botão for um link <a>.
-    // Se você ainda deseja que os detalhes sejam exibidos, será necessário um elemento separado.
-    // Caso contrário, esta função pode ser removida se não houver outro elemento chamando-a.
-    function toggleDetalhes(button) {
-        const detalhesDiv = button.nextElementSibling;
-        if (detalhesDiv.style.display === "block") {
-            detalhesDiv.style.display = "none";
-            button.textContent = "Mais detalhes";
-        } else {
-            detalhesDiv.style.display = "block";
-            button.textContent = "Menos detalhes";
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // O '|safe' é crucial para o Django não estragar as aspas do JSON
+        var dadosMapa = JSON.parse('{{ mapa_json|safe }}');
+        
+    </script>
+
+    
+
+    <script src="{% static 'js/delivery_man/orders.js' %}"></script>
+    <script>
+        // A função toggleDetalhes não será chamada se o botão for um link <a>.
+        // Se você ainda deseja que os detalhes sejam exibidos, será necessário um elemento separado.
+        // Caso contrário, esta função pode ser removida se não houver outro elemento chamando-a.
+        function toggleDetalhes(button) {
+            const detalhesDiv = button.nextElementSibling;
+            if (detalhesDiv.style.display === "block") {
+                detalhesDiv.style.display = "none";
+                button.textContent = "Mais detalhes";
+            } else {
+                detalhesDiv.style.display = "block";
+                button.textContent = "Menos detalhes";
+            }
         }
-    }
-</script>
+        const TOMTOM_KEY_ = "{{ TOMTOM_KEY }}"; 
+    </script>
 {% endblock %}

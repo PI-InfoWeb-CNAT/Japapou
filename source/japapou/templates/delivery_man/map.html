@@ -2,45 +2,23 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
-    <title>Mapa Geral de Entregas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    {% load static %}
+    <title>Rota de Entregas</title>
 
+    <link rel="stylesheet" href="{% static 'css/delivery_man/map.css' %}" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <style>
-        body { margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; }
         
-        .header {
-            background: #2c3e50;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
-
-        #map { flex-grow: 1; width: 100%; }
-        
-        /* Estilo do popup */
-        .popup-btn {
-            display: block;
-            background: #33ccff;
-            color: white;
-            text-align: center;
-            padding: 8px;
-            margin-top: 5px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h2>🗺️ Visão Geral das Entregas</h2>
-        <small id="contador">Carregando pedidos...</small>
+        <h3>🚚 Rota do Dia</h3>
+        <small id="status-qtd">Carregando mapa...</small>
     </div>
 
     <div id="map"></div>
@@ -48,79 +26,13 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
-        // 1. Receber os dados do Django (Vêm como texto JSON)
-        // O '|safe' diz ao Django para não bloquear as aspas do JSON
-        var pedidos = JSON.parse('{{ pedidos_json|safe }}');
-
-        document.getElementById('contador').innerText = pedidos.length + " entregas pendentes";
-
-        // 2. Inicializar o Mapa (Centro de Natal)
-        var map = L.map('map').setView([-5.79448, -35.211], 12);
-
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-            attribution: '© OSM & CARTO',
-            maxZoom: 20
-        }).addTo(map);
-
-        // Ícone Vermelho para os pedidos
-        var iconPedido = L.icon({
-            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41]
-        });
-
-        // 3. Loop para criar os marcadores
-        var grupoMarcadores = L.featureGroup(); // Grupo para facilitar o zoom automático
-
-        pedidos.forEach(function(pedido) {
-            
-            // Cria o marcador
-            var marker = L.marker([pedido.lat, pedido.lon], {icon: iconPedido})
-                .addTo(map);
-            
-            // Adiciona ao grupo
-            grupoMarcadores.addLayer(marker);
-
-            // Conteúdo do balãozinho (Popup)
-            // Inclui link para abrir no Waze direto daquele pedido
-            var conteudoPopup = `
-                <b>${pedido.cliente}</b><br>
-                ${pedido.endereco}<br>
-                <hr>
-                <a href="https://waze.com/ul?ll=${pedido.lat},${pedido.lon}&navigate=yes" 
-                   class="popup-btn" target="_blank">
-                   <i class="fab fa-waze"></i> Ir com Waze
-                </a>
-            `;
-
-            marker.bindPopup(conteudoPopup);
-        });
-
-        // 4. Ajustar Zoom automaticamente
-        // Se houver pedidos, o mapa dá zoom para mostrar todos
-        if (pedidos.length > 0) {
-            map.addLayer(grupoMarcadores);
-            map.fitBounds(grupoMarcadores.getBounds(), {padding: [50, 50]});
-        }
-
-        // 5. Mostrar posição do entregador (Opcional, mas útil)
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var lat = position.coords.latitude;
-                var lon = position.coords.longitude;
-
-                L.marker([lat, lon], {
-                    icon: L.divIcon({
-                        className: 'pulse-icon',
-                        html: '<div style="background-color:#4285F4;width:15px;height:15px;border-radius:50%;border:2px solid white;"></div>'
-                    })
-                }).addTo(map).bindPopup("Você está aqui");
-            });
-        }
-
+        // --- PONTE ENTRE DJANGO E JAVASCRIPT ---
+        // Criamos uma variável global aqui com os dados.
+        const TOMTOM_KEY_ = "{{ TOMTOM_KEY }}"; 
+        window.dadosEntregas = JSON.parse('{{ dados_json|safe }}');
     </script>
+
+    <script src="{% static 'js/delivery_man/map.js' %}"></script>
+
 </body>
 </html>

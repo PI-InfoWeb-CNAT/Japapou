@@ -18,6 +18,6 @@ urlpatterns = [
     path('confirm_delivery/<int:order_id>/', views.dm_confirm_delivery_view, name='dm_confirm_delivery'), # OK
 
     # mapa
-    path("mapa/", mapa_geral, name="mapa_geral"),
+    # path("mapa/", mapa_geral, name="mapa_geral"),
 
 ]
