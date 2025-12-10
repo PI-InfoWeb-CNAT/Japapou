@@ -140,5 +140,9 @@ LOGIN_URL = 'login_register'
 LOGOUT_REDIRECT_URL = 'logout'
 
 # stripe
-STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
-STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+STRIPE_PUBLIC_KEY = os.getenv("STRIPE_PUBLIC_KEY")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
+
+# tomtom
+
+TOMTOM_KEY = os.getenv("TOMTOM_KEY")

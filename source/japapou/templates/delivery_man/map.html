@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+    <title>Navegação Entrega</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+</head>
+<body>
+
+    <div class="header-info">
+        <h2>📦 {{ pedido.cliente }}</h2>
+        <p><i class="fas fa-map-pin"></i> {{ pedido.endereco_completo }}</p>
+    </div>
+
+    <div id="map"></div>
+
+    <div class="nav-buttons">
+        <a id="link-waze" href="#" class="btn-nav btn-waze" target="_blank">
+            <i class="fab fa-waze"></i> Waze
+        </a>
+        <a id="link-google" href="#" class="btn-nav btn-google" target="_blank">
+            <i class="fab fa-google"></i> Maps
+        </a>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+    <script>
+        {% load l10n %}
+        
+        // 1. Dados do Django
+        var latDestino = parseFloat("{{ pedido.lat_destino|unlocalize }}");
+        var lonDestino = parseFloat("{{ pedido.lon_destino|unlocalize }}");
+
+        // Fallback de segurança se não houver coordenadas
+        if (isNaN(latDestino) || isNaN(lonDestino)) {
+            alert("Coordenadas inválidas! Usando centro da cidade.");
+            latDestino = -5.79448;
+            lonDestino = -35.211;
+        }
+
+        // 2. Configurar Links de Navegação (Deep Linking)
+        // Isso abre diretamente a APP instalada no telemóvel
+        document.getElementById('link-waze').href = `https://waze.com/ul?ll=${latDestino},${lonDestino}&navigate=yes`;
+        document.getElementById('link-google').href = `https://www.google.com/maps/dir/?api=1&destination=${latDestino},${lonDestino}&travelmode=driving`;
+
+        // 3. Inicializar Mapa
+        // Usando o mapa 'Voyager' que é mais limpo para navegação
+        var map = L.map('map', { zoomControl: false }).setView([latDestino, lonDestino], 13);
+        
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OSM & CARTO',
+            maxZoom: 20
+        }).addTo(map);
+
+        // Ícone do Destino (Casa Vermelha)
+        var iconDestino = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        L.marker([latDestino, lonDestino], {icon: iconDestino}).addTo(map)
+            .bindPopup("<b>Entrega:</b> {{ pedido.cliente }}").openPopup();
+
+        // Variáveis para controle do GPS
+        var userMarker = null;
+        var routingControl = null;
+        var firstLocation = true;
+
+        // 4. Função de Rastreio em Tempo Real
+        function startNavigation() {
+            if (!navigator.geolocation) {
+                alert("Seu navegador não suporta GPS.");
+                return;
+            }
+
+            // watchPosition: Executa sempre que o usuário se move
+            navigator.geolocation.watchPosition(
+                function(position) {
+                    var lat = position.coords.latitude;
+                    var lon = position.coords.longitude;
+                    var accuracy = position.coords.accuracy;
+
+                    // Atualiza ou Cria o Marcador do Usuário
+                    if (!userMarker) {
+                        // Cria um círculo azul ("Você está aqui")
+                        userMarker = L.circleMarker([lat, lon], {
+                            radius: 10,
+                            fillColor: "#4285F4",
+                            color: "#fff",
+                            weight: 3,
+                            opacity: 1,
+                            fillOpacity: 1
+                        }).addTo(map);
+                    } else {
+                        userMarker.setLatLng([lat, lon]);
+                    }
+
+                    // Se for a primeira vez, desenha a rota e centraliza
+                    if (firstLocation) {
+                        map.setView([lat, lon], 16);
+                        
+                        // Desenha a linha azul da rota (visual)
+                        routingControl = L.Routing.control({
+                            waypoints: [
+                                L.latLng(lat, lon),
+                                L.latLng(latDestino, lonDestino)
+                            ],
+                            lineOptions: { styles: [{color: '#4285F4', opacity: 0.7, weight: 6}] },
+                            createMarker: function() { return null; }, // Não cria marcadores extras na rota
+                            addWaypoints: false,
+                            routeWhileDragging: false,
+                            show: false // Esconde painel de texto
+                        }).addTo(map);
+
+                        firstLocation = false;
+                    }
+                },
+                function(error) {
+                    console.warn("Erro no GPS:", error);
+                },
+                {
+                    enableHighAccuracy: true, // Usa GPS real (bateria gasta mais, mas é preciso)
+                    maximumAge: 10000,
+                    timeout: 5000
+                }
+            );
+        }
+
+        // Inicia o rastreio
+        startNavigation();
+
+        // 5. Tentar manter a tela ligada (Wake Lock API)
+        // Funciona apenas em navegadores modernos e HTTPS
+        if ('wakeLock' in navigator) {
+            let wakeLock = null;
+            const requestWakeLock = async () => {
+                try {
+                    wakeLock = await navigator.wakeLock.request('screen');
+                    console.log('Tela mantida ativa.');
+                } catch (err) {
+                    console.log('Erro Wake Lock:', err.name, err.message);
+                }
+            };
+            requestWakeLock();
+        }
+
+    </script>
+</body>
+</html>

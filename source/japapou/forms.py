@@ -218,8 +218,6 @@ class EnderecoForm(forms.ModelForm):
             'numero', 
             'complemento', 
             'bairro', 
-            'cidade', 
-            'estado', 
             'cep'
         ]
         # 'usuario' e 'id' são preenchidos automaticamente na view.
@@ -234,12 +232,10 @@ class EnderecoForm(forms.ModelForm):
         # Adiciona placeholders
         placeholders = {
             'apelido': 'Ex: Casa, Trabalho',
-            'logradouro': 'Ex: Rua da Mooca',
+            'logradouro': 'Ex: Rua da Rocas',
             'numero': 'Ex: 123',
             'complemento': 'Ex: Apto 45B',
-            'bairro': 'Ex: Mooca',
-            'cidade': 'Ex: São Paulo',
-            'estado': 'Ex: SP',
+            'bairro': 'Ex: Rocas',
             'cep': 'Ex: 01234-567',
         }
 
