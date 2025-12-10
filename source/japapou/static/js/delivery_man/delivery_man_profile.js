@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-	console.log("manage_profile.js carregado ✅");
+	console.log("client_profile.js carregado ✅");
 
 	// 🔹 Função utilitária para pegar o token CSRF
 	function getCSRFToken() {
@@ -53,37 +53,44 @@ document.addEventListener("DOMContentLoaded", () => {
 			input.focus();
 
 			async function saveEdit() {
-				let newValue = input.value.trim();
+				let newValue = input.value.trim(); // O valor atual é YYYY-MM-DD (do input type="date")
 
-				// 🔹 Converte data_nascimento antes de enviar
-				if (editable.dataset.field === "data_nascimento" && newValue) {
-					// yyyy-mm-dd → dd/mm/yyyy para exibição
-					const parts = newValue.split("-");
-					if (parts.length === 3) {
-						const formatted = `${parts[2]}/${parts[1]}/${parts[0]}`;
-						newValue = formatted;
+				let valueToSend = newValue; // Mantém no formato YYYY-MM-DD para o backend (padrão Django)
+
+				// 🔹 Converte data_nascimento para EXIBIÇÃO no frontend, se não estiver vazio
+				if (editable.dataset.field === "data_nascimento") {
+					
+					// Converte yyyy-mm-dd (que está em newValue) para dd/mm/yyyy para exibição
+					if (newValue) {
+						const parts = newValue.split("-");
+						if (parts.length === 3) {
+							// Formato de exibição: dd/mm/yyyy
+							const formatted = `${parts[2]}/${parts[1]}/${parts[0]}`;
+							editable.textContent = formatted;
+						}
+					} else {
+						// Data vazia → exibe "—"
+						editable.textContent = "—";
+					}
+					
+				} else {
+					// Senha → não mostrar valor
+					if (editable.dataset.field === "senha") {
+						editable.textContent = "**************";
+					}
+					// Outros campos → valor direto
+					else {
+						editable.textContent = newValue || "—";
 					}
 				}
-
+				
 				// Restaura o span original
 				input.replaceWith(editable);
 
-				// Senha → não mostrar valor
-				if (editable.dataset.field === "senha") {
-					editable.textContent = "**************";
-				}
-				// Data vazia → exibe "—"
-				else if (editable.dataset.field === "data_nascimento" && !newValue) {
-					editable.textContent = "—";
-				}
-				// Outros campos → valor direto
-				else {
-					editable.textContent = newValue || "—";
-				}
 
 				// Envia via AJAX
 				try {
-					const response = await fetch("/delivery_man/profile/update_user/", {
+					const response = await fetch("/client/profile/update_user/", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",
@@ -92,16 +99,23 @@ document.addEventListener("DOMContentLoaded", () => {
 						body: JSON.stringify({
 							id: editable.dataset.id,
 							field: editable.dataset.field,
-							value: newValue,
+							// 🚨 CORREÇÃO PRINCIPAL: Envia o valor YYYY-MM-DD (valueToSend)
+							value: valueToSend, 
 						}),
 					});
 
 					const result = await response.json();
-					if (!response.ok || result.status !== "ok") {
-						alert("Erro ao salvar! " + (result.mensagem || ""));
+					if (response.ok && result.status === "ok") {
+						// ⭐ SUCESSO na edição inline
+						showStatusToast('Suas informações foram alteradas com sucesso!', true);
+					} else {
+						// ⭐ ERRO na edição inline
+						showStatusToast("Erro ao salvar! " + (result.mensagem || "Verifique o console."), false);
 						console.log(result);
 					}
 				} catch (err) {
+					// ⭐ ERRO na requisição
+					showStatusToast("Erro de conexão ao tentar salvar.", false);
 					console.error("Erro:", err);
 				}
 			}
@@ -130,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			formData.append("id", userId);
 
 			try {
-				const response = await fetch("/delivery_man/profile/update_photo/", {
+				const response = await fetch("/client/profile/update_photo/", {
 					method: "POST",
 					headers: {
 						"X-CSRFToken": getCSRFToken(),
@@ -141,10 +155,15 @@ document.addEventListener("DOMContentLoaded", () => {
 				const data = await response.json();
 				if (data.status === "ok") {
 					previewImage.src = data.nova_foto_url + "?t=" + new Date().getTime();
+					// ⭐ SUCESSO no upload de foto
+					showStatusToast('Foto de perfil alterada com sucesso!', true);
 				} else {
-					alert("Erro ao enviar imagem: " + (data.mensagem || ""));
+					// ⭐ ERRO no upload de foto
+					showStatusToast("Erro ao enviar imagem: " + (data.mensagem || "Verifique o console."), false);
 				}
 			} catch (error) {
+				// ⭐ ERRO na requisição
+				showStatusToast("Erro de conexão ao tentar fazer upload.", false);
 				console.error("Erro ao enviar imagem:", error);
 			}
 		});
@@ -160,7 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			formData.append("id", userId);
 
 			try {
-				const response = await fetch("/delivery_man/profile/update_photo/", {
+				const response = await fetch("/client/profile/update_photo/", {
 					method: "POST",
 					headers: {
 						"X-CSRFToken": getCSRFToken(),
@@ -170,11 +189,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 				const data = await response.json();
 				if (data.status === "ok") {
-					previewImage.src = "/static/imgs/manager/profile.png";
+					// A constante 'defaultImagePath' está definida no profile.html
+					previewImage.src = defaultImagePath || "/static/imgs/manager/profile.png"; 
+					// ⭐ SUCESSO na remoção de foto
+					showStatusToast('Foto de perfil removida com sucesso!', true);
 				} else {
-					alert("Erro ao remover a foto: " + (data.mensagem || ""));
+					// ⭐ ERRO na remoção de foto
+					showStatusToast("Erro ao remover a foto: " + (data.mensagem || "Verifique o console."), false);
 				}
 			} catch (error) {
+				// ⭐ ERRO na requisição
+				showStatusToast("Erro de conexão ao tentar remover a foto.", false);
 				console.error("Erro ao remover a foto:", error);
 			}
 		});

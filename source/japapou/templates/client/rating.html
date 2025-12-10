@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}
+  Avaliar {{ plate.name }} 
+{% endblock %}
+
 {% block extra_head %}
-    <link rel="stylesheet" href="{% static 'css/plate_details.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/client/plate_details.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 {% endblock %}
 
@@ -74,7 +78,7 @@
         <span>{{reviews.count}} avaliações</span>
     </div>
     <div class="graficos-avaliacao">
-        <div class="linha 1">
+        <div class="linha cinco">
             <div class="estrelas">
                 <i class="fas fa-star filled-simple laranja-claro"></i>
                 <i class="fas fa-star filled-simple laranja-claro"></i>
@@ -82,10 +86,14 @@
                 <i class="fas fa-star filled-simple laranja-claro"></i>
                 <i class="fas fa-star filled-simple laranja-claro"></i>
             </div>
-            <p>linha 1</p>
-            <p class="laranja-claro">1</p>
+            <div class="barra-container">
+                <div class="barra-progresso" 
+                     style="width: {{ rating_distribution.0.percentage }}%; background-color: #f8761e;">
+                    </div>
+            </div>
+            <p class="laranja-claro">{{ rating_distribution.0.count }}</p>
         </div>
-        <div class="linha 2">
+        <div class="linha quatro">
             <div class="estrelas">
                 <i class="fas fa-star filled-simple laranja-claro"></i>
                 <i class="fas fa-star filled-simple laranja-claro"></i>
@@ -93,10 +101,14 @@
                 <i class="fas fa-star filled-simple laranja-claro"></i>
                 <i class="fas fa-star filled-simple azul-claro"></i>
             </div>
-            <p>linha 2</p>
-            <p class="laranja-claro">2</p>
+            <div class="barra-container">
+                <div class="barra-progresso" 
+                     style="width: {{ rating_distribution.1.percentage }}%; background-color: #f8761e;">
+                    </div>
+            </div>
+            <p class="laranja-claro">{{ rating_distribution.1.count }}</p>
         </div>
-        <div class="linha 3">
+        <div class="linha tres">
             <div class="estrelas">
                 <i class="fas fa-star filled-simple laranja-escuro"></i>
                 <i class="fas fa-star filled-simple laranja-escuro"></i>
@@ -104,10 +116,14 @@
                 <i class="fas fa-star filled-simple azul-claro"></i>
                 <i class="fas fa-star filled-simple azul-claro"></i>
             </div>
-            <p>linha 3</p>
-            <p class="laranja-escuro">3</p>
+            <div class="barra-container">
+                <div class="barra-progresso" 
+                     style="width: {{ rating_distribution.2.percentage }}%; background-color: #e25d12;">
+                    </div>
+            </div>
+            <p class="laranja-escuro">{{ rating_distribution.2.count }}</p>
         </div>
-        <div class="linha 4">
+        <div class="linha dois">
             <div class="estrelas">
                 <i class="fas fa-star filled-simple laranja-escuro"></i>
                 <i class="fas fa-star filled-simple laranja-escuro"></i>
@@ -115,10 +131,14 @@
                 <i class="fas fa-star filled-simple azul-claro"></i>
                 <i class="fas fa-star filled-simple azul-claro"></i>
             </div>
-            <p>linha 4</p>
-            <p class="laranja-escuro">4</p>
+            <div class="barra-container">
+                <div class="barra-progresso" 
+                     style="width: {{ rating_distribution.3.percentage }}%; background-color: #e25d12;">
+                    </div>
+            </div>
+            <p class="laranja-escuro">{{ rating_distribution.3.count }}</p>
         </div>
-        <div class="linha 5">
+        <div class="linha um">
             <div class="estrelas">
                 <i class="fas fa-star filled-simple vermelho"></i>
                 <i class="fas fa-star filled-simple azul-claro"></i>
@@ -126,8 +146,12 @@
                 <i class="fas fa-star filled-simple azul-claro"></i>
                 <i class="fas fa-star filled-simple azul-claro"></i>
             </div>
-            <p>linha 5</p>
-            <p class="vermelho">5</p>
+            <div class="barra-container">
+                <div class="barra-progresso" 
+                     style="width: {{ rating_distribution.4.percentage }}%; background-color: #981827;">
+                    </div>
+            </div>
+            <p class="vermelho">{{ rating_distribution.4.count }}</p>
         </div>
     </div>
     <div class="button-avaliação">
@@ -160,7 +184,7 @@
 </div>
 <div class="plate-rating-summary">
     {% if user.is_authenticated %}
-        <form class="sua-avaliacao" method="POST" enctype="multipart/form-data" action="{% url 'details_plate' plate.id %}">
+        <form class="sua-avaliacao" method="POST" enctype="multipart/form-data" action="{% if editing %}{% url 'edit_review' review.id %}{% else %}{% url 'rating' plate.id %}{% endif %}">
             {% csrf_token %}
             
             {% if form.non_field_errors %}
@@ -216,40 +240,12 @@
             <div class="botoes">
                 <a href="{% url 'details_plate' plate.id %}"> <p class="cancelar">Cancelar</p></a>
                 <!-- esse volta pra página anterior do plato -->
-                <button type="submit" class="btn btn-primary enviar">Enviar Avaliação</button>
+                <button type="submit" class="btn btn-primary enviar">{% if editing %}Atualizar Avaliação{% else %}Enviar Avaliação{% endif %}</button>
             </div>
         </form>
     {% else %}
         <p><a href="{% url 'login' %}">Faça login</a> para deixar uma avaliação.</p>
     {% endif %}
-
-    <!-- <hr class="mt-5"> -->
-    <h2>Avaliações <span class="teste-span"> ({{ reviews.count }}) </span> </h2>
-    
-    {% for review in reviews %}
-    <div class="card mb-3">
-        <div class="card-body">
-            <h5 class="card-title"><b>{{ review.usuario.username }}</b></h5>
-            <h6 class="card-subtitle mb-2 text-muted">
-                {% for i in "12345" %}
-                    {% if i|add:0 <= review.value %}
-                        <span style="color: var(--laranja-mais-claro);">&#9733;</span>
-                    {% else %}
-                        <span style="color: var(--azul-mais-escuro);">&#9733;</span>
-                    {% endif %}
-                {% endfor %}
-                ({{ review.value }}/5)
-            </h6>
-            <p class="card-text">{{ review.comment|linebreaksbr }}</p>
-            {% if review.image_review %}
-                <img src="{{ review.image_review.url }}" alt="Foto da avaliação" class="img-fluid rounded" style="max-height: 200px;">
-            {% endif %}
-            <small class="text-muted">{{ review.created_at|date:"d/m/Y \à\s H:i" }}</small>
-        </div>
-    </div>
-    {% empty %}
-    <p>Este prato ainda não possui avaliações. Seja o primeiro!</p>
-    {% endfor %}
 </div>
 
 
@@ -365,4 +361,7 @@
     // =========================================================
     });
 </script>
+
+
+<script src="{% static 'js/client/details_plate.js' %}"></script>
 {% endblock %}

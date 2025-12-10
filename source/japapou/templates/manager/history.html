@@ -2,14 +2,14 @@
 {% load static %}
 
 {% block title %}
-Visualizar Pedidos Pendentes
+Pedidos Finalizados
 {% endblock %}
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/manager/manage_orders.css' %}" />
 {% endblock %}
 
 {% block content %}
-<h1>Pedidos Pendentes</h1>
+<h1>Pedidos Finalizados</h1>
 
 {% for pedido in pedidos %}
 {# FILTRAGEM: Exibe apenas se nenhuma das datas estiver preenchida #}

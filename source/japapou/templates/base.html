@@ -1,188 +1,199 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>
-      {% block title %}
+ <head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>
+   {% block title %}
 
-      {% endblock %}- JAPAPOU
-    </title>
-    <!-- FONTS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=image_arrow_up" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+   {% endblock %}- JAPAPOU
+  </title>
+  <!-- FONTS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=image_arrow_up" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-    <!-- JS LIBS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/eb5472cd53.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- JS LIBS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/eb5472cd53.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    <!-- GLOBAL CSS -->
-    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+  <!-- GLOBAL CSS -->
+  <link rel="stylesheet" href="{% static 'css/global.css' %}" />
 
-    <!-- EXTRA HEAD -->
-    {% block extra_head %}
+  <!-- EXTRA HEAD -->
+  {% block extra_head %}
 
-    {% endblock %}
+  {% endblock %}
 
-    {% block styles %}{% endblock %}
-  </head>
-  <body>
-    <header id="header">
-      {% csrf_token %}
-      <div id="logo">
-        {% if user.is_authenticated and user.tipo_usuario == "MANAGER" and user.foto_perfil %}
-          <!-- <a href="{% url 'manager_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
-          <a href="{% url 'manager_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a>
-        {% elif user.is_authenticated and user.tipo_usuario == "CLIENT" and user.foto_perfil %}
-          <!-- <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
-          <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a>
-        {% elif user.is_authenticated and user.tipo_usuario == "DELIVERY_MAN" and user.foto_perfil %}
-          <!-- <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
-          <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a>
-        {% elif user.is_authenticated and user.tipo_usuario == "MANAGER" %}
-          <!-- <a href="{% url 'manager_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
-          <a href="{% url 'manager_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
-        {% elif user.is_authenticated and user.tipo_usuario == "CLIENT" %}
-          <!-- <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
-          <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
-        {% elif user.is_authenticated and user.tipo_usuario == "DELIVERY_MAN" %}
-          <!-- <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
-          <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
-        {% else %}
-          <a href="{% url 'login_register' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
-        {% endif %}
+  {% block styles %}{% endblock %}
+ </head>
+ <body>
+  <header id="header">
+   {% csrf_token %}
+   <div id="logo">
+    {% if user.is_authenticated and user.tipo_usuario == "MANAGER" and user.foto_perfil %}
+     <!-- <a href="{% url 'manager_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
+     <a href="{% url 'manager_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a>
+    {% elif user.is_authenticated and user.tipo_usuario == "CLIENT" and user.foto_perfil %}
+     <!-- <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
+     <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a>
+    {% elif user.is_authenticated and user.tipo_usuario == "DELIVERY_MAN" and user.foto_perfil %}
+     <!-- <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
+     <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a>
+    {% elif user.is_authenticated and user.tipo_usuario == "MANAGER" %}
+     <!-- <a href="{% url 'manager_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
+     <a href="{% url 'manager_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
+    {% elif user.is_authenticated and user.tipo_usuario == "CLIENT" %}
+     <!-- <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
+     <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
+    {% elif user.is_authenticated and user.tipo_usuario == "DELIVERY_MAN" %}
+     <!-- <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
+     <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
+    {% else %}
+     <a href="{% url 'login_register' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
+    {% endif %}
+   </div>
+
+  {% if user.is_authenticated and user.tipo_usuario == 'DELIVERY_MAN' and average_courier_rating is not None %}
+    <div class="header-rating-display">
+        <i class="star fa-solid fa-star"></i> 
+        <span class="rating-value">{{ average_courier_rating|floatformat:2 }}</span>
+    </div>
+  {% endif %}
+
+   <a href="{% url 'home' %}"><p>JAPAPOU</p></a>
+
+   <!-- O hamburger foi removido daqui para que ele possa ter um z-index maior que o header -->
+  </header>
+
+  <!-- O hamburger agora é um irmão direto do header e nav -->
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav>
+   <ul class="sideMenu" id="sideMenu">
+    {% if user.is_authenticated and user.tipo_usuario == 'MANAGER' %}
+     {% include 'partials/menu_manager.html' %}
+    {% elif user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
+     {% include 'partials/menu_client.html' %}
+    {% elif user.is_authenticated and user.tipo_usuario == 'DELIVERY_MAN' %}
+     {% include 'partials/menu_delivery_man.html' %}
+    {% else %}
+     {% include 'partials/menu_visitor.html' %}
+    {% endif %}
+   </ul>
+  </nav>
+  <main>
+   {% block content %}
+
+   {% endblock %}
+  </main>
+  <footer>
+   <div class="footer-top">
+    <div class="footer-logo">
+     <a href="{% url 'home' %}"><img src={% static "imgs/logo.png" %} alt="Logo" /></a>
+     <span class="footer-brand">JAPAPOU</span>
+    </div>
+    <div class="footer-social">
+     <i class="fa-solid fa-envelope"></i>
+     <i class="fa-brands fa-instagram"></i>
+     <i class="fa-brands fa-whatsapp"></i>
+    </div>
+   </div>
+
+   <hr class="footer-divider" />
+   
+    {% if user.is_authenticated and user.tipo_usuario == 'MANAGER' %}
+    <div class="footer-links">
+     <div class="footer-column">
+      <h4><a href="{% url 'manager_profile' %}"><i class="fa-solid fa-gear"></i>Minha Conta</a></h4>
+     </div>
+     <div class="footer-column">
+      <h4><a href="{% url 'manager_plates' %}"><i class="fa-solid fa-book-open"></i> Pratos</a></h4>
+     </div>
+     <div class="footer-column">
+      <h4><a href="{% url 'manager_menu' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
+     </div>
+     <div class="footer-column">
+      <h4><a href="{% url 'manager_delivery_man' %}"><i class="fa-solid fa-gear"></i> Entregadores</a></h4>
+     </div>
+     <div class="footer-column">
+      <h4><a href="{% url 'manager_orders' %}"><i class="fa-solid fa-gear"></i> Pedidos Pendentes</a></h4>
+     </div>
+     <div class="footer-column">
+      <h4><a href="{% url 'manager_history' %}"><i class="fa-solid fa-gear"></i> Histórico</a></h4>
+     </div>
+     <div class="footer-column">
+      <h4><a href="{% url 'manager_dashboard' %}"><i class="fa-solid fa-gear"></i> Relatórios</a></h4>
+     </div>
+     <div class="footer-column">
+      <h4><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></h4>
+     </div>
+    </div>
+
+    {% elif user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
+     <div class="footer-links">
+      <div class="footer-column">
+       <h4><a href="{% url 'client_profile' %}"><i class="fa-solid fa-gear"></i>Minha Conta</a></h4>
       </div>
-
-      <a href="{% url 'home' %}"><p>JAPAPOU</p></a>
-
-      <div class="hamburger" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="footer-column">
+       <h4><a href="{% url 'client_menu' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
       </div>
-    </header>
-    <nav>
-      <ul class="sideMenu" id="sideMenu">
-        {% if user.is_authenticated and user.tipo_usuario == 'MANAGER' %}
-          {% include 'partials/menu_manager.html' %}
-        {% elif user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
-          {% include 'partials/menu_client.html' %}
-        {% elif user.is_authenticated and user.tipo_usuario == 'DELIVERY_MAN' %}
-          {% include 'partials/menu_delivery_man.html' %}
-        {% else %}
-          {% include 'partials/menu_visitor.html' %}
-        {% endif %}
-      </ul>
-    </nav>
-    <main>
-      {% block content %}
-
-      {% endblock %}
-    </main>
-    <footer>
-      <div class="footer-top">
-        <div class="footer-logo">
-          <a href="{% url 'home' %}"><img src={% static "imgs/logo.png" %} alt="Logo" /></a>
-          <span class="footer-brand">JAPAPOU</span>
-        </div>
-        <div class="footer-social">
-          <i class="fa-solid fa-envelope"></i>
-          <i class="fa-brands fa-instagram"></i>
-          <i class="fa-brands fa-whatsapp"></i>
-        </div>
+      <div class="footer-column">
+       <h4><a href="{% url 'client_order' %}"><i class="fa-solid fa-gear"></i>Meus Pedidos</a></h4>
       </div>
+      <div class="footer-column">
+       <h4><a href="{% url 'client_history' %}"><i class="fa-solid fa-gear"></i> Histórico</a></h4>
+      </div>
+      <div class="footer-column">
+       <h4><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></h4>
+      </div> 
+     </div>
 
-      <hr class="footer-divider" />
-      
-        {% if user.is_authenticated and user.tipo_usuario == 'MANAGER' %}
-        <div class="footer-links">
-          <div class="footer-column">
-            <h4><a href="{% url 'manager_profile' %}"><i class="fa-solid fa-gear"></i>Minha Conta</a></h4>
-          </div>
-          <div class="footer-column">
-            <h4><a href="{% url 'manager_plates' %}"><i class="fa-solid fa-book-open"></i> Pratos</a></h4>
-          </div>
-          <div class="footer-column">
-            <h4><a href="{% url 'manager_menu' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
-          </div>
-          <div class="footer-column">
-            <h4><a href="{% url 'manager_delivery_man' %}"><i class="fa-solid fa-gear"></i> Entregadores</a></h4>
-          </div>
-          <div class="footer-column">
-            <h4><a href="{% url 'manager_orders' %}"><i class="fa-solid fa-gear"></i> Pedidos Pendentes</a></h4>
-          </div>
-          <div class="footer-column">
-            <h4><a href="{% url 'manager_history' %}"><i class="fa-solid fa-gear"></i> Histórico</a></h4>
-          </div>
-          <div class="footer-column">
-            <h4><a href="{% url 'manager_dashboard' %}"><i class="fa-solid fa-gear"></i> Relatórios</a></h4>
-          </div>
-          <div class="footer-column">
-            <h4><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></h4>
-          </div>
-        </div>
-
-        {% elif user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
-          <div class="footer-links">
-            <div class="footer-column">
-              <h4><a href="{% url 'client_profile' %}"><i class="fa-solid fa-gear"></i>Minha Conta</a></h4>
-            </div>
-            <div class="footer-column">
-              <h4><a href="{% url 'client_menu' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
-            </div>
-            <div class="footer-column">
-              <h4><a href="{% url 'client_order' %}"><i class="fa-solid fa-gear"></i>Meus Pedidos</a></h4>
-            </div>
-            <div class="footer-column">
-              <h4><a href="{% url 'client_history' %}"><i class="fa-solid fa-gear"></i> Histórico</a></h4>
-            </div>
-            <div class="footer-column">
-              <h4><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></h4>
-            </div>  
-          </div>
-
-        {% elif user.is_authenticated and user.tipo_usuario == 'DELIVERY_MAN' %}
-          <div class="footer-links">
-            <div class="footer-column">
-              <h4><a href="{% url 'delivery_man_profile' %}"><i class="fa-solid fa-gear"></i>Minha Conta</a></h4>
-            </div>
-            <div class="footer-column">
-              <h4><a href="{% url 'client_menu' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
-            </div>
-            <div class="footer-column">
-              <h4><a href="{% url 'delivery_man_orders' %}"><i class="fa-solid fa-gear"></i>Pedidos Pendentes</a></h4>
-            </div>
-            <div class="footer-column">
-              <h4><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></h4>
-            </div>
-          </div>
-        
-        {% else %}
-          <div class="footer-links">
-            <div class="footer-column">
-              <h4><a href="{% url 'client_profile' %}"><i class="fa-solid fa-gear"></i>Minha Conta</a></h4>
-            </div>
-            <div class="footer-column">
-              <h4><a href="{% url 'visitor_menu' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
-            </div>
-            <div class="footer-column">
-              <h4><a href="{% url 'client_order' %}"><i class="fa-solid fa-gear"></i>Meus Pedidos</a></h4>
-            </div>
-          </div>
-        {% endif %}
-    </footer>
+    {% elif user.is_authenticated and user.tipo_usuario == 'DELIVERY_MAN' %}
+     <div class="footer-links">
+      <div class="footer-column">
+       <h4><a href="{% url 'delivery_man_profile' %}"><i class="fa-solid fa-gear"></i>Minha Conta</a></h4>
+      </div>
+      <div class="footer-column">
+       <h4><a href="{% url 'client_menu' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
+      </div>
+      <div class="footer-column">
+       <h4><a href="{% url 'delivery_man_orders' %}"><i class="fa-solid fa-gear"></i>Pedidos Pendentes</a></h4>
+      </div>
+      <div class="footer-column">
+       <h4><a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></h4>
+      </div>
+     </div>
+    
+    {% else %}
+     <div class="footer-links">
+      <div class="footer-column">
+       <h4><a href="{% url 'client_profile' %}"><i class="fa-solid fa-gear"></i>Minha Conta</a></h4>
+      </div>
+      <div class="footer-column">
+       <h4><a href="{% url 'visitor_menu' %}"><i class="fa-solid fa-book-open"></i> Menu</a></h4>
+      </div>
+      <div class="footer-column">
+       <h4><a href="{% url 'client_order' %}"><i class="fa-solid fa-gear"></i>Meus Pedidos</a></h4>
+      </div>
+     </div>
+    {% endif %}
+  </footer>
 
 
-    <script src="{% static 'js/global.js' %}"></script>
-    {% block scripts %}
+  <script src="{% static 'js/global.js' %}"></script>
+  {% block scripts %}
 
-    {% endblock %}
-  </body>
+  {% endblock %}
+ </body>
 </html>

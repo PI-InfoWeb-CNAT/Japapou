@@ -1,9 +1,83 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block title %}
+    Meu Histórico  
+{% endblock %}
+
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/client/cart.css' %}">
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"> -->
+
+<script>
+    // Funções JavaScript para atualizar a quantidade e submeter o formulário
+    function updateQuantity(itemId, change) {
+        const input = document.getElementById('quantity-' + itemId);
+        let current = parseInt(input.value);
+        let newValue = current + change;
+
+        if (newValue >= 1) {
+            input.value = newValue;
+            
+            // Submete o formulário quando a quantidade muda
+            const form = input.closest('form');
+            if (form) {
+                form.submit();
+            }
+        }
+    }
+    
+    // Função para filtrar itens (movida para o escopo global ou para ser chamada diretamente no onkeyup)
+    function filterCartItems(searchTerm) {
+        const itemsList = document.querySelector('.lista-itens');
+        // Adiciona um null check para evitar erro se a lista estiver vazia
+        const cartItems = itemsList ? itemsList.querySelectorAll('.item-carrinho') : []; 
+
+        cartItems.forEach(item => {
+            const itemNameElement = item.querySelector('.item-nome');
+            if (itemNameElement) {
+                const itemName = itemNameElement.textContent.toLowerCase();
+                
+                if (itemName.includes(searchTerm)) {
+                    // Garante que o item aparece no layout correto
+                    item.style.display = 'flex'; 
+                } else {
+                    item.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    // === NOVO BLOCO: Lógica para mostrar/esconder o campo de busca ===
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleBtn = document.getElementById('toggle-search-btn');
+        const searchContainer = document.getElementById('search-container');
+        const searchInput = document.getElementById('cart-search-input');
+    
+        if (toggleBtn && searchContainer && searchInput) {
+            // Função para mostrar/esconder o campo de busca
+            toggleBtn.addEventListener('click', () => {
+                // Verifica se o container está visível
+                const isVisible = searchContainer.style.display === 'flex' || searchContainer.style.display === '';
+                
+                // Usa 'flex' para corresponder ao seu layout, garantindo que o Tailwind ou CSS funcione bem
+                searchContainer.style.display = isVisible ? 'none' : 'flex';
+            
+                if (!isVisible) {
+                    // Se for visível agora, foca no input
+                    searchInput.focus(); 
+                } else {
+                    // Ao esconder, limpa o campo e restaura a lista
+                    searchInput.value = ''; 
+                    filterCartItems(''); // Mostra todos os itens novamente
+                }
+            });
+        } else {
+            console.error("Erro: Elementos de busca (botão, container ou input) não encontrados.");
+        }
+    });
+    // =================================================================
+</script>
 {% endblock %}
 
 {% block content %}
@@ -29,7 +103,16 @@
                     {% endfor %}
                 </select>
             </div>
-            <button class="btn-icone" aria-label="Pesquisar">
+            <div id="search-container" class="search-container-input" style="display: none;">
+                <input 
+                    type="text" 
+                    id="cart-search-input" 
+                    placeholder="Pesquisar prato no carrinho..." 
+                    class="form-control"
+                    onkeyup="filterCartItems(this.value.toLowerCase())"
+                >
+            </div>
+            <button id="toggle-search-btn" class="btn-icone" aria-label="Pesquisar">
                 <i class="fas fa-search"></i>
             </button>
         </div>
@@ -104,16 +187,17 @@
                     </div>
 
                     <div class="checkout-btn-container histórico">
-                        <form action="" method="POST">
+                        <form action="{% url 'client_receipt' order_id=pedido.id %}" method="POST">
                             {% csrf_token %}
-                            <a href="{% url 'client_receipt' order_id=pedido.id %}">
-                                <button type="submit" class="btn-checkout">
-                                    Avaliações e Recibo
-                                </button>
-                            </a>
+                            <button type="submit" class="btn-checkout">
+                                Avaliações e Recibo
+                            </button>
                         </form>
+                        
+                        {# Alteração AQUI: Adiciona o order_id para re-pedido #}
                         <form action="{% url 'add_to_cart' %}" method="POST">
                             {% csrf_token %}
+                            <input type="hidden" name="order_id" value="{{ pedido.id }}">
                             <button type="submit" class="btn-checkout">
                                 + Adicionar ao Carrinho
                             </button>
@@ -186,6 +270,11 @@
     
         // Funções JavaScript existentes (updateQuantity, etc., permanecem aqui se necessário)
     </script>
+
+{% block scripts %}
+
+<script src="{% static 'js/client/cart.js' %}"></script>
+{% endblock %}
 
 
 {% endblock %}

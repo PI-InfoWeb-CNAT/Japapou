@@ -11,9 +11,6 @@ section{
     text-align: left;
     margin: 1em;
 }
-i.fa-circle-check{
-    font-size: 150px;
-}
 h2{
     text-align: left;
     font-weight: 800;
@@ -71,4 +68,186 @@ tfoot td{
 }
 table td{
     padding: 1em;
+}
+table tr:hover{
+    background-color: var(--azul-mais-claro);
+}
+
+table tfoot tr:hover{
+    background-color: var(--laranja-mais-claro);
+}
+
+table thead tr:hover{
+    background-color: var(--azul-mais-escuro);
+}
+
+/* --- Estilos do Modal (CORRIGIDO: display: none por padrão) --- */
+.modal-overlay {
+    display: none; /* CORRIGIDO: Deve ser 'none' para que o JS o abra */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); 
+    overflow: auto;
+    /* Remover 'display: flex;' daqui, ele será adicionado via JS */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--azul-mais-claro);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* --- Estilos de Detalhes e Observações --- */
+.modal-content h2 {
+    margin-bottom: 10px !important;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.delivery-details {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px 0;
+}
+
+.delivery-details p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+.observacoes-label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    background-color: var(--azul-mais-escuro);
+    border: 1px solid white;
+    color: white;
+    border-radius: 5px;
+    resize: none;
+    font-size: 0.9em;
+}
+
+/* --- Estilos das Estrelas --- */
+.rating-stars {
+    font-size: 36px;
+    color: var(--laranja-mais-claro);
+    margin-bottom: 20px;
+}
+
+.interactive-rating .star {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.interactive-rating .star.filled, 
+.entregador-media .filled {
+    color: var(--laranja-mais-claro);
+}
+
+.interactive-rating .star:hover,
+.interactive-rating .star-hover {
+    color: var(--laranja-mais-escuro);
+}
+
+#submitBtn {
+    background-color: var(--laranja-mais-claro);
+    color: #032539;
+    border: none;
+    padding: 10px 30px;
+    margin-top: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+#submitBtn:hover {
+    background-color: var(--laranja-mais-claro);
+}
+
+.fa-star:before{
+    color: var(--laranja-mais-claro);
+}
+.modal-content > p{
+    margin: 0em !important;
+}
+.rating-stars{
+    margin: 0em !important;
+}
+i.fa-circle-check{
+    font-size: 150px;
+    color: white !important;
+}
+button.btn-submit{
+    background-color: var(--laranja-mais-claro);
+    border: none !important;
+    padding: 0.5em;
+    padding-inline: 41%;
+}
+button.btn-submit:hover{
+    background-color: var(--laranja-mais-escuro);
+    color: white;
+}
+
+button.btn-submit.btn-plate-rate{
+    border-radius: 50px;
+    padding-inline: 36%;
+}
+.linha.item-prato-unico{
+    text-align: center;
+}
+p.avaliacao-incentivo{
+    margin-bottom: 2em !important;
+}
+div.linha.item-prato-multi{
+    display: flex;
+    width: 100%;
+}
+.linha.item-prato-multi > p.esquerda{
+    width: 50%;
+    text-align: left;
+}
+.linha.item-prato-multi{
+    margin-top: 1em;
+}
+a.btn-submit.btn-plate-rate-list{
+    background-color: var(--laranja-mais-claro) !important;
+    color: white !important;
+    text-decoration: none !important;
+    padding: 0.3em !important;
+    padding-inline: 15% !important;
+    border-radius: 50px !important;
+}
+a.btn-submit.btn-plate-rate-list:hover{
+    background-color: var(--laranja-mais-escuro) !important;
+    color: white !important;
 }

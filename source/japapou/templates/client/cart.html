@@ -22,6 +22,57 @@
             }
         }
     }
+    
+    // Função para filtrar itens (movida para o escopo global ou para ser chamada diretamente no onkeyup)
+    function filterCartItems(searchTerm) {
+        const itemsList = document.querySelector('.lista-itens');
+        // Adiciona um null check para evitar erro se a lista estiver vazia
+        const cartItems = itemsList ? itemsList.querySelectorAll('.item-carrinho') : []; 
+
+        cartItems.forEach(item => {
+            const itemNameElement = item.querySelector('.item-nome');
+            if (itemNameElement) {
+                const itemName = itemNameElement.textContent.toLowerCase();
+                
+                if (itemName.includes(searchTerm)) {
+                    // Garante que o item aparece no layout correto
+                    item.style.display = 'flex'; 
+                } else {
+                    item.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    // === NOVO BLOCO: Lógica para mostrar/esconder o campo de busca ===
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleBtn = document.getElementById('toggle-search-btn');
+        const searchContainer = document.getElementById('search-container');
+        const searchInput = document.getElementById('cart-search-input');
+    
+        if (toggleBtn && searchContainer && searchInput) {
+            // Função para mostrar/esconder o campo de busca
+            toggleBtn.addEventListener('click', () => {
+                // Verifica se o container está visível
+                const isVisible = searchContainer.style.display === 'flex' || searchContainer.style.display === '';
+                
+                // Usa 'flex' para corresponder ao seu layout, garantindo que o Tailwind ou CSS funcione bem
+                searchContainer.style.display = isVisible ? 'none' : 'flex';
+            
+                if (!isVisible) {
+                    // Se for visível agora, foca no input
+                    searchInput.focus(); 
+                } else {
+                    // Ao esconder, limpa o campo e restaura a lista
+                    searchInput.value = ''; 
+                    filterCartItems(''); // Mostra todos os itens novamente
+                }
+            });
+        } else {
+            console.error("Erro: Elementos de busca (botão, container ou input) não encontrados.");
+        }
+    });
+    // =================================================================
 </script>
 {% endblock %}
 
@@ -39,16 +90,27 @@
         </div>
 
         <div class="icones-container">
-            <button class="btn-icone" aria-label="Pesquisar">
-                <i class="fas fa-search"></i>
-            </button>
-            
             <a href="{% url 'client_menu' %}">
                 <button class="btn-icone" aria-label="Adicionar Novo Item">
                     <i class="fas fa-plus-circle"></i>
                 </button>
             </a>
+
+            {# ESTE É O BOTÃO DA LUPA. O ID 'toggle-search-btn' É USADO NO JS ABAIXO. #}
+            <button id="toggle-search-btn" class="btn-icone" aria-label="Pesquisar">
+                <i class="fas fa-search"></i>
+            </button>
+            <div id="search-container" class="search-container-input" style="display: none;">
+                <input 
+                    type="text" 
+                    id="cart-search-input" 
+                    placeholder="Pesquisar prato no carrinho..." 
+                    class="form-control"
+                    onkeyup="filterCartItems(this.value.toLowerCase())"
+                >
+            </div>
         </div>
+        
 
         <div class="coluna-cabecalho">
             <span class="cab-produto">Produto</span>
@@ -78,7 +140,7 @@
                     />
                     <div>
                         <p class="item-nome">{{ item.plate.name }}</p>
-                        <p class="item-especificacoes">Especificações: Sem adição de pimenta.</p> 
+                        <p class="item-especificacoes">{{ item.plate.description }}</p> 
                         
                         <form action="{% url 'remove_from_cart' %}" method="POST" class="form-remover">
                             {% csrf_token %}
@@ -153,7 +215,7 @@
             </div>
 
             <div class="checkout-btn-container">
-                <form action="{% url 'checkout' %}">
+                <form action="{% url 'checkout' %}" method="GET">
                     {% csrf_token %}
                     <button type="submit" class="btn-checkout">
                         Check Out
@@ -164,10 +226,11 @@
 
     {% endif %}
 </div>
-</div>
+{# Fechamento da div container-carrinho #}
+</div> 
 
 <section id="grid-espaco">
-    <a href="" class="container-btn-sessao teste2"><p class="btn-sessao teste2">Contate-nos</p></a>
+    <a href="{% url 'contact' %}" class="container-btn-sessao teste2"><p class="btn-sessao teste2">Contate-nos</p></a>
     <div class="grid-container">
         <div class="grid-item area-a">
             <img src="{% static 'imgs/Grid(area-a).png' %}">
@@ -202,6 +265,8 @@
     <script id="dados-do-django" type="application/json">
         {{ dados_js|safe }}
     </script>
+    {# O código de busca foi movido para o bloco 'extra_head' para garantir que ele seja executado cedo #}
+    {# Removido o script de busca daqui. #}
 
 <script src="{% static 'js/client/cart.js' %}"></script>
 {% endblock %}

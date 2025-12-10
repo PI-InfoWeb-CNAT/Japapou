@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-Visualizar Pedidos Pendentes
+Pedidos Pendentes
 {% endblock %}
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/manager/manage_orders.css' %}" />
@@ -90,7 +90,7 @@ precisa ser atribuido entregador a este pedido
 </div>
 <br>
 
-{% if pedido.tipo_pedido == 'ENTREGA' and not pedido.entregador %}
+{% if not pedido.entregador and pedido.tipo_pedido == 'ENTREGA'%}
   <a href="{% url 'assign_delivery' order_id=pedido.id %}" class="btn-toggle">
     Atribuir Entregador
   </a>

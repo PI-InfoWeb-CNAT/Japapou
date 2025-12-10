@@ -86,7 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const csrfToken = detalhesEntregador.dataset.csrf;
     const selected = document.querySelector('input[name="selectedDeliveryMan"]:checked');
 
-    if (!selected) { alert('Selecione um entregador antes de atribuir.'); return; }
+    if (!selected) { 
+      // alert('Selecione um entregador antes de atribuir.');
+      return; }
 
     fetch(`/manager/assign_delivery/${orderId}/`, {
       method: 'POST',
@@ -96,11 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(res => res.json())
     .then(data => {
       if (data.success) {
-        alert('Entregador atribuído com sucesso!');
+        // alert('Entregador atribuído com sucesso!');
         location.reload();
-      } else alert('Erro ao atribuir entregador.');
+      } 
+      // else 
+      //   alert('Erro ao atribuir entregador.');
     })
-    .catch(err => { console.error(err); alert('Erro ao atribuir entregador.'); });
+    .catch(err => { 
+      console.error(err); 
+      // alert('Erro ao atribuir entregador.'); 
+    });
 
     modal.style.display = 'none';
   });
@@ -131,11 +138,11 @@ document.addEventListener('DOMContentLoaded', () => {
         confirmBtn.innerHTML = `<h4>Já saiu para entrega (${data.dispatch_date})</h4>`;
         confirmBtn.style.backgroundColor = '#3bb33b';
       } else {
-        alert('Erro ao confirmar saída.');
+        // alert('Erro ao confirmar saída.');
       }
     } catch (error) {
       console.error(error);
-      alert('Erro de conexão.');
+      // alert('Erro de conexão.');
     }
   });
 });

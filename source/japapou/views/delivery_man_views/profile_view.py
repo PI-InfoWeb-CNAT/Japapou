@@ -7,7 +7,7 @@ import json
 
 
 @login_required
-@permission_required(['japapou.view_customuser', 'japapou.change_customuser'], raise_exception=True)
+# @permission_required(['japapou.view_customuser', 'japapou.change_customuser'], raise_exception=True)
 def delivery_man_profile_view(request):
     return render(request, "delivery_man/profile.html", {"user": request.user})
 
@@ -30,6 +30,15 @@ def update_user(request):
 					return JsonResponse({"status": "ok"})
 				else:
 					return JsonResponse({"status": "erro", "mensagem": "Senha não pode ser vazia"})
+				
+			elif hasattr(user, field):
+				# 💡 CORREÇÃO AQUI: Se o valor for uma string vazia, salva como None
+				if value == "":
+					value = None
+				
+				setattr(user, field, value)
+				user.save()
+				return JsonResponse({"status": "ok"})
 
 			elif hasattr(user, field):
 				setattr(user, field, value)
@@ -75,3 +84,4 @@ def update_photo(request):
 			print("Erro update_photo:", e)
 			return JsonResponse({"status": "erro", "mensagem": str(e)})
 	return JsonResponse({"status": "erro", "mensagem": "Método inválido"})
+

@@ -2,141 +2,131 @@
 {% load static %}
 
 {% block title %}
-Visualizar Pedidos
+    Pedidos Finalizados 
 {% endblock %}
 {% block extra_head %}
-<link rel="stylesheet" href="{% static 'css/manager/manage_orders.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/manager/manage_orders.css' %}" />
 {% endblock %}
 
 {% block content %}
-<h1>Pedidos</h1>
+    <h1>Pedidos Finalizados</h1>
 
-{% for pedido in pedidos %}
-<div class="pedido-box">
+    {% for pedido in pedidos %}
+    {% if pedido.tipo_pedido == 'ENTREGA' and pedido.data_entrega and pedido.data_saida %}
+        <div class="pedido-box">
+            <div class="pedido-header">Pedido #{{ pedido.id }} - {{ pedido.get_tipo_pedido_display }}</div>
+            <div class="pedido-conteudo">
+                {% with item_count=pedido.itens.count|default:0 %}
+                    {% if item_count >= 4 %}
+                            {% with item_count_class='4' %}
+                    {% endwith %}
+                        {% elif item_count > 0 %}
+                    {% with item_count_class=item_count %}
+                        {% endwith %}
+                    {% else %}
+                        {% with item_count_class='1' %}
+                        {% endwith %}
+                    {% endif %}
+                    {% with class_value=item_count_class %}
+        
+                        <div class="pedido-imagens pedido-imagens--{{ class_value }}">
+                            {% for item in pedido.itens.all|slice:":4" %}
+                                <img src="{{ item.prato.photo.url }}" alt="{{ item.prato.name }}" />
+                            {% endfor %}
+                        </div>
 
-<div class="pedido-header">Pedido #{{ pedido.id }} - {{ pedido.get_tipo_pedido_display }}</div>
+                    {% endwith %}
 
-<div class="pedido-conteudo">
+                {% endwith %}
 
-{% with item_count=pedido.itens.count|default:0 %}
+                <div class="pedido-info">
+                    <div>
+                        <p>
+                            <strong>Nome do Usuário:</strong> {{ pedido.usuario.get_full_name|default:pedido.usuario.username }}
+                        </p>
+                        <br>
+                        <p>
+                            <strong>Itens:</strong><br />
+                            {% for item in pedido.itens.all %}
+                                {{ item.amount }}x {{ item.prato.name }} - R$ {{ item.prato.price|floatformat:2 }}<br />
+                            {% endfor %}
+                            <strong>Total:</strong> R$ {{ pedido.total|floatformat:2 }}
+                        </p>
+                    </div>
 
- {% if item_count >= 4 %}
-  {% with item_count_class='4' %}
-  {% endwith %}
- {% elif item_count > 0 %}
-  {% with item_count_class=item_count %}
-  {% endwith %}
- {% else %}
-  {% with item_count_class='1' %}
-  {% endwith %}
- {% endif %}
+                    {% if pedido.tipo_pedido == 'ENTREGA' %}
+                        <div>
+                            <p>
+                                <strong>Endereço:</strong><br />
+                                {{ pedido.endereco_entrega.logradouro }}, {{ pedido.endereco_entrega.numero }}
+                                {% if pedido.endereco_entrega.complemento %}
+                                    ({{ pedido.endereco_entrega.complemento }})
+                                {% endif %}
+                                <br />
+                                {{ pedido.endereco_entrega.bairro }}, {{ pedido.endereco_entrega.cidade }} - {{ pedido.endereco_entrega.estado }}
+                                <br />
+                                CEP: {{ pedido.endereco_entrega.cep }}
+                            </p>
+                            <p>
+                                <strong>Entregador:</strong> 
 
- {% with class_value=item_count_class %}
-  
-  <div class="pedido-imagens pedido-imagens--{{ class_value }}">
- {% for item in pedido.itens.all|slice:":4" %}
- <img src="{{ item.prato.photo.url }}" alt="{{ item.prato.name }}" />
- {% endfor %}
- </div>
+                            {% if pedido.entregador %}
+                                {{ pedido.entregador.get_full_name|default:pedido.entregador.username }}
+                            {% else %}
+                                precisa ser atribuido entregador a este pedido
+                            {% endif %}
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <br>
 
- {% endwith %}
+            {% if pedido.tipo_pedido == 'ENTREGA' %}
+                <a href="{% url 'dm_assign_delivery' order_id=pedido.id %}" class="btn-toggle">
+                    Confirmar Entrega
+                </a>
+            {% endif %}
 
-{% endwith %}
-
-
-<div class="pedido-info">
-<div>
-<p>
-<strong>Nome do Usuário:</strong> {{ pedido.usuario.get_full_name|default:pedido.usuario.username }}
-</p>
-<br>
-<p>
-<strong>Itens:</strong><br />
-{% for item in pedido.itens.all %}
-{{ item.amount }}x {{ item.prato.name }} - R$ {{ item.prato.price|floatformat:2 }}<br />
-{% endfor %}
-<strong>Total:</strong> R$ {{ pedido.total|floatformat:2 }}
-</p>
-</div>
-
-{% if pedido.tipo_pedido == 'ENTREGA' %}
-<div>
-<p>
-<strong>Endereço:</strong><br />
-{{ pedido.endereco_entrega.logradouro }}, {{ pedido.endereco_entrega.numero }}
-{% if pedido.endereco_entrega.complemento %}
-({{ pedido.endereco_entrega.complemento }})
-{% endif %}
-<br />
-{{ pedido.endereco_entrega.bairro }}, {{ pedido.endereco_entrega.cidade }} - {{ pedido.endereco_entrega.estado }}
-<br />
-CEP: {{ pedido.endereco_entrega.cep }}
-</p>
-<p>
-<strong>Entregador:</strong> 
-
-{% if pedido.entregador %}
-{{ pedido.entregador.get_full_name|default:pedido.entregador.username }}
-{% else %}
-precisa ser atribuido entregador a este pedido
-{% endif %}
-</p>
-</div>
-{% endif %}
-
-</div>
-</div>
- <br>
-{# --- ALTERAÇÃO AQUI: Botão de Ação Condicional --- #}
-
-{% if pedido.tipo_pedido == 'ENTREGA' %}
-    <a href="{% url 'dm_assign_delivery' order_id=pedido.id %}" class="btn-toggle">
-        teste
-    </a>
-{% endif %}
-
-{# O bloco de detalhes deve ser ativado por outro elemento se o botão for para navegação. #}
-{# Se você quer que o botão de atribuição TAMBÉM mostre os detalhes, #}
-{# você pode usar o JavaScript abaixo, mas a navegação será prioritária. #}
-
-<div class="detalhes">
-<p>
-
-<strong>Observações:</strong> {{ pedido.notes|default:"Nenhuma observação." }}<br />
-
-<strong>Forma de pagamento:</strong> {{ pedido.payment_method }}<br />
-<strong>Horário do pedido:</strong> {{ pedido.created_at|date:"H:i" }} - {{ pedido.created_at|date:"d/m/Y" }}<br />
-
-<strong>Status:</strong> {{ pedido.status }}
-</p>
-</div>
-</div>
-{% empty %}
-<div class="alert alert-info" role="alert">
-Nenhum pedido encontrado.
-</div>
-{% endfor %}
-
-<div class="lightbox-overlay" id="lightbox">
-<img id="lightbox-img" src="" alt="Imagem ampliada" />
-</div>
+            <div class="detalhes">
+                <p>
+                    <strong>Observações:</strong> {{ pedido.notes|default:"Nenhuma observação." }}<br />
+                    <strong>Forma de pagamento:</strong> {{ pedido.payment_method }}<br />
+                    <strong>Horário do pedido:</strong> {{ pedido.created_at|date:"H:i" }} - {{ pedido.created_at|date:"d/m/Y" }}<br />
+                    <strong>Status:</strong> {{ pedido.status }}
+                </p>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Nenhum pedido entregue
+        </div>
+    {% endif %}
+    {% empty %}
+    <div class="alert alert-info" role="alert">
+        Nenhum pedido encontrado.
+    </div>
+    {% endfor %}
+    <div class="lightbox-overlay" id="lightbox">
+        <img id="lightbox-img" src="" alt="Imagem ampliada" />
+    </div>
 {% endblock %}
 
 {% block scripts %}
 <script src="{% static 'js/manager/manage_orders.js' %}"></script>
 <script>
-// A função toggleDetalhes não será chamada se o botão for um link <a>.
-// Se você ainda deseja que os detalhes sejam exibidos, será necessário um elemento separado.
-// Caso contrário, esta função pode ser removida se não houver outro elemento chamando-a.
-function toggleDetalhes(button) {
-const detalhesDiv = button.nextElementSibling;
-if (detalhesDiv.style.display === "block") {
-detalhesDiv.style.display = "none";
-button.textContent = "Mais detalhes";
-} else {
-detalhesDiv.style.display = "block";
-button.textContent = "Menos detalhes";
-}
-}
+    // A função toggleDetalhes não será chamada se o botão for um link <a>.
+    // Se você ainda deseja que os detalhes sejam exibidos, será necessário um elemento separado.
+    // Caso contrário, esta função pode ser removida se não houver outro elemento chamando-a.
+    function toggleDetalhes(button) {
+        const detalhesDiv = button.nextElementSibling;
+        if (detalhesDiv.style.display === "block") {
+            detalhesDiv.style.display = "none";
+            button.textContent = "Mais detalhes";
+        } else {
+            detalhesDiv.style.display = "block";
+            button.textContent = "Menos detalhes";
+        }
+    }
 </script>
 {% endblock %}

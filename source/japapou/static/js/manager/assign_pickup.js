@@ -84,11 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
         confirmBtn.style.backgroundColor = '#3bb33b';
         confirmBtn.classList.add('confirmed');
       } else {
-        alert('Erro ao registrar retirada.');
+        // alert('Erro ao registrar retirada.');
       }
     } catch (error) {
       console.error(error);
-      alert('Erro de conexão.');
+      // alert('Erro de conexão.');
     }
   });
 

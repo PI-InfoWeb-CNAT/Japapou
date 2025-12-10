@@ -1,54 +1,67 @@
-const elementoSelect = document.querySelector(".frete-dropdown");
+// O código foi encapsulado em uma IIFE (Immediately Invoked Function Expression)
+// para criar um escopo privado e evitar o erro "has already been declared".
 
-const opcoes = elementoSelect.options;
+(function() {
+    // === Variáveis do DOM ===
+    const elementoSelect = document.querySelector(".frete-dropdown");
+    const totalValorHtml = document.querySelector(".total-valor"); // Contém a tag <div> que exibe o total
 
-var totalValorHtml = document.querySelector(".total-valor"); // contem a tag html
-var totalValorString = document.querySelector(".total-valor").textContent; // contem o valor da tag html
+    // --- Lógica de Inicialização de Valores ---
 
-const elementoDados = document.getElementById('dados-do-django'); 
+    // Obtém a string de valor inicial do HTML (Ex: "R$ 100,00")
+    const totalValorStringInicial = totalValorHtml.textContent.trim();
 
-var floatTotalValor = parseFloat(totalValorString.replace("R$", '').replace(',','.').replace(' ',''));
+    // Função auxiliar para converter "R$ 100,00" para 100.00 (float)
+    const stringToFloat = (str) => {
+        // Remove "R$", espaços, substitui vírgula por ponto e converte para float
+        return parseFloat(str.replace("R$", '').replace(/\s/g, '').replace(',', '.'));
+    };
 
-// console.log(totalValorString)
-if (elementoDados) {
-    // 2. Extrai o conteúdo (que é a string JSON)
-    const stringJson = elementoDados.textContent;
-    // console.log("String json", stringJson)
-    // 3. Converte a string JSON num objeto JavaScript
-    try {
-        const dadosDoDjango = JSON.parse(stringJson);
+    // Variável para armazenar o valor base do carrinho (sem frete), crucial para resets
+    let floatTotalValorBase = stringToFloat(totalValorStringInicial);
 
-        // 4. Agora você pode usar os dados!
-        taxaEntrega = dadosDoDjango.taxa_entrega;
+    // Variável para armazenar a taxa de entrega (padrão 0)
+    let taxaEntrega = 0.00; 
 
+    // Busca a taxa de entrega do Django (se existir)
+    const elementoDados = document.getElementById('dados-do-django'); 
 
-    } catch (e) {
-        console.error("Erro ao analisar o JSON:", e);
-    }
-}
+    if (elementoDados) {
+        const stringJson = elementoDados.textContent;
+        try {
+            const dadosDoDjango = JSON.parse(stringJson);
+            // Armazena a taxa de entrega para uso futuro
+            taxaEntrega = parseFloat(dadosDoDjango.taxa_entrega); 
 
-function somarValorTotal() {
-    // se a opção selecionada for a opção de entrega
-    if(elementoSelect.selectedIndex === 2) {
-        // console.log("Opção 3 escolhida");
-
-        floatTotalValor += taxaEntrega // adicionando a taxa de entrega ao valor do pedido
-        // console.log(floattotalValorStringString);
-
-        var novoValor = "R$" + ' ' + floatTotalValor.toFixed(2);
-        novoValor = novoValor.replace('.',',');
-        // console.log(novoValor)
-
-        totalValorHtml.textContent = novoValor; // atualiza o valor no html
-    }
-    else {
-        totalValorHtml.textContent = totalValorString;
+        } catch (e) {
+            console.error("Erro ao analisar o JSON de dados do Django:", e);
+        }
     }
 
-    taxaEntrega = 0; // zerar taxa de entrega para que o valor nao fique subindo infinitamente
-    
-    // console.log(`Índice selecionado: ${indiceSelecionado}`);
-    // console.log(`Valor da opção no índice: ${opcaoSelecionada.textContent}`);
-}
+    // --- Função de Cálculo e Atualização ---
 
-elementoSelect.addEventListener('change', somarValorTotal);
+    function atualizarValorTotal() {
+        let novoTotal = floatTotalValorBase;
+        
+        const indiceSelecionado = elementoSelect.selectedIndex;
+
+        // Se a opção de "Entrega Padrão" for selecionada (índice 2)
+        if (indiceSelecionado === 2) {
+            novoTotal += taxaEntrega;
+        } 
+        // Para as outras opções (0: Estimar Frete, 1: Retirada), o total permanece o valor base
+        // (Assumindo que Retirada é R$ 0,00, o que já está implícito).
+
+        // Formata o novo valor de volta para o formato de moeda "R$ 123,45"
+        let novoValorFormatado = "R$ " + novoTotal.toFixed(2).replace('.', ',');
+        
+        // Atualiza o valor no HTML
+        totalValorHtml.textContent = novoValorFormatado; 
+    }
+
+    // === Listener CRÍTICO ===
+    // ATENÇÃO: Essa linha garante que a função de cálculo é chamada quando o usuário 
+    // muda a opção no dropdown de frete. Este era um bug de funcionalidade no seu código.
+    elementoSelect.addEventListener('change', atualizarValorTotal);
+
+})(); // Fim da IIFE

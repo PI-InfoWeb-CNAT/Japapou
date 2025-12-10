@@ -373,3 +373,26 @@ section{
 form > span{
 	color: var(--laranja-mais-claro);
 }
+/* --- Estilização da Mensagem de Sucesso --- */
+
+#success-message {
+    text-align: center;
+    margin:0 !important; 
+	margin-top: -80px !important;
+    background-color: #4CAF50;
+    color: white !important;
+    padding: 15px; 
+    border-radius: 8px; 
+    border: 1px solid #4CAF50; 
+    font-size: 1.1em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    width: 21%;
+	position: absolute;
+	z-index: 1000;
+	transition: opacity 1s ease-out; 
+	opacity: 1; 
+}
+
+span{
+	color: var(--laranja-mais-claro);
+}
