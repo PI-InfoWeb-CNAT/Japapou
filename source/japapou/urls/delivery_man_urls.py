@@ -15,5 +15,9 @@ urlpatterns = [
     path('confirm_dispatch/<int:order_id>/', views.confirm_dispatch_view, name='dm_confirm_dispatch'), # OK
       
     # 2. ROTA DE ENTREGA (DELIVERY) - Associa a view correta de Entrega (a que criamos)
-    path('confirm_delivery/<int:order_id>/', views.dm_confirm_delivery_view, name='dm_confirm_delivery'), # OK 
+    path('confirm_delivery/<int:order_id>/', views.dm_confirm_delivery_view, name='dm_confirm_delivery'), # OK
+
+    # mapa
+    path("mapa/", mapa_geral, name="mapa_geral"),
+
 ]

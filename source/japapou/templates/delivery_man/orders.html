@@ -12,7 +12,7 @@
     <h1>Pedidos Pendente</h1>
 
     {% for pedido in pedidos %}
-    {% if pedido.tipo_pedido == 'ENTREGA' and not pedido.data_entrega and pedido.data_saida %}
+    {% if pedido.tipo_pedido == 'ENTREGA' and not pedido.data_entrega and not pedido.data_saida %}
         <div class="pedido-box">
             <div class="pedido-header">Pedido #{{ pedido.id }} - {{ pedido.get_tipo_pedido_display }}</div>
             <div class="pedido-conteudo">
@@ -42,7 +42,7 @@
                 <div class="pedido-info">
                     <div>
                         <p>
-                            <strong>Nome do Usuário:</strong> {{ pedido.usuario.get_full_name|default:pedido.usuario.username }}
+                            <strong>Nome do Cliente:</strong> {{ pedido.usuario.get_full_name|default:pedido.usuario.username }}
                         </p>
                         <br>
                         <p>
@@ -66,15 +66,6 @@
                                 {{ pedido.endereco_entrega.bairro }}, {{ pedido.endereco_entrega.cidade }} - {{ pedido.endereco_entrega.estado }}
                                 <br />
                                 CEP: {{ pedido.endereco_entrega.cep }}
-                            </p>
-                            <p>
-                                <strong>Entregador:</strong> 
-
-                            {% if pedido.entregador %}
-                                {{ pedido.entregador.get_full_name|default:pedido.entregador.username }}
-                            {% else %}
-                                precisa ser atribuido entregador a este pedido
-                            {% endif %}
                             </p>
                         </div>
                     {% endif %}
