@@ -8,7 +8,6 @@ urlpatterns = [
     path("order/", client_order_view, name="client_order"),
     path("profile/", client_profile_view, name="client_profile"),
     path("profile/update_user/", update_user, name="update_user"),
-    path("profile/update_photo/", update_photo, name="update_photo"),
     path("rating/", client_rating_view, name="client_rating"),
     path("details_plate/<int:plate_id>/", details_plate_view, name="details_plate"),
     path("details_plate/review/<int:plate_id>/", rating_view, name="rating"),

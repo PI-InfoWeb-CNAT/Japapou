@@ -1124,3 +1124,60 @@ button{
 .botao-criar:hover .plus-icon-text {
     color: var(--azul-mais-escuro);
 }
+
+textarea#id_description{
+	resize: none;
+	border: 1px solid white !important;
+	border-radius: 5px;
+}
+
+select#id_menus{
+	background-color: var(--azul-mais-claro);
+	border: 1px solid white;
+	color: white;
+	border-radius: 5px;
+}
+option{
+	background-color: var(--laranja-mais-claro);
+	color: black;
+}
+button[name="btn-create-plate"]:hover{
+	background-color: var(--laranja-mais-escuro) !important;
+	color: white !important;
+}
+form #image-file:hover{
+	background-color: var(--laranja-mais-escuro) !important;
+}
+#novo-cardapio #div-pratos {
+        input[type="checkbox"]{
+			cursor: pointer;
+		}
+}
+#novo-cardapio #div-pratos {
+        input[type="checkbox"]:hover{
+			cursor: pointer;
+			background-color: var(--azul-mais-escuro);
+		}
+}
+
+#novo-prato {
+    & #div-novo-prato {
+        div {
+			&:hover {
+				background-color: var(--laranja-mais-escuro);
+				color: white !important;
+				button{
+					background-color: var(--laranja-mais-escuro);
+					color: white !important;
+					border: 1px solid white;
+				}
+				h2{
+					color: white;
+				}
+				p{
+					color: white;
+				}
+			}
+		}
+	}
+}

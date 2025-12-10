@@ -60,17 +60,20 @@
             <div class="grid-item2 area-d2"><div><i class="fa-solid fa-clock"></i></div><p> Pedidos online de terça a domingo, das 18h às 23h. <br> <b>Fechado apenas às segundas-feiras.</b> </p></div>
         </div>
     </div> 
-    <form class="forms" action="">
+    <form class="forms" id="contact-form" action="">
         <h2><b>Entre em Contato!</b></h2>
         <p>Responderemos seu chamado em até 24h</p>
-        <label for="">Nome<span>*</span>  <br> <input placeholder="Digite seu nome" type="text"></label>
+        <label for="id_nome">Nome<span>*</span>  <br> <input placeholder="Digite seu nome" type="text" id="id_nome" required></label>
         <br>
-        <label for="">E-mail<span>*</span> <input placeholder="Digite um e-mail para entrarmos em contato de volta" type="text"></label>
+        <label for="id_nome">E-mail<span>*</span> <input placeholder="Digite um e-mail para entrarmos em contato de volta" type="text" id="id_email" required></label>
         <br>
-        <label for="">Telefone<span>*</span> <input placeholder="Digite um telefone (caso o e-mail não funcione)" type="text"></label>
+        <label for="id_telefone">Telefone<span>*</span> <input placeholder="Digite um telefone (caso o e-mail não funcione)" type="text" id="id_telefone" required></label>
         <br>
-        <label for="">Mensagem<span>*</span> <br> <textarea placeholder="Conte-nos, sobre o que deseja falar?" name="" id=""></textarea></label>
-        <input type="submit">
+        <label for="id_mensagem">Mensagem<span>*</span> <br> <textarea placeholder="Conte-nos, sobre o que deseja falar?" name="" id="id_mensagem" required></textarea></label>
+        <input type="submit" id="submit-button">
+        <p id="success-message" style="display: none;">
+            Recebemos sua mensagem, entraremos em contato em breve.
+        </p>
     </form>
 </section>
 
@@ -105,3 +108,37 @@
     </div>
 </section>
 {% endblock content %}
+
+{% block scripts %}
+<script>
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        
+        // Limpa os campos (opcional)
+        document.getElementById('id_nome').value = '';
+        document.getElementById('id_email').value = '';
+        document.getElementById('id_telefone').value = '';
+        document.getElementById('id_mensagem').value = '';
+        
+        const messageElement = document.getElementById('success-message');
+        
+        // 1. Garante que a opacidade esteja em 1 e que o elemento esteja visível
+        messageElement.style.opacity = '1';
+        messageElement.style.display = 'block';
+
+        // 2. Inicia o Fade Out após 3 segundos (tempo de exibição total = 3s + 1s de transição)
+        // Você pode ajustar o '3000' para mudar o tempo que a mensagem fica parada.
+        setTimeout(() => {
+            // Define a opacidade para 0. O CSS cuidará da transição suave (1s).
+            messageElement.style.opacity = '0';
+        
+            // 3. Oculta o elemento da página após o FADE OUT (1 segundo de transição)
+            // O valor aqui (1000ms) deve ser igual ao tempo da transição no CSS.
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+            }, 1000); // 1000ms = 1s, tempo da transição
+            
+        }, 3000); // 3000ms = 3s, tempo que a mensagem fica visível antes de começar a sumir
+    });
+</script>
+{% endblock %}

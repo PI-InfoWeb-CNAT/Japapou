@@ -146,6 +146,34 @@
 {% block scripts %}
 <script>
   const defaultImagePath = "{% static 'imgs/default_profile.png' %}";
+  
+  // 💡 NOVO CÓDIGO: Definição da função showStatusToast
+  function showStatusToast(message, isSuccess) {
+    // 1. Cria o elemento do Toast (se você tiver uma estrutura HTML/CSS para isso)
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.className = 'status-toast'; // Classe base para o estilo
+
+    // 2. Adiciona classe de sucesso ou erro para cor
+    if (isSuccess) {
+      toast.classList.add('success');
+    } else {
+      toast.classList.add('error');
+    }
+
+    // 3. Adiciona ao corpo do documento
+    document.body.appendChild(toast);
+
+    // 4. Exibe e depois esconde (removendo após 3 segundos)
+    setTimeout(() => {
+      toast.classList.add('show');
+    }, 100); // Pequeno atraso para garantir que o CSS de transição funcione
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+      toast.addEventListener('transitionend', () => toast.remove());
+    }, 3000);
+  }
 </script>
-<script src="{% static 'js/client/client_profile.js' %}"></script>
+<script src="{% static 'js/client/cliente_profile.js' %}"></script>
 {% endblock %}

@@ -359,3 +359,32 @@ div .img-secundaria:hover {
 	color: var(--vermelho);
 }
 
+/* Coloque este CSS em seu arquivo de estilos principal */
+#message-container {
+    position: fixed;
+    top: 20px; /* Distância do topo */
+    right: 20px; /* Distância da direita */
+    z-index: 10000; /* Garante que fique acima de outros elementos */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaçamento entre as mensagens */
+}
+
+.flash-message {
+    padding: 15px 25px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Adiciona transição para o fade out */
+    transform: translateY(0);
+}
+
+.flash-message-success {
+    background-color: #4CAF50; /* Verde */
+}
+
+.flash-message-error {
+    background-color: #f44336; /* Vermelho */
+}

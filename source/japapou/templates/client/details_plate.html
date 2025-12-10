@@ -187,6 +187,18 @@
   </div>
 </div>
 <hr class="mt-5">
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div id="success-feedback-message" class="alert alert-success d-flex align-items-center mb-4" role="alert" style="opacity: 0;">
+                <i class="fas fa-check-circle me-2"></i>
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
 <h2>Avaliações ({{ reviews.count }})</h2>
 
 {% for review in reviews %}
@@ -203,11 +215,11 @@
       {% endfor %}
       ({{ review.value }}/5)
     </h6>
+    <small class="text-muted">{{ review.created_at|date:"d/m/Y \à\s H:i" }}</small>
     <p class="card-text">{{ review.comment|linebreaksbr }}</p>
     {% if review.image_review %}
       <img src="{{ review.image_review.url }}" alt="Foto da avaliação" class="img-fluid rounded" style="max-height: 200px;">
     {% endif %}
-    <small class="text-muted">{{ review.created_at|date:"d/m/Y \à\s H:i" }}</small>
         
         {% comment %} Adiciona os botões de Editar/Excluir se a avaliação for do usuário logado {% endcomment %}
         {% if review.usuario == user %}
@@ -232,5 +244,39 @@
 {% endblock %} 
 
 {% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ... Seu código de details_plate.js ... (Não incluído aqui, mas já está no próximo script)
+
+        // =========================================================
+        // NOVO CÓDIGO PARA FADE OUT DA MENSAGEM DE SUCESSO DO DJANGO
+        // =========================================================
+        const successMessage = document.getElementById('success-feedback-message');
+        
+        if (successMessage) {
+            
+            // 1. Garante que a mensagem apareça (pois iniciamos com opacity: 0 no HTML)
+            // Se a mensagem existir, definimos a opacidade para 1.
+            setTimeout(() => {
+                successMessage.style.opacity = '1'; 
+            }, 50); // Pequeno delay para garantir que o CSS de transição funcione.
+            
+            const visibleDuration = 3000; // 3 segundos que a mensagem fica parada
+            const fadeDuration = 1000;    // 1 segundo para a transição (deve ser igual ao CSS)
+
+            // 2. Inicia o Fade Out após a duração visível
+            setTimeout(() => {
+                // Inicia a transição de opacidade para 0 (o CSS cuida da animação)
+                successMessage.style.opacity = '0';
+            
+                // 3. Oculta o elemento da página após o FADE OUT terminar (para liberar o espaço)
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, fadeDuration);
+                
+            }, visibleDuration + 50); // Adiciona o pequeno delay inicial
+        }
+    });
+</script>
 <script src="{% static 'js/client/details_plate.js' %}"></script>
 {% endblock %}

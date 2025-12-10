@@ -56,6 +56,8 @@ def rating_view(request, plate_id):
         review.usuario = request.user
         review.plate = plate
         review.save()
+
+        messages.success(request, "Agradecemos a sua avaliação!")
         return redirect('details_plate', plate_id=plate.id)
       else:
         form.add_error(None, "Você já enviou uma avaliação para este prato.")
@@ -117,12 +119,14 @@ def details_plate_view(request, plate_id):
     form = PlateReviewForm(request.POST, request.FILES)
 
     if form.is_valid():
-      # Verifica se o usuário JÁ avaliou este prato
+      # Verifica se o usuário JÁ avaliou este prato, para evitar duplicatas
       if not PlateReview.objects.filter(usuario=request.user, plate=plate).exists():
         review = form.save(commit=False)
         review.usuario = request.user
         review.plate = plate
         review.save()
+
+        messages.success(request, "Agradecemos a sua avaliação!") # <--- ESTÁ CORRETO!
         return redirect('details_plate', plate_id=plate.id)
       else:
         form.add_error(None, "Você já enviou uma avaliação para este prato.")
