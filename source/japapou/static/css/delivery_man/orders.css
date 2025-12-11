@@ -254,6 +254,9 @@ Se usar esta opção, o CSS dos `img` abaixo pode precisar de ajuste para que o 
 	height: 500px;
 	margin-bottom: 3%;
 	margin-top: 10px;
+	border-radius: 8px;
+	background-color: var(--azul-mais-claro);
+	padding: 1em;
 
 	#mapa-entregas {
     height: 100%; /* Ajuste a altura conforme preferir */
@@ -265,11 +268,12 @@ Se usar esta opção, o CSS dos `img` abaixo pode precisar de ajuste para que o 
 }
 
 #btn-google-maps {
-	width: 30%;
-	height: 10%;
-	background-color: white;
-	color: var(--azul-mais-escuro);
+	width: 10%;
+	height: 40px;
+	background-color: var(--azul-mais-claro);
+	color: white;
 	border: none;
+	border-radius: 8px;
 }
 
 /* MAPA */

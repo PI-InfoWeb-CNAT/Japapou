@@ -10,7 +10,7 @@ from django.utils import timezone
 import json
 
 @login_required
-@permission_required('view_order', login_url='home')
+# @permission_required('view_order', login_url='home')
 @csrf_exempt
 def manager_assign_delivery_view(request, order_id):
     order = get_object_or_404(Order, id=order_id)
