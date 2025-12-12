@@ -4,209 +4,103 @@
 {% block title %}Gerenciar Entregadores{% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="{% static 'css/manager/manage_delivery_man.css' %}" />
-<style>
-    .add-delivery-man-card {
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: 2px dashed #dee2e6;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 200px;
-        background-color: #f8f9fa;
-        text-decoration: none !important;
-        color: inherit;
-    }
-    .add-delivery-man-card:hover {
-        transform: scale(1.02);
-        border-color: #0d6efd;
-        background-color: #e7f1ff;
-        box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.15);
-        text-decoration: none;
-    }
-    .add-delivery-man-card .card-body {
-        text-align: center;
-        padding: 2.5rem 1.5rem;
-    }
-    .add-icon {
-        font-size: 3.5rem;
-        color: #6c757d;
-        margin-bottom: 1rem;
-        transition: all 0.3s ease;
-    }
-    .add-delivery-man-card:hover .add-icon {
-        color: #0d6efd;
-        transform: scale(1.1);
-    }
-    .delivery-man-card {
-        height: 100%;
-        transition: transform 0.3s ease;
-    }
-    .delivery-man-card:hover {
-        transform: translateY(-5px);
-    }
-    .delivery-avatar {
-        width: 60px;
-        height: 60px;
-        object-fit: cover;
-    }
-    .delivery-avatar-default {
-        width: 60px;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-</style>
+<link rel="stylesheet" href="{% static 'css/manager/manage_delivery_man.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid py-4">
-    <!-- Cabeçalho -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h1 class="h3 mb-0 text-gray-800">
-                <i class="fas fa-motorcycle me-2"></i>Gerenciar Entregadores
-            </h1>
-            <p class="text-muted mb-0">Gerencie os entregadores da plataforma</p>
-        </div>
+<div class="container">
+
+    <div class="page-header">
+        <h1 class="title">Gerenciar Entregadores</h1>
+        <p class="subtitle">Gerencie os entregadores da plataforma</p>
     </div>
 
-    <!-- Cards dos Entregadores -->
-    <div class="row">
-        <!-- Card para adicionar novo entregador -->
-        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
-            <a href="{% url 'manager_delivery_man_create' %}" class="card add-delivery-man-card shadow-sm">
-                <div class="card-body">
-                    <div class="add-icon">
-                        <i class="fas fa-plus-circle"></i>
-                    </div>
-                    <h5 class="text-primary mb-2">Adicionar Entregador</h5>
-                    <p class="text-muted small mb-0">Clique para cadastrar um novo entregador na plataforma</p>
-                </div>
-            </a>
-        </div>
+    <div class="cards-grid">
 
-        <!-- Cards dos entregadores existentes -->
+        <!-- Card Novo Entregador -->
+        <a href="{% url 'manager_delivery_man_create' %}" class="card card--new" id="add-card">
+            <span class="plus-icon">+</span>
+        </a>
+
+        <!-- Lista de Entregadores -->
         {% for delivery_man in delivery_men %}
-        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
-            <div class="card delivery-man-card border-left-primary shadow h-100">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center mb-3">
-                        <div class="col-auto me-3">
-                            {% if delivery_man.foto %}
-                                <img src="{{ delivery_man.foto.url }}" alt="{{ delivery_man.username }}" 
-                                     class="rounded-circle delivery-avatar">
-                            {% else %}
-                                <div class="bg-primary text-white rounded-circle delivery-avatar-default">
-                                    <i class="fas fa-user fa-lg"></i>
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="col">
-                            <div class="h5 font-weight-bold text-primary mb-1">
-                                {{ delivery_man.first_name }} {{ delivery_man.last_name }}
-                            </div>
-                            <div class="text-xs text-muted mb-1">
-                                <i class="fas fa-user me-1"></i>@{{ delivery_man.username }}
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <div class="text-xs text-muted mb-1">
-                                <i class="fas fa-phone me-1"></i>{{ delivery_man.telefone }}
-                            </div>
-                            <div class="text-xs text-muted">
-                                <i class="fas fa-motorcycle me-1"></i>{{ delivery_man.modelo_moto }}
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Ações -->
-                    <div class="mt-3 d-flex gap-2">
-                        <a href="{% url 'manager_delivery_man_detail' delivery_man.id %}" 
-                           class="btn btn-sm btn-outline-primary flex-fill">
-                            <i class="fas fa-eye me-1"></i>Detalhes
-                        </a>
-                        <a href="{% url 'manager_delivery_man_update' delivery_man.id %}" 
-                           class="btn btn-sm btn-outline-warning flex-fill">
-                            <i class="fas fa-edit me-1"></i>Editar
-                        </a>
-                    </div>
-                    
-                    <!-- Botão de excluir separado -->
-                    <div class="mt-2">
-                        <button type="button" class="btn btn-sm btn-outline-danger w-100" 
-                                data-bs-toggle="modal" data-bs-target="#deleteModal{{ delivery_man.id }}">
-                            <i class="fas fa-trash me-1"></i>Excluir
-                        </button>
-                    </div>
-                </div>
+        <div class="mg-card card" onclick="window.location.href='{% url 'manager_delivery_man_detail' delivery_man.id %}'">
+            <!-- <div class="card card--entregador"> -->
+
+            <!-- Foto -->
+            {% if delivery_man.foto %}
+            <img src="{{ delivery_man.foto.url }}" class="card__image" alt="{{ delivery_man.username }}">
+            {% else %}
+            <div class="img-placeholder">
+                <i class="fas fa-user"></i>
+            </div>
+            {% endif %}
+
+            <!-- Nome -->
+            <h3 class="card__name">
+                {{ delivery_man.first_name }} {{ delivery_man.last_name }}
+            </h3>
+
+            <!-- Infos -->
+            <p class="info">
+                <i class="fas fa-user me-1"></i>@{{ delivery_man.username }}
+            </p>
+            <p class="info">
+                <i class="fas fa-phone me-1"></i>{{ delivery_man.telefone }}
+            </p>
+            <p class="info">
+                <i class="fas fa-motorcycle me-1"></i>{{ delivery_man.modelo_moto }}
+            </p>
+
+            <!-- Botões -->
+            <div class="card__actions">
+                <a href="{% url 'manager_delivery_man_update' delivery_man.id %}" class="btn btn--editar">Editar</a>
+                <button class="btn btn--excluir" data-bs-toggle="modal"
+                    data-bs-target="#deleteModal{{ delivery_man.id }}" onclick="event.stopPropagation()">
+                    Excluir
+                </button>
             </div>
         </div>
-
-        <!-- Modal de Confirmação de Exclusão -->
+        
+        <!-- Modal de exclusão -->
         <div class="modal fade" id="deleteModal{{ delivery_man.id }}" tabindex="-1">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
+
                     <div class="modal-header">
                         <h5 class="modal-title text-danger">
                             <i class="fas fa-exclamation-triangle me-2"></i>Confirmar Exclusão
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
+
                     <div class="modal-body">
-                        <p>Tem certeza que deseja excluir o entregador <strong>{{ delivery_man.first_name }} {{ delivery_man.last_name }}</strong>?</p>
-                        <p class="text-danger">
-                            <small>
-                                <i class="fas fa-exclamation-circle me-1"></i>
-                                Esta ação não pode ser desfeita. Todas as informações deste entregador serão perdidas.
-                            </small>
+                        <p>Tem certeza que deseja excluir <strong>{{ delivery_man.first_name }} {{ delivery_man.last_name }}</strong>?</p>
+                        <p class="text-danger small">
+                            <i class="fas fa-exclamation-circle me-1"></i>Essa ação não pode ser desfeita.
                         </p>
                     </div>
+
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <i class="fas fa-times me-1"></i>Cancelar
-                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
                         <form method="POST" action="{% url 'manager_delivery_man_delete' delivery_man.id %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-danger">
-                                <i class="fas fa-trash me-1"></i>Excluir
-                            </button>
+                            <button type="submit" class="btn btn-danger">Excluir</button>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
-        {% empty %}
-        <!-- Se não houver entregadores cadastrados, mostra apenas o card de adicionar -->
+
         {% endfor %}
+
     </div>
+
 </div>
 {% endblock %}
 
 {% block extra_js %}
-<script>
-    // Adiciona evento de clique no card de adicionar
-    document.addEventListener('DOMContentLoaded', function() {
-        const addCard = document.getElementById('addDeliveryManCard');
-        if (addCard) {
-            addCard.addEventListener('click', function() {
-                // Efeito visual de clique
-                this.style.transform = 'scale(0.98)';
-                
-                // Redireciona para a página de criação
-                window.location.href = "{% url 'manager_delivery_man_create' %}";
-                
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                }, 150);
-            });
-        }
-    });
-</script>
+<script src="{% static 'js/manager/manage_delivery_man.js' %}"></script>
 {% endblock %}

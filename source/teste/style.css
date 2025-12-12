@@ -1,0 +1,264 @@
+/* -------------------------------------------------------------------------
+   VARIÁVEIS CSS
+------------------------------------------------------------------------- */
+:root {
+    /* Cores */
+    --color-background-dark: #121820; /* Fundo principal */
+    --color-primary-blue: #1C232E; /* Cor de fundo do Card/Modal */
+    --color-text-light: #F0F0F0; /* Texto principal claro */
+    --color-accent-orange: #F58434; /* Botão Excluir/Adicionar e acentos */
+    --color-btn-neutral: #5A6A7F; /* Botão Editar/Cancelar */
+    --color-divider-line: #F0F0F080;
+    --color-border-card: #28303B;
+
+    /* Fontes e Tamanhos */
+    --font-family-primary: 'Arial', sans-serif;
+    
+    /* Sombras e Transições */
+    --shadow-card: 0 8px 16px rgba(0, 0, 0, 0.4);
+    --transition-fast: 0.2s ease-in-out;
+}
+
+/* -------------------------------------------------------------------------
+   ESTILO GERAL E RESET BÁSICO
+------------------------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--color-background-dark);
+    color: var(--color-text-light);
+    font-family: var(--font-family-primary);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* -------------------------------------------------------------------------
+   HEADER
+------------------------------------------------------------------------- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header__avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.header__title {
+    font-size: 1.5rem;
+    font-weight: normal;
+    letter-spacing: 5px;
+}
+
+.header__menu {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.header__divider {
+    border: none;
+    height: 1px;
+    background-color: var(--color-divider-line);
+    max-width: 1200px;
+    margin: 0 auto 40px;
+}
+
+/* -------------------------------------------------------------------------
+   TELA 1: GRADE DE CARDS
+------------------------------------------------------------------------- */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.card {
+    background-color: var(--color-primary-blue);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid var(--color-border-card);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    padding-bottom: 15px;
+}
+
+/* HOVER EFFECT: o card salta */
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-card);
+}
+
+.card__image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.card__rating .star {
+    color: var(--color-accent-orange);
+    font-size: 1.2rem;
+}
+
+.card__rating .half-star {
+    opacity: 0.5;
+}
+
+.card__actions {
+    margin-top: 15px;
+}
+
+.btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 0 5px;
+    transition: background-color var(--transition-fast);
+}
+
+.btn--excluir, .btn--confirm-delete, .btn--confirm-add, .btn--back {
+    background-color: var(--color-accent-orange);
+    color: var(--color-text-light);
+}
+
+.btn--editar, .btn--cancel {
+    background-color: var(--color-btn-neutral);
+    color: var(--color-text-light);
+}
+
+.btn:hover {
+    filter: brightness(1.1);
+}
+
+.card--new-entry {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 250px;
+}
+
+.new-entry__icon {
+    font-size: 5rem;
+    color: var(--color-divider-line);
+}
+
+
+/* -------------------------------------------------------------------------
+   TELA 2: DETALHE DO CARD
+------------------------------------------------------------------------- */
+.card-detail {
+    padding-top: 40px;
+}
+
+.detail-content {
+    display: flex;
+    align-items: flex-start; 
+    background-color: var(--color-primary-blue);
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.detail__image-box {
+    margin-right: 40px;
+    border-radius: 8px;
+    padding: 2px;
+    background-color: var(--color-border-card);
+}
+
+.detail__image {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+.detail__rating .star {
+    color: var(--color-accent-orange);
+    font-size: 1.4rem;
+}
+
+/* -------------------------------------------------------------------------
+   MODAIS
+------------------------------------------------------------------------- */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    /* Usar flexbox para centralizar o conteúdo */
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+/* Reverter o display para 'none' para que o JS o controle */
+#deleteModal, #addModal {
+    display: none; 
+}
+
+
+.modal-content {
+    background-color: var(--color-primary-blue);
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: var(--shadow-card);
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Estilo do formulário de adição */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--color-border-card);
+    border-radius: 4px;
+    background-color: var(--color-background-dark);
+    color: var(--color-text-light);
+}

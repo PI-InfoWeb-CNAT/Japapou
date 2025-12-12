@@ -1,141 +1,164 @@
-:root {
-    --darker-gray: #222;
-    --lighter-gray: #444;
-    --light-gray: #555;
-    --text-primary: #fff;
-    --gray: #aaa;
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* ======== GRID PRINCIPAL ======== */
-.entregadores {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 32px;
-    padding: 0 32px 64px;
+.page-header {
+    text-align: left;
+    margin-bottom: 30px;
 }
 
-/* ======== CARD ======== */
+.title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.subtitle {
+    color: #666;
+    margin-top: 5px;
+}
+
+/* GRID COM FLEXBOX — 4 por linha */
+.cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+
+    /* isso garante que cada card ocupe aprox 1/4 da largura */
+}
+
+.cards-grid > .card {
+    flex: 1 1 calc(25% - 20px); /* 4 por linha */
+    max-width: calc(25% - 20px);
+
+    /* altura mais “3:4” (opcional) */
+    aspect-ratio: 3 / 4;
+    display: flex;
+}
+
+/* Card base (Aplicado a .card--new e .mg-card) */
 .card {
-    background: #000;
-    border: 1px solid var(--darker-gray);
-    border-radius: 12px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #dcdcdc;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+    text-decoration: none;
+    color: inherit;
+
+    /* Organização interna */
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    width: 100%;
 }
 
 .card:hover {
-    transform: translateY(-4px);
-    border-color: var(--lighter-gray);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-.card h2 {
-    font-size: 16px;
-    font-weight: 600;
-    text-align: center;
-    margin: 12px 0 8px;
-    color: var(--text-primary);
-}
-
-/* ======== FOTO ======== */
-.photo {
-    height: 260px;
-    background: linear-gradient(#b6b6b6, #5b5b5b);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.photo img {
+/* Imagem do card */
+.card__image {
     width: 100%;
-    height: 100%;
+    height: 45%; 
     object-fit: cover;
 }
 
-/* ======== RATING ======== */
-.rating {
+/* Placeholder sem foto */
+.img-placeholder {
+    width: 100%;
+    height: 45%;
+    background: #e8e8e8;
     display: flex;
     justify-content: center;
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.rating i {
-    font-size: 20px;
-    color: var(--gray);
-}
-
-/* ======== AÇÕES ======== */
-.actions {
-    display: flex;
-    gap: 4px;
-    padding: 12px;
-    justify-content: center;
-}
-
-.actions button {
-    flex: 1;
-    border: none;
-    font-weight: 600;
-    padding: 8px 0;
-    cursor: pointer;
-    background: white;
-    color: black;
-    transition: background 0.2s ease;
-}
-
-.actions button:hover {
-    background: var(--lighter-gray);
-}
-
-/* ======== BOTÃO DE ADIÇÃO ======== */
-.add-card {
-    background: var(--lighter-gray);
-    display: flex;
     align-items: center;
+    font-size: 45px;
+    color: #777;
+}
+
+/* Nome */
+.card__name {
+    margin: 15px 10px 5px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Informações */
+.info {
+    color: #666;
+    font-size: 14px;
+    margin: 2px 10px;
+    text-align: left;
+    padding-left: 15px;
+}
+
+/* Botões */
+.card__actions {
+    display: flex;
     justify-content: center;
-    font-size: 48px;
-    color: black;
-    height: 360px;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 15px;
+    padding-bottom: 20px;
+}
+
+.btn {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
     cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.add-card:hover {
-    background: var(--light-gray);
-}
-
-.add-card a {
-    color: inherit;
+    font-size: 14px;
+    transition: 0.2s;
     text-decoration: none;
 }
 
-
-/* ======== ANIMAÇÕES ======== */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.btn--editar {
+    background: #ffc107;
+    color: #333 !important;
 }
 
-@keyframes scaleIn {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+.btn--editar:hover {
+    background: #e0a800;
 }
 
-/* ======== RESPONSIVIDADE ======== */
-@media (max-width: 600px) {
-  .entregadores-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
+.btn--excluir {
+    background: #dc3545;
+    color: #fff !important;
+}
 
-  .card-content h2 {
-    font-size: 1rem;
-  }
+.btn--excluir:hover {
+    background: #c82333;
+}
 
-  .modal-content {
-    padding: 24px;
-  }
+/* Card “+” (Novo Entregador) */
+.card--new {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    font-size: 60px;
+    border: 2px dashed #d0d0d0;
+    padding: 0;
+}
+
+.card--new:hover {
+    border-color: #0d6efd;
+    background: #eaf3ff;
+}
+
+.plus-icon {
+    font-weight: 300;
+    color: #777;
+    line-height: 1;
+}
+
+label,
+.modal-body p,
+strong {
+    color: black;
 }
