@@ -5,6 +5,48 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/manager/manage_delivery_man.css' %}" />
+<style>
+    .form-section {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e9ecef;
+    }
+    .form-section-title {
+        color: #2d3748;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid #e9ecef;
+    }
+    .required-field::after {
+        content: " *";
+        color: #dc3545;
+    }
+    .form-control {
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+    }
+    .form-control:focus {
+        border-color: #4299e1;
+        box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+    }
+    .password-toggle {
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+    }
+    .password-input-container {
+        position: relative;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -24,22 +66,23 @@
             </nav>
         </div>
         <a href="{% url 'manager_delivery_man' %}" class="btn btn-secondary">
-            <i class="fas fa-arrow-left me-1"></i>Voltar
+            <i class="fas fa-arrow-left me-1"></i>Voltar para Lista
         </a>
     </div>
 
     <div class="row justify-content-center">
-        <div class="col-xl-8">
+        <div class="col-xl-10">
             <div class="card shadow">
                 <div class="card-header bg-primary text-white">
                     <h6 class="m-0 font-weight-bold">
-                        <i class="fas fa-motorcycle me-1"></i>Formulário de Cadastro
+                        <i class="fas fa-user-plus me-2"></i>Cadastrar Novo Entregador
                     </h6>
                 </div>
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data" novalidate>
+                    <form method="POST" enctype="multipart/form-data" novalidate id="deliveryForm">
                         {% csrf_token %}
                         
+                        <!-- Mensagens de alerta -->
                         {% if messages %}
                             {% for message in messages %}
                                 <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -50,167 +93,183 @@
                         {% endif %}
 
                         <!-- Informações de Acesso -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h5 class="text-primary mb-3">
-                                    <i class="fas fa-key me-1"></i>Informações de Acesso
-                                </h5>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.username.id_for_label }}" class="form-label">
-                                    {{ form.username.label }} *
-                                </label>
-                                {{ form.username }}
-                                {% if form.username.errors %}
-                                    <div class="text-danger small">{{ form.username.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.password.id_for_label }}" class="form-label">
-                                    {{ form.password.label }} *
-                                </label>
-                                {{ form.password }}
-                                {% if form.password.errors %}
-                                    <div class="text-danger small">{{ form.password.errors }}</div>
-                                {% endif %}
+                        <div class="form-section">
+                            <h5 class="form-section-title">
+                                <i class="fas fa-key me-2"></i>Informações de Acesso
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.username.id_for_label }}" class="form-label fw-semibold required-field">
+                                        {{ form.username.label }}
+                                    </label>
+                                    {{ form.username }}
+                                    {% if form.username.errors %}
+                                        <div class="text-danger small mt-1">{{ form.username.errors }}</div>
+                                    {% endif %}
+                                    <div class="form-text">Nome de usuário para login (obrigatório)</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="password-input-container">
+                                        <label for="{{ form.password.id_for_label }}" class="form-label fw-semibold required-field">
+                                            {{ form.password.label }}
+                                        </label>
+                                        {{ form.password }}
+                                        <span class="password-toggle" onclick="togglePassword(this)">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                        {% if form.password.errors %}
+                                            <div class="text-danger small mt-1">{{ form.password.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="form-text">Senha para acesso ao sistema (obrigatório)</div>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Informações Pessoais -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h5 class="text-primary mb-3">
-                                    <i class="fas fa-user me-1"></i>Informações Pessoais
-                                </h5>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.first_name.id_for_label }}" class="form-label">
-                                    {{ form.first_name.label }} *
-                                </label>
-                                {{ form.first_name }}
-                                {% if form.first_name.errors %}
-                                    <div class="text-danger small">{{ form.first_name.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.last_name.id_for_label }}" class="form-label">
-                                    {{ form.last_name.label }} *
-                                </label>
-                                {{ form.last_name }}
-                                {% if form.last_name.errors %}
-                                    <div class="text-danger small">{{ form.last_name.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.email.id_for_label }}" class="form-label">
-                                    {{ form.email.label }} *
-                                </label>
-                                {{ form.email }}
-                                {% if form.email.errors %}
-                                    <div class="text-danger small">{{ form.email.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.telefone.id_for_label }}" class="form-label">
-                                    {{ form.telefone.label }} *
-                                </label>
-                                {{ form.telefone }}
-                                {% if form.telefone.errors %}
-                                    <div class="text-danger small">{{ form.telefone.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.cpf.id_for_label }}" class="form-label">
-                                    {{ form.cpf.label }} *
-                                </label>
-                                {{ form.cpf }}
-                                {% if form.cpf.errors %}
-                                    <div class="text-danger small">{{ form.cpf.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.data_nascimento.id_for_label }}" class="form-label">
-                                    {{ form.data_nascimento.label }} *
-                                </label>
-                                {{ form.data_nascimento }}
-                                {% if form.data_nascimento.errors %}
-                                    <div class="text-danger small">{{ form.data_nascimento.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label for="{{ form.endereco.id_for_label }}" class="form-label">
-                                    {{ form.endereco.label }}
-                                </label>
-                                {{ form.endereco }}
-                                {% if form.endereco.errors %}
-                                    <div class="text-danger small">{{ form.endereco.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label for="{{ form.foto.id_for_label }}" class="form-label">
-                                    {{ form.foto.label }}
-                                </label>
-                                {{ form.foto }}
-                                {% if form.foto.errors %}
-                                    <div class="text-danger small">{{ form.foto.errors }}</div>
-                                {% endif %}
+                        <div class="form-section">
+                            <h5 class="form-section-title">
+                                <i class="fas fa-user me-2"></i>Informações Pessoais
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.first_name.id_for_label }}" class="form-label fw-semibold required-field">
+                                        {{ form.first_name.label }}
+                                    </label>
+                                    {{ form.first_name }}
+                                    {% if form.first_name.errors %}
+                                        <div class="text-danger small mt-1">{{ form.first_name.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.last_name.id_for_label }}" class="form-label fw-semibold required-field">
+                                        {{ form.last_name.label }}
+                                    </label>
+                                    {{ form.last_name }}
+                                    {% if form.last_name.errors %}
+                                        <div class="text-danger small mt-1">{{ form.last_name.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.email.id_for_label }}" class="form-label fw-semibold required-field">
+                                        {{ form.email.label }}
+                                    </label>
+                                    {{ form.email }}
+                                    {% if form.email.errors %}
+                                        <div class="text-danger small mt-1">{{ form.email.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.telefone.id_for_label }}" class="form-label fw-semibold required-field">
+                                        {{ form.telefone.label }}
+                                    </label>
+                                    {{ form.telefone }}
+                                    {% if form.telefone.errors %}
+                                        <div class="text-danger small mt-1">{{ form.telefone.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.cpf.id_for_label }}" class="form-label fw-semibold required-field">
+                                        {{ form.cpf.label }}
+                                    </label>
+                                    {{ form.cpf }}
+                                    {% if form.cpf.errors %}
+                                        <div class="text-danger small mt-1">{{ form.cpf.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.data_nascimento.id_for_label }}" class="form-label fw-semibold required-field">
+                                        {{ form.data_nascimento.label }}
+                                    </label>
+                                    {{ form.data_nascimento }}
+                                    {% if form.data_nascimento.errors %}
+                                        <div class="text-danger small mt-1">{{ form.data_nascimento.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="{{ form.endereco.id_for_label }}" class="form-label fw-semibold">
+                                        {{ form.endereco.label }}
+                                    </label>
+                                    {{ form.endereco }}
+                                    {% if form.endereco.errors %}
+                                        <div class="text-danger small mt-1">{{ form.endereco.errors }}</div>
+                                    {% endif %}
+                                    <div class="form-text">Endereço completo (opcional)</div>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label for="{{ form.foto.id_for_label }}" class="form-label fw-semibold">
+                                        {{ form.foto.label }}
+                                    </label>
+                                    {{ form.foto }}
+                                    {% if form.foto.errors %}
+                                        <div class="text-danger small mt-1">{{ form.foto.errors }}</div>
+                                    {% endif %}
+                                    <div class="form-text">Foto do entregador (opcional)</div>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Informações da Moto -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h5 class="text-primary mb-3">
-                                    <i class="fas fa-motorcycle me-1"></i>Informações da Moto
-                                </h5>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.cnh.id_for_label }}" class="form-label">
-                                    {{ form.cnh.label }} *
-                                </label>
-                                {{ form.cnh }}
-                                {% if form.cnh.errors %}
-                                    <div class="text-danger small">{{ form.cnh.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.modelo_moto.id_for_label }}" class="form-label">
-                                    {{ form.modelo_moto.label }} *
-                                </label>
-                                {{ form.modelo_moto }}
-                                {% if form.modelo_moto.errors %}
-                                    <div class="text-danger small">{{ form.modelo_moto.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.cor_moto.id_for_label }}" class="form-label">
-                                    {{ form.cor_moto.label }} *
-                                </label>
-                                {{ form.cor_moto }}
-                                {% if form.cor_moto.errors %}
-                                    <div class="text-danger small">{{ form.cor_moto.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.placa_moto.id_for_label }}" class="form-label">
-                                    {{ form.placa_moto.label }} *
-                                </label>
-                                {{ form.placa_moto }}
-                                {% if form.placa_moto.errors %}
-                                    <div class="text-danger small">{{ form.placa_moto.errors }}</div>
-                                {% endif %}
+                        <div class="form-section">
+                            <h5 class="form-section-title">
+                                <i class="fas fa-motorcycle me-2"></i>Informações da Moto
+                            </h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.cnh.id_for_label }}" class="form-label fw-semibold required-field">
+                                        {{ form.cnh.label }}
+                                    </label>
+                                    {{ form.cnh }}
+                                    {% if form.cnh.errors %}
+                                        <div class="text-danger small mt-1">{{ form.cnh.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.modelo_moto.id_for_label }}" class="form-label fw-semibold required-field">
+                                        {{ form.modelo_moto.label }}
+                                    </label>
+                                    {{ form.modelo_moto }}
+                                    {% if form.modelo_moto.errors %}
+                                        <div class="text-danger small mt-1">{{ form.modelo_moto.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.cor_moto.id_for_label }}" class="form-label fw-semibold required-field">
+                                        {{ form.cor_moto.label }}
+                                    </label>
+                                    {{ form.cor_moto }}
+                                    {% if form.cor_moto.errors %}
+                                        <div class="text-danger small mt-1">{{ form.cor_moto.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.placa_moto.id_for_label }}" class="form-label fw-semibold required-field">
+                                        {{ form.placa_moto.label }}
+                                    </label>
+                                    {{ form.placa_moto }}
+                                    {% if form.placa_moto.errors %}
+                                        <div class="text-danger small mt-1">{{ form.placa_moto.errors }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
 
                         <!-- Botões -->
                         <div class="row mt-4">
-                            <div class="col-12 d-flex gap-2">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-save me-1"></i>Cadastrar Entregador
-                                </button>
-                                <a href="{% url 'manager_delivery_man' %}" class="btn btn-secondary">
-                                    <i class="fas fa-times me-1"></i>Cancelar
-                                </a>
+                            <div class="col-12">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <button type="submit" class="btn btn-primary px-4">
+                                            <i class="fas fa-save me-2"></i>Cadastrar Entregador
+                                        </button>
+                                        <button type="reset" class="btn btn-outline-secondary ms-2">
+                                            <i class="fas fa-redo me-2"></i>Limpar Formulário
+                                        </button>
+                                    </div>
+                                    <a href="{% url 'manager_delivery_man' %}" class="btn btn-outline-primary">
+                                        <i class="fas fa-list me-2"></i>Ver Todos Entregadores
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -223,7 +282,18 @@
 
 {% block extra_js %}
 <script>
-    // Formatação automática para campos específicos
+    // Função para mostrar/ocultar senha
+    function togglePassword(element) {
+        const passwordField = element.parentElement.querySelector('input');
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            element.innerHTML = '<i class="fas fa-eye-slash"></i>';
+        } else {
+            passwordField.type = 'password';
+            element.innerHTML = '<i class="fas fa-eye"></i>';
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         // Formatação do CPF
         const cpfField = document.getElementById('{{ form.cpf.id_for_label }}');
@@ -260,6 +330,82 @@
                     value = value.replace(/(\d{2})/, "($1");
                 }
                 e.target.value = value;
+            });
+        }
+
+        // Formatação da placa (AAA-0000)
+        const placaField = document.getElementById('{{ form.placa_moto.id_for_label }}');
+        if (placaField) {
+            placaField.addEventListener('input', function(e) {
+                let value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+                if (value.length > 7) value = value.substring(0, 7);
+                
+                if (value.length > 3) {
+                    value = value.replace(/(\w{3})(\w{4})/, "$1-$2");
+                }
+                e.target.value = value;
+            });
+        }
+
+        // Formatação da CNH (somente números)
+        const cnhField = document.getElementById('{{ form.cnh.id_for_label }}');
+        if (cnhField) {
+            cnhField.addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/\D/g, '');
+            });
+        }
+
+        // Validação de idade mínima (18 anos)
+        const nascimentoField = document.getElementById('{{ form.data_nascimento.id_for_label }}');
+        if (nascimentoField) {
+            nascimentoField.addEventListener('change', function(e) {
+                const birthDate = new Date(e.target.value);
+                const today = new Date();
+                const age = today.getFullYear() - birthDate.getFullYear();
+                const monthDiff = today.getMonth() - birthDate.getMonth();
+                
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                
+                if (age < 18) {
+                    alert('O entregador deve ter pelo menos 18 anos de idade.');
+                    e.target.value = '';
+                }
+            });
+        }
+
+        // Validação de formulário
+        const form = document.getElementById('deliveryForm');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                // Remover máscaras antes de enviar
+                if (cpfField) {
+                    cpfField.value = cpfField.value.replace(/\D/g, '');
+                }
+                if (telefoneField) {
+                    telefoneField.value = telefoneField.value.replace(/\D/g, '');
+                }
+                if (placaField) {
+                    placaField.value = placaField.value.replace(/\D/g, '');
+                }
+                
+                // Validação básica
+                const requiredFields = form.querySelectorAll('.required-field');
+                let isValid = true;
+                
+                requiredFields.forEach(label => {
+                    const field = document.getElementById(label.getAttribute('for'));
+                    if (field && !field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('is-invalid');
+                    }
+                });
+                
+                if (!isValid) {
+                    e.preventDefault();
+                    alert('Por favor, preencha todos os campos obrigatórios (*).');
+                }
             });
         }
     });

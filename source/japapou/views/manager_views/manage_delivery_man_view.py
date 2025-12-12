@@ -64,7 +64,6 @@ def manager_delivery_man_create_view(request):
     else:
         form = DeliveryRegisterForm()
 
-    # USE O NOME QUE VOCÊ QUER: manager_delivery_man_register.html
     return render(request, "manager/manager_delivery_man_register.html", {"form": form})
 
 
@@ -73,10 +72,10 @@ def manage_delivery_man_view(request):
     """Lista todos os entregadores"""
     try:
         delivery_men = CustomUser.objects.filter(
-            tipo_usuario='DELIVERY_MAN'
+            tipo_usuario='DELIVERY_MAN',
+            is_active=True  # Filtra apenas usuários ativos
         ).order_by('-date_joined')
 
-        # MANTENDO manager_delivery_man.html para listagem
         return render(request, "manager/manager_delivery_man.html", {
             "delivery_men": delivery_men
         })
@@ -89,7 +88,6 @@ def manage_delivery_man_view(request):
 @manager_required('japapou.view_customuser')
 def manager_delivery_man_detail_view(request, id):
     """Exibe os detalhes de um entregador"""
-    # Busca o usuário pelo ID e garante que ele é um 'DELIVERY_MAN'
     delivery_man = get_object_or_404(CustomUser, pk=id, tipo_usuario='DELIVERY_MAN')
     return render(request, "manager/manager_delivery_man_detail.html", {
         "delivery_man": delivery_man
@@ -144,7 +142,7 @@ def manager_delivery_man_update_view(request, id):
 @manager_required('japapou.delete_customuser')
 @csrf_protect
 def manager_delivery_man_delete_view(request, id):
-    """Exclui um entregador (deve ser chamado por um método POST, geralmente de um formulário)"""
+    """Exclui um entregador"""
     delivery_man = get_object_or_404(CustomUser, pk=id, tipo_usuario='DELIVERY_MAN')
 
     if request.method == "POST":
