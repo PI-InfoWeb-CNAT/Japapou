@@ -3,7 +3,45 @@ from django.conf import settings # type: ignore # Importar settings
 from japapou.models.adress import Endereco
 
 class Order(models.Model):
-    
+
+    class Status(models.TextChoices):
+        PENDENTE = 'PENDENTE', 'Pendente (Aguardando Confirmação)'
+        PROCESSANDO = 'PROCESSANDO', 'Em Preparo'
+        PRONTO_PARA_RETIRADA = 'PRONTO_PARA_RETIRADA', 'Pronto para Retirada'
+        A_CAMINHO = 'A_CAMINHO', 'A Caminho'
+        ENTREGUE = 'ENTREGUE', 'Entregue'
+        CONCLUIDO = 'CONCLUIDO', 'Concluído'
+        CANCELADO = 'CANCELADO', 'Cancelado'
+        FALHA = 'FALHA', 'Falha no Pagamento/Entrega'
+
+    status = models.CharField(
+        max_length=50,
+        choices=Status.choices,
+        default=Status.PENDENTE, # Todos os pedidos novos começam como Pendente
+        verbose_name="Status do Pedido"
+    )
+
+    # apenas se a opção de pagamento for dinheiro
+    troco_para = models.DecimalField(
+        max_digits=10, 
+        decimal_places=2, 
+        null=True, 
+        blank=True,
+        verbose_name="Troco para o valor"
+    )
+
+    class MetodoPagamento(models.TextChoices):
+        DINHEIRO = 'DINHEIRO', 'Dinheiro'
+        CARTAO = 'CARTAO', 'Cartão'
+        PIX = 'PIX', 'Pix'
+
+    metodo_pagamento = models.CharField(
+        max_length=10, 
+        choices=MetodoPagamento.choices, 
+        default=MetodoPagamento.PIX, 
+        verbose_name="Método de Pagamento"
+    )
+
     class TipoPedido(models.TextChoices):
         RETIRADA = 'RETIRADA', 'retirada'
         ENTREGA = 'ENTREGA', 'entrega'

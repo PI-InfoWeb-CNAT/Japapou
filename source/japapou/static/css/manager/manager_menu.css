@@ -248,14 +248,91 @@ main {
 	margin-bottom: 1em;
 	align-items: center;
 	
+	.text-ruler {
+    	font-size: 20px;
+		visibility: hidden; /* Torna-o invisível */
+    	position: absolute; /* Remove-o do fluxo de layout */
+    	white-space: nowrap; /* Impede que o texto quebre linhas */
+    	padding: 0;
+    	margin: 0;
+    	/* Adicione quaisquer outros estilos de fonte, como padding (se aplicável) */
+	}
+
+	div {
+		position: relative; /* Essencial para posicionar o pseudo-elemento */
+		display: inline-block; /* Para que o wrapper se ajuste ao tamanho do select */
+		width: 100%;
+
+		select {
+			cursor: pointer;
+			background-color: transparent;
+			color: white;
+			border: none;
+			text-align: center;
+			margin: 0 auto;
+			font-size: 20px;
+			width: 100%;
+
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+
+			background-image: url('../../imgs/seta_baixo.png');
+			background-repeat: no-repeat;
+			background-size: 20px 10px;
+			background-position: right 5% center;
+
+			option {
+				background-color: var(--azul-mais-escuro);
+			}
+
+		}
+		select:focus {
+			outline: none;
+		}
+	}
+
+	
+	
 
 	#period-form {
-		width: 18%;
+		display: inline-block;
+		align-content: center;
+		width: 20%;
 		height: 55%;
 
 		select {
-			font-size: 19px;
+			cursor: pointer;
+        	background-color: transparent;
+        	color: white;
+        	border: none;
+        	text-align: center;
+        	margin: 0 auto;
+        	font-size: 20px;
+			width: 100%;
+
+			background-color: transparent;
+			color: white;
 			text-align: center;
+			margin: 0 auto;
+			font-size: 20px;
+
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+
+			background-image: url('../../imgs/seta_baixo.png');
+			background-repeat: no-repeat;
+			background-size: 7% 37%;
+			background-position: right 3% center;
+
+
+			option {
+				background-color: var(--azul-mais-escuro);
+			}
+		}
+		select:focus {
+			outline: none;
 		}
 	}
 	div p {
@@ -289,34 +366,28 @@ main {
 		color: #f97316;
 		font-size: 30px;
 		cursor: pointer;
+		background-color: transparent;
 	}
 	form {
-		width: 16%;
+		/*width: 15%;*/
+		/*max-width: 20%;*/
 		height: 55%;
+		border-radius: 25px;
+		border: 1px solid white;
+		display: inline-block;
+		align-content: center;
+		/* display: flex;
+		justify-content: space-around;
+		align-items: center; */
 
-		/* div {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			border: 1px solid white;
-			color: #f97316;
-			border-radius: 30px;
-			width: 100%;
-			height: 100%;
-			} */
 		label {
 			margin: 0;
 			margin-right: 5px;
 			font-size: 20px;
 		}
 	}
-	form select {
-		background-color: none;
-		font-size: 19px;
-		text-align: center;
-		cursor: pointer;
-	}
-	form select:hover {
+	
+	form:hover {
 		background-color: var(--azul-mais-claro);
 	}
 }
@@ -393,9 +464,9 @@ form {
 	z-index: 1;
 	margin: 0;
 	width: 35%;
+	height: 90%;
 	padding: 15px 30px 0px 30px;
-	height: 72%;
-	background-color: #024057;
+	background-color: var(--azul-mais-escuro);
 	border: 1px solid white;
 	border-radius: 20px;
 
@@ -405,6 +476,10 @@ form {
 
 	h2 {
 		color: white;
+		margin: 0;
+	}
+	label {
+		margin: 0;
 	}
 	form #name-menu{
 		display: flex;
@@ -413,9 +488,10 @@ form {
 	}
 	form #id_name {
 		width: 60%;
-		border: 2px solid white;
+		border: 1px solid white;
 		color: white;
     	border-radius: 8px;
+		background-color: var(--azul-mais-claro);
 	}
 }
 
@@ -424,11 +500,11 @@ form {
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 4%;
-	background-color: var(--azul-mais-escuro);
+	background-color: var(--azul-mais-claro);
 	padding: 20px 0px 20px 0px;
 	width: 100%;
-	height: 70%;
-	border: 2px solid white;
+	height: 80%;
+	border: 1px solid white;
 	border-radius: 8px;
 
 	div {
@@ -466,8 +542,8 @@ form {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	margin: 0;
-	width: 50%;
-	height: 45%;
+	width: 60%;
+	height: 50%;
 	border: none;
 	background-color: transparent;
 
@@ -486,6 +562,7 @@ form {
 			border-radius: 15px;
 			padding: 20px 25px 0px 25px;
 			place-items: center;
+			cursor: default;
 
 			> div {
 				padding: 0px;
@@ -499,18 +576,21 @@ form {
 
 			button {
 				padding: 0px;
-				width: 200px;
-				height: 200px;
+				width: 70%;
+				height: 60%;
 				background-color: #f97316;
 				border: 2px solid black;
 				border-radius: 0;
-				margin-bottom: 12%;
+				margin: 0;
+				
 			}
 
 			h2 {
 				font-size: 25px;
 				font-weight: bold;
 				color: black;
+				margin: 0;
+				margin-top: 5%;
 			}
 
 			p {
@@ -527,7 +607,7 @@ form {
 	}
 }
 
-/* #pratos-registrados {
+#pratos-registrados {
 	margin: 0 auto;
 	position: fixed;
 	top: 50%;
@@ -535,42 +615,39 @@ form {
 	transform: translate(-50%, -50%);
 	z-index: 1;
 	margin: 0;
-	width: 30%;
-	height: 75%;
+	width: 35%;
+	height: 90%;
 	padding: 15px 20px 20px 20px;
-	background-color: #024057;
+	background-color: var(--azul-mais-escuro);
 	border: 1px solid white;
 	border-radius: 20px;
 	place-items: center;
 
 	h2 {
 		font-size: 36px;
-		margin-bottom: 15px;
+		margin: 0;
+		margin-bottom: 3%;
 	}
 
 	button {
-		width: 40%;
-		height: 6%;
-		margin-top: 5%;
+		background-color: var(--laranja-mais-claro);
+        border: 2px solid black;
+        border-radius: 15px;
+        width: 40%;
+        height: 7%;
+        margin-top: 3%;
 	}
 
 	form {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 5%;
-		background-color: var();
-		padding: 25px 0px 45px 0px;
-		width: 95%;
-		height: 70%;
-		border: 2px solid black;
-		border-radius: 8px;
 
-		div {
+		#outros-pratos {
 			display: flex;
 			align-items: center;
-			gap: 1%;
-			height: 5%;
+			width: 100%;
+			height: 95%;
+			background-color: var(--azul-mais-claro);
+			border: 1px solid white;
+			border-radius: 8px;
 		}
 
 		label {
@@ -597,7 +674,8 @@ form {
 			}
 		}
 	}
-} */
+} 
+
 
 #criar-prato {
 	margin: 0 auto;
@@ -609,11 +687,23 @@ form {
 	margin: 0;
 	width: 30%;
 	height: 90%;
-	padding: 15px 40px 20px 40px;
+	padding: 35px 40px 20px 40px;
 	background-color: var(--azul-mais-escuro);
 	border: 1px solid white;
 	border-radius: 20px;
 	place-items: center;
+
+	p {
+		margin: 0;
+        font-size: x-small;
+		text-align: center;
+		color: white;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: larger;
+	}
 
 	form {
 		place-items: center;
@@ -621,8 +711,12 @@ form {
 
 	form #image-file {
 		background-color: var(--laranja-mais-claro);
-		width: 35%;
-		height: 25%;
+		width: 150px;
+        height: 145px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+		cursor: pointer;
 	}
 
 	form div {
@@ -632,11 +726,14 @@ form {
 	form .criar-prato-menus{
 		display: flex;
 		flex-direction: column;
+		text-align: center;
 	}
 
 	form div textarea {
 		background-color: var(--azul-mais-claro);
+		color: white;
 		width: 100%;
+		margin-bottom: 15px;
 	}
 
 	form div label {
@@ -659,17 +756,17 @@ form {
 		text-align: center;
 		margin: 0;
 		padding: 0px 0px 0px 0px;
-		width: 100%;
-		height: 100%;
 	}
 
 	form label p {
 		margin: 0;
+		font-size: x-small;
 	}
 
 	form label .material-symbols-outlined {
-		font-size: 60px;
-		margin: 25px 0px 0px 0px;
+		font-size: 50px;
+		cursor: pointer;
+		/* margin: 25px 0px 0px 0px; */ 
 	}
 
 	form input[type="file"] {
@@ -680,8 +777,8 @@ form {
 		background-color: var(--laranja-mais-claro);
 		border: 2px solid black;
 		border-radius: 12px;
-		width: 110%;
-		height: 6%;
+		width: 80%;
+		height: 8%;
 		margin-top: 5%;
 	}
 }
@@ -702,6 +799,11 @@ form {
 	border-radius: 20px;
 	place-items: center;
 
+	h2 {
+		margin: 0;
+		font-size: larger;
+	}
+
 	form {
 		place-items: center;
 		position: relative;
@@ -709,8 +811,8 @@ form {
 
 	form #image-file-edit {
 		background-color: var(--azul-mais-claro);
-		width: 35%;
-		height: 25%;
+		width: 100%;
+		height: 100%;
 	}
 
 	form div {
@@ -722,6 +824,7 @@ form {
 			height: 100%;
 		}
 	}
+
 	form .criar-prato-menus{
 		display: flex;
 		flex-direction: column;
@@ -731,6 +834,7 @@ form {
 	form div textarea {
 		background-color: var(--azul-mais-claro);
 		width: 100%;
+		margin-bottom: 15px;
 		color: white;
 	}
 
@@ -770,22 +874,88 @@ form {
 		margin: 0;
 	}
 
-	form label .material-symbols-outlined {
-		font-size: 60px;
+	.material-symbols-outlined {
+		font-size: 35px;
 		
 	}
 
-	form input[type="file"] {
+	#edit-photo-input {
 		display: none;
+	}
+
+	#image-file-edit-container {
+    /* Torna o container relativo para posicionar o label/ícone por cima */
+    position: relative;
+    /* Define o tamanho que a área da imagem deve ter */
+    width: 100px; 
+    height: 100px;
+    /* Centraliza se necessário */
+    margin: 20px auto; 
+    /* Garante que o ícone e o texto de upload estejam escondidos por padrão */
+    overflow: hidden;
+	}
+
+	#edit-photo-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    border-radius: 8px;
+    /* Adiciona uma transição para suavizar as mudanças de opacidade e zoom */
+    transition: all 0.3s ease-in-out; 
+	}
+
+	#upload-label {
+    /* Posiciona o label no centro, por cima da imagem */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Centraliza o conteúdo (ícone e texto) */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* Fundo semi-transparente e cor do texto/ícone */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparente cinza escuro */
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    
+    /* Por padrão, o overlay está transparente e não clicável (para vermos a imagem) */
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+	}
+
+	/* 4. O EFEITO HOVER (Passar o mouse sobre a área da imagem) */
+	#image-file-edit-container:hover #upload-label {
+	    /* Ao passar o mouse, torna o overlay visível (destaca a área de upload) */
+	    opacity: 1;
+	}
+
+	#image-file-edit-container:hover #edit-photo-preview {
+	    /* Opcional: Efeito de zoom sutil na imagem ao passar o mouse */
+	    transform: scale(1.05); 
+	    /* Opcional: Escurece a imagem levemente para o overlay se destacar */
+	    filter: brightness(0.8);
 	}
 
 	button {
 		background-color: var(--laranja-mais-claro);
 		border: 2px solid black;
 		border-radius: 12px;
-		width: 110%;
-		height: 6%;
+		width: 80%;
+		height: 8%;
 		margin-top: 5%;
+	}
+
+	#menu-associado {
+		text-align: center;
+		display: flex;
+		flex-direction: column;
 	}
 }
 
@@ -901,26 +1071,7 @@ h2{
 	text-align: center;
 	margin-top: 1em;
 }
-.data-cardapio {
-    select {
-		background-color: var(--azul-mais-escuro);
-		color: white;
-		border-radius: 25px;
-		border: 1px solid white;
-		text-align: center;
-		padding: 10px;
-		margin: 0 auto;
-		padding-inline: 1em;
-	}
-}
 
-/* .data-cardapio {
-    form {
-        label {
-			visibility: hidden;
-		}
-	}
-} */
 
 span.material-symbols-outlined{
 	background-color: var(--azul-mais-escuro);

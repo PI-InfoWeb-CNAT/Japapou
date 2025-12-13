@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/client/checkout.css' %}">
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock extra_head %}
 
 {% block content %}
 <div class="container">
@@ -12,77 +18,209 @@
         {% endfor %}
     {% endif %}
 
-    <div style="display: flex; gap: 20px;">
-        <div style="flex: 1;">
-            <h3>Resumo do seu Carrinho</h3>
-            {% for item in cart_items %}
-                <p>
-                    {{ item.quantity }}x <strong>{{ item.plate.name }}</strong>
-                    (R$ {{ item.get_item_total|floatformat:2 }})
-                </p>
-            {% endfor %}
-            <hr>
-            <p><strong>Subtotal: R$ {{ subtotal|floatformat:2 }}</strong></p>
+    <div id="cards-pratos">
+        <p>aqui sera exibido os cards dos pratos comprados</p>
+    </div>
+
+    <div id="resumo-container">
+        <div id="titulo-resumo">
+            <span>Seu pedido em</span>
+            <h3>Japapou [rua]</h3>
         </div>
-
-        <div style="flex: 1;">
-            <h3>Escolha o Método</h3>
-            
-            <form method="POST" action="{% url 'checkout' %}">
-                {% csrf_token %}
-
-                <h4>Tipo de Pedido:</h4>
-                
-                <input type="radio" id="retirada" name="tipo_pedido" value="{{ TipoPedido.RETIRADA }}" required>
-                <label for="retirada">
-                    <strong>Retirada na Loja</strong> 
-                    (Total: R$ {{ subtotal|floatformat:2 }})
-                </label>
-                <br>
-                <br>
-                
-                <input type="radio" id="entrega" name="tipo_pedido" value="{{ TipoPedido.ENTREGA }}" required>
-                <label for="entrega">
-                    <strong>Entrega (Delivery)</strong>
-                    (Taxa: R$ {{ taxa_entrega|floatformat:2 }}) - 
-                    <strong>Total: R$ {{ total_com_entrega|floatformat:2 }}</strong>
-                </label>
-
-                <div id="bloco-enderecos" style="margin-left: 25px; margin-top: 10px; padding: 10px; border: 1px solid #eee;">
-                    
-                    <h5>Selecione o endereço de entrega:</h5>
-
-                    {% if enderecos %}
-                        {% for endereco in enderecos %}
-                            <input type="radio" 
-                                   id="endereco-{{ endereco.id }}" 
-                                   name="endereco_id" 
-                                   value="{{ endereco.id }}" 
-                                   required> <label for="endereco-{{ endereco.id }}">
-                                <strong>{{ endereco.apelido|default:"Endereço" }}:</strong> 
-                                {{ endereco.logradouro }}, {{ endereco.numero }} 
-                                ({{ endereco.bairro }})
-                            </label>
-                            <br>
-                        {% endfor %}
-
-                    {% else %}
-                        <p style="color: red;">
-                            Você não possui endereços cadastrados para entrega.
-                        </p>
-                    {% endif %}
-                    
-                    <a href="{% url 'add_endereco' %}" style="font-size: 0.9em; margin-top: 10px; display: inline-block;">
-                        + Adicionar novo endereço
-                    </a>
-                </div>
-                <hr>
-                
-                <button type="submit" class="btn btn-lg btn-success">
-                    Confirmar e Pagar (Simulado)
-                </button>
-            </form>
+        <div id="resumo-pedido">
+            <div id="container-resumo"> 
+                <div><p>Subtotal</p><p id="resumo-subtotal" data-valor="{{ subtotal|stringformat:'.2f' }}">R$ {{ subtotal }}</p></div>
+                <div><p>Entrega</p><p id="resumo-taxa" data-valor="{{ taxa_entrega|stringformat:'.2f' }}">R$ {{ taxa_entrega }}</p></div>
+                <div><h4>Total</h4><h4 id="resumo-total">R$ {{ total }}</h4></div>
+            </div>
+            <a href="{% url 'cart_view' %}"><i class="fa-solid fa-pencil"></i>Editar</a>
         </div>
     </div>
+
+    <div id="container-tipo-pedido">
+        <form method="POST" action="{% url 'checkout' %}" id="form-checkout">
+            {% csrf_token %}
+            
+            {% if pix_selecionado %}
+                <input type="hidden" name="pix_confirmado" value="True">
+                <input type="hidden" name="endereco_id" value="{{ endereco_selecionado_id }}">
+                <input type="hidden" name="tipo_pedido" value="{{ tipo_pedido_selecionado }}">
+
+                {% comment %} <div class="alert alert-success">
+                    QR Code gerado com sucesso! Realize o pagamento e confirme abaixo.
+                </div> {% endcomment %}
+            {% endif %}
+
+            <div class="radio-group">
+                {% comment %} <input type="radio" id="entrega" name="tipo_pedido" value="{{ TipoPedido.ENTREGA }}" required>
+                <label for="entrega">Entrega</label>
+                <input type="radio" id="retirada" name="tipo_pedido" value="{{ TipoPedido.RETIRADA }}" required>
+                <label for="retirada">Retirada</label> {% endcomment %}
+                <input type="radio" id="entrega" name="tipo_pedido" value="{{ TipoPedido.ENTREGA }}" required {% if tipo_pedido_padrao == TipoPedido.ENTREGA %}checked{% endif %}>
+                <label id="label-entrega" for="entrega">Entrega</label>
+                <input type="radio" id="retirada" name="tipo_pedido" value="{{ TipoPedido.RETIRADA }}" required {% if tipo_pedido_padrao == TipoPedido.RETIRADA %}checked{% endif %}>
+                <label id="label-retirada" for="retirada">Retirada</label>
+            </div>
+            <div id="bloco-enderecos">
+                <div><img src="../../static/imgs/localization-icon.png"></img></div>
+                <div>
+                    <h3 id="titulo-endereco-selecionado">
+                        {% if endereco_padrao %}
+                            {{ endereco_padrao.bairro }}, {{ endereco_padrao.logradouro }}, {{ endereco_padrao.numero }}
+                        {% else %}
+                            Endereço não selecionado
+                        {% endif %}
+                    </h3>
+                    <p id="complemento-endereco-selecionado">
+                        {% if endereco_padrao and endereco_padrao.complemento %}
+                            {{ endereco_padrao.complemento }}
+                        {% else %}
+                            Sem Complemento.
+                        {% endif %}
+                    </p>
+                </div>
+                {% if enderecos %}
+                    <button type="button" id="btn-abrir-modal" onclick="document.getElementById('modal-enderecos').showModal()">
+                        Escolher
+                    </button>
+                    <input type="hidden" id="input-endereco-id" name="endereco_id" value="{% if endereco_padrao %}{{ endereco_padrao.id }}{% endif %}">
+                 {% else %}
+                    <p style="color: red;">
+                        Você não possui endereços cadastrados para entrega.
+                    </p>
+                 {% endif %}
+                    
+                {% comment %} <a href="{% url 'add_endereco' %}" style="font-size: 0.9em; margin-top: 10px; display: inline-block;">
+                    + Adicionar novo endereço
+                </a> {% endcomment %}
+            </div>
+            <!--<h3>Tipo Entreg</h3>-->
+            <div id="tipo-entrega">
+                <div>
+                    <div>
+                        <h3>Padrão</h3>
+                        <p>Hoje, 35min</p>
+                    </div>
+                    <strong>R$ {{ taxa_entrega }}</strong>
+                </div>
+                <div id="express-opcao" class="disabled">
+                    <div>
+                        <h3>Express</h3>
+                        <p>Inderteminado</p>
+                    </div>
+                    <strong>Não disponivel.</strong>
+                </div>
+            </div>
+
+            <div id="container-metodo-pagamento">
+                <div id="radio-group-categoria">
+                    <input type="radio" id="categoria-online" name="categoria_pagamento" value="ONLINE" required checked>
+                    <label id="label-categoria-online" for="categoria-online">Pagamento pelo Site</label>
+
+                    <input type="radio" id="categoria-local" name="categoria_pagamento" value="LOCAL" required>
+                    <label id="label-categoria-local" for="categoria-local">Pagamento na Entrega</label>
+                </div>
+
+                <div id="container-metodo-online">
+                    <div id="mostrar-metodo-atual-online">
+                        <div><img src="../../static/imgs/icon-pix.png"></img></div>
+                        <div>
+                            <h3 id="titulo-metodo-pagamento-selecionado">PIX</h3>
+                            <p id="detalhes-metodo-pagamento-selecionado">Pague com seu app bancário via QR Code ou copie o código.</p>
+                        </div>
+                        <button type="button" id="btn-abrir-modal-pagamento" onclick="document.getElementById('modal-tipo-pagamento').showModal()">Escolher</button>
+                    </div>
+                </div>
+
+                <div id="container-metodo-local">
+                    <div id="mostrar-metodo-atual-local">
+                        <input type="checkbox" id="pagamento-dinheiro" name="metodo_pagamento" value="{{ MetodoPagamento.DINHEIRO }}">
+                        <label for="pagamento-dinheiro">Pagamento no Dinheiro?</label>
+                    </div>
+
+                    <div id="container-dinheiro">
+                        <h3>Pagamento em Dinheiro</h3>
+                        <label for="input-troco">Precisa de troco para quanto?</label>
+                        <input type="number" id="input-troco" name="troco_para" min="0" step="0.01" placeholder="Ex: 50.00">
+                    </div>
+                </div>
+            </div>
+              
+            <div id="container-pix" style="{% if not pix_selecionado %}display: none;{% endif %} text-align: center;">
+                {% if pix_selecionado %}
+                    <img id="img-qr-code" src="data:image/png;base64,{{ qr_code_base64 }}" alt="QR Code PIX" style="width: 200px; height: 200px; margin-bottom: 10px;">
+
+                    <p style="font-weight: bold;">Copia e cola:</p>
+
+                    <textarea id="codigo-pix-copia" readonly style="width: 100%; height: 60px; font-size: 0.8em; margin-bottom: 5px;">{{ codigo_pix }}</textarea>
+
+                    <button type="button" id="btn-copiar-pix-final" style="margin-bottom: 15px; cursor: pointer;">
+                        Copiar Código
+                    </button>
+                {% else %}
+                    <img src="../../static/imgs/icon-pix.png" style="width: 50px;">
+                    <p>Ao confirmar, o QR Code será gerado na próxima tela.</p>
+                {% endif %}
+            </div>
+
+            <div id="container-cartao">
+                <h3>Dados do Cartão (Stripe)</h3>
+                <div class="cartao-wrapper">
+                    <div id="card-element" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; background: white;">
+                        </div>
+                    
+                    <div id="card-errors" role="alert" style="color: red; margin-top: 10px; font-size: 0.9em;"></div>
+                    
+                    <input type="hidden" id="stripePaymentMethodId" name="stripePaymentMethodId">
+                </div>
+            </div>
+
+            <hr>
+
+            <button type="submit" class="btn btn-lg btn-success" id="btn-submit-checkout">
+                    CONFIRMAR E PAGAR (SIMULADO)
+            </button>
+            
+
+            <dialog id="modal-tipo-pagamento">
+                <h3>Selecione o Método de Pagamento</h3>
+
+                <input type="radio" id="pagamento-cartao" name="metodo_pagamento" value="{{ MetodoPagamento.CARTAO }}" required>
+                <label for="pagamento-cartao">Cartão</label>
+
+                <input type="radio" id="pagamento-pix" name="metodo_pagamento" value="{{ MetodoPagamento.PIX }}" required checked>
+                <label for="pagamento-pix">Pix</label> 
+            </dialog>
+
+        </form>
+    </div>
 </div>
+
+
+
+
+
+<dialog id="modal-enderecos">
+    <h3>Selecione o Endereço para Entrega</h3>
+    {% for endereco in enderecos %}
+        <div class="endereco-item" data-id="{{ endereco.id }}" 
+             data-logradouro="{{ endereco.logradouro }}"
+             data-numero="{{ endereco.numero }}"
+             data-bairro="{{ endereco.bairro }}"
+             data-complemento="{{ endereco.complemento|default:"Sem Complemento" }}">
+            <strong>{{ endereco.apelido|default:"Endereço" }}:</strong> 
+            {{ endereco.logradouro }}, {{ endereco.numero }} ({{ endereco.bairro }})
+        </div>
+    {% endfor %}
+</dialog>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+        const STRIPE_PUBLIC_KEY = "{{ STRIPE_PUBLIC_KEY }}";
+    </script>
+
+    <script src="{% static 'js/client/checkout.js' %}"></script>
 {% endblock %}

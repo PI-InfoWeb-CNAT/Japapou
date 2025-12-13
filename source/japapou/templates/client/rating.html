@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block extra_head %}
-    <link rel="stylesheet" href="{% static 'css/plate_details.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/client/plate_details.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 {% endblock %}
 
@@ -74,7 +74,7 @@
         <span>{{reviews.count}} avaliações</span>
     </div>
     <div class="graficos-avaliacao">
-        <div class="linha 1">
+        <div class="linha cinco">
             <div class="estrelas">
                 <i class="fas fa-star filled-simple laranja-claro"></i>
                 <i class="fas fa-star filled-simple laranja-claro"></i>
@@ -82,10 +82,14 @@
                 <i class="fas fa-star filled-simple laranja-claro"></i>
                 <i class="fas fa-star filled-simple laranja-claro"></i>
             </div>
-            <p>linha 1</p>
-            <p class="laranja-claro">1</p>
+            <div class="barra-container">
+                <div class="barra-progresso" 
+                     style="width: {{ rating_distribution.0.percentage }}%; background-color: #f8761e;">
+                    </div>
+            </div>
+            <p class="laranja-claro">{{ rating_distribution.0.count }}</p>
         </div>
-        <div class="linha 2">
+        <div class="linha quatro">
             <div class="estrelas">
                 <i class="fas fa-star filled-simple laranja-claro"></i>
                 <i class="fas fa-star filled-simple laranja-claro"></i>
@@ -93,10 +97,14 @@
                 <i class="fas fa-star filled-simple laranja-claro"></i>
                 <i class="fas fa-star filled-simple azul-claro"></i>
             </div>
-            <p>linha 2</p>
-            <p class="laranja-claro">2</p>
+            <div class="barra-container">
+                <div class="barra-progresso" 
+                     style="width: {{ rating_distribution.1.percentage }}%; background-color: #f8761e;">
+                    </div>
+            </div>
+            <p class="laranja-claro">{{ rating_distribution.1.count }}</p>
         </div>
-        <div class="linha 3">
+        <div class="linha tres">
             <div class="estrelas">
                 <i class="fas fa-star filled-simple laranja-escuro"></i>
                 <i class="fas fa-star filled-simple laranja-escuro"></i>
@@ -104,10 +112,14 @@
                 <i class="fas fa-star filled-simple azul-claro"></i>
                 <i class="fas fa-star filled-simple azul-claro"></i>
             </div>
-            <p>linha 3</p>
-            <p class="laranja-escuro">3</p>
+            <div class="barra-container">
+                <div class="barra-progresso" 
+                     style="width: {{ rating_distribution.2.percentage }}%; background-color: #e25d12;">
+                    </div>
+            </div>
+            <p class="laranja-escuro">{{ rating_distribution.2.count }}</p>
         </div>
-        <div class="linha 4">
+        <div class="linha dois">
             <div class="estrelas">
                 <i class="fas fa-star filled-simple laranja-escuro"></i>
                 <i class="fas fa-star filled-simple laranja-escuro"></i>
@@ -115,10 +127,14 @@
                 <i class="fas fa-star filled-simple azul-claro"></i>
                 <i class="fas fa-star filled-simple azul-claro"></i>
             </div>
-            <p>linha 4</p>
-            <p class="laranja-escuro">4</p>
+            <div class="barra-container">
+                <div class="barra-progresso" 
+                     style="width: {{ rating_distribution.3.percentage }}%; background-color: #e25d12;">
+                    </div>
+            </div>
+            <p class="laranja-escuro">{{ rating_distribution.3.count }}</p>
         </div>
-        <div class="linha 5">
+        <div class="linha um">
             <div class="estrelas">
                 <i class="fas fa-star filled-simple vermelho"></i>
                 <i class="fas fa-star filled-simple azul-claro"></i>
@@ -126,8 +142,12 @@
                 <i class="fas fa-star filled-simple azul-claro"></i>
                 <i class="fas fa-star filled-simple azul-claro"></i>
             </div>
-            <p>linha 5</p>
-            <p class="vermelho">5</p>
+            <div class="barra-container">
+                <div class="barra-progresso" 
+                     style="width: {{ rating_distribution.4.percentage }}%; background-color: #981827;">
+                    </div>
+            </div>
+            <p class="vermelho">{{ rating_distribution.4.count }}</p>
         </div>
     </div>
     <div class="button-avaliação">
@@ -365,4 +385,7 @@
     // =========================================================
     });
 </script>
+
+
+<script src="{% static 'js/client/details_plate.js' %}"></script>
 {% endblock %}

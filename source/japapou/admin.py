@@ -13,6 +13,7 @@ admin.site.register(PlateOption)
 admin.site.register(Plate)
 admin.site.register(PlateReview)
 admin.site.register(CourierReview)
+admin.site.register(Endereco)
 
 
 class CustomUserAdmin(UserAdmin):
