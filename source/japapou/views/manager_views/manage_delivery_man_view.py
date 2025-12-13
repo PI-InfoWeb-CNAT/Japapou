@@ -49,8 +49,7 @@ def manager_delivery_man_create_view(request):
             delivery_man = form.save(commit=False)
             delivery_man.tipo_usuario = 'DELIVERY_MAN'
 
-            # --- Validações extras ---
-            # Idade mínima
+            
             birth_date = form.cleaned_data.get('data_nascimento')
             if birth_date:
                 today = date.today()
@@ -58,16 +57,14 @@ def manager_delivery_man_create_view(request):
                 if age < 18:
                     form.add_error('data_nascimento', 'O entregador deve ter pelo menos 18 anos de idade.')
 
-            # CPF: apenas números e 11 dígitos
             cpf = form.cleaned_data.get('cpf', '')
             cpf_numbers = re.sub(r'\D', '', cpf)
             if len(cpf_numbers) != 11:
                 form.add_error('cpf', 'CPF inválido. Deve conter 11 números.')
             delivery_man.cpf = cpf_numbers
 
-            # Telefone: até 11 dígitos
             telefone = form.cleaned_data.get('telefone', '').strip()
-            telefone_numbers = re.sub(r'\D', '', telefone)  # remove tudo que não é número
+            telefone_numbers = re.sub(r'\D', '', telefone)  
 
             if not telefone_numbers:
                 form.add_error('telefone', 'Telefone obrigatório.')
@@ -76,17 +73,14 @@ def manager_delivery_man_create_view(request):
             else:
                 delivery_man.telefone = telefone_numbers
 
-            # Placa: ABC-1234
             placa = form.cleaned_data.get('placa_moto', '').upper().replace('-', '')
             if placa and not re.match(r'^[A-Z]{3}[0-9]{4}$', placa):
                 form.add_error('placa_moto', 'Placa inválida. Deve estar no formato ABC-1234.')
             delivery_man.placa_moto = f"{placa[:3]}-{placa[3:]}" if placa else ''
 
-            # Se houver erros, não salva
             if form.errors:
                 return render(request, "manager/manager_delivery_man_register.html", {"form": form})
 
-            # Senha: obrigatória
             raw_password = form.cleaned_data.get("password")
             if raw_password:
                 delivery_man.set_password(raw_password)
@@ -94,7 +88,6 @@ def manager_delivery_man_create_view(request):
                 form.add_error('password', 'Senha obrigatória.')
                 return render(request, "manager/manager_delivery_man_register.html", {"form": form})
 
-            # Salva objeto
             delivery_man.save()
             form.save_m2m()
             messages.success(request, "Entregador registrado com sucesso!")
@@ -113,7 +106,7 @@ def manage_delivery_man_view(request):
     try:
         delivery_men = CustomUser.objects.filter(
             tipo_usuario='DELIVERY_MAN',
-            is_active=True  # Filtra apenas usuários ativos
+            is_active=True  
         ).order_by('-date_joined')
 
         return render(request, "manager/manager_delivery_man.html", {
@@ -149,7 +142,6 @@ def manager_delivery_man_update_view(request, id):
             delivery_man = form.save(commit=False)
             delivery_man.tipo_usuario = 'DELIVERY_MAN'
 
-            # --- Validações extras via form.add_error ---
             birth_date = form.cleaned_data.get('data_nascimento')
             if birth_date:
                 today = date.today()
@@ -157,13 +149,12 @@ def manager_delivery_man_update_view(request, id):
                 if age < 18:
                     form.add_error('data_nascimento', 'O entregador deve ter pelo menos 18 anos de idade.')
 
-            # CPF
+            
             cpf = re.sub(r'\D', '', form.cleaned_data.get('cpf', ''))
             if len(cpf) != 11:
                 form.add_error('cpf', 'CPF inválido. Deve conter 11 números.')
             delivery_man.cpf = cpf
 
-            # Telefone
             telefone_numbers = re.sub(r'\D', '', form.cleaned_data.get('telefone', ''))
             if not telefone_numbers:
                 form.add_error('telefone', 'Telefone obrigatório.')
@@ -172,13 +163,11 @@ def manager_delivery_man_update_view(request, id):
             else:
                 delivery_man.telefone = telefone_numbers
 
-            # Placa
             placa = form.cleaned_data.get('placa_moto', '').upper().replace('-', '')
             if placa and not re.match(r'^[A-Z]{3}[0-9]{4}$', placa):
                 form.add_error('placa_moto', 'Placa inválida. Deve estar no formato ABC-1234.')
             delivery_man.placa_moto = f"{placa[:3]}-{placa[3:]}" if placa else ''
 
-            # Senha: mantém antiga se não for alterada
             raw_password = form.cleaned_data.get('password')
             if raw_password:
                 delivery_man.set_password(raw_password)
@@ -186,13 +175,11 @@ def manager_delivery_man_update_view(request, id):
                 delivery_man.password = initial_password
 
             if form.errors:
-                # Se houver erros, renderiza novamente o template com erros
                 return render(request, "manager/manager_delivery_man_edit.html", {
                     "form": form,
                     "delivery_man": delivery_man
                 })
 
-            # Salva
             delivery_man.save()
             form.save_m2m()
             messages.success(request, "Entregador atualizado com sucesso!")
