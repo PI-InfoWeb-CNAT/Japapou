@@ -875,7 +875,7 @@ form {
 	}
 
 	.material-symbols-outlined {
-		font-size: 35px;
+		font-size: 70px;
 		
 	}
 
@@ -887,8 +887,8 @@ form {
     /* Torna o container relativo para posicionar o label/ícone por cima */
     position: relative;
     /* Define o tamanho que a área da imagem deve ter */
-    width: 100px; 
-    height: 100px;
+    width: 180px; 
+    height: 180px;
     /* Centraliza se necessário */
     margin: 20px auto; 
     /* Garante que o ícone e o texto de upload estejam escondidos por padrão */
