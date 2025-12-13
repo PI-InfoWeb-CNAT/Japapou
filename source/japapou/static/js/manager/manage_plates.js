@@ -6,13 +6,14 @@ document.addEventListener('DOMContentLoaded', function() {
   // Adiciona o evento de clique para TODOS os botões de edição
   document.querySelectorAll('.edit-button').forEach(button => {
     button.addEventListener('click', function() {
-      // 1. Pega o ID do prato do atributo 'plate-id' do botão
+      // Pega o ID do prato do atributo 'plate-id' do botão
       const plateId = this.getAttribute('plate-id');
       
-      // 2. Constrói a URL correta para buscar os dados do prato
+      // Constrói a URL correta para buscar os dados do prato
       //    A URL deve corresponder ao que está em 'manager_urls.py'
-      //const url = `/plates/${plateId}/edit/`;
+      // const url = `/plates/${plateId}/json/`;
       const url = this.getAttribute('data-url');
+      console.log(url);
 
       const nextPage = this.getAttribute('data-next-page');
 
@@ -30,6 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
           // Define a action do formulário para a URL de update correta
           form.action = `/manager/plates/${data.id}/update/`; // Vamos criar essa URL no passo 3
+
+          // console.log(form.action);
 
           // Preenche os campos de texto e número
           form.querySelector('#edit-name').value = data.name;
@@ -52,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
             option.selected = data.menus.includes(parseInt(option.value));
           });
           
+    
           const redirectInput = form.querySelector('#redirect-after-update');
           if (redirectInput) { // Verifica se o campo existe antes de tentar preencher
               redirectInput.value = nextPage;

@@ -702,6 +702,11 @@ form {
 	border-radius: 20px;
 	place-items: center;
 
+	h2 {
+		margin: 0;
+		font-size: larger;
+	}
+
 	form {
 		place-items: center;
 		position: relative;
@@ -709,8 +714,8 @@ form {
 
 	form #image-file-edit {
 		background-color: var(--azul-mais-claro);
-		width: 35%;
-		height: 25%;
+		width: 100%;
+		height: 100%;
 	}
 
 	form div {
@@ -722,6 +727,7 @@ form {
 			height: 100%;
 		}
 	}
+
 	form .criar-prato-menus{
 		display: flex;
 		flex-direction: column;
@@ -731,6 +737,7 @@ form {
 	form div textarea {
 		background-color: var(--azul-mais-claro);
 		width: 100%;
+		margin-bottom: 15px;
 		color: white;
 	}
 
@@ -770,22 +777,88 @@ form {
 		margin: 0;
 	}
 
-	form label .material-symbols-outlined {
-		font-size: 60px;
+	.material-symbols-outlined {
+		font-size: 70px;
 		
 	}
 
-	form input[type="file"] {
+	#edit-photo-input {
 		display: none;
+	}
+
+	#image-file-edit-container {
+    /* Torna o container relativo para posicionar o label/ícone por cima */
+    position: relative;
+    /* Define o tamanho que a área da imagem deve ter */
+    width: 180px; 
+    height: 180px;
+    /* Centraliza se necessário */
+    margin: 20px auto; 
+    /* Garante que o ícone e o texto de upload estejam escondidos por padrão */
+    overflow: hidden;
+	}
+
+	#edit-photo-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    border-radius: 8px;
+    /* Adiciona uma transição para suavizar as mudanças de opacidade e zoom */
+    transition: all 0.3s ease-in-out; 
+	}
+
+	#upload-label {
+    /* Posiciona o label no centro, por cima da imagem */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Centraliza o conteúdo (ícone e texto) */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* Fundo semi-transparente e cor do texto/ícone */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparente cinza escuro */
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    
+    /* Por padrão, o overlay está transparente e não clicável (para vermos a imagem) */
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+	}
+
+	/* 4. O EFEITO HOVER (Passar o mouse sobre a área da imagem) */
+	#image-file-edit-container:hover #upload-label {
+	    /* Ao passar o mouse, torna o overlay visível (destaca a área de upload) */
+	    opacity: 1;
+	}
+
+	#image-file-edit-container:hover #edit-photo-preview {
+	    /* Opcional: Efeito de zoom sutil na imagem ao passar o mouse */
+	    transform: scale(1.05); 
+	    /* Opcional: Escurece a imagem levemente para o overlay se destacar */
+	    filter: brightness(0.8);
 	}
 
 	button {
 		background-color: var(--laranja-mais-claro);
 		border: 2px solid black;
 		border-radius: 12px;
-		width: 110%;
-		height: 6%;
+		width: 80%;
+		height: 8%;
 		margin-top: 5%;
+	}
+
+	#menu-associado {
+		text-align: center;
+		display: flex;
+		flex-direction: column;
 	}
 }
 
