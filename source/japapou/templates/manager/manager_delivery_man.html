@@ -12,57 +12,47 @@
 
     <div class="page-header">
         <h1 class="title">Gerenciar Entregadores</h1>
-        <p class="subtitle">Gerencie os entregadores da plataforma</p>
+        
     </div>
 
     <div class="cards-grid">
 
-        <!-- Card Novo Entregador -->
-        <a href="{% url 'manager_delivery_man_create' %}" class="card card--new" id="add-card">
+        <a href="{% url 'manager_delivery_man_create' %}" class="card card--new">
             <span class="plus-icon">+</span>
         </a>
 
-        <!-- Lista de Entregadores -->
         {% for delivery_man in delivery_men %}
-        <div class="mg-card card" onclick="window.location.href='{% url 'manager_delivery_man_detail' delivery_man.id %}'">
-            <!-- <div class="card card--entregador"> -->
+        <div class="card"
+             onclick="window.location.href='{% url 'manager_delivery_man_detail' delivery_man.id %}'">
 
-            <!-- Foto -->
             {% if delivery_man.foto %}
-            <img src="{{ delivery_man.foto.url }}" class="card__image" alt="{{ delivery_man.username }}">
+                <img src="{{ delivery_man.foto.url }}" class="card__image" alt="{{ delivery_man.username }}">
             {% else %}
-            <div class="img-placeholder">
-                <i class="fas fa-user"></i>
-            </div>
+                <div class="img-placeholder">
+                    <i class="fas fa-user"></i>
+                </div>
             {% endif %}
 
-            <!-- Nome -->
-            <h3 class="card__name">
+            <h2 class="card__name">
                 {{ delivery_man.first_name }} {{ delivery_man.last_name }}
-            </h3>
+            </h2>
 
-            <!-- Infos -->
-            <p class="info">
-                <i class="fas fa-user me-1"></i>@{{ delivery_man.username }}
-            </p>
-            <p class="info">
-                <i class="fas fa-phone me-1"></i>{{ delivery_man.telefone }}
-            </p>
-            <p class="info">
-                <i class="fas fa-motorcycle me-1"></i>{{ delivery_man.modelo_moto }}
-            </p>
-
-            <!-- Botões -->
             <div class="card__actions">
-                <a href="{% url 'manager_delivery_man_update' delivery_man.id %}" class="btn btn--editar">Editar</a>
-                <button class="btn btn--excluir" data-bs-toggle="modal"
-                    data-bs-target="#deleteModal{{ delivery_man.id }}" onclick="event.stopPropagation()">
+                <a href="{% url 'manager_delivery_man_update' delivery_man.id %}"
+                   class="btn btn--editar"
+                   onclick="event.stopPropagation()">
+                    Editar
+                </a>
+
+                <button class="btn btn--excluir"
+                        data-bs-toggle="modal"
+                        data-bs-target="#deleteModal{{ delivery_man.id }}"
+                        onclick="event.stopPropagation()">
                     Excluir
                 </button>
             </div>
         </div>
-        
-        <!-- Modal de exclusão -->
+
         <div class="modal fade" id="deleteModal{{ delivery_man.id }}" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -75,31 +65,39 @@
                     </div>
 
                     <div class="modal-body">
-                        <p>Tem certeza que deseja excluir <strong>{{ delivery_man.first_name }} {{ delivery_man.last_name }}</strong>?</p>
+                        <p>
+                            Tem certeza que deseja excluir
+                            <strong>{{ delivery_man.first_name }} {{ delivery_man.last_name }}</strong>?
+                        </p>
                         <p class="text-danger small">
-                            <i class="fas fa-exclamation-circle me-1"></i>Essa ação não pode ser desfeita.
+                            <i class="fas fa-exclamation-circle me-1"></i>
+                            Essa ação não pode ser desfeita.
                         </p>
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
                         <form method="POST" action="{% url 'manager_delivery_man_delete' delivery_man.id %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-danger">Excluir</button>
+                            <button type="submit" class="btn btn-danger">
+                                Excluir
+                            </button>
                         </form>
                     </div>
 
                 </div>
             </div>
         </div>
-
         {% endfor %}
 
     </div>
 
 </div>
 {% endblock %}
+
+
 
 {% block extra_js %}
 <script src="{% static 'js/manager/manage_delivery_man.js' %}"></script>

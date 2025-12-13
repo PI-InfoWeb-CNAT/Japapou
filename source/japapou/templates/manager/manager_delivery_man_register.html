@@ -6,64 +6,65 @@
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/manager/manage_delivery_man.css' %}" />
 <style>
-    .form-section {
-        background: white;
-        border-radius: 10px;
-        padding: 1.5rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        border: 1px solid #e9ecef;
-    }
-    .form-section-title {
-        color: #2d3748;
-        font-weight: 600;
-        margin-bottom: 1.5rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 2px solid #e9ecef;
-    }
-    .required-field::after {
-        content: " *";
-        color: #dc3545;
-    }
-    .form-control {
-        border-radius: 8px;
-        padding: 0.75rem 1rem;
-        border: 1px solid #e2e8f0;
-        transition: all 0.3s ease;
-    }
-    .form-control:focus {
-        border-color: #4299e1;
-        box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
-    }
-    .password-toggle {
-        cursor: pointer;
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #6c757d;
-    }
+        /* Container do input de senha */
     .password-input-container {
         position: relative;
     }
+
+    /* Ajusta o input para ter espaço para o ícone */
+    .password-input-container input {
+        width: 100%;
+        padding-right: 40px; /* espaço para o ícone */
+    }
+
+    /* Ícone do olho */
+    .password-toggle {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        right: 25px; /* distância da borda direita */
+        transform: translateY(-50%);
+        color: #ffffff; /* branco */
+        font-size: 1rem;
+        z-index: 2;
+        bottom: 40px;
+    }
+        .container-fluid .card {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        cursor: default;
+        transform: none;
+    }
+
+    .container-fluid .card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .container-fluid .card-header {
+        background: transparent !important;
+        color: #fff !important;
+        border: none;
+        padding-left: 0;
+    }
+
+    .container-fluid .card-body {
+        padding: 0;
+    }
+
+
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="container-fluid py-4">
-    <!-- Cabeçalho -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 class="h3 mb-0 text-gray-800">
                 <i class="fas fa-user-plus me-2"></i>Cadastrar Novo Entregador
             </h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'manager_dashboard' %}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'manager_delivery_man' %}">Entregadores</a></li>
-                    <li class="breadcrumb-item active">Novo Entregador</li>
-                </ol>
-            </nav>
         </div>
         <a href="{% url 'manager_delivery_man' %}" class="btn btn-secondary">
             <i class="fas fa-arrow-left me-1"></i>Voltar para Lista
@@ -73,16 +74,10 @@
     <div class="row justify-content-center">
         <div class="col-xl-10">
             <div class="card shadow">
-                <div class="card-header bg-primary text-white">
-                    <h6 class="m-0 font-weight-bold">
-                        <i class="fas fa-user-plus me-2"></i>Cadastrar Novo Entregador
-                    </h6>
-                </div>
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data" novalidate id="deliveryForm">
                         {% csrf_token %}
                         
-                        <!-- Mensagens de alerta -->
                         {% if messages %}
                             {% for message in messages %}
                                 <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -92,7 +87,6 @@
                             {% endfor %}
                         {% endif %}
 
-                        <!-- Informações de Acesso -->
                         <div class="form-section">
                             <h5 class="form-section-title">
                                 <i class="fas fa-key me-2"></i>Informações de Acesso
@@ -114,9 +108,9 @@
                                             {{ form.password.label }}
                                         </label>
                                         {{ form.password }}
-                                        <span class="password-toggle" onclick="togglePassword(this)">
-                                            <i class="fas fa-eye"></i>
-                                        </span>
+                                      <span class="password-toggle" onclick="togglePassword(this)">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
                                         {% if form.password.errors %}
                                             <div class="text-danger small mt-1">{{ form.password.errors }}</div>
                                         {% endif %}
@@ -126,7 +120,6 @@
                             </div>
                         </div>
 
-                        <!-- Informações Pessoais -->
                         <div class="form-section">
                             <h5 class="form-section-title">
                                 <i class="fas fa-user me-2"></i>Informações Pessoais
@@ -209,7 +202,6 @@
                             </div>
                         </div>
 
-                        <!-- Informações da Moto -->
                         <div class="form-section">
                             <h5 class="form-section-title">
                                 <i class="fas fa-motorcycle me-2"></i>Informações da Moto
@@ -254,16 +246,12 @@
                             </div>
                         </div>
 
-                        <!-- Botões -->
                         <div class="row mt-4">
                             <div class="col-12">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>
                                         <button type="submit" class="btn btn-primary px-4">
                                             <i class="fas fa-save me-2"></i>Cadastrar Entregador
-                                        </button>
-                                        <button type="reset" class="btn btn-outline-secondary ms-2">
-                                            <i class="fas fa-redo me-2"></i>Limpar Formulário
                                         </button>
                                     </div>
                                     <a href="{% url 'manager_delivery_man' %}" class="btn btn-outline-primary">
@@ -278,136 +266,20 @@
         </div>
     </div>
 </div>
-{% endblock %}
 
-{% block extra_js %}
 <script>
-    // Função para mostrar/ocultar senha
-    function togglePassword(element) {
-        const passwordField = element.parentElement.querySelector('input');
-        if (passwordField.type === 'password') {
-            passwordField.type = 'text';
-            element.innerHTML = '<i class="fas fa-eye-slash"></i>';
-        } else {
-            passwordField.type = 'password';
-            element.innerHTML = '<i class="fas fa-eye"></i>';
-        }
+
+function togglePassword(element) {
+    const passwordField = element.parentElement.querySelector('input');
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        element.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    } else {
+        passwordField.type = 'password';
+        element.innerHTML = '<i class="fas fa-eye"></i>';
     }
+}
 
-    document.addEventListener('DOMContentLoaded', function() {
-        // Formatação do CPF
-        const cpfField = document.getElementById('{{ form.cpf.id_for_label }}');
-        if (cpfField) {
-            cpfField.addEventListener('input', function(e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length > 11) value = value.substring(0, 11);
-                
-                if (value.length > 9) {
-                    value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-                } else if (value.length > 6) {
-                    value = value.replace(/(\d{3})(\d{3})(\d{3})/, "$1.$2.$3");
-                } else if (value.length > 3) {
-                    value = value.replace(/(\d{3})(\d{3})/, "$1.$2");
-                }
-                e.target.value = value;
-            });
-        }
-
-        // Formatação do telefone
-        const telefoneField = document.getElementById('{{ form.telefone.id_for_label }}');
-        if (telefoneField) {
-            telefoneField.addEventListener('input', function(e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length > 11) value = value.substring(0, 11);
-                
-                if (value.length > 10) {
-                    value = value.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
-                } else if (value.length > 6) {
-                    value = value.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
-                } else if (value.length > 2) {
-                    value = value.replace(/(\d{2})(\d{4})/, "($1) $2");
-                } else if (value.length > 0) {
-                    value = value.replace(/(\d{2})/, "($1");
-                }
-                e.target.value = value;
-            });
-        }
-
-        // Formatação da placa (AAA-0000)
-        const placaField = document.getElementById('{{ form.placa_moto.id_for_label }}');
-        if (placaField) {
-            placaField.addEventListener('input', function(e) {
-                let value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
-                if (value.length > 7) value = value.substring(0, 7);
-                
-                if (value.length > 3) {
-                    value = value.replace(/(\w{3})(\w{4})/, "$1-$2");
-                }
-                e.target.value = value;
-            });
-        }
-
-        // Formatação da CNH (somente números)
-        const cnhField = document.getElementById('{{ form.cnh.id_for_label }}');
-        if (cnhField) {
-            cnhField.addEventListener('input', function(e) {
-                e.target.value = e.target.value.replace(/\D/g, '');
-            });
-        }
-
-        // Validação de idade mínima (18 anos)
-        const nascimentoField = document.getElementById('{{ form.data_nascimento.id_for_label }}');
-        if (nascimentoField) {
-            nascimentoField.addEventListener('change', function(e) {
-                const birthDate = new Date(e.target.value);
-                const today = new Date();
-                const age = today.getFullYear() - birthDate.getFullYear();
-                const monthDiff = today.getMonth() - birthDate.getMonth();
-                
-                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-                    age--;
-                }
-                
-                if (age < 18) {
-                    alert('O entregador deve ter pelo menos 18 anos de idade.');
-                    e.target.value = '';
-                }
-            });
-        }
-
-        // Validação de formulário
-        const form = document.getElementById('deliveryForm');
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                // Remover máscaras antes de enviar
-                if (cpfField) {
-                    cpfField.value = cpfField.value.replace(/\D/g, '');
-                }
-                if (telefoneField) {
-                    telefoneField.value = telefoneField.value.replace(/\D/g, '');
-                }
-                if (placaField) {
-                    placaField.value = placaField.value.replace(/\D/g, '');
-                }
-                
-                // Validação básica
-                const requiredFields = form.querySelectorAll('.required-field');
-                let isValid = true;
-                
-                requiredFields.forEach(label => {
-                    const field = document.getElementById(label.getAttribute('for'));
-                    if (field && !field.value.trim()) {
-                        isValid = false;
-                        field.classList.add('is-invalid');
-                    }
-                });
-                
-                if (!isValid) {
-                    e.preventDefault();
-                    alert('Por favor, preencha todos os campos obrigatórios (*).');
-                }
-            });
-        }
-    });
 </script>
+
 {% endblock %}

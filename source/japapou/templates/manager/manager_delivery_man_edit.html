@@ -6,82 +6,189 @@
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/manager/manage_delivery_man.css' %}" />
 <style>
-    .form-section {
-        background: white;
-        border-radius: 10px;
-        padding: 1.5rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        border: 1px solid #e9ecef;
-    }
-    .form-section-title {
-        color: #2d3748;
-        font-weight: 600;
-        margin-bottom: 1.5rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 2px solid #e9ecef;
-    }
-    .current-photo {
-        max-width: 150px;
-        border-radius: 8px;
-        margin-bottom: 10px;
-    }
-    .form-control {
-        border-radius: 8px;
-        padding: 0.75rem 1rem;
-        border: 1px solid #e2e8f0;
-        transition: all 0.3s ease;
-    }
-    .form-control:focus {
-        border-color: #4299e1;
-        box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
-    }
+/* Container e card */
+.container-fluid .card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.container-fluid .card-body {
+    padding: 0;
+}
+
+/* Seções */
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.form-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.form-section-title i {
+    margin-right: 8px;
+}
+
+/* Inputs totalmente estáticos */
+input, select, textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #555;
+    color: #fff;
+    padding: 8px 12px;
+    margin-top: 4px;
+}
+
+/* Placeholder */
+input::placeholder,
+textarea::placeholder {
+    color: #bbb;
+}
+
+/* Não muda nada ao focar ou passar mouse */
+input:focus,
+textarea:focus,
+select:focus,
+button:hover,
+button:focus {
+    outline: none;
+    background: transparent;
+    border-color: #555;
+    color: #fff;
+}
+
+/* Password toggle */
+.password-input-container {
+    position: relative;
+}
+
+.password-input-container input {
+    padding-right: 40px;
+}
+
+.password-toggle {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1rem;
+    z-index: 2;
+}
+
+/* Labels e textos */
+label {
+    color: #fff;
+    font-weight: 600;
+}
+
+.text-danger {
+    color: #f87171;
+    font-size: 0.875rem;
+}
+
+.form-text {
+    color: #fff;
+    font-size: 0.875rem;
+}
+
+/* Botões estáticos */
+button[type="submit"], .btn-outline-primary {
+    background-color: #f8761e;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+}
+
+.btn-outline-primary {
+    border: 1px solid #fff;
+}
+
+/* Sem hover para botões */
+button, .btn-outline-primary {
+    cursor: default;
+}
+
+/* Layout header */
+.header-edit-delivery {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.header-edit-delivery h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.header-edit-delivery .delivery-name {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.25rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+.header-edit-delivery .btn-back {
+    white-space: nowrap;
+}
+
+/* Layout grid */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.col-md-6 {
+    flex: 0 0 calc(50% - 10px);
+}
+
+.col-12 {
+    flex: 0 0 100%;
+}
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="container-fluid py-4">
+
     <!-- Cabeçalho -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h1 class="h3 mb-0 text-gray-800">
-                <i class="fas fa-edit me-2"></i>Editar Entregador
-            </h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'manager_dashboard' %}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'manager_delivery_man' %}">Entregadores</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'manager_delivery_man_detail' delivery_man.id %}">{{ delivery_man.first_name }}</a></li>
-                    <li class="breadcrumb-item active">Editar</li>
-                </ol>
-            </nav>
+    <div class="header-edit-delivery">
+        <h1 class="h3">
+            <i class="fas fa-user-edit me-2"></i>Editar Entregador
+        </h1>
+        <div class="delivery-name">
+            {{ form.instance.get_full_name }}
         </div>
-        <div>
-            <a href="{% url 'manager_delivery_man_detail' delivery_man.id %}" class="btn btn-info">
-                <i class="fas fa-eye me-1"></i>Ver Detalhes
-            </a>
-            <a href="{% url 'manager_delivery_man' %}" class="btn btn-secondary">
-                <i class="fas fa-arrow-left me-1"></i>Voltar
-            </a>
-        </div>
+        <a href="{% url 'manager_delivery_man' %}" class="btn btn-secondary btn-back">
+            <i class="fas fa-arrow-left me-1"></i>Voltar para Lista
+        </a>
     </div>
 
     <div class="row justify-content-center">
         <div class="col-xl-10">
-            <div class="card shadow">
-                <div class="card-header bg-warning text-dark">
-                    <h6 class="m-0 font-weight-bold">
-                        <i class="fas fa-edit me-1"></i>Editar Entregador: {{ delivery_man.first_name }} {{ delivery_man.last_name }}
-                    </h6>
-                </div>
+
+            <div class="card">
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data" novalidate id="deliveryForm">
+                    <form method="POST" enctype="multipart/form-data" novalidate>
                         {% csrf_token %}
-                        
-                        <!-- Mensagens de alerta -->
+
                         {% if messages %}
                             {% for message in messages %}
-                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
                                     {{ message }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                                 </div>
@@ -90,167 +197,140 @@
 
                         <!-- Informações de Acesso -->
                         <div class="form-section">
-                            <h5 class="form-section-title">
-                                <i class="fas fa-key me-2"></i>Informações de Acesso
-                            </h5>
+                            <h5 class="form-section-title"><i class="fas fa-key"></i>Informações de Acesso</h5>
+
                             <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="{{ form.username.id_for_label }}" class="form-label fw-semibold">
-                                        {{ form.username.label }} <span class="text-danger">*</span>
-                                    </label>
+                                <div class="col-md-6 mb-3 password-input-container">
+                                    <label class="form-label fw-semibold required-field">{{ form.username.label }}</label>
                                     {{ form.username }}
                                     {% if form.username.errors %}
                                         <div class="text-danger small mt-1">{{ form.username.errors }}</div>
                                     {% endif %}
-                                    <div class="form-text">Nome de usuário para login</div>
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="{{ form.password.id_for_label }}" class="form-label fw-semibold">
-                                        {{ form.password.label }}
-                                    </label>
+
+                                <div class="col-md-6 mb-3 password-input-container">
+                                    <label class="form-label fw-semibold">{{ form.password.label }}</label>
                                     {{ form.password }}
+                                    <span class="password-toggle" onclick="togglePassword(this)">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                    <div class="form-text">Preencha apenas se desejar alterar a senha</div>
                                     {% if form.password.errors %}
                                         <div class="text-danger small mt-1">{{ form.password.errors }}</div>
                                     {% endif %}
-                                    <div class="form-text text-muted">Deixe em branco para manter a senha atual</div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Informações Pessoais -->
                         <div class="form-section">
-                            <h5 class="form-section-title">
-                                <i class="fas fa-user me-2"></i>Informações Pessoais
-                            </h5>
+                            <h5 class="form-section-title"><i class="fas fa-user"></i>Informações Pessoais</h5>
+
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="{{ form.first_name.id_for_label }}" class="form-label fw-semibold">
-                                        {{ form.first_name.label }} <span class="text-danger">*</span>
-                                    </label>
+                                    <label class="form-label fw-semibold">{{ form.first_name.label }}</label>
                                     {{ form.first_name }}
                                     {% if form.first_name.errors %}
                                         <div class="text-danger small mt-1">{{ form.first_name.errors }}</div>
                                     {% endif %}
                                 </div>
+
                                 <div class="col-md-6 mb-3">
-                                    <label for="{{ form.last_name.id_for_label }}" class="form-label fw-semibold">
-                                        {{ form.last_name.label }} <span class="text-danger">*</span>
-                                    </label>
+                                    <label class="form-label fw-semibold">{{ form.last_name.label }}</label>
                                     {{ form.last_name }}
                                     {% if form.last_name.errors %}
                                         <div class="text-danger small mt-1">{{ form.last_name.errors }}</div>
                                     {% endif %}
                                 </div>
+
                                 <div class="col-md-6 mb-3">
-                                    <label for="{{ form.email.id_for_label }}" class="form-label fw-semibold">
-                                        {{ form.email.label }} <span class="text-danger">*</span>
-                                    </label>
+                                    <label class="form-label fw-semibold">{{ form.email.label }}</label>
                                     {{ form.email }}
                                     {% if form.email.errors %}
                                         <div class="text-danger small mt-1">{{ form.email.errors }}</div>
                                     {% endif %}
                                 </div>
+
                                 <div class="col-md-6 mb-3">
-                                    <label for="{{ form.telefone.id_for_label }}" class="form-label fw-semibold">
-                                        {{ form.telefone.label }} <span class="text-danger">*</span>
-                                    </label>
+                                    <label class="form-label fw-semibold">{{ form.telefone.label }}</label>
                                     {{ form.telefone }}
                                     {% if form.telefone.errors %}
                                         <div class="text-danger small mt-1">{{ form.telefone.errors }}</div>
                                     {% endif %}
                                 </div>
+
                                 <div class="col-md-6 mb-3">
-                                    <label for="{{ form.cpf.id_for_label }}" class="form-label fw-semibold">
-                                        {{ form.cpf.label }} <span class="text-danger">*</span>
-                                    </label>
+                                    <label class="form-label fw-semibold">{{ form.cpf.label }}</label>
                                     {{ form.cpf }}
                                     {% if form.cpf.errors %}
                                         <div class="text-danger small mt-1">{{ form.cpf.errors }}</div>
                                     {% endif %}
                                 </div>
+
                                 <div class="col-md-6 mb-3">
-                                    <label for="{{ form.data_nascimento.id_for_label }}" class="form-label fw-semibold">
-                                        {{ form.data_nascimento.label }} <span class="text-danger">*</span>
-                                    </label>
+                                    <label class="form-label fw-semibold">{{ form.data_nascimento.label }}</label>
                                     {{ form.data_nascimento }}
                                     {% if form.data_nascimento.errors %}
                                         <div class="text-danger small mt-1">{{ form.data_nascimento.errors }}</div>
                                     {% endif %}
                                 </div>
+
                                 <div class="col-12 mb-3">
-                                    <label for="{{ form.endereco.id_for_label }}" class="form-label fw-semibold">
-                                        {{ form.endereco.label }}
-                                    </label>
+                                    <label class="form-label fw-semibold">{{ form.endereco.label }}</label>
                                     {{ form.endereco }}
                                     {% if form.endereco.errors %}
                                         <div class="text-danger small mt-1">{{ form.endereco.errors }}</div>
                                     {% endif %}
                                 </div>
+
                                 <div class="col-12 mb-3">
-                                    <label for="{{ form.foto.id_for_label }}" class="form-label fw-semibold">
-                                        {{ form.foto.label }}
-                                    </label>
-                                    
-                                    {% if delivery_man.foto %}
-                                        <div class="mb-3">
-                                            <p class="mb-2">Foto atual:</p>
-                                            <img src="{{ delivery_man.foto.url }}" alt="Foto atual" 
-                                                 class="current-photo img-thumbnail">
-                                            <div class="form-check mt-2">
-                                                <input class="form-check-input" type="checkbox" name="foto-clear" id="foto-clear">
-                                                <label class="form-check-label" for="foto-clear">
-                                                    Remover foto atual
-                                                </label>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                    
+                                    <label class="form-label fw-semibold">{{ form.foto.label }}</label>
                                     {{ form.foto }}
                                     {% if form.foto.errors %}
                                         <div class="text-danger small mt-1">{{ form.foto.errors }}</div>
                                     {% endif %}
-                                    <div class="form-text">Envie uma nova foto (opcional)</div>
+
+                                    {% if form.foto_atual %}
+                                        <div class="form-check mt-2">
+                                            {{ form.remover_foto }}
+                                            <label class="form-check-label">Remover foto atual</label>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
 
                         <!-- Informações da Moto -->
                         <div class="form-section">
-                            <h5 class="form-section-title">
-                                <i class="fas fa-motorcycle me-2"></i>Informações da Moto
-                            </h5>
+                            <h5 class="form-section-title"><i class="fas fa-motorcycle"></i>Informações da Moto</h5>
+
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="{{ form.cnh.id_for_label }}" class="form-label fw-semibold">
-                                        {{ form.cnh.label }} <span class="text-danger">*</span>
-                                    </label>
+                                    <label class="form-label fw-semibold">{{ form.cnh.label }}</label>
                                     {{ form.cnh }}
                                     {% if form.cnh.errors %}
                                         <div class="text-danger small mt-1">{{ form.cnh.errors }}</div>
                                     {% endif %}
                                 </div>
+
                                 <div class="col-md-6 mb-3">
-                                    <label for="{{ form.modelo_moto.id_for_label }}" class="form-label fw-semibold">
-                                        {{ form.modelo_moto.label }} <span class="text-danger">*</span>
-                                    </label>
+                                    <label class="form-label fw-semibold">{{ form.modelo_moto.label }}</label>
                                     {{ form.modelo_moto }}
                                     {% if form.modelo_moto.errors %}
                                         <div class="text-danger small mt-1">{{ form.modelo_moto.errors }}</div>
                                     {% endif %}
                                 </div>
+
                                 <div class="col-md-6 mb-3">
-                                    <label for="{{ form.cor_moto.id_for_label }}" class="form-label fw-semibold">
-                                        {{ form.cor_moto.label }} <span class="text-danger">*</span>
-                                    </label>
+                                    <label class="form-label fw-semibold">{{ form.cor_moto.label }}</label>
                                     {{ form.cor_moto }}
                                     {% if form.cor_moto.errors %}
                                         <div class="text-danger small mt-1">{{ form.cor_moto.errors }}</div>
                                     {% endif %}
                                 </div>
+
                                 <div class="col-md-6 mb-3">
-                                    <label for="{{ form.placa_moto.id_for_label }}" class="form-label fw-semibold">
-                                        {{ form.placa_moto.label }} <span class="text-danger">*</span>
-                                    </label>
+                                    <label class="form-label fw-semibold">{{ form.placa_moto.label }}</label>
                                     {{ form.placa_moto }}
                                     {% if form.placa_moto.errors %}
                                         <div class="text-danger small mt-1">{{ form.placa_moto.errors }}</div>
@@ -259,111 +339,39 @@
                             </div>
                         </div>
 
-                        <!-- Botões -->
-                        <div class="row mt-4">
-                            <div class="col-12">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <button type="submit" class="btn btn-warning px-4">
-                                            <i class="fas fa-save me-2"></i>Atualizar Entregador
-                                        </button>
-                                        <a href="{% url 'manager_delivery_man_detail' delivery_man.id %}" class="btn btn-secondary ms-2">
-                                            <i class="fas fa-times me-2"></i>Cancelar
-                                        </a>
-                                    </div>
-                                    <a href="{% url 'manager_delivery_man' %}" class="btn btn-outline-primary">
-                                        <i class="fas fa-list me-2"></i>Ver Todos Entregadores
-                                    </a>
-                                </div>
-                            </div>
+                        <!-- Ações -->
+                        <div class="form-actions mt-4 d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="fas fa-save me-2"></i>Salvar Alterações
+                            </button>
+
+                            <a href="{% url 'manager_delivery_man' %}" class="btn btn-outline-primary">
+                                Cancelar
+                            </a>
                         </div>
+
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
-{% endblock %}
 
-{% block extra_js %}
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Formatação do CPF
-        const cpfField = document.getElementById('{{ form.cpf.id_for_label }}');
-        if (cpfField) {
-            cpfField.addEventListener('input', function(e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length > 11) value = value.substring(0, 11);
-                
-                if (value.length > 9) {
-                    value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-                } else if (value.length > 6) {
-                    value = value.replace(/(\d{3})(\d{3})(\d{3})/, "$1.$2.$3");
-                } else if (value.length > 3) {
-                    value = value.replace(/(\d{3})(\d{3})/, "$1.$2");
-                }
-                e.target.value = value;
-            });
-        }
-
-        // Formatação do telefone
-        const telefoneField = document.getElementById('{{ form.telefone.id_for_label }}');
-        if (telefoneField) {
-            telefoneField.addEventListener('input', function(e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length > 11) value = value.substring(0, 11);
-                
-                if (value.length > 10) {
-                    value = value.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
-                } else if (value.length > 6) {
-                    value = value.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
-                } else if (value.length > 2) {
-                    value = value.replace(/(\d{2})(\d{4})/, "($1) $2");
-                } else if (value.length > 0) {
-                    value = value.replace(/(\d{2})/, "($1");
-                }
-                e.target.value = value;
-            });
-        }
-
-        // Formatação da placa (AAA-0000)
-        const placaField = document.getElementById('{{ form.placa_moto.id_for_label }}');
-        if (placaField) {
-            placaField.addEventListener('input', function(e) {
-                let value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
-                if (value.length > 7) value = value.substring(0, 7);
-                
-                if (value.length > 3) {
-                    value = value.replace(/(\w{3})(\w{4})/, "$1-$2");
-                }
-                e.target.value = value;
-            });
-        }
-
-        // Formatação da CNH (somente números)
-        const cnhField = document.getElementById('{{ form.cnh.id_for_label }}');
-        if (cnhField) {
-            cnhField.addEventListener('input', function(e) {
-                e.target.value = e.target.value.replace(/\D/g, '');
-            });
-        }
-
-        // Validação de formulário
-        const form = document.getElementById('deliveryForm');
-        if (form) {
-            form.addEventListener('submit', function(e) {
-                // Remover máscaras antes de enviar
-                if (cpfField) {
-                    cpfField.value = cpfField.value.replace(/\D/g, '');
-                }
-                if (telefoneField) {
-                    telefoneField.value = telefoneField.value.replace(/\D/g, '');
-                }
-                if (placaField) {
-                    placaField.value = placaField.value.replace(/\D/g, '');
-                }
-            });
-        }
-    });
+function togglePassword(element) {
+    const input = element.parentElement.querySelector('input');
+    if (input.type === 'password') {
+        input.type = 'text';
+        element.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    } else {
+        input.type = 'password';
+        element.innerHTML = '<i class="fas fa-eye"></i>';
+    }
+}
 </script>
 {% endblock %}
+
+
+
+
