@@ -5,282 +5,429 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/manager/manage_delivery_man.css' %}" />
+<style>
+    .btn,
+    .btn:hover,
+    .btn:focus,
+    .btn:active {
+        transform: none !important;
+        box-shadow: none !important;
+        transition: none !important;
+    }
+
+    .container-fluid .card,
+    .container-fluid .card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    .btn:focus-visible,
+    button:focus-visible {
+        outline: none !important;
+    }
+
+    form,
+    form * {
+        transition: none !important;
+    }
+
+
+    .btn-primary {
+        background-color: #f8761e !important;
+        border-color: #f8761e !important;
+        color: #fff !important;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active {
+        background-color: #d36216 !important;
+        border-color: #d36216 !important;
+        color: #fff !important;
+        box-shadow: none !important;
+    }
+
+    .btn-secondary {
+        background-color: #f8761e !important;
+        border-color: #f8761e !important;
+        color: #fff !important;
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus,
+    .btn-secondary:active {
+        background-color: #d36216 !important;
+        border-color: #d36216 !important;
+        color: #fff !important;
+        box-shadow: none !important;
+    }
+
+    .btn-outline-primary {
+        background-color: transparent !important;
+        border: 1px solid #f8761e !important;
+        color: #f8761e !important;
+    }
+
+    .btn-outline-primary:hover,
+    .btn-outline-primary:focus,
+    .btn-outline-primary:active {
+        background-color: #f8761e !important;
+        border-color: #f8761e !important;
+        color: #fff !important;
+        box-shadow: none !important;
+    }
+
+    .container-fluid .card {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .container-fluid .card-body {
+        padding: 0;
+    }
+
+    .form-section {
+        margin-bottom: 2rem;
+    }
+
+    .form-section-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 12px;
+    }
+
+    .form-section-title i {
+        margin-right: 8px;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #555;
+        color: #fff;
+        padding: 8px 12px;
+        margin-top: 4px;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: #bbb;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus,
+    button:hover,
+    button:focus {
+        outline: none;
+        background: transparent;
+        border-color: black;
+        color: #fff;
+    }
+
+    .password-input-container {
+        position: relative;
+    }
+
+    .password-input-container input {
+        padding-right: 40px;
+    }
+
+    .password-toggle {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        color: #fff;
+        font-size: 1rem;
+        z-index: 2;
+    }
+
+    label {
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .text-danger {
+        color: #f87171;
+        font-size: 0.875rem;
+    }
+
+    .form-text {
+        color: #fff;
+        font-size: 0.875rem;
+    }
+
+    button[type="submit"], .btn-outline-primary {
+        background-color: #f8761e;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+    }
+
+    .btn-outline-primary {
+        border: 1px solid #fff;
+    }
+
+    button, .btn-outline-primary {
+        cursor: default;
+    }
+
+    .header-edit-delivery {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+        position: relative;
+    }
+
+    .header-edit-delivery h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: #fff;
+    }
+
+    .header-edit-delivery .delivery-name {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.25rem;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .header-edit-delivery .btn-back {
+        white-space: nowrap;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .col-md-6 {
+        flex: 0 0 calc(50% - 10px);
+    }
+
+    .col-12 {
+        flex: 0 0 100%;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
 <div class="container-fluid py-4">
+
     <!-- Cabeçalho -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h1 class="h3 mb-0 text-gray-800">
-                <i class="fas fa-edit me-2"></i>Editar Entregador
-            </h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'manager_dashboard' %}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'manager_delivery_man' %}">Entregadores</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'manager_delivery_man_detail' delivery_man.id %}">{{ delivery_man.first_name }}</a></li>
-                    <li class="breadcrumb-item active">Editar</li>
-                </ol>
-            </nav>
+    <div class="header-edit-delivery">
+        <h1 class="h3">
+            <i class="fas fa-user-edit me-2"></i>Editar Entregador
+        </h1>
+        <div class="delivery-name">
+            {{ form.instance.get_full_name }}
         </div>
-        <div>
-            <a href="{% url 'manager_delivery_man_detail' delivery_man.id %}" class="btn btn-info">
-                <i class="fas fa-eye me-1"></i>Ver Detalhes
-            </a>
-            <a href="{% url 'manager_delivery_man' %}" class="btn btn-secondary">
-                <i class="fas fa-arrow-left me-1"></i>Voltar
-            </a>
-        </div>
+        <a href="{% url 'manager_delivery_man' %}" class="btn btn-secondary btn-back">
+            <i class="fas fa-arrow-left me-1"></i>Voltar para Lista
+        </a>
     </div>
 
     <div class="row justify-content-center">
-        <div class="col-xl-8">
-            <div class="card shadow">
-                <div class="card-header bg-warning text-dark">
-                    <h6 class="m-0 font-weight-bold">
-                        <i class="fas fa-edit me-1"></i>Editar Entregador: {{ delivery_man.first_name }} {{ delivery_man.last_name }}
-                    </h6>
-                </div>
+        <div class="col-xl-10">
+
+            <div class="card">
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data" novalidate>
                         {% csrf_token %}
-                        
+
                         {% if messages %}
                             {% for message in messages %}
-                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
                                     {{ message }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                                 </div>
                             {% endfor %}
                         {% endif %}
 
-                        <!-- Informações de Acesso -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h5 class="text-primary mb-3">
-                                    <i class="fas fa-key me-1"></i>Informações de Acesso
-                                </h5>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.username.id_for_label }}" class="form-label">
-                                    {{ form.username.label }} *
-                                </label>
-                                {{ form.username }}
-                                {% if form.username.errors %}
-                                    <div class="text-danger small">{{ form.username.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.password.id_for_label }}" class="form-label">
-                                    {{ form.password.label }}
-                                    <small class="text-muted">(Deixe em branco para manter a senha atual)</small>
-                                </label>
-                                {{ form.password }}
-                                {% if form.password.errors %}
-                                    <div class="text-danger small">{{ form.password.errors }}</div>
-                                {% endif %}
+                        <div class="form-section">
+                            <h5 class="form-section-title"><i class="fas fa-key"></i>Informações de Acesso</h5>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3 password-input-container">
+                                    <label class="form-label fw-semibold required-field">{{ form.username.label }}</label>
+                                    {{ form.username }}
+                                    {% if form.username.errors %}
+                                        <div class="text-danger small mt-1">{{ form.username.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6 mb-3 password-input-container">
+                                    <label class="form-label fw-semibold">{{ form.password.label }}</label>
+                                    {{ form.password }}
+                                    <span class="password-toggle" onclick="togglePassword(this)">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                    <div class="form-text">Preencha apenas se desejar alterar a senha</div>
+                                    {% if form.password.errors %}
+                                        <div class="text-danger small mt-1">{{ form.password.errors }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Informações Pessoais -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h5 class="text-primary mb-3">
-                                    <i class="fas fa-user me-1"></i>Informações Pessoais
-                                </h5>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.first_name.id_for_label }}" class="form-label">
-                                    {{ form.first_name.label }} *
-                                </label>
-                                {{ form.first_name }}
-                                {% if form.first_name.errors %}
-                                    <div class="text-danger small">{{ form.first_name.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.last_name.id_for_label }}" class="form-label">
-                                    {{ form.last_name.label }} *
-                                </label>
-                                {{ form.last_name }}
-                                {% if form.last_name.errors %}
-                                    <div class="text-danger small">{{ form.last_name.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.email.id_for_label }}" class="form-label">
-                                    {{ form.email.label }} *
-                                </label>
-                                {{ form.email }}
-                                {% if form.email.errors %}
-                                    <div class="text-danger small">{{ form.email.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.telefone.id_for_label }}" class="form-label">
-                                    {{ form.telefone.label }} *
-                                </label>
-                                {{ form.telefone }}
-                                {% if form.telefone.errors %}
-                                    <div class="text-danger small">{{ form.telefone.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.cpf.id_for_label }}" class="form-label">
-                                    {{ form.cpf.label }} *
-                                </label>
-                                {{ form.cpf }}
-                                {% if form.cpf.errors %}
-                                    <div class="text-danger small">{{ form.cpf.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.data_nascimento.id_for_label }}" class="form-label">
-                                    {{ form.data_nascimento.label }} *
-                                </label>
-                                {{ form.data_nascimento }}
-                                {% if form.data_nascimento.errors %}
-                                    <div class="text-danger small">{{ form.data_nascimento.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label for="{{ form.endereco.id_for_label }}" class="form-label">
-                                    {{ form.endereco.label }}
-                                </label>
-                                {{ form.endereco }}
-                                {% if form.endereco.errors %}
-                                    <div class="text-danger small">{{ form.endereco.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label for="{{ form.foto.id_for_label }}" class="form-label">
-                                    {{ form.foto.label }}
-                                </label>
-                                {% if delivery_man.foto %}
-                                    <div class="mb-2">
-                                        <img src="{{ delivery_man.foto.url }}" alt="Foto atual" 
-                                             class="img-thumbnail" style="max-width: 150px;">
+                        <div class="form-section">
+                            <h5 class="form-section-title"><i class="fas fa-user"></i>Informações Pessoais</h5>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">{{ form.first_name.label }}</label>
+                                    {{ form.first_name }}
+                                    {% if form.first_name.errors %}
+                                        <div class="text-danger small mt-1">{{ form.first_name.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">{{ form.last_name.label }}</label>
+                                    {{ form.last_name }}
+                                    {% if form.last_name.errors %}
+                                        <div class="text-danger small mt-1">{{ form.last_name.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">{{ form.email.label }}</label>
+                                    {{ form.email }}
+                                    {% if form.email.errors %}
+                                        <div class="text-danger small mt-1">{{ form.email.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">{{ form.telefone.label }}</label>
+                                    {{ form.telefone }}
+                                    {% if form.telefone.errors %}
+                                        <div class="text-danger small mt-1">{{ form.telefone.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">{{ form.cpf.label }}</label>
+                                    {{ form.cpf }}
+                                    {% if form.cpf.errors %}
+                                        <div class="text-danger small mt-1">{{ form.cpf.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">{{ form.data_nascimento.label }}</label>
+                                    {{ form.data_nascimento }}
+                                    {% if form.data_nascimento.errors %}
+                                        <div class="text-danger small mt-1">{{ form.data_nascimento.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <label class="form-label fw-semibold">{{ form.endereco.label }}</label>
+                                    {{ form.endereco }}
+                                    {% if form.endereco.errors %}
+                                        <div class="text-danger small mt-1">{{ form.endereco.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-12 mb-3">
+                                    <label class="form-label fw-semibold">{{ form.foto.label }}</label>
+                                    {{ form.foto }}
+                                    {% if form.foto.errors %}
+                                        <div class="text-danger small mt-1">{{ form.foto.errors }}</div>
+                                    {% endif %}
+
+                                    {% if form.foto_atual %}
                                         <div class="form-check mt-2">
-                                            <input class="form-check-input" type="checkbox" name="foto-clear" id="foto-clear">
-                                            <label class="form-check-label" for="foto-clear">
-                                                Remover foto atual
-                                            </label>
+                                            {{ form.remover_foto }}
+                                            <label class="form-check-label">Remover foto atual</label>
                                         </div>
-                                    </div>
-                                {% endif %}
-                                {{ form.foto }}
-                                {% if form.foto.errors %}
-                                    <div class="text-danger small">{{ form.foto.errors }}</div>
-                                {% endif %}
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Informações da Moto -->
-                        <div class="row mb-4">
-                            <div class="col-12">
-                                <h5 class="text-primary mb-3">
-                                    <i class="fas fa-motorcycle me-1"></i>Informações da Moto
-                                </h5>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.cnh.id_for_label }}" class="form-label">
-                                    {{ form.cnh.label }} *
-                                </label>
-                                {{ form.cnh }}
-                                {% if form.cnh.errors %}
-                                    <div class="text-danger small">{{ form.cnh.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.modelo_moto.id_for_label }}" class="form-label">
-                                    {{ form.modelo_moto.label }} *
-                                </label>
-                                {{ form.modelo_moto }}
-                                {% if form.modelo_moto.errors %}
-                                    <div class="text-danger small">{{ form.modelo_moto.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.cor_moto.id_for_label }}" class="form-label">
-                                    {{ form.cor_moto.label }} *
-                                </label>
-                                {{ form.cor_moto }}
-                                {% if form.cor_moto.errors %}
-                                    <div class="text-danger small">{{ form.cor_moto.errors }}</div>
-                                {% endif %}
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.placa_moto.id_for_label }}" class="form-label">
-                                    {{ form.placa_moto.label }} *
-                                </label>
-                                {{ form.placa_moto }}
-                                {% if form.placa_moto.errors %}
-                                    <div class="text-danger small">{{ form.placa_moto.errors }}</div>
-                                {% endif %}
+                        <div class="form-section">
+                            <h5 class="form-section-title"><i class="fas fa-motorcycle"></i>Informações da Moto</h5>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">{{ form.cnh.label }}</label>
+                                    {{ form.cnh }}
+                                    {% if form.cnh.errors %}
+                                        <div class="text-danger small mt-1">{{ form.cnh.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">{{ form.modelo_moto.label }}</label>
+                                    {{ form.modelo_moto }}
+                                    {% if form.modelo_moto.errors %}
+                                        <div class="text-danger small mt-1">{{ form.modelo_moto.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">{{ form.cor_moto.label }}</label>
+                                    {{ form.cor_moto }}
+                                    {% if form.cor_moto.errors %}
+                                        <div class="text-danger small mt-1">{{ form.cor_moto.errors }}</div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label fw-semibold">{{ form.placa_moto.label }}</label>
+                                    {{ form.placa_moto }}
+                                    {% if form.placa_moto.errors %}
+                                        <div class="text-danger small mt-1">{{ form.placa_moto.errors }}</div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Botões -->
-                        <div class="row mt-4">
-                            <div class="col-12 d-flex gap-2">
-                                <button type="submit" class="btn btn-warning">
-                                    <i class="fas fa-save me-1"></i>Atualizar Entregador
-                                </button>
-                                <a href="{% url 'manager_delivery_man_detail' delivery_man.id %}" class="btn btn-secondary">
-                                    <i class="fas fa-times me-1"></i>Cancelar
-                                </a>
-                            </div>
+                        <div class="form-actions mt-4 d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="fas fa-save me-2"></i>Salvar Alterações
+                            </button>
+
+                            <a href="{% url 'manager_delivery_man' %}" class="btn btn-outline-primary">
+                                Cancelar
+                            </a>
                         </div>
+
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
-{% endblock %}
 
-{% block extra_js %}
 <script>
-    // Reutiliza a mesma formatação do template de registro
-    document.addEventListener('DOMContentLoaded', function() {
-        // Formatação do CPF
-        const cpfField = document.getElementById('{{ form.cpf.id_for_label }}');
-        if (cpfField) {
-            cpfField.addEventListener('input', function(e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length > 11) value = value.substring(0, 11);
-                
-                if (value.length > 9) {
-                    value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-                } else if (value.length > 6) {
-                    value = value.replace(/(\d{3})(\d{3})(\d{3})/, "$1.$2.$3");
-                } else if (value.length > 3) {
-                    value = value.replace(/(\d{3})(\d{3})/, "$1.$2");
-                }
-                e.target.value = value;
-            });
-        }
-
-        // Formatação do telefone
-        const telefoneField = document.getElementById('{{ form.telefone.id_for_label }}');
-        if (telefoneField) {
-            telefoneField.addEventListener('input', function(e) {
-                let value = e.target.value.replace(/\D/g, '');
-                if (value.length > 11) value = value.substring(0, 11);
-                
-                if (value.length > 10) {
-                    value = value.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
-                } else if (value.length > 6) {
-                    value = value.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
-                } else if (value.length > 2) {
-                    value = value.replace(/(\d{2})(\d{4})/, "($1) $2");
-                } else if (value.length > 0) {
-                    value = value.replace(/(\d{2})/, "($1");
-                }
-                e.target.value = value;
-            });
-        }
-    });
+function togglePassword(element) {
+    const input = element.parentElement.querySelector('input');
+    if (input.type === 'password') {
+        input.type = 'text';
+        element.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    } else {
+        input.type = 'password';
+        element.innerHTML = '<i class="fas fa-eye"></i>';
+    }
+}
 </script>
 {% endblock %}
+
+
+
+

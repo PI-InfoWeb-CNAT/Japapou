@@ -18,7 +18,6 @@ urlpatterns = [
     path("delivery-man/<int:id>/", views.manager_delivery_man_detail_view, name="manager_delivery_man_detail"),
     path("delivery-man/<int:id>/edit/", views.manager_delivery_man_update_view, name="manager_delivery_man_update"),
     path("delivery-man/<int:id>/delete/", views.manager_delivery_man_delete_view, name="manager_delivery_man_delete"),
-
     # MENUS
     path("menu/", views.manager_menu_view, name="manager_menu"),
     path("menu/create/", views.create_menu_view, name="create_menu"),
