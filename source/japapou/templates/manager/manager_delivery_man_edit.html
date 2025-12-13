@@ -6,159 +6,219 @@
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/manager/manage_delivery_man.css' %}" />
 <style>
-/* Container e card */
-.container-fluid .card {
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    border-radius: 0;
-}
+    .btn,
+    .btn:hover,
+    .btn:focus,
+    .btn:active {
+        transform: none !important;
+        box-shadow: none !important;
+        transition: none !important;
+    }
 
-.container-fluid .card-body {
-    padding: 0;
-}
+    .container-fluid .card,
+    .container-fluid .card:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
 
-/* Seções */
-.form-section {
-    margin-bottom: 2rem;
-}
+    .btn:focus-visible,
+    button:focus-visible {
+        outline: none !important;
+    }
 
-.form-section-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 12px;
-}
+    form,
+    form * {
+        transition: none !important;
+    }
 
-.form-section-title i {
-    margin-right: 8px;
-}
 
-/* Inputs totalmente estáticos */
-input, select, textarea {
-    width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #555;
-    color: #fff;
-    padding: 8px 12px;
-    margin-top: 4px;
-}
+    .btn-primary {
+        background-color: #f8761e !important;
+        border-color: #f8761e !important;
+        color: #fff !important;
+    }
 
-/* Placeholder */
-input::placeholder,
-textarea::placeholder {
-    color: #bbb;
-}
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active {
+        background-color: #d36216 !important;
+        border-color: #d36216 !important;
+        color: #fff !important;
+        box-shadow: none !important;
+    }
 
-/* Não muda nada ao focar ou passar mouse */
-input:focus,
-textarea:focus,
-select:focus,
-button:hover,
-button:focus {
-    outline: none;
-    background: transparent;
-    border-color: #555;
-    color: #fff;
-}
+    .btn-secondary {
+        background-color: #f8761e !important;
+        border-color: #f8761e !important;
+        color: #fff !important;
+    }
 
-/* Password toggle */
-.password-input-container {
-    position: relative;
-}
+    .btn-secondary:hover,
+    .btn-secondary:focus,
+    .btn-secondary:active {
+        background-color: #d36216 !important;
+        border-color: #d36216 !important;
+        color: #fff !important;
+        box-shadow: none !important;
+    }
 
-.password-input-container input {
-    padding-right: 40px;
-}
+    .btn-outline-primary {
+        background-color: transparent !important;
+        border: 1px solid #f8761e !important;
+        color: #f8761e !important;
+    }
 
-.password-toggle {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    right: 12px;
-    transform: translateY(-50%);
-    color: #fff;
-    font-size: 1rem;
-    z-index: 2;
-}
+    .btn-outline-primary:hover,
+    .btn-outline-primary:focus,
+    .btn-outline-primary:active {
+        background-color: #f8761e !important;
+        border-color: #f8761e !important;
+        color: #fff !important;
+        box-shadow: none !important;
+    }
 
-/* Labels e textos */
-label {
-    color: #fff;
-    font-weight: 600;
-}
+    .container-fluid .card {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+    }
 
-.text-danger {
-    color: #f87171;
-    font-size: 0.875rem;
-}
+    .container-fluid .card-body {
+        padding: 0;
+    }
 
-.form-text {
-    color: #fff;
-    font-size: 0.875rem;
-}
+    .form-section {
+        margin-bottom: 2rem;
+    }
 
-/* Botões estáticos */
-button[type="submit"], .btn-outline-primary {
-    background-color: #f8761e;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-}
+    .form-section-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 12px;
+    }
 
-.btn-outline-primary {
-    border: 1px solid #fff;
-}
+    .form-section-title i {
+        margin-right: 8px;
+    }
 
-/* Sem hover para botões */
-button, .btn-outline-primary {
-    cursor: default;
-}
+    input, select, textarea {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #555;
+        color: #fff;
+        padding: 8px 12px;
+        margin-top: 4px;
+    }
 
-/* Layout header */
-.header-edit-delivery {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-    position: relative;
-}
+    input::placeholder,
+    textarea::placeholder {
+        color: #bbb;
+    }
 
-.header-edit-delivery h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #fff;
-}
+    input:focus,
+    textarea:focus,
+    select:focus,
+    button:hover,
+    button:focus {
+        outline: none;
+        background: transparent;
+        border-color: black;
+        color: #fff;
+    }
 
-.header-edit-delivery .delivery-name {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.25rem;
-    color: #fff;
-    font-weight: 500;
-}
+    .password-input-container {
+        position: relative;
+    }
 
-.header-edit-delivery .btn-back {
-    white-space: nowrap;
-}
+    .password-input-container input {
+        padding-right: 40px;
+    }
 
-/* Layout grid */
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
+    .password-toggle {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        color: #fff;
+        font-size: 1rem;
+        z-index: 2;
+    }
 
-.col-md-6 {
-    flex: 0 0 calc(50% - 10px);
-}
+    label {
+        color: #fff;
+        font-weight: 600;
+    }
 
-.col-12 {
-    flex: 0 0 100%;
-}
+    .text-danger {
+        color: #f87171;
+        font-size: 0.875rem;
+    }
+
+    .form-text {
+        color: #fff;
+        font-size: 0.875rem;
+    }
+
+    button[type="submit"], .btn-outline-primary {
+        background-color: #f8761e;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 6px;
+    }
+
+    .btn-outline-primary {
+        border: 1px solid #fff;
+    }
+
+    button, .btn-outline-primary {
+        cursor: default;
+    }
+
+    .header-edit-delivery {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+        position: relative;
+    }
+
+    .header-edit-delivery h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: #fff;
+    }
+
+    .header-edit-delivery .delivery-name {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.25rem;
+        color: #fff;
+        font-weight: 500;
+    }
+
+    .header-edit-delivery .btn-back {
+        white-space: nowrap;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .col-md-6 {
+        flex: 0 0 calc(50% - 10px);
+    }
+
+    .col-12 {
+        flex: 0 0 100%;
+    }
 </style>
 {% endblock %}
 
@@ -195,7 +255,6 @@ button, .btn-outline-primary {
                             {% endfor %}
                         {% endif %}
 
-                        <!-- Informações de Acesso -->
                         <div class="form-section">
                             <h5 class="form-section-title"><i class="fas fa-key"></i>Informações de Acesso</h5>
 
@@ -222,7 +281,6 @@ button, .btn-outline-primary {
                             </div>
                         </div>
 
-                        <!-- Informações Pessoais -->
                         <div class="form-section">
                             <h5 class="form-section-title"><i class="fas fa-user"></i>Informações Pessoais</h5>
 
@@ -300,7 +358,6 @@ button, .btn-outline-primary {
                             </div>
                         </div>
 
-                        <!-- Informações da Moto -->
                         <div class="form-section">
                             <h5 class="form-section-title"><i class="fas fa-motorcycle"></i>Informações da Moto</h5>
 
@@ -339,7 +396,6 @@ button, .btn-outline-primary {
                             </div>
                         </div>
 
-                        <!-- Ações -->
                         <div class="form-actions mt-4 d-flex justify-content-between">
                             <button type="submit" class="btn btn-primary px-4">
                                 <i class="fas fa-save me-2"></i>Salvar Alterações

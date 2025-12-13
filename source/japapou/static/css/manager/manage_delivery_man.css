@@ -189,21 +189,21 @@ strong {
 }
 
 .container-fluid .btn-primary {
-    background-color: #0d6efd;
+    background-color: #f8761e;
     border: none;
 }
 
 .container-fluid .btn-primary:hover {
-    background-color: #0b5ed7;
+    background-color: #d36216;
 }
 
 .container-fluid .btn-secondary {
-    background-color: #334155;
+    background-color: #f8761e;
     border: none;
 }
 
 .container-fluid .btn-secondary:hover {
-    background-color: #475569;
+    background-color: #d36216;
 }
 
 
@@ -248,5 +248,18 @@ h5.form-section-title{
     margin-top: 32px;
 }
 
+
+
+a.btn.btn-outline-primary {
+    color: #f8761e;
+    border-color: #f8761e;
+}
+
+
+
+button.btn btn-primary px-4{
+    background-color: #f8761e;
+    border: none;
+}
 
 

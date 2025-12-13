@@ -6,25 +6,67 @@
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/manager/manage_delivery_man.css' %}" />
 <style>
-        /* Container do input de senha */
+    .btn-primary {
+        background-color: #f8761e !important;
+        border-color: #f8761e !important;
+        color: #fff !important;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active {
+        background-color: #d36216 !important;
+        border-color: #d36216 !important;
+        color: #fff !important;
+        box-shadow: none !important;
+    }
+
+    .btn-secondary {
+        background-color: #f8761e !important;
+        border-color: #f8761e !important;
+        color: #fff !important;
+    }
+
+    .btn-secondary:hover,
+    .btn-secondary:focus,
+    .btn-secondary:active {
+        background-color: #d36216 !important;
+        border-color: #d36216 !important;
+        color: #fff !important;
+        box-shadow: none !important;
+    }
+
+    .btn-outline-primary {
+        background-color: transparent !important;
+        border: 1px solid #f8761e !important;
+        color: #f8761e !important;
+    }
+
+    .btn-outline-primary:hover,
+    .btn-outline-primary:focus,
+    .btn-outline-primary:active {
+        background-color: #f8761e !important;
+        border-color: #f8761e !important;
+        color: #fff !important;
+        box-shadow: none !important;
+    }
+
     .password-input-container {
         position: relative;
     }
 
-    /* Ajusta o input para ter espaço para o ícone */
     .password-input-container input {
         width: 100%;
-        padding-right: 40px; /* espaço para o ícone */
+        padding-right: 40px; 
     }
 
-    /* Ícone do olho */
     .password-toggle {
         cursor: pointer;
         position: absolute;
         top: 50%;
-        right: 25px; /* distância da borda direita */
+        right: 25px; 
         transform: translateY(-50%);
-        color: #ffffff; /* branco */
+        color: #ffffff; 
         font-size: 1rem;
         z-index: 2;
         bottom: 40px;
