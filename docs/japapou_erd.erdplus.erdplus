@@ -1973,6 +1973,26 @@
         },
         "selected": false,
         "dragging": false
+      },
+      {
+        "id": "0568a463-c82c-45dd-96d1-833928c75298",
+        "parentId": "e0d8f4f9-2045-46a8-84f0-6eccf06a5571",
+        "type": "Attribute",
+        "position": {
+          "x": 31.76731095210448,
+          "y": -137.22882272038095
+        },
+        "data": {
+          "label": "Status",
+          "types": [],
+          "isSelected": false
+        },
+        "measured": {
+          "width": 100,
+          "height": 50
+        },
+        "selected": false,
+        "dragging": false
       }
     ],
     "edges": [
@@ -2766,21 +2786,27 @@
         "type": "Attribute",
         "source": "7d872015-9c8f-458e-b524-36d132fe808d",
         "target": "8d9cd951-2e6f-40b0-a9b8-adb4c957865e"
+      },
+      {
+        "id": "12ca091a-707b-4079-918f-0c2333663142",
+        "type": "Attribute",
+        "source": "e0d8f4f9-2045-46a8-84f0-6eccf06a5571",
+        "target": "0568a463-c82c-45dd-96d1-833928c75298"
       }
     ],
     "viewport": {
-      "x": 356.4211992770779,
-      "y": 77.68025937211593,
-      "zoom": 0.6723070630713697
+      "x": 326.1410647612953,
+      "y": 81.68341384282621,
+      "zoom": 0.7069535620271948
     }
   },
-  "name": "Japapou - DER.erdplus",
+  "name": "japapou_erd.erdplus",
   "folder": {
     "name": "Diagrams",
     "folderType": 1,
     "depth": 0,
     "id": 143018
   },
-  "id": 166886,
-  "updatedAtTimestamp": 1763423259
+  "id": 199829,
+  "updatedAtTimestamp": 1765824377
 }
