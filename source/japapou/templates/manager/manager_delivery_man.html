@@ -34,7 +34,11 @@
             {% endif %}
 
             <h2 class="card__name">
-                {{ delivery_man.first_name }} {{ delivery_man.last_name }}
+                {% if delivery_man.first_name and delivery_man.last_name %}
+                    {{ delivery_man.first_name }} {{ delivery_man.last_name }}
+                {% else %}
+                    {{ delivery_man.username }}
+                {% endif %}
             </h2>
 
             <div class="card__actions">
