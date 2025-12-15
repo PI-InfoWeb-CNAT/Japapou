@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.status === 'ok') {
         confirmBtn.innerHTML = `<h4>Já saiu para entrega (${data.dispatch_date})</h4>`;
         confirmBtn.style.backgroundColor = '#3bb33b';
+        confirmBtn.style.padding = '1em';
       } else {
         // alert('Erro ao confirmar saída.');
       }

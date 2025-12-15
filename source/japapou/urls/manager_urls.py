@@ -1,6 +1,7 @@
 from django.urls import path
 # Importa o pacote de views do Manager (assumindo que ele está corretamente mapeado)
 import japapou.views.manager_views as views 
+from japapou.views.client_views import details_plate_view
 # Note: Isso pressupõe que suas views de fato estão dentro de japapou/views/manager_views.py ou __init__.py
 
 urlpatterns = [
@@ -31,7 +32,7 @@ urlpatterns = [
     path("plates/add_single_to_menu/", views.add_single_plate_to_menu_view, name="add_single_plate_to_menu"),
     path("plates/<int:id>/delete/", views.plate_delete_view, name="plate_delete"),
     path("plates/add_to_menu/", views.add_plates_to_menu_view, name="add_plates_to_menu"),
-    
+    path("details_plate/<int:plate_id>/", details_plate_view, name="details_plate"),
 
     # GERAIS
     path("history/", views.manager_history_view, name="manager_history"),

@@ -71,6 +71,7 @@
     <h2><b>{{ selected.name }}</b></h2>
     <div class="cards">
       {% for plate in menu_plates %}
+      <a href="{% url 'details_plate' plate.id %}">
         <div class="product-card" id="plate-card-{{ plate.id }}" data-media="{{ plate.media|default:0}}" >
           <button class="action-button delete-button remove-from-menu-button" 
                   data-plate-id="{{ plate.id }}" 
@@ -109,6 +110,7 @@
             <p>R$ {{ plate.price }}</p>
           </div>
         </div>
+      </a>
       {% endfor %}
       
         <button class="botao-criar" onclick="document.getElementById('novo-prato').showModal()">

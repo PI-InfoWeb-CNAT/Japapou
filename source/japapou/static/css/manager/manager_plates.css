@@ -163,6 +163,7 @@ main {
 
 				.star {
 					position: absolute;
+					z-index: 10;
 					font-size: 30px;
 					/*color:var(--lighter-gray);*/
 					color: #FFD700;

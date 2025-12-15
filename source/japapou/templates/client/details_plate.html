@@ -156,7 +156,9 @@
       </div>
       <p class="vermelho">{{ rating_distribution.4.count }}</p>
     </div>
-    <a href="{% url 'rating' plate.id %}"><p class="botao-avaliar">Avaliar Prato</p></a>
+    {% if request.user.tipo_usuario == 'CLIENT' %}
+      <a href="{% url 'rating' plate.id %}"><p class="botao-avaliar">Avaliar Prato</p></a>
+    {% endif %}
   </div>
   <div class="button-avaliação">
     {% if user.is_authenticated and user.tipo_usuario == 'CLIENT' %}
@@ -179,10 +181,6 @@
             </div>
           </div>
         </form>
-      {% elif user.is_authenticated %}
-        <p class="text-muted"><em>(Apenas clientes podem adicionar itens ao carrinho.)</em></p>
-      {% else %}
-        <p class="mt-3"><a href="{% url 'login_register' %}" class="btn btn-outline-primary">Faça login</a> para adicionar ao carrinho.</p>
       {% endif %}
   </div>
 </div>

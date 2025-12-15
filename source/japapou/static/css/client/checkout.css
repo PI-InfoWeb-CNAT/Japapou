@@ -74,6 +74,9 @@
                 margin-right: 8px;
             }
         }
+        a:hover{
+            background-color: var(--laranja-mais-claro);
+        }
     }
 }
 /* CSS DA PARTE DO RESUMO */
@@ -98,6 +101,11 @@
                 font-size: 25px;
                 border-bottom: 1px solid white;
 
+            }
+
+            label:hover{
+                color: var(--lightest-gray);
+                opacity: 70%;
             }
 
             input[type="radio"] {
@@ -132,7 +140,13 @@
                 background-color: white;
                 height: 23%;
                 padding: 0px 10px 0px 10px;
+                border: 1px solid white;
                 
+            }
+            button:hover{
+                background-color: var(--azul-mais-claro);
+                color: white;
+                border: 1px solid white;
             }
         }
 
@@ -169,7 +183,7 @@
 
                 strong {
                     width: 90%;
-                    height: 45px;
+                    height: 100%;
                     display: block;
                     color: var(--azul-mais-escuro);
                     background-color: white;
@@ -183,7 +197,9 @@
             
             #express-opcao {
                     opacity: 60%;
-
+            }
+            #express-opcao:hover{
+                opacity: 80%;
             }
         }
     }
@@ -204,7 +220,22 @@
         background-color: white;
         height: 23%;
         padding: 0px 10px 0px 10px;
-    }
+        border: 1px solid white;
+}
+
+#btn-copiar-pix-final:hover{
+    background-color: var(--azul-mais-claro);
+    border: 1px solid white;
+    color: white;
+}
+textarea#codigo-pix-area{
+    background-color: var(--azul-mais-claro);
+    resize: none;
+    color: white;
+    border: none;
+    padding: 0.4em;
+    border-radius: 50px
+}
 /* CSS DA PARTE DO METODO PAGAMENTO */
 #container-metodo-pagamento{
     transition: all 0.5s ease;
@@ -224,6 +255,9 @@
             margin: 0;
             padding-bottom: 5px;
             
+        }
+        label:hover{
+            color: var(--lightest-gray);
         }
     }
     #mostrar-metodo-atual-online {
@@ -246,6 +280,13 @@
             background-color: white;
             height: 23%;
             padding: 0px 10px 0px 10px;
+            border: 1px solid white;
+        }
+
+        button:hover{
+            background-color: var(--azul-mais-claro);
+            color: white;
+            border: 1px solid white;
         }
     }
 
@@ -485,8 +526,15 @@
                 border: none;
                 padding: 5px;
                 color: white;
+                resize: none;
             }
         }
     }
 }
 /* CSS CARDS DOS PRATOS */
+
+
+.endereco-item.selecionado:hover{
+    background-color: var(--azul-mais-claro);
+    cursor: pointer;
+}

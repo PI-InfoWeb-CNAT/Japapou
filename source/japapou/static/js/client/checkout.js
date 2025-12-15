@@ -94,6 +94,8 @@ function verificarTipoPedido() {
         blocoEndereco.style.opacity = "60%"; 
         blocoEndereco.style.pointerEvents = "none"; 
         
+        divTipoDeEntrega.style.pointerEvents = "none";
+        
         containerMetodoOnline.style.display = "block";
         divMetodoAtual.style.display = "flex";
         divContainerPix.style.display = "block";
@@ -103,7 +105,7 @@ function verificarTipoPedido() {
         labelEntrega.style.opacity = "60%";
         labelRetirada.style.opacity = "100%";
         labelCategoriaLocal.style.pointerEvents = "none";
-        labelCategoriaLocal.style.opacity = "30%";
+        labelCategoriaLocal.style.opacity = "0%";
         labelCategoriaOnline.style.opacity = "100%";
         
         // Desativar a visualização da taxa de entrega
@@ -136,6 +138,8 @@ function verificarTipoPedido() {
         // 1. Ativar a escolha de endereço
         blocoEndereco.style.opacity = "100%";
         blocoEndereco.style.pointerEvents = "all";
+
+        divTipoDeEntrega.style.pointerEvents = "all";
 
         // Estilização das etiquetas
         labelRetirada.style.opacity = "60%";
@@ -203,7 +207,13 @@ function atualizarValoresResumo(comEntrega) {
 function verificarTipoPagamento() {
     // se o input categoria online tiver selecionado 
     if (inputCategoriaOnline.checked) {
-        labelCategoriaLocal.style.opacity = "60%";
+        if (inputEntrega.checked){
+            labelCategoriaLocal.style.opacity = "60%";
+        }
+        if (inputRetirada.checked){
+            labelCategoriaLocal.style.opacity = "0%";
+        }
+        labelCategoriaLocal.style.opacity = "0%"
         labelCategoriaOnline.style.opacity = "100%";
         divMetodoAtual.style.display = "flex";
         divMetodoAtualLocal.style.display = "none";
