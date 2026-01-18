@@ -38,34 +38,36 @@
    {% csrf_token %}
    <div id="logo">
     {% if user.is_authenticated and user.tipo_usuario == "MANAGER" and user.foto_perfil %}
-     <!-- <a href="{% url 'manager_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
-     <a href="{% url 'manager_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a>
+     <a href="{% url 'manager_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /> {{request.user.username}}</a>
+     {% comment %} <a href="{% url 'manager_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a> {% endcomment %}
     {% elif user.is_authenticated and user.tipo_usuario == "CLIENT" and user.foto_perfil %}
-     <!-- <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
-     <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a>
+     <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" />{{request.user.username}}</a>
+     {% comment %} <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a> {% endcomment %}
     {% elif user.is_authenticated and user.tipo_usuario == "DELIVERY_MAN" and user.foto_perfil %}
-     <!-- <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
-     <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a>
+     <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" />{{request.user.username}}</a>
+     {% comment %} <a href="{% url 'client_profile' %}"><img src="{{ user.foto_perfil.url }}" alt="Perfil" width="32px" /></a> {% endcomment %}
     {% elif user.is_authenticated and user.tipo_usuario == "MANAGER" %}
-     <!-- <a href="{% url 'manager_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
-     <a href="{% url 'manager_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
+     <a href="{% url 'manager_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a>
+     {% comment %} <a href="{% url 'manager_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a> {% endcomment %}
     {% elif user.is_authenticated and user.tipo_usuario == "CLIENT" %}
-     <!-- <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
-     <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
+     <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a>
+     {% comment %} <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a> {% endcomment %}
     {% elif user.is_authenticated and user.tipo_usuario == "DELIVERY_MAN" %}
-     <!-- <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a> -->
-     <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
+     <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" />{{request.user.username}}</a>
+     {% comment %} <a href="{% url 'client_profile' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a> {% endcomment %}
     {% else %}
      <a href="{% url 'login_register' %}"><img src="{% static 'imgs/manager/profile.png' %}" alt="Perfil" width="32px" /></a>
     {% endif %}
+
+    {% if user.is_authenticated and user.tipo_usuario == 'DELIVERY_MAN' %}
+    <div id="media-estrelas">
+      <i class="star fa-solid fa-star"></i>
+      <p>{{ media_entregador|floatformat:2 }}</p></div>
+   {% endif %}
+
    </div>
 
-  {% if user.is_authenticated and user.tipo_usuario == 'DELIVERY_MAN' and average_courier_rating is not None %}
-    <div class="header-rating-display">
-        <i class="star fa-solid fa-star"></i> 
-        <span class="rating-value">{{ average_courier_rating|floatformat:2 }}</span>
-    </div>
-  {% endif %}
+   
 
    <a href="{% url 'home' %}"><p>JAPAPOU</p></a>
 

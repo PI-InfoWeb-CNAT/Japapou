@@ -69,6 +69,7 @@ header {
   #logo img {
     vertical-align: middle;
     border-radius: 50%;
+    margin-right: 8px;
   }
 
   /* O .hamburger foi removido daqui e estilizado globalmente */
@@ -269,14 +270,44 @@ a{
     width: 100%; 
     padding-left: 1rem;
     padding-right: 1rem;
+    position: relative;
 }
 
 #header > a {
-    display: flex; 
-    margin-left: auto;
-    margin-right: auto; /* Esta é a chave para centralizar */
+    position: absolute;       /* Retira o elemento do fluxo normal */
+    left: 50%;                /* Move o início do elemento para o meio (50%) */
+    transform: translateX(-50%); /* Puxa o elemento 50% da sua própria largura para a esquerda */
+    
+    /* Remove as margens automáticas antigas se existirem */
+    margin: 0; 
+    
+    /* Garante que o texto não quebra linha de forma estranha */
+    white-space: nowrap; 
 }
 
 #logo {
+  display: flex;
     flex-shrink: 0; /* Impede que o logo encolha */
+    gap: 15px;
+
+    a {
+      color: white;
+    }
+    a:hover {
+      color: #c7c7c7;
+    }
+}
+
+#media-estrelas {
+  display: flex;
+  gap: 3px;
+  
+  i {
+    font-size: 24px;
+    color: var(--laranja-mais-claro);
+  }
+
+  p{
+    font-size: 22px;
+  }
 }
