@@ -2,6 +2,8 @@ from django.urls import path
 from japapou.views.client_views import *  
 from japapou.views.client_views.cart_view import add_to_cart_view, remove_from_cart_view, update_cart_item_view  # type: ignore
 from japapou.views.client_views.receipt_view import submit_courier_review
+from japapou.views.client_views.endereco_view import add_endereco_view, listar_enderecos_view  # type: ignore
+
 
 urlpatterns = [
     path("menu/", client_menu_view, name="client_menu"),
@@ -26,7 +28,8 @@ urlpatterns = [
     #path('order/create/', order_view.create_order_view, name='create_order'),
     path('orders/', order_view.client_order_view, name='client_history'),
     path('checkout/', checkout_view, name='checkout'),
-    path('checkout/adicionar-endereco/', add_endereco_view, name='add_endereco'),
+    path('checkout/adicionar-endereco/', add_endereco_view, name='checkout_add_endereco'),
+    path('enderecos/', listar_enderecos_view, name='listar_enderecos'),
     path('order/sucesso/<int:order_id>/', order_success_view, name='order_success'),
 
 ]

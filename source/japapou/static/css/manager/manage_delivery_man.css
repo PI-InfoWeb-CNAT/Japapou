@@ -262,4 +262,25 @@ button.btn btn-primary px-4{
     border: none;
 }
 
+.estrelas {
+    color: var(--laranja-mais-claro);
+    font-size: 24px;
+}
+
+.img-estrela .estrelas .curved-stars-container .star.star-inactive {
+  color: var(--gray); /* Cor cinza claro para estrela inativa */
+  /* Outra opção: 
+     color: #e0e0e0; (um cinza bem suave)
+  */
+}
+
+/* 2. Define a cor para as estrelas INATIVAS */
+/* Quando o JS adicionar a classe .star-inactive, esta
+   regra terá prioridade e mudará a cor da estrela */
+.estrelas .star.star-inactive {
+  color: var(--gray); /* Cor cinza claro para estrela inativa */
+  /* Outra opção: 
+     color: #e0e0e0; (um cinza bem suave)
+  */
+}
 

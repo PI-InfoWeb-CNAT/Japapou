@@ -23,7 +23,7 @@
 
         {% for delivery_man in delivery_men %}
         <div class="card"
-             onclick="window.location.href='{% url 'manager_delivery_man_detail' delivery_man.id %}'">
+             onclick="window.location.href='{% url 'manager_delivery_man_detail' delivery_man.id %}'" data-media="{{ delivery_man.media|default:0 }}">
 
             {% if delivery_man.foto %}
                 <img src="{{ delivery_man.foto.url }}" class="card__image" alt="{{ delivery_man.username }}">
@@ -40,6 +40,13 @@
                     {{ delivery_man.username }}
                 {% endif %}
             </h2>
+            <div class="estrelas">
+                <i class="star fa-solid fa-star"></i>
+                <i class="star fa-solid fa-star"></i>
+                <i class="star fa-solid fa-star"></i>
+                <i class="star fa-solid fa-star"></i>
+                <i class="star fa-solid fa-star"></i>
+            </div>
 
             <div class="card__actions">
                 <a href="{% url 'manager_delivery_man_update' delivery_man.id %}"
@@ -103,6 +110,6 @@
 
 
 
-{% block extra_js %}
-<script src="{% static 'js/manager/manage_delivery_man.js' %}"></script>
+{% block scripts %}
+  <script src="{% static 'js/manager/manage_delivery_man.js' %}"></script>
 {% endblock %}

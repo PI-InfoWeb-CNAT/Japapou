@@ -359,9 +359,9 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener('click', goNext);
 
     // Se houver menos de 3 slides, desativa os botões 
-    if (slides.length < 3) {
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'none';
+    if (slides.length > 1 && slides.length < 3) {
+        prevBtn.style.display = 'block';
+        nextBtn.style.display = 'block';
     }
 
     updateSlides();

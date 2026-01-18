@@ -8,10 +8,12 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from functools import wraps
 import logging
-from japapou.models import CustomUser 
+from japapou.models import CustomUser, CourierReview
 from japapou.forms import DeliveryRegisterForm 
 from datetime import date
 import re
+from django.db.models import Avg # type: ignore
+from django.db.models.functions import Round # type: ignore
 
 
 logger = logging.getLogger(__name__)
@@ -103,11 +105,24 @@ def manager_delivery_man_create_view(request):
 @manager_required('japapou.view_customuser')
 def manage_delivery_man_view(request):
     """Lista todos os entregadores"""
+
+    avaliacoes_dict = {}
+
     try:
         delivery_men = CustomUser.objects.filter(
             tipo_usuario='DELIVERY_MAN',
             is_active=True  
         ).order_by('-date_joined')
+
+        courier_reviews = CourierReview.objects.values('entregador__username').annotate(
+                            media=Round(Avg('value'))
+                            )
+        
+        avaliacoes_dict = {a['entregador__username']: a['media'] for a in courier_reviews}
+        
+        for de in delivery_men:
+            de.media = avaliacoes_dict.get(de.username)
+        
 
         return render(request, "manager/manager_delivery_man.html", {
             "delivery_men": delivery_men

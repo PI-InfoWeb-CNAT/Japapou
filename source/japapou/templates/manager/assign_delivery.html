@@ -90,14 +90,16 @@
    <div class="secundario"><p>Cor</p><p class="resp">{{ order.entregador.cor_moto }}</p></div>
    <div class="secundario"><p>Placa</p><p class="resp">{{ order.entregador.placa_moto }}</p></div>
 
-   <div class="button">
-    <div class="assign-delivery-btn"><h4>Alterar entregador</h4></div>
-   </div>
+   {% if not order.data_saida %}
+     <div class="button">
+      <div class="assign-delivery-btn"><h4>Alterar entregador</h4></div>
+     </div>
+   {% endif %}
    
    {% if order.data_saida %}
     <div class="button">
-     <div id="button-3" class="confirmed">
-      <h4>Já saiu para entrega ({{ order.data_saida|date:"d/m/Y H:i" }})</h4>
+     <div id="button-3" class="confirmed" >
+      <h4>Saiu para entrega ({{ order.data_saida|date:"d/m/Y H:i" }})</h4>
      </div>
     </div>
    {% else %}

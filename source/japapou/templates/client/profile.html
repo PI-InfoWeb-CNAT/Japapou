@@ -75,10 +75,10 @@
       </div>
     </li>
     <li>
-      <strong>Endereço</strong>
+      <strong>Meus Endereço</strong>
       <div class="value-with-icon">
         <span id="endereco" data-field="endereco" data-id="{{ user.id }}" class="editable-span">{{ user.endereco }}</span>
-        <a href="#" class="edit-icon" data-edit="endereco" title="Editar"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        <a href="{% url "listar_enderecos" %}" >Ver meus endereços</a>
       </div>
     </li>
 

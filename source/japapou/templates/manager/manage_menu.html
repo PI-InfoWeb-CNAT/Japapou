@@ -71,7 +71,7 @@
     <h2><b>{{ selected.name }}</b></h2>
     <div class="cards">
       {% for plate in menu_plates %}
-      <a href="{% url 'details_plate' plate.id %}">
+      
         <div class="product-card" id="plate-card-{{ plate.id }}" data-media="{{ plate.media|default:0}}" >
           <button class="action-button delete-button remove-from-menu-button" 
                   data-plate-id="{{ plate.id }}" 
@@ -103,14 +103,15 @@
             </div>
           </div>
           <div class="card-body">
-            <h3 class="product-name">{{ plate.name }}</h3>
-            <p class="product-description">{{ plate.description }}</p>
+            <a href="{% url 'details_plate' plate.id %}">
+              <h3 class="product-name">{{ plate.name }}</h3>
+              <p class="product-description">{{ plate.description }}</p>
+            </a>
           </div>
           <div class="product-price">
             <p>R$ {{ plate.price }}</p>
           </div>
         </div>
-      </a>
       {% endfor %}
       
         <button class="botao-criar" onclick="document.getElementById('novo-prato').showModal()">
@@ -160,8 +161,10 @@
             </div>
           </div>
           <div class="card-body">
-            <h3 class="product-name">{{ plate.name }}</h3>
-            <p class="product-description">{{ plate.description }}</p>
+           <a href="{% url 'details_plate' plate.id %}">
+              <h3 class="product-name">{{ plate.name }}</h3>
+              <p class="product-description">{{ plate.description }}</p>
+            </a>
           </div>
           <div class="product-price">
             <p>R$ {{ plate.price }}</p>

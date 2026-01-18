@@ -112,7 +112,8 @@ def manager_menu_view(request):
     # Aplicamos a média aos pratos DENTRO do menu
     for plate in menu_plates:
         plate.media = avaliacoes_dict.get(plate.name)
-
+    
+    
     # Aplicamos a média aos pratos FORA do menu
     for plate in other_plates:
         plate.media = avaliacoes_dict.get(plate.name)

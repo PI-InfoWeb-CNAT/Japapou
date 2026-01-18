@@ -116,12 +116,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const confirmBtn = document.getElementById('button-3');
-  if (!confirmBtn) return;
+  
+  // Se o botão não existir ou já tiver a classe 'confirmed', paramos aqui.
+  if (!confirmBtn || confirmBtn.classList.contains('confirmed')) return;
 
   confirmBtn.addEventListener('click', async () => {
     const container = document.getElementById('detalhes-entregador');
     const orderId = container.dataset.orderId;
     const csrf = container.dataset.csrf;
+
+    // Feedback visual imediato: "Carregando..."
+    const originalText = confirmBtn.innerHTML;
+    confirmBtn.innerHTML = '<h4>Processando...</h4>';
+    confirmBtn.style.pointerEvents = 'none'; // Evita cliques duplos
 
     try {
       const response = await fetch(`/manager/confirm_dispatch/${orderId}/`, {
@@ -135,18 +142,50 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
 
       if (data.status === 'ok') {
-        confirmBtn.innerHTML = `<h4>Já saiu para entrega (${data.dispatch_date})</h4>`;
+        const agora = new Date();
+        const dataFormatada = agora.toLocaleDateString('pt-BR') + ' às ' + agora.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
+        
+        // --- MUDANÇA VISUAL AQUI ---
+        // 1. Usamos <br> para quebrar a linha.
+        // 2. Usamos um <span> com fonte menor para a data.
+        confirmBtn.innerHTML = `
+            <h4 style="margin: 0;">Já saiu para entrega</h4>
+            <span style="font-size: 1.2em; font-weight: normal; display: block;>
+                ${dataFormatada}
+            </span>
+        `;
+        
+        confirmBtn.classList.add('confirmed');
+        
+        // --- AJUSTES DE CSS NO JS ---
         confirmBtn.style.backgroundColor = '#3bb33b';
-        confirmBtn.style.padding = '1em';
+        confirmBtn.style.opacity = '1';
+        
+        // Importante: removemos a altura fixa e damos espaço interno
+        confirmBtn.style.height = 'auto'; 
+        confirmBtn.style.padding = '30px 10px'; 
+        confirmBtn.style.display = 'flex';
+        confirmBtn.style.flexDirection = 'column';
+        confirmBtn.style.justifyContent = 'center';
+        confirmBtn.style.alignItems = 'center';
+
+        // Esconder o botão de alterar (mantém-se igual)
+        const changeBtn = container.querySelector('.assign-delivery-btn');
+        if (changeBtn) {
+            changeBtn.closest('.button').style.display = 'none';
+        }
+
       } else {
-        // alert('Erro ao confirmar saída.');
+        // Se der erro no servidor
+        confirmBtn.innerHTML = originalText;
+        confirmBtn.style.pointerEvents = 'auto';
+        alert('Erro ao confirmar saída.');
       }
     } catch (error) {
       console.error(error);
-      // alert('Erro de conexão.');
+      confirmBtn.innerHTML = originalText;
+      confirmBtn.style.pointerEvents = 'auto';
+      alert('Erro de conexão.');
     }
   });
 });
-
-confirmBtn.classList.add('confirmed');
-confirmBtn.disabled = true;

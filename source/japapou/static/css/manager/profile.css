@@ -180,3 +180,12 @@ h2,
 .status-toast.error {
     background-color: var(--vermelho); /* Vermelho */
 }
+
+a {
+	text-decoration: none;
+	color: var(--laranja-mais-claro);
+}
+
+a:hover {
+	color: #ffa94d; 
+}

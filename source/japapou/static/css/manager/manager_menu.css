@@ -76,6 +76,8 @@ main {
 		justify-content: center;
 		flex-wrap: wrap;
 		gap: 120px 80px;
+
+		
 	}
 }
 
@@ -169,19 +171,19 @@ main {
 					/* color: #FFD700; */
 
 					&:nth-child(1) {
-						transform: translate(-58px, 6px) rotate(0deg);
+						transform: translate(-73px, 4px) rotate(0deg);
 					}
 					&:nth-child(2) {
-						transform: translate(-30px, 20px) rotate(0deg);
+						transform: translate(-39px, 20px) rotate(0deg);
 					}
 					&:nth-child(3) {
-						transform: translate(0px, 27px);
+						transform: translate(-5px, 27px);
 					}
 					&:nth-child(4) {
 						transform: translate(30px, 20px) rotate(0deg);
 					}
 					&:nth-child(5) {
-						transform: translate(58px, 6px) rotate(0deg);
+						transform: translate(62px, 4px) rotate(0deg);
 					}
 				}
 			}
@@ -190,6 +192,10 @@ main {
 
 	.card-body {
 		margin-top: -35%;
+		width: 228px;
+        height: 100px;
+		position: relative;
+		z-index: 100;
 
 		.product-name {
 			font-size: 20px;
@@ -216,6 +222,14 @@ main {
 			&:hover {
 				transform: scale(1.05);
 			}
+		}
+		
+		a {
+			display: block;
+			text-decoration: none;
+			color: white;
+			width: 100%;
+        	height: 100%;
 		}
 	}
 

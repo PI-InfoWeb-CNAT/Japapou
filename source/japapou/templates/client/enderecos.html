@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Endereços Cadastrado</h2>
+    <ul>
+        {% for endereco in enderecos %}
+            <li>{{ endereco.apelido }} - {{ endereco }}</li>
+        {% endfor %}
+    </ul>
+
+
+    <a href="{% url 'client_profile' %}">voltar</a>
+</div>
+{% endblock %}

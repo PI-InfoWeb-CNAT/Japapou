@@ -280,9 +280,3 @@ a{
 #logo {
     flex-shrink: 0; /* Impede que o logo encolha */
 }
-i.fa-solid.fa-star {
-	color: var(--laranja-mais-claro);
-	margin-left: 0.5em;
-	font-size: 24px;
-	z-index: 1500; /* Certifique-se de que esteja acima de outros elementos */
-}

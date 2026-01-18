@@ -85,8 +85,10 @@
             </div>
           </div>
           <div class="card-body">
-            <h3 class="product-name">{{ plate.name }}</h3>
-            <p class="product-description">{{ plate.description }}</p>
+            <a href="{% url 'details_plate' plate.id %}">
+              <h3 class="product-name">{{ plate.name }}</h3>
+              <p class="product-description">{{ plate.description }}</p>
+            </a>
           </div>
           <div class="product-price">
             <p>R$ {{ plate.price }}</p>

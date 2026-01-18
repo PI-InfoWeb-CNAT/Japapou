@@ -424,10 +424,9 @@ div .img-secundaria:hover {
   border-radius: 10px;
   width: 80%;
   max-width: 500px;
-  /* height: 50vh; */
+  height: 50vh;
   position: relative;
   box-sizing: border-box;
-  justify-content: center;
 }
 
 .close {
@@ -458,6 +457,7 @@ div .img-secundaria:hover {
   padding: 0;
   margin: 0;
   width: 100%;
+  padding-left: 20px;
   overflow-y: auto;
 }
 
@@ -465,9 +465,9 @@ div .img-secundaria:hover {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 20vh;
+  /* margin-bottom: 20vh;
   margin-top: 1em;
-  padding-inline-start: 2em;
+  padding-inline-start: 2em; */
   overflow-y: auto; /* scroll se necessário */
 }
 

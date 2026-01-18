@@ -37,10 +37,31 @@
         
         <button type="submit" class="btn btn-primary">Salvar Endereço</button>
         
-        <a href="{% url 'checkout' %}" class="btn btn-secondary">
-            Voltar para o Checkout
-        </a>
     </form>
+
+    {% if request.META.HTTP_REFERER %}
+
+        {% if 'checkout' in request.META.HTTP_REFERER %}
+            <a href="{% url 'checkout' %}" class="btn btn-secondary">
+                Voltar para o Checkout
+            </a>
+        
+        {% elif 'profile' in request.META.HTTP_REFERER %}
+            <a href="{% url 'profile' %}" class="btn btn-secondary">
+                Voltar para o Perfil
+            </a>
+        {% else %}
+            <a href="/" class="btn btn-secondary">
+                Voltar ao Início
+            </a>
+        {% endif %}
+
+    {% else %}
+        <a href="/" class="btn btn-secondary">
+            Voltar ao Início
+        </a>
+    
+    {% endif %}
 
 </div>
 {% endblock %}

@@ -76,6 +76,8 @@ main {
 		justify-content: center;
 		flex-wrap: wrap;
 		gap: 120px 80px;
+
+		
 	}
 }
 
@@ -165,23 +167,23 @@ main {
 					position: absolute;
 					z-index: 10;
 					font-size: 30px;
-					/*color:var(--lighter-gray);*/
-					color: #FFD700;
+					/* color:var(--gray); */
+					/* color: #FFD700; */
 
 					&:nth-child(1) {
-						transform: translate(-58px, 6px) rotate(0deg);
+						transform: translate(-73px, 4px) rotate(0deg);
 					}
 					&:nth-child(2) {
-						transform: translate(-30px, 20px) rotate(0deg);
+						transform: translate(-39px, 20px) rotate(0deg);
 					}
 					&:nth-child(3) {
-						transform: translate(0px, 27px);
+						transform: translate(-5px, 27px);
 					}
 					&:nth-child(4) {
 						transform: translate(30px, 20px) rotate(0deg);
 					}
 					&:nth-child(5) {
-						transform: translate(58px, 6px) rotate(0deg);
+						transform: translate(62px, 4px) rotate(0deg);
 					}
 				}
 			}
@@ -190,6 +192,10 @@ main {
 
 	.card-body {
 		margin-top: -35%;
+		width: 228px;
+        height: 100px;
+		position: relative;
+		z-index: 20;
 
 		.product-name {
 			font-size: 20px;
@@ -216,6 +222,14 @@ main {
 			&:hover {
 				transform: scale(1.05);
 			}
+		}
+		
+		a {
+			display: block;
+			text-decoration: none;
+			color: white;
+			width: 100%;
+        	height: 100%;
 		}
 	}
 
@@ -249,14 +263,93 @@ main {
 	margin-bottom: 1em;
 	align-items: center;
 	
+	.text-ruler {
+    	font-size: 20px;
+		visibility: hidden; /* Torna-o invisível */
+    	position: absolute; /* Remove-o do fluxo de layout */
+    	white-space: nowrap; /* Impede que o texto quebre linhas */
+    	padding: 0;
+    	margin: 0;
+    	/* Adicione quaisquer outros estilos de fonte, como padding (se aplicável) */
+	}
+
+	div {
+		position: relative; /* Essencial para posicionar o pseudo-elemento */
+		display: inline-block; /* Para que o wrapper se ajuste ao tamanho do select */
+		width: 100%;
+		height: 100%;
+
+		select {
+			cursor: pointer;
+			height:100%;
+			background-color: transparent;
+			color: white;
+			border: none;
+			text-align: center;
+			margin: 0 auto;
+			font-size: 20px;
+			width: 100%;
+
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+
+			background-image: url('../../imgs/seta_baixo.png');
+			background-repeat: no-repeat;
+			background-size: 20px 10px;
+			background-position: right 5% center;
+
+			option {
+				background-color: var(--azul-mais-escuro);
+			}
+
+		}
+		select:focus {
+			outline: none;
+		}
+	}
+
+	
+	
 
 	#period-form {
-		width: 18%;
+		display: inline-block;
+		align-content: center;
+		width: 20%;
 		height: 55%;
 
 		select {
-			font-size: 19px;
+			cursor: pointer;
+        	background-color: transparent;
+        	color: white;
+        	border: none;
+        	text-align: center;
+        	margin: 0 auto;
+        	font-size: 20px;
+			width: 100%;
+
+			background-color: transparent;
+			color: white;
 			text-align: center;
+			margin: 0 auto;
+			font-size: 20px;
+
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+
+			background-image: url('../../imgs/seta_baixo.png');
+			background-repeat: no-repeat;
+			background-size: 7% 37%;
+			background-position: right 3% center;
+
+
+			option {
+				background-color: var(--azul-mais-escuro);
+			}
+		}
+		select:focus {
+			outline: none;
 		}
 	}
 	div p {
@@ -290,34 +383,28 @@ main {
 		color: #f97316;
 		font-size: 30px;
 		cursor: pointer;
+		background-color: transparent;
 	}
 	form {
-		width: 16%;
+		/*width: 15%;*/
+		/*max-width: 20%;*/
 		height: 55%;
+		border-radius: 25px;
+		border: 1px solid white;
+		display: inline-block;
+		align-content: center;
+		/* display: flex;
+		justify-content: space-around;
+		align-items: center; */
 
-		/* div {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			border: 1px solid white;
-			color: #f97316;
-			border-radius: 30px;
-			width: 100%;
-			height: 100%;
-			} */
 		label {
 			margin: 0;
 			margin-right: 5px;
 			font-size: 20px;
 		}
 	}
-	form select {
-		background-color: none;
-		font-size: 19px;
-		text-align: center;
-		cursor: pointer;
-	}
-	form select:hover {
+	
+	form:hover {
 		background-color: var(--azul-mais-claro);
 	}
 }
@@ -394,9 +481,9 @@ form {
 	z-index: 1;
 	margin: 0;
 	width: 35%;
+	height: 90%;
 	padding: 15px 30px 0px 30px;
-	height: 72%;
-	background-color: #024057;
+	background-color: var(--azul-mais-escuro);
 	border: 1px solid white;
 	border-radius: 20px;
 
@@ -406,6 +493,10 @@ form {
 
 	h2 {
 		color: white;
+		margin: 0;
+	}
+	label {
+		margin: 0;
 	}
 	form #name-menu{
 		display: flex;
@@ -414,9 +505,10 @@ form {
 	}
 	form #id_name {
 		width: 60%;
-		border: 2px solid white;
+		border: 1px solid white;
 		color: white;
     	border-radius: 8px;
+		background-color: var(--azul-mais-claro);
 	}
 }
 
@@ -425,11 +517,11 @@ form {
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 4%;
-	background-color: var(--azul-mais-escuro);
+	background-color: var(--azul-mais-claro);
 	padding: 20px 0px 20px 0px;
 	width: 100%;
-	height: 70%;
-	border: 2px solid white;
+	height: 80%;
+	border: 1px solid white;
 	border-radius: 8px;
 
 	div {
@@ -467,8 +559,8 @@ form {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	margin: 0;
-	width: 50%;
-	height: 45%;
+	width: 60%;
+	height: 50%;
 	border: none;
 	background-color: transparent;
 
@@ -487,6 +579,7 @@ form {
 			border-radius: 15px;
 			padding: 20px 25px 0px 25px;
 			place-items: center;
+			cursor: default;
 
 			> div {
 				padding: 0px;
@@ -500,18 +593,21 @@ form {
 
 			button {
 				padding: 0px;
-				width: 200px;
-				height: 200px;
+				width: 70%;
+				height: 60%;
 				background-color: #f97316;
 				border: 2px solid black;
 				border-radius: 0;
-				margin-bottom: 12%;
+				margin: 0;
+				
 			}
 
 			h2 {
 				font-size: 25px;
 				font-weight: bold;
 				color: black;
+				margin: 0;
+				margin-top: 5%;
 			}
 
 			p {
@@ -528,7 +624,7 @@ form {
 	}
 }
 
-/* #pratos-registrados {
+#pratos-registrados {
 	margin: 0 auto;
 	position: fixed;
 	top: 50%;
@@ -536,42 +632,39 @@ form {
 	transform: translate(-50%, -50%);
 	z-index: 1;
 	margin: 0;
-	width: 30%;
-	height: 75%;
+	width: 35%;
+	height: 90%;
 	padding: 15px 20px 20px 20px;
-	background-color: #024057;
+	background-color: var(--azul-mais-escuro);
 	border: 1px solid white;
 	border-radius: 20px;
 	place-items: center;
 
 	h2 {
 		font-size: 36px;
-		margin-bottom: 15px;
+		margin: 0;
+		margin-bottom: 3%;
 	}
 
 	button {
-		width: 40%;
-		height: 6%;
-		margin-top: 5%;
+		background-color: var(--laranja-mais-claro);
+        border: 2px solid black;
+        border-radius: 15px;
+        width: 40%;
+        height: 7%;
+        margin-top: 3%;
 	}
 
 	form {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		gap: 5%;
-		background-color: var();
-		padding: 25px 0px 45px 0px;
-		width: 95%;
-		height: 70%;
-		border: 2px solid black;
-		border-radius: 8px;
 
-		div {
+		#outros-pratos {
 			display: flex;
 			align-items: center;
-			gap: 1%;
-			height: 5%;
+			width: 100%;
+			height: 95%;
+			background-color: var(--azul-mais-claro);
+			border: 1px solid white;
+			border-radius: 8px;
 		}
 
 		label {
@@ -598,7 +691,8 @@ form {
 			}
 		}
 	}
-} */
+} 
+
 
 #criar-prato {
 	margin: 0 auto;
@@ -610,11 +704,23 @@ form {
 	margin: 0;
 	width: 30%;
 	height: 90%;
-	padding: 15px 40px 20px 40px;
+	padding: 35px 40px 20px 40px;
 	background-color: var(--azul-mais-escuro);
 	border: 1px solid white;
 	border-radius: 20px;
 	place-items: center;
+
+	p {
+		margin: 0;
+        font-size: x-small;
+		text-align: center;
+		color: white;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: larger;
+	}
 
 	form {
 		place-items: center;
@@ -622,8 +728,12 @@ form {
 
 	form #image-file {
 		background-color: var(--laranja-mais-claro);
-		width: 35%;
-		height: 25%;
+		width: 150px;
+        height: 145px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+		cursor: pointer;
 	}
 
 	form div {
@@ -633,11 +743,14 @@ form {
 	form .criar-prato-menus{
 		display: flex;
 		flex-direction: column;
+		text-align: center;
 	}
 
 	form div textarea {
 		background-color: var(--azul-mais-claro);
+		color: white;
 		width: 100%;
+		margin-bottom: 15px;
 	}
 
 	form div label {
@@ -660,17 +773,17 @@ form {
 		text-align: center;
 		margin: 0;
 		padding: 0px 0px 0px 0px;
-		width: 100%;
-		height: 100%;
 	}
 
 	form label p {
 		margin: 0;
+		font-size: x-small;
 	}
 
 	form label .material-symbols-outlined {
-		font-size: 60px;
-		margin: 25px 0px 0px 0px;
+		font-size: 50px;
+		cursor: pointer;
+		/* margin: 25px 0px 0px 0px; */ 
 	}
 
 	form input[type="file"] {
@@ -681,8 +794,8 @@ form {
 		background-color: var(--laranja-mais-claro);
 		border: 2px solid black;
 		border-radius: 12px;
-		width: 110%;
-		height: 6%;
+		width: 80%;
+		height: 8%;
 		margin-top: 5%;
 	}
 }
@@ -945,7 +1058,7 @@ form {
 }
 
 .img-estrela .estrelas .curved-stars-container .star.star-inactive {
-  color: #b0b0b0; /* Cor cinza claro para estrela inativa */
+  color: var(--gray); /* Cor cinza claro para estrela inativa */
   /* Outra opção: 
      color: #e0e0e0; (um cinza bem suave)
   */
@@ -955,7 +1068,7 @@ form {
 /* Quando o JS adicionar a classe .star-inactive, esta
    regra terá prioridade e mudará a cor da estrela */
 .estrelas .star.star-inactive {
-  color: #b0b0b0; /* Cor cinza claro para estrela inativa */
+  color: var(--gray); /* Cor cinza claro para estrela inativa */
   /* Outra opção: 
      color: #e0e0e0; (um cinza bem suave)
   */
@@ -975,26 +1088,7 @@ h2{
 	text-align: center;
 	margin-top: 1em;
 }
-.data-cardapio {
-    select {
-		background-color: var(--azul-mais-escuro);
-		color: white;
-		border-radius: 25px;
-		border: 1px solid white;
-		text-align: center;
-		padding: 10px;
-		margin: 0 auto;
-		padding-inline: 1em;
-	}
-}
 
-/* .data-cardapio {
-    form {
-        label {
-			visibility: hidden;
-		}
-	}
-} */
 
 span.material-symbols-outlined{
 	background-color: var(--azul-mais-escuro);
@@ -1046,4 +1140,61 @@ button{
 
 .botao-criar:hover .plus-icon-text {
     color: var(--azul-mais-escuro);
+}
+
+textarea#id_description{
+	resize: none;
+	border: 1px solid white !important;
+	border-radius: 5px;
+}
+
+select#id_menus{
+	background-color: var(--azul-mais-claro);
+	border: 1px solid white;
+	color: white;
+	border-radius: 5px;
+}
+option{
+	background-color: var(--laranja-mais-claro);
+	color: black;
+}
+button[name="btn-create-plate"]:hover{
+	background-color: var(--laranja-mais-escuro) !important;
+	color: white !important;
+}
+form #image-file:hover{
+	background-color: var(--laranja-mais-escuro) !important;
+}
+#novo-cardapio #div-pratos {
+        input[type="checkbox"]{
+			cursor: pointer;
+		}
+}
+#novo-cardapio #div-pratos {
+        input[type="checkbox"]:hover{
+			cursor: pointer;
+			background-color: var(--azul-mais-escuro);
+		}
+}
+
+#novo-prato {
+    & #div-novo-prato {
+        div {
+			&:hover {
+				background-color: var(--laranja-mais-escuro);
+				color: white !important;
+				button{
+					background-color: var(--laranja-mais-escuro);
+					color: white !important;
+					border: 1px solid white;
+				}
+				h2{
+					color: white;
+				}
+				p{
+					color: white;
+				}
+			}
+		}
+	}
 }
