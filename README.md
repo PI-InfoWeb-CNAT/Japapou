@@ -9,15 +9,10 @@ Todo material está publicado sob licença [GPL-3.0](https://www.gnu.org/license
 ### Artefatos do Projeto
 
 -   [Documento de visão](./docs/Documento_de_Visao.md)
--   Detalhamento de casos de uso (_TODO_)
-    1. [Abrir carrinho](./docs/casos_de_uso/cdu_abrir_carrinho.md)
-    2. [Adicionar produtos no carrinho](./docs/casos_de_uso/cdu_adicionar_carrinho.md)
-    3. [Adicionar prato ao menu](./docs/casos_de_uso/cdu_adicionar_prato_menu.md)
-	4. [Confirmar entrega](./docs/casos_de_uso/cdu_confirmar_entrega.md)
-	5. [Fazer pedido](./docs/casos_de_uso/cdu_fazer_pedido.md)
-	6. [remove prato do menu](./docs/casos_de_uso/cdu_remover_prato_menu.md)
--   [Modelo de caso de uso](./docs/modelo_CDU.md) (_TODO_)
--   [Diagrama de classes de domínio](./docs/imagens/japapou_diagrama_classes.png) (_TODO_)
+-   [Documento de entidade e relacionamento](./docs/imagens/japapou_erdplus.png)
+-   [Diagrama de classes de domínio](./docs/imagens/japapou_diagrama_classes.png)
+-   [Modelo de caso de uso](./docs/modelo_CDU.md)
+-	[Mapa do site](./docs/imagens/mapa_site_japapou.png)
 
 ## Equipe
 
