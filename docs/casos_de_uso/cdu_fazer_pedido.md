@@ -54,3 +54,7 @@ Não há excessão.
 ### 7. Diagrama de classe de domínio usados neste caso de uso
 
 `A ser desenvolvido pela equipe.`
+
+### 8. Diagrama de Atividades
+
+
