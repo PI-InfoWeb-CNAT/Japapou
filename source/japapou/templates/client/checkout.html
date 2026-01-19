@@ -113,7 +113,7 @@
                 <div>
                     <h3 id="titulo-endereco-selecionado">
                         {% if endereco_padrao %}
-                            {{ endereco_padrao.bairro }}, {{ endereco_padrao.logradouro }}, {{ endereco_padrao.numero }}
+                            {{ endereco_padrao.logradouro }}, {{ endereco_padrao.numero }}
                         {% else %}
                             Endereço não selecionado
                         {% endif %}
@@ -135,6 +135,7 @@
                     <p style="color: red;">
                         Você não possui endereços cadastrados para entrega.
                     </p>
+                    <a href="{% url 'add_endereco' %}?next={% url 'checkout' %}">Adicionar endereço</a>
                  {% endif %}
                     
                 {% comment %} <a href="{% url 'add_endereco' %}" style="font-size: 0.9em; margin-top: 10px; display: inline-block;">
@@ -259,6 +260,7 @@
             {{ endereco.logradouro }}, {{ endereco.numero }} ({{ endereco.bairro }})
         </div>
     {% endfor %}
+    <a href="{% url 'add_endereco' %}?next={% url 'checkout' %}">Adicionar um novo endereço</a>
 </dialog>
 
 {% endblock %}

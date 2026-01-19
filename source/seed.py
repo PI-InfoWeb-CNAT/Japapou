@@ -292,8 +292,8 @@ def criar_menus_periodos():
         else:
             print(f"Menu '{menu_principal.name}' já existia.")
         
-        data_inicio = date(2025, 1, 1)
-        data_fim = date(2025, 12, 31)
+        data_inicio = date(2026, 1, 1)
+        data_fim = date(2026, 12, 31)
 
         periodo, criado_periodo = Period.objects.get_or_create(
             menu=menu_principal,

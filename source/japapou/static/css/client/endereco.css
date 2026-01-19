@@ -1,0 +1,30 @@
+.container {
+    a {
+        color: white;
+    }
+    a:hover {
+        color: darkgray;
+    }
+
+
+    ul {
+        list-style: none;
+
+        li {
+            a {
+                color: white;
+            }
+            a:hover {
+                color: darkgray;
+            }
+        }
+    }
+}
+
+.item-endereco {
+    display: flex;             /* Ativa o modo flexível */
+    justify-content: space-between; /* Empurra um para cada ponta */
+    align-items: center;       /* Alinha verticalmente no centro */
+    border-bottom: 2px solid white;
+    padding: 10px 0;
+}

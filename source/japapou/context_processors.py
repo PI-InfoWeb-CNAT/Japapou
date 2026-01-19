@@ -20,5 +20,7 @@ def media_estrelas_entregador(request):
             average_courier_rating = average_rating_data['average_rating']
             
             media_entregador = round(average_courier_rating, 2)
+        else:
+            media_entregador = 0
 
     return {'media_entregador': media_entregador}

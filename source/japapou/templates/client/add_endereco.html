@@ -5,7 +5,7 @@
     <h2>Adicionar Novo Endereço</h2>
     <p>
         Preencha os dados abaixo. Após salvar, você será 
-        redirecionado de volta para o checkout.
+        redirecionado de volta para a pagina anterior.
     </p>
 
     {% if messages %}
@@ -33,35 +33,28 @@
             </div>
         {% endfor %}
 
+        {% if next_url %}
+            <input type="hidden" name="next" value="{{ next_url }}">
+        {% endif %}
+
         <hr>
         
         <button type="submit" class="btn btn-primary">Salvar Endereço</button>
+
+        {% if next_url %}
+            <a href="{{ next_url }}" class="btn btn-secondary">
+                Cancelar e Voltar
+            </a>
+        {% else %}
+            {# Fallback: Se não houver histórico, vai para o perfil #}
+            <a href="{% url 'client_profile' %}" class="btn btn-secondary">
+                Cancelar
+            </a>
+        {% endif %}
         
     </form>
 
-    {% if request.META.HTTP_REFERER %}
-
-        {% if 'checkout' in request.META.HTTP_REFERER %}
-            <a href="{% url 'checkout' %}" class="btn btn-secondary">
-                Voltar para o Checkout
-            </a>
-        
-        {% elif 'profile' in request.META.HTTP_REFERER %}
-            <a href="{% url 'profile' %}" class="btn btn-secondary">
-                Voltar para o Perfil
-            </a>
-        {% else %}
-            <a href="/" class="btn btn-secondary">
-                Voltar ao Início
-            </a>
-        {% endif %}
-
-    {% else %}
-        <a href="/" class="btn btn-secondary">
-            Voltar ao Início
-        </a>
     
-    {% endif %}
 
 </div>
 {% endblock %}

@@ -1,15 +1,27 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/client/endereco.css' %}" />
+{% endblock %}
 
 {% block content %}
 <div class="container">
     <h2>Endereços Cadastrado</h2>
     <ul>
         {% for endereco in enderecos %}
-            <li>{{ endereco.apelido }} - {{ endereco }}</li>
+            <li class="item-endereco"><span class="texto">
+                <strong>{{ endereco.apelido }}</strong> - {{ endereco }}
+            </span>
+
+            <a href="{% url 'editar_endereco' endereco.id %}?next={{ request.path }}" class="btn-editar">
+                Editar
+            </a></li>
         {% endfor %}
     </ul>
 
 
-    <a href="{% url 'client_profile' %}">voltar</a>
+    <a href="{% url 'client_profile' %}">voltar</a><br>
+    <a href="{% url 'add_endereco' %}?next={% url 'listar_enderecos' %}">Adicionar um novo endereço</a>
 </div>
 {% endblock %}
