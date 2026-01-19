@@ -16,7 +16,7 @@ Todo material está publicado sob licença [GPL-3.0](https://www.gnu.org/license
 	4. [Confirmar entrega](./docs/casos_de_uso/cdu_confirmar_entrega.md)
 	5. [Fazer pedido](./docs/casos_de_uso/cdu_fazer_pedido.md)
 	6. [remove prato do menu](./docs/casos_de_uso/cdu_remover_prato_menu.md)
--   [Diagrama de casos de uso](./docs/imagens/Japapou_CDU.png) (_TODO_)
+-   [Modelo de caso de uso](./docs/modelo_CDU.md) (_TODO_)
 -   [Diagrama de classes de domínio](./docs/imagens/japapou_diagrama_classes.png) (_TODO_)
 
 ## Equipe
