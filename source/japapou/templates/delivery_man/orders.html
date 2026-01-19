@@ -23,7 +23,7 @@
 
 
     {% for pedido in pedidos %}
-    {% if pedido.tipo_pedido == 'ENTREGA' and not pedido.data_entrega and not pedido.data_saida %}
+    {% if pedido.tipo_pedido == 'ENTREGA' and not pedido.data_entrega and pedido.data_saida %}
         <div class="pedido-box">
             <div class="pedido-header">Pedido #{{ pedido.id }} - {{ pedido.get_tipo_pedido_display }}</div>
             <div class="pedido-conteudo">

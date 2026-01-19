@@ -14,6 +14,7 @@ def client_order_view(request):
         return render(request, "403.html", status=403)
 
     # Lógica para buscar os pedidos do cliente
+    # busca os pedidos do usuário logado, ordenados do mais recente para o mais antigo
     pedidos = Order.objects.filter(
         usuario=request.user
     ).order_by('-created_at').prefetch_related('itens__prato')

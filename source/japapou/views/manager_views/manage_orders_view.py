@@ -11,7 +11,6 @@ from japapou.models import Order # Certifique-se de importar o modelo Order
     #return user.is_staff
 
 @login_required
-#@user_passes_test(is_manager) # Restringe o acesso apenas para usuários gerentes/staff
 def manage_orders_view(request):
     """
     Exibe uma lista de todos os pedidos, ordenados do mais recente
@@ -20,11 +19,8 @@ def manage_orders_view(request):
     
     # 1. Busca todos os pedidos
     # 2. Ordena por 'created_at' (ou 'date') em ordem decrescente (-)
-    # O campo 'created_at' parece ser o mais preciso para ordem cronológica.
+    
     pedidos = Order.objects.all().order_by('-created_at')
-
-    # Se você quiser filtrar por pedidos ativos/pendentes:
-    # pedidos = Order.objects.filter(status__in=['PENDENTE', 'EM_PREPARACAO']).order_by('-created_at')
 
     #print(pedidos)
 

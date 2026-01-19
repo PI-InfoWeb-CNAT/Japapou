@@ -13,24 +13,42 @@ import json
 # @permission_required('view_order', login_url='home')
 @csrf_exempt
 def manager_assign_delivery_view(request, order_id):
+    '''
+    Exibe a tela de detalhes do pedido com lista de entregadores disponíveis (GET) 
+    e processa a atribuição do entregador escolhido ao pedido via JSON (POST).
+    '''
+
+    # Pega o pedido caso contrario retorna 404
     order = get_object_or_404(Order, id=order_id)
     
+    # Pega os entregadores disponíveis
     delivery_men = CustomUser.objects.filter(tipo_usuario='DELIVERY_MAN')
 
+
+    #
     if request.method == 'POST':
         try:
+
+            # Tenta ler o corpo da requisição e transformar de JSON (texto) para um dicionário Python
             data = json.loads(request.body)
         except json.JSONDecodeError:
+            # Se o JSON estiver mal formatado, retorna um erro 400 (Bad Request).
             return HttpResponseBadRequest("Dados JSON inválidos.")
-            
+        
+
+        # Tenta pegar o ID do entregador enviado no JSON.    
         dm_id = data.get('delivery_man_id')
         
+
+        # Se o ID não foi enviado, retorna um JSON avisando o erro (status 400).
         if not dm_id:
             return JsonResponse({'success': False, 'message': 'ID do entregador ausente.'}, status=400)
             
         try:
+            # Busca o entregador específico pelo ID e garante que ele é mesmo um 'DELIVERY_MAN'.
             dm = CustomUser.objects.get(id=dm_id, tipo_usuario='DELIVERY_MAN')
             
+            # Atribui o objeto do entregador ao campo 'entregador' do pedido.
             order.entregador = dm
             order.save()
             return JsonResponse({'success': True})
@@ -57,6 +75,7 @@ def confirm_dispatch_view(request, order_id):
     except Order.DoesNotExist:
         return HttpResponseBadRequest("Pedido não encontrado.")
     
+    order.status = order.Status.A_CAMINHO
     order.data_saida = timezone.now()
     order.save()
 
