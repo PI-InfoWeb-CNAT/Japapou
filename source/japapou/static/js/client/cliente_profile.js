@@ -3,8 +3,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	// 🔹 Função utilitária para pegar o token CSRF
 	function getCSRFToken() {
-		const token = document.querySelector('[name=csrfmiddlewaretoken]');
-		return token ? token.value : "";
+		const tokenElem = document.querySelector('[name=csrfmiddlewaretoken]');
+		if (tokenElem && tokenElem.value) return tokenElem.value;
+
+		// Fallback: ler cookie 'csrftoken'
+		function getCookie(name) {
+			const value = `; ${document.cookie}`;
+			const parts = value.split(`; ${name}=`);
+			if (parts.length === 2) return parts.pop().split(';').shift();
+			return null;
+		}
+
+		const cookieToken = getCookie('csrftoken');
+		if (cookieToken) return cookieToken;
+
+		// Último fallback: meta tag
+		const meta = document.querySelector('meta[name="csrf-token"]');
+		if (meta) return meta.getAttribute('content') || '';
+
+		return "";
 	}
 
 	// 🔹 EDIÇÃO INLINE VIA BOTÃO
@@ -96,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
 							"Content-Type": "application/json",
 							"X-CSRFToken": getCSRFToken(),
 						},
+						credentials: 'same-origin',
 						body: JSON.stringify({
 							id: editable.dataset.id,
 							field: editable.dataset.field,
@@ -149,17 +167,27 @@ document.addEventListener("DOMContentLoaded", () => {
 					headers: {
 						"X-CSRFToken": getCSRFToken(),
 					},
+					credentials: 'same-origin',
 					body: formData,
 				});
 
-				const data = await response.json();
-				if (data.status === "ok") {
+				let data = null;
+				try {
+					data = await response.json();
+				} catch (e) {
+					console.error('Resposta não-JSON:', e);
+				}
+				if (response.ok && data && data.status === "ok") {
 					previewImage.src = data.nova_foto_url + "?t=" + new Date().getTime();
 					// ⭐ SUCESSO no upload de foto
 					showStatusToast('Foto de perfil alterada com sucesso!', true);
 				} else {
-					// ⭐ ERRO no upload de foto
-					showStatusToast("Erro ao enviar imagem: " + (data.mensagem || "Verifique o console."), false);
+					// ⭐ ERRO no upload de foto — logar mais informações
+					let bodyText = null;
+					try { bodyText = await response.text(); } catch (e) { /* ignore */ }
+					console.error('Upload falhou. status=', response.status, 'body=', bodyText, 'parsed=', data);
+					const mensagem = (data && data.mensagem) ? data.mensagem : (bodyText || 'Verifique o console.');
+					showStatusToast("Erro ao enviar imagem: " + mensagem, false);
 				}
 			} catch (error) {
 				// ⭐ ERRO na requisição
@@ -184,18 +212,28 @@ document.addEventListener("DOMContentLoaded", () => {
 					headers: {
 						"X-CSRFToken": getCSRFToken(),
 					},
+					credentials: 'same-origin',
 					body: formData,
 				});
 
-				const data = await response.json();
-				if (data.status === "ok") {
+				let data = null;
+				try {
+					data = await response.json();
+				} catch (e) {
+					console.error('Resposta não-JSON:', e);
+				}
+				if (response.ok && data && data.status === "ok") {
 					// A constante 'defaultImagePath' está definida no profile.html
 					previewImage.src = defaultImagePath || "/static/imgs/manager/profile.png"; 
 					// ⭐ SUCESSO na remoção de foto
 					showStatusToast('Foto de perfil removida com sucesso!', true);
 				} else {
-					// ⭐ ERRO na remoção de foto
-					showStatusToast("Erro ao remover a foto: " + (data.mensagem || "Verifique o console."), false);
+					// ⭐ ERRO na remoção de foto — logar mais informações
+					let bodyText = null;
+					try { bodyText = await response.text(); } catch (e) { /* ignore */ }
+					console.error('Remove falhou. status=', response.status, 'body=', bodyText, 'parsed=', data);
+					const mensagem = (data && data.mensagem) ? data.mensagem : (bodyText || 'Verifique o console.');
+					showStatusToast("Erro ao remover a foto: " + mensagem, false);
 				}
 			} catch (error) {
 				// ⭐ ERRO na requisição
