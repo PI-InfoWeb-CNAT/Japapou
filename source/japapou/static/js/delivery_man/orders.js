@@ -148,6 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 window.gerarRotaGoogle = function() {
     const lista = (typeof dadosMapa !== 'undefined') ? dadosMapa : [];
+    console.log(lista);
 
     if (lista.length === 0) {
         alert("Não há pedidos para criar rota.");

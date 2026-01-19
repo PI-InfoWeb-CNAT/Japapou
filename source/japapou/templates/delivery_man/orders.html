@@ -22,9 +22,9 @@
     </div>
 
 
-    {% for pedido in pedidos %}
-    {% if pedido.tipo_pedido == 'ENTREGA' and not pedido.data_entrega and pedido.data_saida %}
-        <div class="pedido-box">
+    {% if pedidos %}
+        {% for pedido in pedidos %}
+            <div class="pedido-box">
             <div class="pedido-header">Pedido #{{ pedido.id }} - {{ pedido.get_tipo_pedido_display }}</div>
             <div class="pedido-conteudo">
                 {% with item_count=pedido.itens.count|default:0 %}
@@ -99,16 +99,12 @@
                 </p>
             </div>
         </div>
+        {% endfor %}
     {% else %}
         <div class="alert alert-info" role="alert">
             Nenhum pedido a ser entregue
         </div>
     {% endif %}
-    {% empty %}
-    <div class="alert alert-info" role="alert">
-        Nenhum pedido encontrado.
-    </div>
-    {% endfor %}
     <div class="lightbox-overlay" id="lightbox">
         <img id="lightbox-img" src="" alt="Imagem ampliada" />
     </div>
