@@ -54,3 +54,11 @@ Não há excessão.
 ### 7. Diagrama de classe de domínio usados neste caso de uso
 
 `A ser desenvolvido pela equipe.`
+
+### 8. Diagrama de Atividades
+
+![Diagrama de Atividades](../imagens/Diagrama-de-Atividades-da-Criacao-do-Pedido.png)
+
+### 9. Diagrama de Estados do Pedido
+
+![Diagrama de Estados](../imagens/Diagrama-de-Estados-do-Pedido.png)
