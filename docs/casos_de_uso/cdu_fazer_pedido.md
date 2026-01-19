@@ -57,4 +57,4 @@ Não há excessão.
 
 ### 8. Diagrama de Atividades
 
-![Casos de Uso](./imagens/Diagrama-de-Atividades-da-Criacao-do-Pedido.png)
+![Casos de Uso](././imagens/Diagrama-de-Atividades-da-Criacao-do-Pedido.png)
