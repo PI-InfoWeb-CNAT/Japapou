@@ -13,7 +13,8 @@ Todo material está publicado sob licença [GPL-3.0](https://www.gnu.org/license
 -   [Diagrama de classes de domínio](./docs/imagens/japapou_diagrama_classes.png)
 -   [Modelo de caso de uso](./docs/modelo_CDU.md)
 -	[Mapa do site](./docs/imagens/mapa_site_japapou.png)
--	[Slides](./apresentação/Japapou_slides_20260126_213737_0000.pdf) e [Vídeo Demonstração](.apresentação/lv_0_20260126221401.mp4)
+-	[Slides](./apresentação/Japapou_slides_20260126_213737_0000.pdf)
+-	[Vídeo Demonstração](.apresentação/lv_0_20260126221401.mp4)
 
 ## Equipe
 
