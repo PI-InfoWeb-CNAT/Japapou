@@ -467,3 +467,7 @@ if __name__ == "__main__":
         print(f"\n--- OCORREU UM ERRO DURANTE A EXECUÇÃO ---")
         print(f"Erro: {e}")
         print("As alterações na base de dados foram revertidas (rollback).")
+
+
+
+# TESTE
